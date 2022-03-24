@@ -1,17 +1,24 @@
 package p2parking.server;
 
+import java.util.ArrayList;
+
 public class Usuario {
 
-	public String nombre;
-	public String correo;
-	public String contrsena;
-	public String foto;
+	private String nombre;
+	private String correo;
+	private String contrsena;
+	private String foto;
+	public ArrayList<Plaza> favoritos;
 	
 	public Usuario(String nombre, String correo, String contrsena, String foto) {
 		this.nombre = nombre;
 		this.correo = correo;
 		this.contrsena = contrsena;
 		this.foto = foto;
+	}
+	
+	public void addFav(Plaza plaza) {
+		this.favoritos.add(plaza);
 	}
 	
 	public String getNombre() {
