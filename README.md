@@ -7,5 +7,10 @@ First, compile the whole code:
 Then, in three separate cmd windows, run:
 
 1. mvn jetty:run 
-2. mvn exec:java -Pmanager
-3. mvn exec:java -Pclient
+2. mvn datanucleus:schema-create
+3. mvn exec:java
+4. mvn datanucleus:schema-delete
+
+
+5. mvn exec:java -Pmanager
+6. mvn exec:java -Pclient

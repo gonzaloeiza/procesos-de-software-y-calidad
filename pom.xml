@@ -15,9 +15,43 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<server.hostname>127.0.0.1</server.hostname>
 		<server.port>8080</server.port>
+		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	
 
 	<dependencies>
+		<dependency>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>datanucleus-core</artifactId>
+				<version>[5.1.6, 5.9)</version>
+			</dependency>
+			<dependency>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>datanucleus-api-jdo</artifactId>
+				<version>[5.1.4, 5.9)</version>
+			</dependency>
+			<dependency>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>datanucleus-rdbms</artifactId>
+				<version>[5.1.6, 5.9)</version>
+			</dependency>
+			<dependency>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>javax.jdo</artifactId>
+				<version>[3.2.0-m8, )</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>8.0.23</version>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>[1.2.17, )</version>
+			</dependency>
+			
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-server</artifactId>
@@ -52,7 +86,37 @@
 	</dependencies>
 	
 	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+	
+		<resources>
+			<resource>
+				<directory>${config.files.dir}</directory>
+				<includes>
+					<include>**/*.jdo</include>
+					<include>**/*.orm</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
+	
 		<plugins>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${basedir}</directory>
+							<includes>
+								<include>*.log</include>
+								<include>*.ods</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>
@@ -62,11 +126,67 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.4.19.v20190610</version>
             </plugin>
+            
+            <plugin>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>datanucleus-maven-plugin</artifactId>
+				<version>5.0.2</version>
+				<configuration>
+					<log4jConfiguration>${config.files.dir}/log4j.properties</log4jConfiguration>
+					<verbose>true</verbose>
+					<props>${config.files.dir}/datanucleus.properties</props>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+
+				<configuration>
+					<mainClass>p2parking.jdo.Main</mainClass>
+					<systemProperties>
+						<systemProperty>
+							<key>log4j.configuration</key>
+							<value>file:${config.files.dir}/log4j.properties</value>
+						</systemProperty>
+					</systemProperties>
+				</configuration>
+				
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>${basedir}/assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<show>private</show>
+					<nohelp>true</nohelp>
+				</configuration>
+			</plugin>
+            
+            
 		</plugins>
 	</build>
 
