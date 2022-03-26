@@ -1,4 +1,4 @@
-package p2parking.server;
+package p2parking.serialization;
 
 import java.util.ArrayList;
 
