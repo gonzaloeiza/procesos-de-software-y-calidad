@@ -2,18 +2,23 @@ package p2parking.serialization;
 
 import java.util.ArrayList;
 
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+
+
 public class Usuario {
 
 	private String nombre;
 	private String correo;
-	private String contrsena;
+	private String contrasena;
 	private String foto;
 	private ArrayList<Plaza> favoritos;
 	
-	public Usuario(String nombre, String correo, String contrsena, String foto) {
+	public Usuario(String nombre, String correo, String contrasena, String foto) {
 		this.nombre = nombre;
 		this.correo = correo;
-		this.contrsena = contrsena;
+		this.contrasena = contrasena;
 		this.foto = foto;
 		this.favoritos = new ArrayList<>();
 	}
@@ -38,11 +43,11 @@ public class Usuario {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	public String getContrsena() {
-		return contrsena;
+	public String getContrasena() {
+		return contrasena;
 	}
-	public void setContrsena(String contrsena) {
-		this.contrsena = contrsena;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 	public String getFoto() {
 		return foto;
