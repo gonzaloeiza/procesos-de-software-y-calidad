@@ -8,13 +8,18 @@ public class Usuario {
 	private String correo;
 	private String contrsena;
 	private String foto;
-	public ArrayList<Plaza> favoritos;
+	private ArrayList<Plaza> favoritos;
 	
 	public Usuario(String nombre, String correo, String contrsena, String foto) {
 		this.nombre = nombre;
 		this.correo = correo;
 		this.contrsena = contrsena;
 		this.foto = foto;
+		this.favoritos = new ArrayList<>();
+	}
+	
+	public ArrayList<Plaza> getFav(){
+		return this.favoritos;
 	}
 	
 	public void addFav(Plaza plaza) {
