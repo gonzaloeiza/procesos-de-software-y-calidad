@@ -1,5 +1,6 @@
 package p2parking.server;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -14,14 +15,14 @@ import p2parking.serialization.Plaza;
 import p2parking.serialization.Usuario;
 
 @Path("/prueba")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)//TODO: Añadir metodos de BD
 public class MainServer {
 	
 // localhost:8080/api/prueba/test
 // POST y GET funcionan igual pero con o sin param	
 // no puede haber dos metodos GET o POST en la misma URL
 	
-	HashMap<Date, Usuario> tokenUsuario = new HashMap<>(); //mapa de usuarios logeados
+	HashMap<Date, Usuario> tokenUsuarios = new HashMap<>(); //mapa de usuarios logeados
 	
 	@GET
 	@Path("/test")
@@ -31,26 +32,26 @@ public class MainServer {
 	/*Metodos gestion cuenta*/
 	@POST
 	@Path("/registro")
-	public Response registro(String nombre, String correo, String contrsena, String foto) {
-		boolean resultado = true;// funacionalidad registro
+	public Response registro(Usuario usr) {
+		boolean resultado = true;// TODO:funacionalidad registro
 		return Response.ok(resultado).build();
 	}
 	@POST
 	@Path("/logIn")
 	public Response logIn(String correo, String contrsena) {
-		boolean resultado = true;// funacionalidad logIn
-		return Response.ok(resultado).build();
+		Date token = new Date();// TODO:funacionalidad logIn
+		return Response.ok(token).build();
 	}
 	@POST
 	@Path("/updateUser")
-	public Response updateUser(Date token, String nombre, String correo, String contrsena, String foto) {
-		boolean resultado = true;// funacionalidad updateUser
+	public Response updateUser(Date token, Usuario usr) {
+		boolean resultado = true;// TODO:funacionalidad updateUser
 		return Response.ok(resultado).build();
 	}
 	@GET
 	@Path("servicioCliente")
 	public Response getServCliente() {
-		boolean resultado = true;// funacionalidad getServCliente
+		String resultado = "servivio";// TODO: definir servicio al cliente
 		return Response.ok(resultado).build();
 	}
 	
@@ -58,33 +59,50 @@ public class MainServer {
 	@POST
 	@Path("/addPlaza")
 	public Response addPlaza(Date token, Plaza plaza) {
-		boolean resultado = true;// funacionalidad addPlaza
-		return Response.ok(resultado).build();
+		if(tokenUsuarios.containsKey(token)) {
+			Usuario usr = tokenUsuarios.get(token);
+			usr.addFav(plaza);
+			tokenUsuarios.replace(token, usr);
+			return Response.ok(true).build();
+		}
+		return Response.ok(false).build();
 	}
 	@POST
 	@Path("/updatePlaza")
 	public Response updatePlaza(Date token, Plaza plazaOld, Plaza plazaNew) {
-		boolean resultado = true;// funacionalidad updatePlaza
+		boolean resultado = true;// TODO:funacionalidad updatePlaza
 		return Response.ok(resultado).build();
 	}
 	@POST
 	@Path("/borrarPlaza")
 	public Response borrarPlaza(Date token, Plaza plaza) {
-		boolean resultado = true;// funacionalidad borrarPlaza
+		boolean resultado = true;// TODO:funacionalidad borrarPlaza
 		return Response.ok(resultado).build();
 	}
 	@POST
 	@Path("getMisPlazas")
 	public Response getMisPlazas(Date token) {
-		boolean resultado = true;// funacionalidad getMisPlazas
+		ArrayList<Plaza> resultado = new ArrayList<>();// TODO:funacionalidad getMisPlazas
 		return Response.ok(resultado).build();
 	}
 	@POST
 	@Path("addPlazaFav")
-	public Response addPlazaFab(Date token, Plaza plaza) {
-		boolean resultado = true;// funacionalidad addPlazaFab
-		return Response.ok(resultado).build();
+	public Response addPlazaFav(Date token, Plaza plaza) {
+		if(tokenUsuarios.containsKey(token)) {
+			Usuario usr = tokenUsuarios.get(token);
+			usr.addFav(plaza);
+			tokenUsuarios.replace(token, usr);
+			return Response.ok(true).build();
+		}
+		return Response.ok(false).build();
 	}
-	
-	
+	@POST
+	@Path("getMisFav")
+	public Response getMisFav(Date token) {
+		if(tokenUsuarios.containsKey(token)) {
+			ArrayList<Plaza> resultado = tokenUsuarios.get(token).getFav();
+			return Response.ok(resultado).build();
+		}
+		return Response.ok(null).build();
+	}
 }
