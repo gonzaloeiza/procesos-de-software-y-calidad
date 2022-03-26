@@ -28,7 +28,7 @@ public class Ventana_principal_alquiler extends JFrame {
     	setForeground(SystemColor.windowBorder);
     	setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio_sesion.class.getResource("/p2parking/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 914, 810);
+		setBounds(100, 100, 666, 428);
 		panelPricipal = new JPanel();
 		panelPricipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panelPricipal);
@@ -41,11 +41,11 @@ public class Ventana_principal_alquiler extends JFrame {
 		JButton perfil = new JButton("");
 		perfil.setBounds(new Rectangle(2, 2, 1, 1));
 		perfil.setBackground(SystemColor.activeCaptionBorder);
-		perfil.setIcon(new ImageIcon("H:\\Universidad_Local\\4\\2º Semestre\\Procesos de Software\\MaterialProyecto\\usuario3.jpg"));
+		perfil.setIcon(null);
 		panel_arriba.add(perfil);
 		
 		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon("H:\\Universidad_Local\\4\\2º Semestre\\Procesos de Software\\MaterialProyecto\\p2larfo.jpg"));
+		logo.setIcon(new ImageIcon(Ventana_principal_alquiler.class.getResource("/p2parking/ventanas/p2larfo.jpg")));
 		panel_arriba.add(logo);
 		
 		JPanel panel_arribaderecha = new JPanel();
@@ -63,6 +63,12 @@ public class Ventana_principal_alquiler extends JFrame {
 		
 		JList list = new JList();
 		panel_medio.add(list);
+		
+		JPanel panel_abjo = new JPanel();
+		panelPricipal.add(panel_abjo, BorderLayout.SOUTH);
+		
+		JButton btnsubir = new JButton("Publicar Anuncio");
+		panel_abjo.add(btnsubir);
 	}
 
 	public static void main(String[] args) {
