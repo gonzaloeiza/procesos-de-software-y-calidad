@@ -16,3 +16,6 @@ buildNumber.properties
 .settings
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+#log
+datanucleus.log
