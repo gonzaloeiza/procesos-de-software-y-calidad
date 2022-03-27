@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import p2parking.jdo.UsuarioJDO;
+import p2parking.serialization.Plaza;
 import p2parking.serialization.Usuario;
 
 
@@ -24,10 +25,8 @@ import p2parking.serialization.Usuario;
 @Produces(MediaType.APPLICATION_JSON)//TODO: Añadir metodos de BD
 public class MainServer {
 	
-// localhost:8080/api/prueba/test
-// POST y GET funcionan igual pero con o sin param	
-// no puede haber dos metodos GET o POST en la misma URL
-	HashMap<Date, UsuarioJDO> tokenUsuarios = new HashMap<>(); //mapa de usuarios logeados
+	
+	HashMap<Date, Usuario> tokenUsuarios = new HashMap<>(); //mapa de usuarios logeados
 	PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 	PersistenceManager pm = pmf.getPersistenceManager();
 	Transaction tx = pm.currentTransaction();
@@ -62,7 +61,7 @@ public class MainServer {
             
             if (u.getContrasena().equals(contrasena)) {
             	Date token = new Date();
-            	tokenUsuarios.put(token, u);
+            	tokenUsuarios.put(token, new Usuario(u.getNombre(), u.getCorreo(), u.getContrasena(), u.getFoto()));
             	return Response.ok(token).build();
             } else {
             	return Response.status(401, "Correo/contraseña incorrectos").build();
@@ -94,17 +93,19 @@ public class MainServer {
 //	}
 //	
 //	/*Metodos gestion Plaza*/
-//	@POST
-//	@Path("/addPlaza")
-//	public Response addPlaza(Date token, Plaza plaza) {
+	@POST
+	@Path("/addPlaza")
+	public Response addPlaza(Date token, Plaza plaza) {
 //		if(tokenUsuarios.containsKey(token)) {
+//			Usuario u = tokenUsuarios.get(token);
+//			System.out.println(u.getNombre());
 //			Usuario usr = tokenUsuarios.get(token);
 //			usr.addFav(plaza);
 //			tokenUsuarios.replace(token, usr);
 //			return Response.ok(true).build();
 //		}
-//		return Response.ok(false).build();
-//	}
+		return Response.ok(false).build();
+	}
 //	@POST
 //	@Path("/updatePlaza")
 //	public Response updatePlaza(Date token, Plaza plazaOld, Plaza plazaNew) {
