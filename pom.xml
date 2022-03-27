@@ -216,7 +216,6 @@
 		-->
 		
 		<!-- run as 'mvn exec:java -Pclient' -->
-		<!--
 		<profile>
 			<id>client</id>
 			<build>
@@ -226,7 +225,7 @@
 						<artifactId>exec-maven-plugin</artifactId>
 						<version>1.2.1</version>
 						<configuration>
-							<mainClass>donations.client.Donor</mainClass>
+							<mainClass>p2parking.client.ventanas.Inicio_sesion</mainClass>
 							<arguments>
 								<argument>${server.hostname}</argument>
 								<argument>${server.port}</argument>
@@ -236,7 +235,6 @@
 				</plugins>
 			</build>
 		</profile>
-		-->
 		
 	</profiles>
 </project>
