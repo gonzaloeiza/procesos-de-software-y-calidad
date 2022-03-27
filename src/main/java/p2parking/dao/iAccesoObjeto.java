@@ -1,4 +1,4 @@
-package p2parking.jdo;
+package p2parking.dao;
 
 
 import java.util.List;
