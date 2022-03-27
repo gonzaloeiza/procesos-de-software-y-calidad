@@ -35,7 +35,7 @@ public class Ventana_registro extends JFrame {
 	public Ventana_registro() {
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
-    	setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio_sesion.class.getResource("/p2parking/ventanas/P2.jpg")));
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_registro.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 481);
 		panelPricipal = new JPanel();
@@ -67,7 +67,7 @@ public class Ventana_registro extends JFrame {
 		panel_arriba.setLayout(new GridLayout(1, 4, 5, 25));
 		
 		JLabel imagen = new JLabel("");
-		imagen.setIcon(new ImageIcon(Ventana_registro.class.getResource("/p2parking/ventanas/P2.jpg")));
+		imagen.setIcon(new ImageIcon(Ventana_registro.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		panel_arriba.add(imagen);
 		
 		JPanel panel_central = new JPanel();
