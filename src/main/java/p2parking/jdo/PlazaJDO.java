@@ -8,14 +8,14 @@ import javax.jdo.annotations.PersistenceCapable;
 
 @PersistenceCapable
 @Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
-public class Plaza {
+public class PlazaJDO {
 	
 	private float precio;
 	private String localizacion;
 	private ArrayList<String> fotos;
 	private int idPropietario;
 	
-	public Plaza(float precio, String localizacion, ArrayList<String> fotos, int idPropietario) {
+	public PlazaJDO(float precio, String localizacion, ArrayList<String> fotos, int idPropietario) {
 		this.precio = precio;
 		this.localizacion = localizacion;
 		this.fotos = fotos;

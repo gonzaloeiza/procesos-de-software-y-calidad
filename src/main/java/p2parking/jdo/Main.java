@@ -40,7 +40,7 @@ public class Main {
             System.out.println("Persisting products");
 //            Product product = new Product("Sony Discman","A standard discman from Sony",200.00);
 //            Book book = new Book("Lord of the Rings by Tolkien","The classic story",49.99,"JRR Tolkien", "12345678", "MyBooks Factory");
-            Usuario u = new Usuario("gonzalo", "gonzaloeizaguirre@opendeusto.es", "1234", "ss");
+            UsuarioJDO u = new UsuarioJDO("gonzalo", "gonzaloeizaguirre@opendeusto.es", "1234", "ss");
             pm.makePersistent(u);
  
             tx.commit();

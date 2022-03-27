@@ -16,7 +16,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import p2parking.jdo.Usuario;
+import p2parking.jdo.UsuarioJDO;
+import p2parking.serialization.Usuario;
+
 
 @Path("/prueba")
 @Produces(MediaType.APPLICATION_JSON)//TODO: Añadir metodos de BD
@@ -25,7 +27,7 @@ public class MainServer {
 // localhost:8080/api/prueba/test
 // POST y GET funcionan igual pero con o sin param	
 // no puede haber dos metodos GET o POST en la misma URL
-	HashMap<Date, Usuario> tokenUsuarios = new HashMap<>(); //mapa de usuarios logeados
+	HashMap<Date, UsuarioJDO> tokenUsuarios = new HashMap<>(); //mapa de usuarios logeados
 	PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 	PersistenceManager pm = pmf.getPersistenceManager();
 	Transaction tx = pm.currentTransaction();
@@ -54,9 +56,9 @@ public class MainServer {
         tx = pm.currentTransaction();
         try {
             tx.begin();
-            Query<Usuario> q = pm.newQuery(Usuario.class);
+            Query<UsuarioJDO> q = pm.newQuery(UsuarioJDO.class);
             q.filter("this.correo == '" + correo + "'");
-            Usuario u = q.executeUnique();
+            UsuarioJDO u = q.executeUnique();
             
             if (u.getContrasena().equals(contrasena)) {
             	Date token = new Date();

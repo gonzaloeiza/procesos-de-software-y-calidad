@@ -11,7 +11,7 @@ import p2parking.serialization.Plaza;
 
 @PersistenceCapable
 @Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
-public class Usuario {
+public class UsuarioJDO {
 
 	private String nombre;
 	private String correo;
@@ -19,7 +19,7 @@ public class Usuario {
 	private String foto;
 	private ArrayList<Plaza> favoritos;
 	
-	public Usuario(String nombre, String correo, String contrasena, String foto) {
+	public UsuarioJDO(String nombre, String correo, String contrasena, String foto) {
 		this.nombre = nombre;
 		this.correo = correo;
 		this.contrasena = contrasena;
