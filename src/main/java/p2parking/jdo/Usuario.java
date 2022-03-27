@@ -1,9 +1,13 @@
 package p2parking.jdo;
 
 
+import java.util.ArrayList;
+
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
+
+import p2parking.serialization.Plaza;
 
 @PersistenceCapable
 @Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
@@ -13,14 +17,22 @@ public class Usuario {
 	private String correo;
 	private String contrasena;
 	private String foto;
+	private ArrayList<Plaza> favoritos;
 	
 	public Usuario(String nombre, String correo, String contrasena, String foto) {
 		this.nombre = nombre;
 		this.correo = correo;
 		this.contrasena = contrasena;
 		this.foto = foto;
+		this.favoritos = new ArrayList<>();
 	}
 	
+	public ArrayList<Plaza> getFav(){
+		return this.favoritos;
+	}
+	public void addFav(Plaza plaza) {
+		this.favoritos.add(plaza);
+	}
 	public String getNombre() {
 		return nombre;
 	}
