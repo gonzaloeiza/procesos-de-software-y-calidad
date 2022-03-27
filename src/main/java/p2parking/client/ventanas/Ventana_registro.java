@@ -1,4 +1,4 @@
-package p2parking.ventanas;
+package p2parking.client.ventanas;
 
 import java.awt.EventQueue;
 import java.awt.SystemColor;

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package p2parking.ventanas;
+package p2parking.client.ventanas;
 
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -81,7 +81,7 @@ public class Inicio_sesion extends JFrame {
     public Inicio_sesion(){
     	setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
-    	setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio_sesion.class.getResource("/p2parking/ventanas/P2.jpg")));
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio_sesion.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 481);
 		panelPricipal = new JPanel();
@@ -129,7 +129,7 @@ public class Inicio_sesion extends JFrame {
     	panel_arriba.setLayout(new GridLayout(1, 4, 5, 25));
     	
     	JLabel imagen = new JLabel("");
-    	imagen.setIcon(new ImageIcon(Inicio_sesion.class.getResource("/p2parking/ventanas/P2.jpg")));
+    	imagen.setIcon(new ImageIcon(Inicio_sesion.class.getResource("/p2parking/client/ventanas/P2.jpg")));
     	panel_arriba.add(imagen);
     	
     	JPanel panel_central = new JPanel();
