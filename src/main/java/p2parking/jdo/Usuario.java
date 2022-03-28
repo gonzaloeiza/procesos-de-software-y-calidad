@@ -19,7 +19,6 @@ public class Usuario {
 	private String foto;
 	
 	@Join
-	@Persistent(mappedBy="usuario", dependentElement="true")
 	private ArrayList<Plaza> favoritos;
 	
 	public Usuario(String nombre, String correo, String contrasena, String foto) {

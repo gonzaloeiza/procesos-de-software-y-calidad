@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response.Status;
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
 
+
 public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro por funcion
 
 	private Client client;
@@ -86,7 +87,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	
 	/*Metodos gestion Plaza*/
 	//Post
-	protected boolean addPlaza(Date token, float precio, String localizacion, ArrayList<String> fotos, int propietario) {
+	protected boolean addPlaza(Date token, float precio, String localizacion, ArrayList<String> fotos, Usuario propietario) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/addPlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
@@ -101,7 +102,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		return true;
 	}
 	//Post
-	protected boolean updatePlaza(Date token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos, int propietario) {
+	protected boolean updatePlaza(Date token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos, Usuario propietario) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/updatePlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
