@@ -13,19 +13,19 @@ public class Plaza {
 	private float precio;
 	private String localizacion;
 	private ArrayList<String> fotos;
-	private int idPropietario;
+	private Usuario propietario;
 	
-	public Plaza(float precio, String localizacion, ArrayList<String> fotos, int idPropietario) {
+	public Plaza(float precio, String localizacion, ArrayList<String> fotos, Usuario propietario) {
 		this.precio = precio;
 		this.localizacion = localizacion;
 		this.fotos = fotos;
-		this.idPropietario = idPropietario;
+		this.propietario = propietario;
 	}
-	public int getIdPropietario() {
-		return idPropietario;
+	public Usuario getPropietario() {
+		return propietario;
 	}
-	public void setIdPropietario(int idPropietario) {
-		this.idPropietario = idPropietario;
+	public void setPropietario(Usuario propietario) {
+		this.propietario = propietario;
 	}
 	public float getPrecio() {
 		return precio;

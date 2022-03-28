@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 
 @PersistenceCapable
 @Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
@@ -15,6 +17,9 @@ public class Usuario {
 	private String correo;
 	private String contrasena;
 	private String foto;
+	
+	@Join
+	@Persistent(mappedBy="usuario", dependentElement="true")
 	private ArrayList<Plaza> favoritos;
 	
 	public Usuario(String nombre, String correo, String contrasena, String foto) {
