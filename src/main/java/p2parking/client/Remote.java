@@ -12,8 +12,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import p2parking.serialization.Plaza;
-import p2parking.serialization.Usuario;
+import p2parking.jdo.Plaza;
+import p2parking.jdo.Usuario;
 
 public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro por funcion
 

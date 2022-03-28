@@ -16,9 +16,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import p2parking.jdo.UsuarioJDO;
-import p2parking.serialization.Plaza;
-import p2parking.serialization.Usuario;
+import p2parking.jdo.Usuario;
+import p2parking.jdo.Plaza;
 
 
 @Path("/prueba")
@@ -55,9 +54,10 @@ public class MainServer {
         tx = pm.currentTransaction();
         try {
             tx.begin();
-            Query<UsuarioJDO> q = pm.newQuery(UsuarioJDO.class);
+            Query<Usuario> q = pm.newQuery(Usuario.class);
             q.filter("this.correo == '" + correo + "'");
-            UsuarioJDO u = q.executeUnique();
+            
+            Usuario u = q.executeUnique();
             
             if (u.getContrasena().equals(contrasena)) {
             	Date token = new Date();
@@ -93,19 +93,19 @@ public class MainServer {
 //	}
 //	
 //	/*Metodos gestion Plaza*/
-	@POST
-	@Path("/addPlaza")
-	public Response addPlaza(Date token, Plaza plaza) {
-//		if(tokenUsuarios.containsKey(token)) {
-//			Usuario u = tokenUsuarios.get(token);
-//			System.out.println(u.getNombre());
-//			Usuario usr = tokenUsuarios.get(token);
-//			usr.addFav(plaza);
-//			tokenUsuarios.replace(token, usr);
-//			return Response.ok(true).build();
-//		}
-		return Response.ok(false).build();
-	}
+//	@POST
+//	@Path("/addPlaza")
+//	public Response addPlaza(Date token, Plaza plaza) {
+////		if(tokenUsuarios.containsKey(token)) {
+////			Usuario u = tokenUsuarios.get(token);
+////			System.out.println(u.getNombre());
+////			Usuario usr = tokenUsuarios.get(token);
+////			usr.addFav(plaza);
+////			tokenUsuarios.replace(token, usr);
+////			return Response.ok(true).build();
+////		}
+//		return Response.ok(false).build();
+//	}
 //	@POST
 //	@Path("/updatePlaza")
 //	public Response updatePlaza(Date token, Plaza plazaOld, Plaza plazaNew) {

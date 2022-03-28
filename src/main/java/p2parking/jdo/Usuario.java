@@ -7,11 +7,9 @@ import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 
-import p2parking.serialization.Plaza;
-
 @PersistenceCapable
 @Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
-public class UsuarioJDO {
+public class Usuario {
 
 	private String nombre;
 	private String correo;
@@ -19,7 +17,7 @@ public class UsuarioJDO {
 	private String foto;
 	private ArrayList<Plaza> favoritos;
 	
-	public UsuarioJDO(String nombre, String correo, String contrasena, String foto) {
+	public Usuario(String nombre, String correo, String contrasena, String foto) {
 		this.nombre = nombre;
 		this.correo = correo;
 		this.contrasena = contrasena;

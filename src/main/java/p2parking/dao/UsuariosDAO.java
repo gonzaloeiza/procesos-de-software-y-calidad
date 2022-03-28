@@ -22,6 +22,7 @@ public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<U
 
     @Override
     public Usuario find(String param) {
+    	
         return null;
     }
 }
