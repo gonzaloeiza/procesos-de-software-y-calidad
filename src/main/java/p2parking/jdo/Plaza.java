@@ -2,6 +2,7 @@ package p2parking.jdo;
 
 import java.util.ArrayList;
 
+import javax.jdo.annotations.ForeignKey;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.Join;
@@ -15,6 +16,7 @@ public class Plaza {
 	private float precio;
 	private String localizacion;
 	private ArrayList<String> fotos;
+	@ForeignKey
 	private Usuario propietario;
 	
 	

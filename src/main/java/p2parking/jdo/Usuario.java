@@ -8,16 +8,16 @@ import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
 @Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
 public class Usuario {
-
 	private String nombre;
+	@PrimaryKey
 	private String correo;
 	private String contrasena;
 	private String foto;
-	
 	
 	
 	public Usuario(String nombre, String correo, String contrasena, String foto) {

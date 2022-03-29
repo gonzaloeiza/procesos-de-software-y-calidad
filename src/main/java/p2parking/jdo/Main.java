@@ -17,59 +17,12 @@ Contributors:
 **********************************************************************/
 package p2parking.jdo;
 
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
-
 import java.util.ArrayList;
 
-import javax.jdo.JDOHelper;
-import javax.jdo.Transaction;
+import p2parking.dao.PlazasDAO;
+import p2parking.dao.UsuariosDAO;
 
 public class Main {
-	
-	public static void aniadirUsuario(Usuario u) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try {
-            tx.begin();
-            System.out.println("Persisting products");
-//            Product product = new Product("Sony Discman","A standard discman from Sony",200.00);
-//            Book book = new Book("Lord of the Rings by Tolkien","The classic story",49.99,"JRR Tolkien", "12345678", "MyBooks Factory");
-            pm.makePersistent(u);
- 
-            tx.commit();
-            System.out.println("Usuario has been persisted");
-        }
-        finally {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-            pm.close();
-        }
-	}
-	
-	public static void aniadirPlaza(Plaza p) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try {
-            tx.begin();
-            System.out.println("Persisting products");
-//            Product product = new Product("Sony Discman","A standard discman from Sony",200.00);
-//            Book book = new Book("Lord of the Rings by Tolkien","The classic story",49.99,"JRR Tolkien", "12345678", "MyBooks Factory");
-            pm.makePersistent(p);
- 
-            tx.commit();
-            System.out.println("Usuario has been persisted");
-        }
-        finally {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-            pm.close();
-        }
-	}
 	
     @SuppressWarnings("unchecked")
 	public static void main(String args[]) {
@@ -86,21 +39,24 @@ public class Main {
         Usuario u3 = new Usuario("endika", "endika@opendeusto.es", "1234", "ss");
         Usuario u4 = new Usuario("oier", "oier@opendeusto.es", "1234", "ss");
 
-        aniadirUsuario(u1);
-        aniadirUsuario(u2);
-        aniadirUsuario(u3);
-
         Plaza p1 = new Plaza(12.2f, "", new ArrayList<String>(), u1);
         Plaza p2 = new Plaza(12.2f, "", new ArrayList<String>(), u2);
+        Plaza p3 = new Plaza(12.2f, "", new ArrayList<String>(), u3);
+   
+//        Favoritos f1 = new Favoritos(u1, p2);
+//        Favoritos f2 = new Favoritos(u1, p3);
         
-                
-        ArrayList<Plaza> favs = new ArrayList<Plaza>();
-        favs.add(p1);
-        favs.add(p2);
-        
-//        u4.addFav(p1);
-        aniadirUsuario(u4);
 
+        UsuariosDAO.getInstance().save(u1);
+        UsuariosDAO.getInstance().save(u2);
+        UsuariosDAO.getInstance().save(u3);
+        UsuariosDAO.getInstance().save(u4);
+        
+        PlazasDAO.getInstance().save(p1);
+        PlazasDAO.getInstance().save(p2);
+        PlazasDAO.getInstance().save(p3);
+        
+        
         
         System.out.println("");
     }
