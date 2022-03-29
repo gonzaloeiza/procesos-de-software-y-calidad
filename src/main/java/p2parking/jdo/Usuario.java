@@ -1,40 +1,76 @@
 package p2parking.jdo;
 
-import javax.jdo.annotations.Inheritance;
-import javax.jdo.annotations.InheritanceStrategy;
+import java.util.Set;
+
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
-@Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
 public class Usuario {
-	 protected String email=null;
-	 protected String contrasena=null;
-	 
-	 protected Usuario() {
-        super();
-    }
-	 
-	 public Usuario(String email, String contrasena) {
-        super();
-        this.email = email;
-        this.contrasena = contrasena;
-    }
-
-	public String getEmail() {
-		return email;
+	private String nombre;
+	@PrimaryKey
+	private String correo;
+	private String contrasena;
+	private String foto;
+	private Set<Plaza> plazas;
+	
+	public Usuario(String nombre, String correo, String contrasena, String foto, Set<Plaza> set) {
+		super();
+		this.nombre = nombre;
+		this.correo = correo;
+		this.contrasena = contrasena;
+		this.foto = foto;
+		this.plazas = set;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+
+	public String getNombre() {
+		return nombre;
 	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public String getCorreo() {
+		return correo;
+	}
+
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
 
 	public String getContrasena() {
 		return contrasena;
 	}
 
+
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
 
-	 
+
+	public String getFoto() {
+		return foto;
+	}
+
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+
+	public Set<Plaza> getPlazas() {
+		return plazas;
+	}
+
+
+	public void setPlazas(Set<Plaza> plazas) {
+		this.plazas = plazas;
+	}
+
 }

@@ -17,41 +17,60 @@ Contributors:
 **********************************************************************/
 package p2parking.jdo;
 
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.JDOHelper;
-import javax.jdo.Transaction;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+import p2parking.dao.UsuariosDAO;
+
 
 public class Main {
+	
     @SuppressWarnings("unchecked")
 	public static void main(String args[]) {
     	System.out.println("Starting ....");
         // Create a PersistenceManagerFactory for this datastore
-        PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+        
 
         System.out.println("DataNucleus AccessPlatform with JDO");
         System.out.println("===================================");
 
-        // Persistence of a user
-        PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try {
-            tx.begin();
-            System.out.println("Persisting products");
-//            Product product = new Product("Sony Discman","A standard discman from Sony",200.00);
-//            Book book = new Book("Lord of the Rings by Tolkien","The classic story",49.99,"JRR Tolkien", "12345678", "MyBooks Factory");
-            Usuario u = new Usuario("gonzaloeizaguirre@opendeusto.es", "1234");
-            pm.makePersistent(u);
- 
-            tx.commit();
-            System.out.println("Usuario has been persisted");
-        }
-        finally {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-            pm.close();
-        }
+        
+        Plaza p1 = new Plaza(12.2f, "", new ArrayList<String>());
+        Plaza p2 = new Plaza(12.2f, "", new ArrayList<String>());
+        Plaza p3 = new Plaza(12.2f, "", new ArrayList<String>());  
+        
+        
+        Usuario u1 = new Usuario("gonzalo", "gonzaloeizaguirre@opendeusto.es", "1234", "ss", new HashSet<Plaza>());
+        Usuario u2 = new Usuario("javier", "javier@opendeusto.es", "1234", "ss", new HashSet<Plaza>());
+        Usuario u3 = new Usuario("endika", "endika@opendeusto.es", "1234", "ss", new HashSet<Plaza>());
+        Usuario u4 = new Usuario("oier", "oier@opendeusto.es", "1234", "ss", new HashSet<Plaza>());
+
+        u1.getPlazas().add(p1);
+        u1.getPlazas().add(p2);
+        u2.getPlazas().add(p3);
+       
+        
+        UsuariosDAO.getInstance().save(u1);
+        UsuariosDAO.getInstance().save(u2);
+        UsuariosDAO.getInstance().save(u3);
+        UsuariosDAO.getInstance().save(u4);
+        
+        
+//        ArrayList<Plaza> listaPlazas1 = new ArrayList<Plaza>();
+//        listaPlazas1.add(p1);
+//        listaPlazas1.add(p2);
+//
+//        ArrayList<Plaza> listaPlazas2 = new ArrayList<Plaza>();
+//        listaPlazas1.add(p3);
+        
+        
+       
+//        
+//        
+
+        
+        
+        
         System.out.println("");
     }
 }

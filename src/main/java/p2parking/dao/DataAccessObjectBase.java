@@ -5,6 +5,8 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Transaction;
 
+import p2parking.jdo.Usuario;
+
 public class DataAccessObjectBase {
     protected static PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");//TO DO: Esto habria que cambiarlo a SQL
 
@@ -45,4 +47,6 @@ public class DataAccessObjectBase {
             pm.close();
         }
     }
+
+	
 }
