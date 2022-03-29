@@ -1,42 +1,27 @@
 package p2parking.jdo;
 
-import java.util.ArrayList;
 
-import javax.jdo.annotations.Element;
-import javax.jdo.annotations.Inheritance;
-import javax.jdo.annotations.InheritanceStrategy;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
-@Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
 public class Usuario {
+	private String nombre;
 	@PrimaryKey
 	private String correo;
-	private String nombre;
 	private String contrasena;
 	private String foto;
-	@Element(column="PLAZA_ID")
-	private ArrayList<Plaza> plazas;
+	private Set<Plaza> plazas = new HashSet<Plaza>();
 	
-	
-	public Usuario(String correo, String nombre, String contrasena, String foto, ArrayList<Plaza> plazas) {
+	public Usuario(String nombre, String correo, String contrasena, String foto) {
 		super();
-		this.correo = correo;
 		this.nombre = nombre;
+		this.correo = correo;
 		this.contrasena = contrasena;
 		this.foto = foto;
-		this.plazas = plazas;
-	}
-
-
-	public String getCorreo() {
-		return correo;
-	}
-
-
-	public void setCorreo(String correo) {
-		this.correo = correo;
 	}
 
 
@@ -47,6 +32,16 @@ public class Usuario {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+
+	public String getCorreo() {
+		return correo;
+	}
+
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 
@@ -70,12 +65,13 @@ public class Usuario {
 	}
 
 
-	public ArrayList<Plaza> getPlazas() {
+	public Set<Plaza> getPlazas() {
 		return plazas;
 	}
 
 
-	public void ArrayList(ArrayList<Plaza> plazas) {
+	public void setPlazas(Set<Plaza> plazas) {
 		this.plazas = plazas;
-	}	
+	}
+
 }

@@ -61,7 +61,7 @@ public class MainServer {
             
             if (u.getContrasena().equals(contrasena)) {
             	Date token = new Date();
-            	tokenUsuarios.put(token, new Usuario(u.getNombre(), u.getCorreo(), u.getContrasena(), u.getFoto(), u.getPlazas()));
+            	tokenUsuarios.put(token, new Usuario(u.getNombre(), u.getCorreo(), u.getContrasena(), u.getFoto()));
             	return Response.ok(token).build();
             } else {
             	return Response.status(401, "Correo/contraseña incorrectos").build();

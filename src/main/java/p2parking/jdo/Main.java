@@ -35,32 +35,40 @@ public class Main {
         System.out.println("===================================");
 
         
-//        Plaza p1 = new Plaza(12.2f, "", new ArrayList<String>());
-//        Plaza p2 = new Plaza(12.2f, "", new ArrayList<String>());
-//        Plaza p3 = new Plaza(12.2f, "", new ArrayList<String>());
-//   
-//        ArrayList<Plaza> tienePlazas1 = new ArrayList<Plaza>();
-//        tienePlazas1.add(p1);
-//        
-//        Usuario u1 = new Usuario("gonzalo", "gonzaloeizaguirre@opendeusto.es", "1234", "ss", tienePlazas1);
-//        Usuario u2 = new Usuario("javier", "javier@opendeusto.es", "1234", "ss", new ArrayList<Plaza>());
-//        Usuario u3 = new Usuario("endika", "endika@opendeusto.es", "1234", "ss", new ArrayList<Plaza>());
-//        Usuario u4 = new Usuario("oier", "oier@opendeusto.es", "1234", "ss", new ArrayList<Plaza>());
+        Plaza p1 = new Plaza(12.2f, "", new ArrayList<String>());
+        Plaza p2 = new Plaza(12.2f, "", new ArrayList<String>());
+        Plaza p3 = new Plaza(12.2f, "", new ArrayList<String>());  
+        
+        
+        Usuario u1 = new Usuario("gonzalo", "gonzaloeizaguirre@opendeusto.es", "1234", "ss");
+        Usuario u2 = new Usuario("javier", "javier@opendeusto.es", "1234", "ss");
+        Usuario u3 = new Usuario("endika", "endika@opendeusto.es", "1234", "ss");
+        Usuario u4 = new Usuario("oier", "oier@opendeusto.es", "1234", "ss");
+
+        u1.getPlazas().add(p1);
+        u1.getPlazas().add(p2);
+        u2.getPlazas().add(p3);
+       
+        
+        UsuariosDAO.getInstance().save(u1);
+        UsuariosDAO.getInstance().save(u2);
+        UsuariosDAO.getInstance().save(u3);
+        UsuariosDAO.getInstance().save(u4);
+        
+        
+//        ArrayList<Plaza> listaPlazas1 = new ArrayList<Plaza>();
+//        listaPlazas1.add(p1);
+//        listaPlazas1.add(p2);
 //
-// 
-////        Favoritos f1 = new Favoritos(u1, p2);
-////        Favoritos f2 = new Favoritos(u1, p3);
-//        
-//        PlazasDAO.getInstance().save(p1);
-//        PlazasDAO.getInstance().save(p2);
-//        PlazasDAO.getInstance().save(p3);
+//        ArrayList<Plaza> listaPlazas2 = new ArrayList<Plaza>();
+//        listaPlazas1.add(p3);
+        
+        
+       
 //        
 //        
-//        UsuariosDAO.getInstance().save(u1);
-//        UsuariosDAO.getInstance().save(u2);
-//        UsuariosDAO.getInstance().save(u3);
-//        UsuariosDAO.getInstance().save(u4);
-//        
+
+        
         
         
         System.out.println("");
