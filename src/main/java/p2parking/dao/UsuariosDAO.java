@@ -91,6 +91,4 @@ public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<U
 
 		return result;
 	}
-
-
 }
