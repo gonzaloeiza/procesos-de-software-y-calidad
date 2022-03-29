@@ -17,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import p2parking.jdo.Usuario;
-import p2parking.jdo.Plaza;
 
 
 @Path("/prueba")
@@ -61,7 +60,7 @@ public class MainServer {
             
             if (u.getContrasena().equals(contrasena)) {
             	Date token = new Date();
-            	tokenUsuarios.put(token, new Usuario(u.getNombre(), u.getCorreo(), u.getContrasena(), u.getFoto()));
+            	tokenUsuarios.put(token, new Usuario(u.getNombre(), u.getCorreo(), u.getContrasena(), u.getFoto(), u.getPlazas()));
             	return Response.ok(token).build();
             } else {
             	return Response.status(401, "Correo/contraseña incorrectos").build();
