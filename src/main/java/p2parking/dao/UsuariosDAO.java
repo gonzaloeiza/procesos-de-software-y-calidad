@@ -1,7 +1,5 @@
 package p2parking.dao;
 
-import p2parking.jdo.Usuario;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +7,8 @@ import javax.jdo.Extent;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
+
+import p2parking.jdo.Usuario;
 
 public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<Usuario> {
 	
@@ -90,5 +90,11 @@ public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<U
 		}
 
 		return result;
+	}
+
+	@Override
+	public p2parking.dao.Usuario find(String param) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
