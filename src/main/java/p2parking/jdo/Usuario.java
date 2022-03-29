@@ -33,8 +33,9 @@ public class Usuario {
 	public ArrayList<Favoritos> getFav(){
 		return this.favoritos;
 	}
-	public void addFav(Favoritos plaza) {
-		this.favoritos.add(plaza);
+	public void addFav(Plaza plaza) {
+		Favoritos fav = new Favoritos(this, plaza);
+		this.favoritos.add(fav);
 	}
 	public String getNombre() {
 		return nombre;
