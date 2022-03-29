@@ -1,7 +1,5 @@
 package p2parking.jdo;
 
-
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.jdo.annotations.PersistenceCapable;
@@ -14,14 +12,15 @@ public class Usuario {
 	private String correo;
 	private String contrasena;
 	private String foto;
-	private Set<Plaza> plazas = new HashSet<Plaza>();
+	private Set<Plaza> plazas;
 	
-	public Usuario(String nombre, String correo, String contrasena, String foto) {
+	public Usuario(String nombre, String correo, String contrasena, String foto, Set<Plaza> set) {
 		super();
 		this.nombre = nombre;
 		this.correo = correo;
 		this.contrasena = contrasena;
 		this.foto = foto;
+		this.plazas = set;
 	}
 
 
