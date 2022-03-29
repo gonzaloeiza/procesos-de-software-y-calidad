@@ -91,10 +91,4 @@ public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<U
 
 		return result;
 	}
-
-	@Override
-	public p2parking.dao.Usuario find(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
