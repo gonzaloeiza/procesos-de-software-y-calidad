@@ -5,6 +5,19 @@ import p2parking.jdo.Plaza;
 import java.util.List;
 
 public class PlazasDAO extends DataAccessObjectBase implements iAccesoObjeto<Plaza> {
+	
+	private static PlazasDAO instance;	
+	
+	private PlazasDAO() { }
+	
+	public static PlazasDAO getInstance() {
+		if (instance == null) {
+			instance = new PlazasDAO();
+		}		
+		
+		return instance;
+	}
+	
     @Override
     public void save(Plaza object) {
 

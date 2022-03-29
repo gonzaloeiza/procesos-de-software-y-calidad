@@ -6,6 +6,18 @@ import p2parking.jdo.Favoritos;
 
 public class FavoritosDAO extends DataAccessObjectBase implements iAccesoObjeto<Favoritos>{
 
+	private static FavoritosDAO instance;	
+	
+	private FavoritosDAO() { }
+	
+	public static FavoritosDAO getInstance() {
+		if (instance == null) {
+			instance = new FavoritosDAO();
+		}		
+		
+		return instance;
+	}
+	
 	@Override
 	public void save(Favoritos object) {
 		// TODO Auto-generated method stub
