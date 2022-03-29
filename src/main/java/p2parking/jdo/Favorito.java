@@ -6,11 +6,11 @@ import javax.jdo.annotations.PersistenceCapable;
 
 @PersistenceCapable
 @Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
-public class Favoritos {
+public class Favorito {
 	private Usuario usuario;
 	private Plaza plaza;
 	
-	public Favoritos(Usuario usuario, Plaza plaza) {
+	public Favorito(Usuario usuario, Plaza plaza) {
 		super();
 		this.usuario = usuario;
 		this.plaza = plaza;

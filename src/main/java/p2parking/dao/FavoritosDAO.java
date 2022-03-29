@@ -8,10 +8,10 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-import p2parking.jdo.Favoritos;
+import p2parking.jdo.Favorito;
 import p2parking.jdo.Usuario;
 
-public class FavoritosDAO extends DataAccessObjectBase implements iAccesoObjeto<Favoritos>{
+public class FavoritosDAO extends DataAccessObjectBase implements iAccesoObjeto<Favorito>{
 
 	private static FavoritosDAO instance;	
 	
@@ -26,29 +26,29 @@ public class FavoritosDAO extends DataAccessObjectBase implements iAccesoObjeto<
 	}
 	
 	@Override
-	public void save(Favoritos object) {
+	public void save(Favorito object) {
 		super.saveObject(object);
 		
 	}
 
 	@Override
-	public void delete(Favoritos object) {
+	public void delete(Favorito object) {
 		super.deleteObject(object);		
 	}
 
 	@Override
-	public List<Favoritos> getAll() {
+	public List<Favorito> getAll() {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		
-		List<Favoritos> usuarios = new ArrayList<>();
+		List<Favorito> usuarios = new ArrayList<>();
 
 		try {
 			tx.begin();
 			
-			Extent<Favoritos> userExtent = pm.getExtent(Favoritos.class, true);
+			Extent<Favorito> userExtent = pm.getExtent(Favorito.class, true);
 			
-			for (Favoritos usuario : userExtent) {
+			for (Favorito usuario : userExtent) {
 				usuarios.add(usuario);
 			}
 						
@@ -67,18 +67,18 @@ public class FavoritosDAO extends DataAccessObjectBase implements iAccesoObjeto<
 	}
 
 	@Override
-	public Favoritos find(String param) {//suponiendo param=usr.getEmail();
+	public Favorito find(String param) {//suponiendo param=usr.getEmail();
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
-		Favoritos result = null; 
+		Favorito result = null; 
 
 		try {
 			tx.begin();
 			
 			Query<?> query = pm.newQuery("SELECT * FROM " + Usuario.class.getName() + " WHERE email == '" + param + "'");
 			query.setUnique(true);
-			result = (Favoritos) query.execute();
+			result = (Favorito) query.execute();
 			
 			tx.commit();
 		} catch (Exception ex) {
