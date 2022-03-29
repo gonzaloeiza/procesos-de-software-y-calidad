@@ -21,6 +21,15 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	private Client client;
 	private WebTarget webTarget;
 	private static String path = "prueba";
+	
+	Remote instance;
+	
+	public Remote getInstance(){
+		if (instance == null){
+			instance = new Remote("0.0.0.0", "8080");
+		}
+		return instance;
+	}
 
 	public Remote(String hostname, String port) {
 		client = ClientBuilder.newClient();
