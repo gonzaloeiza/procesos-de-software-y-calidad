@@ -85,12 +85,13 @@ public class MainServer {
 //		boolean resultado = true;// TODO:funacionalidad updateUser
 //		return Response.ok(resultado).build();
 //	}
-//	@GET
-//	@Path("servicioCliente")
-//	public Response getServCliente() {
-//		String resultado = "servivio";// TODO: definir servicio al cliente
-//		return Response.ok(resultado).build();
-//	}
+	/*IMPORTANTE:   Nombre de usuario: "p2parkingCliente@gmail.com"; contrasena: "Q1w2E3r4" */
+	@GET
+	@Path("servicioCliente")
+	public Response getServCliente() {
+		String resultado = "Si tienes algun problema contacta con: p2parkingCliente@gmail.com";// TODO: definir servicio al cliente
+		return Response.ok(resultado).build();
+	}
 //	
 //	/*Metodos gestion Plaza*/
 //	@POST
