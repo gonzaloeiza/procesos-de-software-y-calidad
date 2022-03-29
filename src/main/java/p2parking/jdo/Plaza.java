@@ -17,9 +17,6 @@ public class Plaza {
 	private ArrayList<String> fotos;
 	private Usuario propietario;
 	
-	@Join
-	@Persistent(mappedBy="usuario")
-	private ArrayList<Favoritos> favoritos;
 	
 	public Plaza(float precio, String localizacion, ArrayList<String> fotos, Usuario propietario) {
 		this.precio = precio;
