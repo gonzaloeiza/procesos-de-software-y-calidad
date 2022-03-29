@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 
 @PersistenceCapable
 @Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
@@ -14,6 +16,10 @@ public class Plaza {
 	private String localizacion;
 	private ArrayList<String> fotos;
 	private Usuario propietario;
+	
+	@Join
+	@Persistent(mappedBy="usuario")
+	private ArrayList<Favoritos> favoritos;
 	
 	public Plaza(float precio, String localizacion, ArrayList<String> fotos, Usuario propietario) {
 		this.precio = precio;
