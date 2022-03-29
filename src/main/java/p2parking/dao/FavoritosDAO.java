@@ -20,14 +20,13 @@ public class FavoritosDAO extends DataAccessObjectBase implements iAccesoObjeto<
 	
 	@Override
 	public void save(Favoritos object) {
-		// TODO Auto-generated method stub
+		super.saveObject(object);
 		
 	}
 
 	@Override
 	public void delete(Favoritos object) {
-		// TODO Auto-generated method stub
-		
+		super.deleteObject(object);		
 	}
 
 	@Override
