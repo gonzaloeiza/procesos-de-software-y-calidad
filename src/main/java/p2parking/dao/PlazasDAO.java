@@ -12,20 +12,6 @@ import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 public class PlazasDAO extends DataAccessObjectBase implements iAccesoObjeto<Plaza> {
-<<<<<<< HEAD
-
-    private static PlazasDAO instance;
-
-    private PlazasDAO () { }
-
-    public static PlazasDAO getInstance() {
-        if (instance == null) {
-            instance = new PlazasDAO();
-        }
-        return instance;
-    }
-
-=======
 	
 	private static PlazasDAO instance;	
 	
@@ -39,7 +25,7 @@ public class PlazasDAO extends DataAccessObjectBase implements iAccesoObjeto<Pla
 		return instance;
 	}
 	
->>>>>>> refs/remotes/origin/master
+
     @Override
     public void save(Plaza object) {
     	super.saveObject(object);

@@ -11,20 +11,6 @@ import javax.jdo.Transaction;
 import p2parking.jdo.Usuario;
 
 public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<Usuario> {
-<<<<<<< HEAD
-
-    private static UsuariosDAO instance;
-
-    private UsuariosDAO () { }
-
-    public static UsuariosDAO getInstance() {
-        if (instance == null) {
-            instance = new UsuariosDAO();
-        }
-        return instance;
-    }
-
-=======
 	
 	private static UsuariosDAO instance;	
 	
@@ -37,8 +23,7 @@ public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<U
 		
 		return instance;
 	}
-	
->>>>>>> refs/remotes/origin/master
+
     @Override
     public void save(Usuario object) {
     	super.saveObject(object);
@@ -107,9 +92,5 @@ public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<U
 		return result;
 	}
 
-	@Override
-	public p2parking.dao.Usuario find(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }
