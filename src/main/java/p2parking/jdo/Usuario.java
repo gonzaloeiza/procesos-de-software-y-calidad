@@ -18,25 +18,23 @@ public class Usuario {
 	private String contrasena;
 	private String foto;
 	
-	@Join
-	@Persistent(mappedBy="usuario")
-	private ArrayList<Favoritos> favoritos;
+	
 	
 	public Usuario(String nombre, String correo, String contrasena, String foto) {
 		this.nombre = nombre;
 		this.correo = correo;
 		this.contrasena = contrasena;
 		this.foto = foto;
-		this.favoritos = new ArrayList<>();
+//		this.favoritos = new ArrayList<>();
 	}
 	
-	public ArrayList<Favoritos> getFav(){
-		return this.favoritos;
-	}
-	public void addFav(Plaza plaza) {
-		Favoritos fav = new Favoritos(this, plaza);
-		this.favoritos.add(fav);
-	}
+//	public ArrayList<Favoritos> getFav(){
+//		return this.favoritos;
+//	}
+//	public void addFav(Plaza plaza) {
+//		Favoritos fav = new Favoritos(this, plaza);
+//		this.favoritos.add(fav);
+//	}
 	public String getNombre() {
 		return nombre;
 	}

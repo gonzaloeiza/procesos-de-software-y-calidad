@@ -98,7 +98,7 @@ public class Main {
         favs.add(p1);
         favs.add(p2);
         
-        u4.addFav(p1);
+//        u4.addFav(p1);
         aniadirUsuario(u4);
 
         
