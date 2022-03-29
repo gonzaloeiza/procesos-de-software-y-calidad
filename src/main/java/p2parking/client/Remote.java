@@ -22,9 +22,9 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	private WebTarget webTarget;
 	private static String path = "prueba";
 	
-	Remote instance;
+	private static Remote instance;
 	
-	public Remote getInstance(){
+	public static Remote getInstance(){
 		if (instance == null){
 			instance = new Remote("0.0.0.0", "8080");
 		}
@@ -32,8 +32,9 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	}
 
 	public Remote(String hostname, String port) {
-		client = ClientBuilder.newClient();
-		webTarget = client.target(String.format("http://%s:%s/api", hostname, port));
+		this.client = ClientBuilder.newClient();
+		this.webTarget = client.target(String.format("http://%s:%s/api", hostname, port));
+		instance = this;
 	}
 	
 	/*Metodos gestion Usuario*/
