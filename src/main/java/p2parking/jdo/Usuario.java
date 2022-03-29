@@ -2,7 +2,9 @@ package p2parking.jdo;
 
 import java.util.Set;
 
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
@@ -12,6 +14,8 @@ public class Usuario {
 	private String correo;
 	private String contrasena;
 	private String foto;
+	@Join
+	@Persistent(mappedBy="usuario", dependentElement="true")
 	private Set<Plaza> plazas;
 	
 	public Usuario(String nombre, String correo, String contrasena, String foto, Set<Plaza> set) {

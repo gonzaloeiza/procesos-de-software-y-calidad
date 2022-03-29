@@ -2,14 +2,16 @@ package p2parking.jdo;
 
 import java.util.ArrayList;
 
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 
 @PersistenceCapable
 public class Plaza {
 	
 	private float precio;
 	private String localizacion;
-	private ArrayList<String> fotos;
+	private ArrayList<String> fotos;	// guardamos solo los links para no tener que crear una nueva tabla en la base de datos
 	
 	public Plaza(float precio, String localizacion, ArrayList<String> fotos) {
 		this.precio = precio;

@@ -193,7 +193,6 @@
 	<profiles>
 		<!-- run as 'mvn exec:java -Pmanager' -->
 		
-		<!--
 		<profile>
 			<id>manager</id>
 			<build>
@@ -213,7 +212,6 @@
 				</plugins>
 			</build>
 		</profile>
-		-->
 		
 		<!-- run as 'mvn exec:java -Pclient' -->
 		<profile>
