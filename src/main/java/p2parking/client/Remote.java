@@ -33,7 +33,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		WebTarget donationsWebTarget = webTarget.path(path +  "/registro");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
-		Usuario usr = new Usuario(nombre, correo, contrsena, foto);
+		Usuario usr = new Usuario(nombre, correo, contrsena, foto, new ArrayList<Plaza>());
 		Response response = invocationBuilder.post(Entity.entity(usr, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != Status.OK.getStatusCode()) {
 			//TODO:Añadir gestion de errores
@@ -61,7 +61,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		WebTarget donationsWebTarget = webTarget.path(path +  "/updateUser");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
-		Usuario usrNew = new Usuario(nombre, correo, contrsena, foto);
+		Usuario usrNew = new Usuario(nombre, correo, contrsena, foto, new ArrayList<Plaza>());
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 				//TODO:No se como meter varios parametros. Estono funciona:
 				//invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON), Entity.entity(usrNew, MediaType.APPLICATION_JSON));
@@ -91,7 +91,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		WebTarget donationsWebTarget = webTarget.path(path +  "/addPlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
-		Plaza plaza = new Plaza(precio, localizacion, fotos, propietario);
+		Plaza plaza = new Plaza(precio, localizacion, fotos);
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 				//TODO:No se como meter varios parametros. Estono funciona:
 				//invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON), Entity.entity(plaza, MediaType.APPLICATION_JSON));
@@ -106,7 +106,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		WebTarget donationsWebTarget = webTarget.path(path +  "/updatePlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
-		Plaza plazanew = new Plaza(precio, localizacion, fotos, propietario);
+		Plaza plazanew = new Plaza(precio, localizacion, fotos);
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 				//TODO:No se como meter varios parametros. Estono funciona:
 				//invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON), Entity.entity(plaza, MediaType.APPLICATION_JSON), Entity.entity(plazaNew, MediaType.APPLICATION_JSON));

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import p2parking.dao.PlazasDAO;
 import p2parking.dao.UsuariosDAO;
 
+
 public class Main {
 	
     @SuppressWarnings("unchecked")
@@ -33,29 +34,33 @@ public class Main {
         System.out.println("DataNucleus AccessPlatform with JDO");
         System.out.println("===================================");
 
-        // Persistence of a user
-        Usuario u1 = new Usuario("gonzalo", "gonzaloeizaguirre@opendeusto.es", "1234", "ss");
-        Usuario u2 = new Usuario("javier", "javier@opendeusto.es", "1234", "ss");
-        Usuario u3 = new Usuario("endika", "endika@opendeusto.es", "1234", "ss");
-        Usuario u4 = new Usuario("oier", "oier@opendeusto.es", "1234", "ss");
-
-        Plaza p1 = new Plaza(12.2f, "", new ArrayList<String>(), u1);
-        Plaza p2 = new Plaza(12.2f, "", new ArrayList<String>(), u2);
-        Plaza p3 = new Plaza(12.2f, "", new ArrayList<String>(), u3);
-   
-//        Favoritos f1 = new Favoritos(u1, p2);
-//        Favoritos f2 = new Favoritos(u1, p3);
         
-
-        UsuariosDAO.getInstance().save(u1);
-        UsuariosDAO.getInstance().save(u2);
-        UsuariosDAO.getInstance().save(u3);
-        UsuariosDAO.getInstance().save(u4);
-        
-        PlazasDAO.getInstance().save(p1);
-        PlazasDAO.getInstance().save(p2);
-        PlazasDAO.getInstance().save(p3);
-        
+//        Plaza p1 = new Plaza(12.2f, "", new ArrayList<String>());
+//        Plaza p2 = new Plaza(12.2f, "", new ArrayList<String>());
+//        Plaza p3 = new Plaza(12.2f, "", new ArrayList<String>());
+//   
+//        ArrayList<Plaza> tienePlazas1 = new ArrayList<Plaza>();
+//        tienePlazas1.add(p1);
+//        
+//        Usuario u1 = new Usuario("gonzalo", "gonzaloeizaguirre@opendeusto.es", "1234", "ss", tienePlazas1);
+//        Usuario u2 = new Usuario("javier", "javier@opendeusto.es", "1234", "ss", new ArrayList<Plaza>());
+//        Usuario u3 = new Usuario("endika", "endika@opendeusto.es", "1234", "ss", new ArrayList<Plaza>());
+//        Usuario u4 = new Usuario("oier", "oier@opendeusto.es", "1234", "ss", new ArrayList<Plaza>());
+//
+// 
+////        Favoritos f1 = new Favoritos(u1, p2);
+////        Favoritos f2 = new Favoritos(u1, p3);
+//        
+//        PlazasDAO.getInstance().save(p1);
+//        PlazasDAO.getInstance().save(p2);
+//        PlazasDAO.getInstance().save(p3);
+//        
+//        
+//        UsuariosDAO.getInstance().save(u1);
+//        UsuariosDAO.getInstance().save(u2);
+//        UsuariosDAO.getInstance().save(u3);
+//        UsuariosDAO.getInstance().save(u4);
+//        
         
         
         System.out.println("");
