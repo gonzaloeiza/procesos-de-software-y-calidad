@@ -191,8 +191,8 @@
 	</build>
 
 	<profiles>
+
 		<!-- run as 'mvn exec:java -Pmanager' -->
-		
 		<profile>
 			<id>manager</id>
 			<build>
@@ -203,6 +203,27 @@
 						<version>1.2.1</version>
 						<configuration>
 							<mainClass>donations.server.DonationManager</mainClass>
+							<arguments>
+								<argument>${server.hostname}</argument>
+								<argument>${server.port}</argument>
+							</arguments>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+		<!-- run as 'mvn exec:java -PinsertarEjemplos' -->
+		<profile>
+			<id>insertarEjemplos</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<configuration>
+							<mainClass>p2parking.dao.InsertarEjemplos</mainClass>
 							<arguments>
 								<argument>${server.hostname}</argument>
 								<argument>${server.port}</argument>
