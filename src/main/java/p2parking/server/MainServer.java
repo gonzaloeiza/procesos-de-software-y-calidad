@@ -16,6 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import p2parking.dao.UsuariosDAO;
 import p2parking.jdo.Usuario;
 
 
@@ -36,20 +37,25 @@ public class MainServer {
 	}
 	
 	
-//	/*Metodos gestion cuenta*/
-//	@POST
-//	@Path("/registro")
-//	public Response registro(Usuario usr) {
-//		boolean resultado = true;// TODO:funacionalidad registro
-//		return Response.ok(resultado).build();
-//	}
-//	
+	/*Metodos gestion cuenta*/
+	@POST
+	@Path("/registro")
+	public Response registro(Usuario usr) {
+		if(UsuariosDAO.getInstance().find(usr.getCorreo()) == null){
+			Date token = new Date();
+			tokenUsuarios.put(token, usr);
+			UsuariosDAO.getInstance().save(usr);
+			return Response.ok().build();
+		}		
+		return Response.notModified().build();
+	}
+	
 	
 	@POST
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response login(@FormParam("correo") String correo, @FormParam("contrasena") String contrasena) {
-		pm = pmf.getPersistenceManager();
+		pm = pmf.getPersistenceManager();	//yo quitaria codigo de BD y yamas solo al DAO
         tx = pm.currentTransaction();
         try {
             tx.begin();
@@ -78,12 +84,23 @@ public class MainServer {
 	}
 	
 	
-//	@POST
-//	@Path("/updateUser")
-//	public Response updateUser(Date token, Usuario usr) {
-//		boolean resultado = true;// TODO:funacionalidad updateUser
-//		return Response.ok(resultado).build();
-//	}
+	@POST
+	@Path("/updateUser")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response updateUser(@FormParam("token") Date token, @FormParam("usr") Usuario usr) {
+		if(tokenUsuarios.containsKey(token)) {
+			Usuario temp = UsuariosDAO.getInstance().find(usr.getCorreo());
+			if(temp != null) {
+				UsuariosDAO.getInstance().delete(temp);
+				UsuariosDAO.getInstance().save(usr);
+				tokenUsuarios.replace(token, usr);
+				return Response.ok().build();
+			}
+			return Response.status(401, "Error").build();
+		}
+		return Response.status(401, "Error, no estas logeado").build();
+		
+	}
 	/*IMPORTANTE:   Nombre de usuario: "p2parkingCliente@gmail.com"; contrasena: "Q1w2E3r4" */
 	@GET
 	@Path("servicioCliente")
