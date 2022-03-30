@@ -99,11 +99,11 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	
 	/*Metodos gestion Plaza*/
 	//Post
-	protected boolean addPlaza(Date token, float precio, String localizacion, ArrayList<String> fotos) {
+	protected boolean addPlaza(Date token, float precio, String localizacion, ArrayList<String> fotos, Usuario usuario, Date fecha) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/addPlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
-		Plaza plaza = new Plaza(precio, localizacion, fotos);
+		Plaza plaza = new Plaza(precio, localizacion, fotos, usuario, fecha);
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 				//TODO:No se como meter varios parametros. Estono funciona:
 				//invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON), Entity.entity(plaza, MediaType.APPLICATION_JSON));
@@ -114,11 +114,11 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		return true;
 	}
 	//Post
-	protected boolean updatePlaza(Date token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos) {
+	protected boolean updatePlaza(Date token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos, Usuario usuario, Date fecha) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/updatePlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
-		Plaza plazanew = new Plaza(precio, localizacion, fotos);
+		Plaza plazanew = new Plaza(precio, localizacion, fotos, usuario, fecha);
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 				//TODO:No se como meter varios parametros. Estono funciona:
 				//invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON), Entity.entity(plaza, MediaType.APPLICATION_JSON), Entity.entity(plazaNew, MediaType.APPLICATION_JSON));
