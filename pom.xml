@@ -223,7 +223,7 @@
 						<artifactId>exec-maven-plugin</artifactId>
 						<version>1.2.1</version>
 						<configuration>
-							<mainClass>p2parkin.dao.InsertarEjemplos</mainClass>
+							<mainClass>p2parking.dao.InsertarEjemplos</mainClass>
 							<arguments>
 								<argument>${server.hostname}</argument>
 								<argument>${server.port}</argument>
