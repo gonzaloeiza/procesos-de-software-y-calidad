@@ -8,6 +8,10 @@ import p2parking.jdo.Usuario;
 
 public abstract class InsertarEjemplos {
 	
+	public static void main(String args[]) {
+		insertar();
+	}
+	
 	public static void insertar() {
 		
 		System.out.println("Starting ....");

@@ -2,9 +2,7 @@ package p2parking.jdo;
 
 import java.util.ArrayList;
 
-import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
 
 @PersistenceCapable
 public class Plaza {
