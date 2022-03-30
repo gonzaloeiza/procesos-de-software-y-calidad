@@ -12,7 +12,17 @@ public class Plaza {
 	private float precio;
 	private String localizacion;
 	private ArrayList<String> fotos;	// guardamos solo los links para no tener que crear una nueva tabla en la base de datos
+	private Usuario usuario;
 	
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public Plaza(float precio, String localizacion, ArrayList<String> fotos) {
 		this.precio = precio;
 		this.localizacion = localizacion;
