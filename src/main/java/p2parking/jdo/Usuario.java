@@ -26,6 +26,14 @@ public class Usuario {
 		this.foto = foto;
 		this.plazas = set;
 	}
+	
+	public Usuario(String nombre, String correo, String contrasena, String foto) {
+		super();
+		this.nombre = nombre;
+		this.correo = correo;
+		this.contrasena = contrasena;
+		this.foto = foto;
+	}
 
 
 	public String getNombre() {
