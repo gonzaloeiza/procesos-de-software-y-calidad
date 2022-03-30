@@ -1,5 +1,6 @@
 package p2parking.jdo;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import javax.jdo.annotations.Join;
@@ -16,9 +17,9 @@ public class Usuario {
 	private String foto;
 	@Join
 	@Persistent(mappedBy="usuario", dependentElement="true")
-	private Set<Plaza> plazas;
+	private ArrayList<Plaza> plazas = new ArrayList<>();;
 	
-	public Usuario(String nombre, String correo, String contrasena, String foto, Set<Plaza> set) {
+	public Usuario(String nombre, String correo, String contrasena, String foto, ArrayList<Plaza> set) {
 		super();
 		this.nombre = nombre;
 		this.correo = correo;
@@ -68,12 +69,12 @@ public class Usuario {
 	}
 
 
-	public Set<Plaza> getPlazas() {
+	public ArrayList<Plaza> getPlazas() {
 		return plazas;
 	}
 
 
-	public void setPlazas(Set<Plaza> plazas) {
+	public void setPlazas(ArrayList<Plaza> plazas) {
 		this.plazas = plazas;
 	}
 
