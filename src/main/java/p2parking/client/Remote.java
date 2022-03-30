@@ -106,11 +106,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	
 	/*Metodos gestion Plaza*/
 	//Post
-<<<<<<< HEAD
-	public boolean addPlaza(Date token, float precio, String localizacion, ArrayList<String> fotos) {
-=======
-	protected boolean addPlaza(Date token, float precio, String localizacion, ArrayList<String> fotos, Usuario usuario, Date fecha) {
->>>>>>> refs/heads/endika
+	public boolean addPlaza(Date token, float precio, String localizacion, ArrayList<String> fotos, Usuario usuario, Date fecha) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/addPlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
@@ -125,11 +121,8 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		return true;
 	}
 	//Post
-<<<<<<< HEAD
-	public boolean updatePlaza(Date token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos) {
-=======
-	protected boolean updatePlaza(Date token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos, Usuario usuario, Date fecha) {
->>>>>>> refs/heads/endika
+
+	public boolean updatePlaza(Date token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos, Usuario usuario, Date fecha) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/updatePlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
