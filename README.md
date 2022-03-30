@@ -14,3 +14,6 @@ Then, in three separate cmd windows, run:
 5. mvn exec:java -PinsertarEjemplos
 6. mvn exec:java -Pmanager
 7. mvn exec:java -Pclient
+
+
+
