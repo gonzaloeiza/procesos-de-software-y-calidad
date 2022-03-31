@@ -37,24 +37,11 @@ public abstract class InsertarEjemplos {
 	    u2.getPlazas().add(p3);
 	   
 	    
-	    UsuariosDAO.getInstance().save(u1);
-	    UsuariosDAO.getInstance().save(u2);
-	    UsuariosDAO.getInstance().save(u3);
-	    UsuariosDAO.getInstance().save(u4);
-	    UsuariosDAO.getInstance().save(u5);
-
-	    
-    //    ArrayList<Plaza> listaPlazas1 = new ArrayList<Plaza>();
-	//    listaPlazas1.add(p1);
-	//    listaPlazas1.add(p2);
-	//
-	//    ArrayList<Plaza> listaPlazas2 = new ArrayList<Plaza>();
-	//    listaPlazas1.add(p3);
-	    
-	    
-	   
-	//    
-	//
+//	    UsuariosDAO.getInstance().save(u1);
+//	    UsuariosDAO.getInstance().save(u2);
+//	    UsuariosDAO.getInstance().save(u3);
+//	    UsuariosDAO.getInstance().save(u4);
+//	    UsuariosDAO.getInstance().save(u5);
     
 	}
 

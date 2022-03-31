@@ -1,92 +1,80 @@
 package p2parking.dao;
 
-import p2parking.jdo.Plaza;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.jdo.Extent;
+import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-public class PlazasDAO extends DataAccessObjectBase implements iAccesoObjeto<Plaza> {
+import p2parking.jdo.Plaza;
+
+public class PlazasDAO extends DataAccessObjectBase implements iAccesoObjeto<Plaza>{
+
+	private PersistenceManager pm = null;
+	private PersistenceManagerFactory pmf=null;
+	private static PlazasDAO instance = new PlazasDAO();
 	
-	private static PlazasDAO instance;	
+	private PlazasDAO(){
+		System.out.println("Constructor UsuariosDAO");
+		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+		pm=pmf.getPersistenceManager();
+	}
 	
-	private PlazasDAO() { }
-	
-	public static PlazasDAO getInstance() {
-		if (instance == null) {
-			instance = new PlazasDAO();
-		}		
-		
+	public static PlazasDAO getInstance(){
 		return instance;
 	}
 	
-
-    @Override
-    public void save(Plaza object) {
-    	super.saveObject(object);
-    }
-
-    @Override
-    public void delete(Plaza object) {
-    	super.deleteObject(object);
-    }
-
-    @Override
-    public List<Plaza> getAll() {
-    	
-    	PersistenceManager pm = pmf.getPersistenceManager();
+	@Override
+	public void save(Plaza plaza) {
 		Transaction tx = pm.currentTransaction();
-		List<Plaza> articles = new ArrayList<>();
+		tx.begin();
+		pm.makePersistent(plaza);
+		tx.commit();
 		
-		try {
-			tx.begin();
-				
-			Extent<Plaza> extent = pm.getExtent(Plaza.class, true);
-			for (Plaza category : extent) {
-				articles.add(category);
-			}
+	}
 
-			tx.commit();
-		} catch (Exception ex) {
-			System.out.println("  $ Error retrieving all the Plazas: " + ex.getMessage());
-		} finally {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-		}
-		return articles;
-    }
-
-    @Override
-    public Plaza find(String param) {
-    	//funcion no necesaria
-    	return null;
-    }
-    
-    public List<Plaza> findPlazasDeUsuario(String correo) {
-    	PersistenceManager pm = pmf.getPersistenceManager();
+	@Override
+	public void delete(Plaza plaza) {
 		Transaction tx = pm.currentTransaction();
-		List<Plaza> plazasUsuario = new ArrayList<Plaza>();
+		tx.begin();
+		pm.deletePersistent(plaza);
+		tx.commit();
+		
+	}
 
+	@Override
+	public List<Plaza> getAll() {
+		Transaction tx = pm.currentTransaction();
+		List<Plaza> tempPlaza = null;
 		try {
-			tx.begin();
-			Query<?> query = pm.newQuery("SELECT FROM " + Plaza.class.getName() + " WHERE propietario.correo == '" + correo + "'");
-			plazasUsuario = (List<Plaza>) query.executeList();
-			tx.commit();
-		} catch (Exception ex) {
-			System.out.println("  $ Error querying user's plazas: " + ex.getMessage());
-		} finally {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
+		tx.begin();
+		Query query = pm.newQuery("SELECT FROM " + Plaza.class.getName());
+		tempPlaza = (List<Plaza>)query.execute();
+		tx.commit();
+		} catch(Exception ex) {
+			System.out.println("EXCEPCION AL OBTENER LA PLAZA: \n"+ ex.getMessage());
 		}
-    	
-    	return plazasUsuario;
-    }
+		return tempPlaza;
+	}
 
+	@Override
+	public Plaza find(String param) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Plaza> findPlazasDeUsuario(String correo) {
+		Transaction tx = pm.currentTransaction();
+		List<Plaza> tempPlaza = null;
+		try {
+		tx.begin();
+		Query query = pm.newQuery("SELECT FROM " + Plaza.class.getName() + " WHERE propietario.correo == '" + correo + "'");
+		tempPlaza = (List<Plaza>)query.execute();
+		tx.commit();
+		} catch(Exception ex) {
+			System.out.println("EXCEPCION AL OBTENER LA PLAZA: \n"+ ex.getMessage());
+		}
+		return tempPlaza;
+	}
 }

@@ -1,94 +1,75 @@
 package p2parking.dao;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.jdo.Extent;
+import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 import p2parking.jdo.Usuario;
 
 public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<Usuario> {
+
+	private PersistenceManager pm = null;
+	private PersistenceManagerFactory pmf=null;
+	private static UsuariosDAO instance = new UsuariosDAO();
 	
-	private static UsuariosDAO instance;	
+	private UsuariosDAO(){
+		System.out.println("Constructor UsuariosDAO");
+		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+		pm=pmf.getPersistenceManager();
+	}
 	
-	private UsuariosDAO() { }
-	
-	public static UsuariosDAO getInstance() {
-		if (instance == null) {
-			instance = new UsuariosDAO();
-		}		
-		
+	public static UsuariosDAO getInstance(){
 		return instance;
 	}
-
-    @Override
-    public void save(Usuario object) {
-    	super.saveObject(object);
-    }
-
-    @Override
-    public void delete(Usuario object) {
-    	super.deleteObject(object);
-    }
-
-    @Override
-    public List<Usuario> getAll() {
-    	PersistenceManager pm = pmf.getPersistenceManager();
+	
+	@Override
+	public void save(Usuario usuario) {
 		Transaction tx = pm.currentTransaction();
+		tx.begin();
+		pm.makePersistent(usuario);
+		tx.commit();
 		
-		List<Usuario> usuarios = new ArrayList<>();
-
-		try {
-			tx.begin();
-			
-			Extent<Usuario> userExtent = pm.getExtent(Usuario.class, true);
-			
-			for (Usuario usuario : userExtent) {
-				usuarios.add(usuario);
-			}
-						
-			tx.commit();
-		} catch (Exception ex) {
-			System.out.println("  $ Error querying all users: " + ex.getMessage());
-		} finally {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-
-			pm.close();
-		}
-
-		return usuarios;
 	}
 
-    @Override
-    public Usuario find(String correo) {
-    	PersistenceManager pm = pmf.getPersistenceManager();
+	@Override
+	public void delete(Usuario usuario) {
 		Transaction tx = pm.currentTransaction();
+		tx.begin();
+		pm.deletePersistent(usuario);
+		tx.commit();
+		
+	}
 
-		Usuario result = null; 
-
+	@Override
+	public List<Usuario> getAll() {
+		Transaction tx = pm.currentTransaction();
+		List<Usuario> tempUsuario=null;
 		try {
-			tx.begin();
-			
-			Query<?> query = pm.newQuery("SELECT FROM " + Usuario.class.getName() + " WHERE correo == '" + correo + "'");
-			query.setUnique(true);
-			result = (Usuario) query.execute();
-			
-			tx.commit();
-		} catch (Exception ex) {
-			System.out.println("  $ Error querying a User: " + ex.getMessage());
-		} finally {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-
-			pm.close();
+		tx.begin();
+		Query query = pm.newQuery("SELECT FROM " + Usuario.class.getName());
+		tempUsuario = (List<Usuario>)query.execute();
+		tx.commit();
+		} catch(Exception ex) {
+			System.out.println("EXCEPCION AL OBTENER EL USUARIO: \n"+ ex.getMessage());
 		}
+		return tempUsuario;
+	}
 
-		return result;
+	@Override
+	public Usuario find(String correo) {
+		Transaction tx = pm.currentTransaction();
+		List<Usuario> tempUsuario=null;
+		try {
+		tx.begin();
+		Query query = pm.newQuery("SELECT FROM " + Usuario.class.getName() + " WHERE correo	 == '" + correo + "'");
+		tempUsuario = (List<Usuario>)query.execute();
+		tx.commit();
+		} catch(Exception ex) {
+			System.out.println("EXCEPCION AL OBTENER LA USUARIO: \n"+ ex.getMessage());
+		}	
+		return tempUsuario.get(0);
 	}
 }
