@@ -12,23 +12,13 @@ public class Plaza {
 	private String localizacion;
 	private ArrayList<String> fotos; // guardamos solo los links para no tener que crear una nueva tabla en la base
 										// de datos
-	private Usuario usuario;
-	Date fechaPublicacion;
+	private long fechaPublicacion;
 
-	public Plaza(float precio, String localizacion, ArrayList<String> fotos, Usuario usuario, Date fechaPublicacion) {
+	public Plaza(float precio, String localizacion, ArrayList<String> fotos, long fechaPublicacion) {
 		this.precioDia = precio;
 		this.localizacion = localizacion;
 		this.fotos = fotos;
-		this.usuario = usuario;
 		this.fechaPublicacion = fechaPublicacion;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public float getPrecio() {
@@ -55,11 +45,11 @@ public class Plaza {
 		this.fotos = fotos;
 	}
 
-	public Date getFechaPublicacion() {
+	public long getFechaPublicacion() {
 		return fechaPublicacion;
 	}
 
-	public void setFechaPublicacion(Date fechaPublicacion) {
+	public void setFechaPublicacion(long fechaPublicacion) {
 		this.fechaPublicacion = fechaPublicacion;
 	}
 

@@ -28,9 +28,9 @@ public abstract class InsertarEjemplos {
 	    Usuario u4 = new Usuario("oier", "oier@opendeusto.es", "1234", "ss", new HashSet<Plaza>());
 	    Usuario u5 = new Usuario("imanol", "imanol.gutierrez@opendeusto.es", "1234", "ss", new HashSet<Plaza>());
 	    
-	    Plaza p1 = new Plaza(12.2f, "", new ArrayList<String>(), u1, new Date(2000, 03, 15));
-	    Plaza p2 = new Plaza(12.2f, "", new ArrayList<String>(), u2,  new Date(2000, 03, 15));
-	    Plaza p3 = new Plaza(12.2f, "", new ArrayList<String>(), u3, new Date(2000, 03, 15));  
+	    Plaza p1 = new Plaza(12.2f, "", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
+	    Plaza p2 = new Plaza(12.2f, "", new ArrayList<String>(),  new Date(2000, 03, 15).getTime());
+	    Plaza p3 = new Plaza(12.2f, "", new ArrayList<String>(), new Date(2000, 03, 15).getTime());  
 	    
 	    
 	   

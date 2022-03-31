@@ -75,7 +75,7 @@ public class PlazasDAO extends DataAccessObjectBase implements iAccesoObjeto<Pla
 			query.setUnique(true);
 			result = (Plaza) query.execute();
 			try {
-				devolver = new Plaza(result.getPrecio(), result.getLocalizacion(), result.getFotos(), result.getUsuario(), result.getFechaPublicacion());
+				devolver = new Plaza(result.getPrecio(), result.getLocalizacion(), result.getFotos(), result.getFechaPublicacion());
 			} catch(Exception e) {}
 			tx.commit();
 		} catch (Exception ex) {
