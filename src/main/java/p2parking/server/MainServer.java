@@ -5,7 +5,6 @@ import java.util.HashMap;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.Query;
 import javax.jdo.Transaction;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -16,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import p2parking.dao.PlazasDAO;
 import p2parking.dao.UsuariosDAO;
 import p2parking.jdo.Usuario;
 
@@ -55,59 +55,42 @@ public class MainServer {
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response login(@FormParam("correo") String correo, @FormParam("contrasena") String contrasena) {
-		pm = pmf.getPersistenceManager();	//yo quitaria codigo de BD y yamas solo al DAO
-        tx = pm.currentTransaction();
-        try {
-            tx.begin();
-            Query<Usuario> q = pm.newQuery(Usuario.class);
-            q.filter("this.correo == '" + correo + "'");
-            
-            Usuario u = q.executeUnique();
-            
-            if (u.getContrasena().equals(contrasena)) {
-            	Date token = new Date();
-            	tokenUsuarios.put(token, new Usuario(u.getNombre(), u.getCorreo(), u.getContrasena(), u.getFoto(), u.getPlazas()));
-            	return Response.ok(token).build();
-            } else {
-            	return Response.status(401, "Correo/contraseña incorrectos").build();
-            }
-            
-
-        }catch(Exception e) {
-        	return Response.status(400, "Error, intentalo de nuevo mas tarde").build();
-        } finally {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-            pm.close();
+			
+        Usuario u = UsuariosDAO.getInstance().find(correo);
+        if (u != null) {
+        	Date token = new Date();
+        	u.setPlazas(PlazasDAO.getInstance().findPlazasDeUsuario(u.getCorreo()));
+        	tokenUsuarios.put(token, u);
+        	return Response.ok(token).build();
         }
-	}
+        return Response.status(401, "Correo/Contraseña incorrectos").build();
+   	}
 	
 	
-	@POST
-	@Path("/updateUser")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response updateUser(@FormParam("token") Date token, @FormParam("usr") Usuario usr) {
-		if(tokenUsuarios.containsKey(token)) {
-			Usuario temp = UsuariosDAO.getInstance().find(usr.getCorreo());
-			if(temp != null) {
-				UsuariosDAO.getInstance().delete(temp);
-				UsuariosDAO.getInstance().save(usr);
-				tokenUsuarios.replace(token, usr);
-				return Response.ok().build();
-			}
-			return Response.status(401, "Error").build();
-		}
-		return Response.status(401, "Error, no estas logeado").build();
-		
-	}
-	/*IMPORTANTE:   Nombre de usuario: "p2parkingCliente@gmail.com"; contrasena: "Q1w2E3r4" */
-	@GET
-	@Path("servicioCliente")
-	public Response getServCliente() {
-		String resultado = "Si tienes algun problema contacta con: p2parkingCliente@gmail.com";// TODO: definir servicio al cliente
-		return Response.ok(resultado).build();
-	}
+//	@POST
+//	@Path("/updateUser")
+//	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+//	public Response updateUser(@FormParam("token") Date token, @FormParam("usr") Usuario usr) {
+//		if(tokenUsuarios.containsKey(token)) {
+//			Usuario temp = UsuariosDAO.getInstance().find(usr.getCorreo());
+//			if(temp != null) {
+//				UsuariosDAO.getInstance().delete(temp);
+//				UsuariosDAO.getInstance().save(usr);
+//				tokenUsuarios.replace(token, usr);
+//				return Response.ok().build();
+//			}
+//			return Response.status(401, "Error").build();
+//		}
+//		return Response.status(401, "Error, no estas logeado").build();
+//		
+//	}
+//	/*IMPORTANTE:   Nombre de usuario: "p2parkingCliente@gmail.com"; contrasena: "Q1w2E3r4" */
+//	@GET
+//	@Path("servicioCliente")
+//	public Response getServCliente() {
+//		String resultado = "Si tienes algun problema contacta con: p2parkingCliente@gmail.com";// TODO: definir servicio al cliente
+//		return Response.ok(resultado).build();
+//	}
 //	
 //	/*Metodos gestion Plaza*/
 //	@POST
