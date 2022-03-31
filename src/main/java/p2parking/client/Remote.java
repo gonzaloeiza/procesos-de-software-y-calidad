@@ -3,6 +3,7 @@ package p2parking.client;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -75,7 +76,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		return token;
 	}
 	//Post
-	public boolean updateUser(Date token, String nombre, String correo, String contrsena, String foto, HashSet<Plaza> plazas) {
+	public boolean updateUser(Date token, String nombre, String correo, String contrsena, String foto, List<Plaza> plazas) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/updateUser");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		

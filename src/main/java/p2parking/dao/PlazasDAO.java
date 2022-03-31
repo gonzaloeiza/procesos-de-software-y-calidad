@@ -1,8 +1,6 @@
 package p2parking.dao;
 
 import p2parking.jdo.Plaza;
-import p2parking.jdo.Usuario;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,28 +62,31 @@ public class PlazasDAO extends DataAccessObjectBase implements iAccesoObjeto<Pla
     }
 
     @Override
-    public Plaza find(String param) {//suponiendo param = usr.getEmail();
+    public Plaza find(String param) {
+    	//funcion no necesaria
+    	return null;
+    }
+    
+    public List<Plaza> findPlazasDeUsuario(String correo) {
     	PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
-		Plaza devolver = null;
+		List<Plaza> plazasUsuario = new ArrayList<Plaza>();
+
 		try {
 			tx.begin();
-			Plaza result = null;
-			Query<?> query = pm.newQuery("SELECT FROM " + Plaza.class.getName() +"," + Usuario.class.getName() + " WHERE usuario_email == '" + param + "'");
-			query.setUnique(true);
-			result = (Plaza) query.execute();
-			try {
-				devolver = new Plaza(result.getPrecio(), result.getLocalizacion(), result.getFotos(), result.getFechaPublicacion());
-			} catch(Exception e) {}
+			Query<?> query = pm.newQuery("SELECT FROM " + Plaza.class.getName() + " WHERE propietario.correo == '" + correo + "'");
+			plazasUsuario = (List<Plaza>) query.executeList();
 			tx.commit();
 		} catch (Exception ex) {
-			System.out.println("  $ Error querying an Plaza: " + ex.getMessage());
+			System.out.println("  $ Error querying user's plazas: " + ex.getMessage());
 		} finally {
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
 			}
 			pm.close();
 		}
-		return devolver;    	
+    	
+    	return plazasUsuario;
     }
+
 }

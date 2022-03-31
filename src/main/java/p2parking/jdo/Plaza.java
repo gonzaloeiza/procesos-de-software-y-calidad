@@ -1,7 +1,6 @@
 package p2parking.jdo;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.jdo.annotations.PersistenceCapable;
 
@@ -13,6 +12,7 @@ public class Plaza {
 	private ArrayList<String> fotos; // guardamos solo los links para no tener que crear una nueva tabla en la base
 										// de datos
 	private long fechaPublicacion;
+	private Usuario propietario;
 
 	public Plaza(float precio, String localizacion, ArrayList<String> fotos, long fechaPublicacion) {
 		this.precioDia = precio;
@@ -52,5 +52,23 @@ public class Plaza {
 	public void setFechaPublicacion(long fechaPublicacion) {
 		this.fechaPublicacion = fechaPublicacion;
 	}
+
+	public float getPrecioDia() {
+		return precioDia;
+	}
+
+	public void setPrecioDia(float precioDia) {
+		this.precioDia = precioDia;
+	}
+
+	public Usuario getPropietario() {
+		return propietario;
+	}
+
+	public void setPropietario(Usuario propietario) {
+		this.propietario = propietario;
+	}
+	
+	
 
 }

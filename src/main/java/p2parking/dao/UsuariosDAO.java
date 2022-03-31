@@ -74,7 +74,7 @@ public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<U
 		try {
 			tx.begin();
 			
-			Query<?> query = pm.newQuery("SELECT * FROM " + Usuario.class.getName() + " WHERE email == '" + correo + "'");
+			Query<?> query = pm.newQuery("SELECT FROM " + Usuario.class.getName() + " WHERE correo == '" + correo + "'");
 			query.setUnique(true);
 			result = (Usuario) query.execute();
 			
