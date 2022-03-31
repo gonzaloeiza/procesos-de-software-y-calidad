@@ -2,10 +2,7 @@ package p2parking.server;
 
 import java.util.Date;
 import java.util.HashMap;
-import javax.jdo.JDOHelper;
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.Transaction;
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -14,9 +11,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import p2parking.dao.PlazasDAO;
 import p2parking.dao.UsuariosDAO;
+import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
 
 
@@ -26,10 +22,6 @@ public class MainServer {
 	
 	
 	HashMap<Date, Usuario> tokenUsuarios = new HashMap<>(); //mapa de usuarios logeados
-	PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-	PersistenceManager pm = pmf.getPersistenceManager();
-	Transaction tx = pm.currentTransaction();
-	
 	@GET
 	@Path("/test")
 	public Response addDonation() {
@@ -59,7 +51,6 @@ public class MainServer {
         Usuario u = UsuariosDAO.getInstance().find(correo);
         if (u != null) {
         	Date token = new Date();
-        	u.setPlazas(PlazasDAO.getInstance().findPlazasDeUsuario(u.getCorreo()));
         	tokenUsuarios.put(token, u);
         	return Response.ok(token).build();
         }
@@ -67,45 +58,52 @@ public class MainServer {
    	}
 	
 	
-//	@POST
-//	@Path("/updateUser")
-//	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-//	public Response updateUser(@FormParam("token") Date token, @FormParam("usr") Usuario usr) {
-//		if(tokenUsuarios.containsKey(token)) {
-//			Usuario temp = UsuariosDAO.getInstance().find(usr.getCorreo());
-//			if(temp != null) {
-//				UsuariosDAO.getInstance().delete(temp);
-//				UsuariosDAO.getInstance().save(usr);
-//				tokenUsuarios.replace(token, usr);
-//				return Response.ok().build();
-//			}
-//			return Response.status(401, "Error").build();
-//		}
-//		return Response.status(401, "Error, no estas logeado").build();
-//		
-//	}
-//	/*IMPORTANTE:   Nombre de usuario: "p2parkingCliente@gmail.com"; contrasena: "Q1w2E3r4" */
-//	@GET
-//	@Path("servicioCliente")
-//	public Response getServCliente() {
-//		String resultado = "Si tienes algun problema contacta con: p2parkingCliente@gmail.com";// TODO: definir servicio al cliente
-//		return Response.ok(resultado).build();
-//	}
+	@POST
+	@Path("/updateUser")
+	public Response updateUser(List<Object> requestBody) {
+		if (requestBody.size() == 2 && requestBody.get(0) instanceof Date && requestBody.get(0) instanceof Usuario) {			
+			Date token = (Date) requestBody.get(0);
+			Usuario usuario = (Usuario) requestBody.get(1);
+			if(tokenUsuarios.containsKey(token)) {
+				tokenUsuarios.put(token, usuario);
+				UsuariosDAO.getInstance().save(tokenUsuarios.get(token));
+				return Response.ok("Usuario actualizado correctamente").build();
+			} else {
+				return Response.status(401, "No estas autenticado").build();
+			}
+		} else {
+			return Response.status(400, "Ha ocurrido un error").build();
+		}
+		
+	}
+	
+	/*IMPORTANTE:   Nombre de usuario: "p2parkingCliente@gmail.com"; contrasena: "Q1w2E3r4" */
+	@GET
+	@Path("servicioCliente")
+	public Response getServCliente() {
+		String resultado = "Si tienes algun problema contacta con: p2parkingCliente@gmail.com";// TODO: definir servicio al cliente
+		return Response.ok(resultado).build();
+	}
 //	
 //	/*Metodos gestion Plaza*/
-//	@POST
-//	@Path("/addPlaza")
-//	public Response addPlaza(Date token, Plaza plaza) {
-////		if(tokenUsuarios.containsKey(token)) {
-////			Usuario u = tokenUsuarios.get(token);
-////			System.out.println(u.getNombre());
-////			Usuario usr = tokenUsuarios.get(token);
-////			usr.addFav(plaza);
-////			tokenUsuarios.replace(token, usr);
-////			return Response.ok(true).build();
-////		}
-//		return Response.ok(false).build();
-//	}
+	@POST
+	@Path("/addPlaza")
+	public Response addPlaza(List<Object> requestBody) {
+		if (requestBody.size() == 2 && requestBody.get(0) instanceof Date && requestBody.get(0) instanceof Plaza) {			
+			Date token = (Date) requestBody.get(0);
+			Plaza plaza = (Plaza) requestBody.get(1);
+			if(tokenUsuarios.containsKey(token)) {
+				tokenUsuarios.get(token).getPlazas().add(plaza);
+				UsuariosDAO.getInstance().save(tokenUsuarios.get(token));
+				return Response.ok("Plaza añadida correctamente").build();
+			} else {
+				return Response.status(401, "No estas autenticado").build();
+			}
+		} else {
+			return Response.status(400, "Ha ocurrido un error").build();
+		}
+	}
+	
 //	@POST
 //	@Path("/updatePlaza")
 //	public Response updatePlaza(Date token, Plaza plazaOld, Plaza plazaNew) {

@@ -35,13 +35,12 @@ public abstract class InsertarEjemplos {
 	    u1.getPlazas().add(p1);
 	    u1.getPlazas().add(p2);
 	    u2.getPlazas().add(p3);
-	   
-	    
-//	    UsuariosDAO.getInstance().save(u1);
-//	    UsuariosDAO.getInstance().save(u2);
-//	    UsuariosDAO.getInstance().save(u3);
-//	    UsuariosDAO.getInstance().save(u4);
-//	    UsuariosDAO.getInstance().save(u5);
+	   	    
+	    UsuariosDAO.getInstance().save(u1);
+	    UsuariosDAO.getInstance().save(u2);
+	    UsuariosDAO.getInstance().save(u3);
+	    UsuariosDAO.getInstance().save(u4);
+	    UsuariosDAO.getInstance().save(u5); 
     
 	}
 
