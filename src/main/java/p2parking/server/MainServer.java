@@ -84,26 +84,40 @@ public class MainServer {
 		String resultado = "Si tienes algun problema contacta con: p2parkingCliente@gmail.com";// TODO: definir servicio al cliente
 		return Response.ok(resultado).build();
 	}
-//	
-//	/*Metodos gestion Plaza*/
-	@POST
-	@Path("/addPlaza")
-	public Response addPlaza(List<Object> requestBody) {
-		if (requestBody.size() == 2 && requestBody.get(0) instanceof Date && requestBody.get(0) instanceof Plaza) {			
-			Date token = (Date) requestBody.get(0);
-			Plaza plaza = (Plaza) requestBody.get(1);
-			if(tokenUsuarios.containsKey(token)) {
-				tokenUsuarios.get(token).getPlazas().add(plaza);
-				UsuariosDAO.getInstance().save(tokenUsuarios.get(token));
-				return Response.ok("Plaza añadida correctamente").build();
-			} else {
-				return Response.status(401, "No estas autenticado").build();
-			}
-		} else {
-			return Response.status(400, "Ha ocurrido un error").build();
-		}
-	}
+
 	
+	
+/* NO HACEN FALTA ESTOS METODOS, SI CREAS, ACTUALIZAS O BORRAS LAS PLAZAS USANDO LOS GETTERS Y SETTERS DE LA CLASE USUARIO
+ * Y LLAMAS A /API/PRUEBA/UPDATEUSER (YA PROGRAMADO ARRIBA) SE ACTUALIZAN LA LISTA DE PLAZAS DEL USUARIO EN LA BD
+ * 
+ * usuario u = new Usuario(...);
+ * u.setPlazas(new ArrayList<Plaza>();
+ * UsuariosDAO.getInstance().save(u);
+ *
+ * En este ejemplo estarias sustituyendo todas las plazas del usuario por un arraylist vacio (borrarias todas las plazas),
+ * y los cambios se actualizarian en la BD
+*/
+
+	
+	
+/////*Metodos gestion Plaza*/
+//@POST
+//@Path("/addPlaza")
+//public Response addPlaza(List<Object> requestBody) {
+//	if (requestBody.size() == 2 && requestBody.get(0) instanceof Date && requestBody.get(0) instanceof Plaza) {			
+//		Date token = (Date) requestBody.get(0);
+//		Plaza plaza = (Plaza) requestBody.get(1);
+//		if(tokenUsuarios.containsKey(token)) {
+//			tokenUsuarios.get(token).getPlazas().add(plaza);
+//			UsuariosDAO.getInstance().save(tokenUsuarios.get(token));
+//			return Response.ok("Plaza añadida correctamente").build();
+//		} else {
+//			return Response.status(401, "No estas autenticado").build();
+//		}
+//	} else {
+//		return Response.status(400, "Ha ocurrido un error").build();
+//	}
+//}
 //	@POST
 //	@Path("/updatePlaza")
 //	public Response updatePlaza(Date token, Plaza plazaOld, Plaza plazaNew) {
@@ -122,6 +136,11 @@ public class MainServer {
 //		ArrayList<Plaza> resultado = new ArrayList<>();// TODO:funacionalidad getMisPlazas
 //		return Response.ok(resultado).build();
 //	}
+	
+
+	
+	
+	
 //	@POST
 //	@Path("addPlazaFav")
 //	public Response addPlazaFav(Date token, Plaza plaza) {

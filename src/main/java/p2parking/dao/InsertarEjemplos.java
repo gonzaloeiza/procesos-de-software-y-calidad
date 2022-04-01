@@ -36,15 +36,15 @@ public abstract class InsertarEjemplos {
 	    u1.getPlazas().add(p2);
 	    u2.getPlazas().add(p3);
 	   	    
-	    UsuariosDAO.getInstance().save(u1);
-	    UsuariosDAO.getInstance().save(u2);
-	    UsuariosDAO.getInstance().save(u3);
-	    UsuariosDAO.getInstance().save(u4);
-	    UsuariosDAO.getInstance().save(u5); 
+//	    UsuariosDAO.getInstance().save(u1);
+//	    UsuariosDAO.getInstance().save(u2);
+//	    UsuariosDAO.getInstance().save(u3);
+//	    UsuariosDAO.getInstance().save(u4);
+//	    UsuariosDAO.getInstance().save(u5); 
     
+	    Usuario u = UsuariosDAO.getInstance().find("gonzaloeizaguirre@opendeusto.es");
+	    System.out.println(u.getPlazas().get(0));
+	    u.getPlazas().get(0).setPrecio(1000);
+	    
 	}
-
-    
-    
-
 }
