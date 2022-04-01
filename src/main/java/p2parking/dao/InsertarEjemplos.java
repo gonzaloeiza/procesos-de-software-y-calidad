@@ -2,8 +2,6 @@ package p2parking.dao;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.List;
-
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
 
@@ -36,15 +34,18 @@ public abstract class InsertarEjemplos {
 	    u1.getPlazas().add(p2);
 	    u2.getPlazas().add(p3);
 	   	    
-//	    UsuariosDAO.getInstance().save(u1);
-//	    UsuariosDAO.getInstance().save(u2);
-//	    UsuariosDAO.getInstance().save(u3);
-//	    UsuariosDAO.getInstance().save(u4);
-//	    UsuariosDAO.getInstance().save(u5); 
-    
+	    UsuariosDAO.getInstance().save(u1);
+	    UsuariosDAO.getInstance().save(u2);
+	    UsuariosDAO.getInstance().save(u3);
+	    UsuariosDAO.getInstance().save(u4);
+	    UsuariosDAO.getInstance().save(u5); 
+
+//	    //añadir favoritos
 	    Usuario u = UsuariosDAO.getInstance().find("gonzaloeizaguirre@opendeusto.es");
-	    System.out.println(u.getPlazas().get(0));
-	    u.getPlazas().get(0).setPrecio(1000);
+	    Usuario uu = UsuariosDAO.getInstance().find("javier@opendeusto.es");
+	    
+	    uu.getPlazas().get(0).getUsuariosFavoritos().add(u);
+	    UsuariosDAO.getInstance().save(u);
 	    
 	}
 }

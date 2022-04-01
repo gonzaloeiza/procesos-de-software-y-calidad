@@ -16,7 +16,8 @@ public class Usuario {
 	private String foto;
 	@Persistent(mappedBy="propietario")
 	private List<Plaza> plazas;
-	
+    @Persistent(mappedBy="usuariosFavoritos")
+	private List<Plaza> plazasFavoritos;
 	public Usuario(String nombre, String correo, String contrasena, String foto, List<Plaza> set) {
 		super();
 		this.nombre = nombre;
@@ -83,6 +84,14 @@ public class Usuario {
 
 	public void setPlazas(List<Plaza> plazas) {
 		this.plazas = plazas;
+	}
+
+	public List<Plaza> getPlazasFavoritos() {
+		return plazasFavoritos;
+	}
+
+	public void setPlazasFavoritos(List<Plaza> plazasFavoritos) {
+		this.plazasFavoritos = plazasFavoritos;
 	}
 
 }

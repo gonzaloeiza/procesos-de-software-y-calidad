@@ -16,7 +16,7 @@ public class PlazasDAO extends DataAccessObjectBase implements iAccesoObjeto<Pla
 	private static PlazasDAO instance = new PlazasDAO();
 	
 	private PlazasDAO(){
-		System.out.println("Constructor UsuariosDAO");
+		System.out.println("Constructor PlazasDAO");
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		pm=pmf.getPersistenceManager();
 	}

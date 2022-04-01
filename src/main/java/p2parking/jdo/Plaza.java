@@ -1,8 +1,12 @@
 package p2parking.jdo;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.jdo.annotations.Element;
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 
 @PersistenceCapable
 public class Plaza {
@@ -13,7 +17,11 @@ public class Plaza {
 										// de datos
 	private long fechaPublicacion;
 	private Usuario propietario;
-
+    @Persistent(table="favoritos")
+    @Join(column="PLAZA_ID")
+    @Element(column="correo")
+	private List<Usuario> usuariosFavoritos;
+	
 	public Plaza(float precio, String localizacion, ArrayList<String> fotos, long fechaPublicacion) {
 		this.precioDia = precio;
 		this.localizacion = localizacion;
@@ -68,7 +76,13 @@ public class Plaza {
 	public void setPropietario(Usuario propietario) {
 		this.propietario = propietario;
 	}
-	
-	
+
+	public List<Usuario> getUsuariosFavoritos() {
+		return usuariosFavoritos;
+	}
+
+	public void setUsuariosFavoritos(List<Usuario> usuariosFavoritos) {
+		this.usuariosFavoritos = usuariosFavoritos;
+	}
 
 }
