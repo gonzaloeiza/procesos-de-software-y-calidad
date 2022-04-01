@@ -12,7 +12,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import p2parking.dao.UsuariosDAO;
-import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
 
 
@@ -138,7 +137,6 @@ public class MainServer {
 //	}
 	
 
-	
 	
 	
 //	@POST
