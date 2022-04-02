@@ -61,15 +61,16 @@ public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<U
 	@Override
 	public Usuario find(String correo) {
 		Transaction tx = pm.currentTransaction();
-		List<Usuario> tempUsuario=null;
+		Usuario tempUsuario = null;
 		try {
 		tx.begin();
 		Query query = pm.newQuery("SELECT FROM " + Usuario.class.getName() + " WHERE correo	 == '" + correo + "'");
-		tempUsuario = (List<Usuario>)query.execute();
+		query.setUnique(true);
+		tempUsuario = (Usuario)query.execute();
 		tx.commit();
 		} catch(Exception ex) {
 			System.out.println("EXCEPCION AL OBTENER LA USUARIO: \n"+ ex.getMessage());
 		}	
-		return tempUsuario.get(0);
+		return tempUsuario;
 	}
 }
