@@ -49,17 +49,17 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	/*Metodos gestion Usuario*/
 	//Post
 	public boolean registro(String nombre, String correo, String contrsena, String foto) {//Ejmplo metodo POST
-		WebTarget donationsWebTarget = webTarget.path(path +  "/registro");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
-		
-		Usuario temp = new Usuario(nombre, correo, contrsena, foto);
-		Response response = invocationBuilder.post(Entity.entity(yoMismo, MediaType.APPLICATION_JSON));
-		if (response.getStatus() != Status.OK.getStatusCode()) {
-			return false;
-		}
-		yoMismo = temp;
-		return true;
-	}
+        WebTarget donationsWebTarget = webTarget.path(path +  "/registro");
+        Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+
+        Usuario temp = new Usuario(nombre, correo, contrsena, foto);
+        Response response = invocationBuilder.post(Entity.entity(temp, MediaType.APPLICATION_JSON));
+        if (response.getStatus() == 200) {
+            yoMismo = temp;
+            return response.readEntity(Boolean.class);
+        }
+        return false;
+    }
 	//Post
 	public Date logIn(String email, String contrasena) {
         WebTarget donationsWebTarget = webTarget.path("prueba/login");
