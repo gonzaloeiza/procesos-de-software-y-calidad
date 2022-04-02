@@ -62,19 +62,19 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	}
 	//Post
 	public Date logIn(String email, String contrasena) {
-		WebTarget donationsWebTarget = webTarget.path(path +  "/logIn");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
-		
-		Response response = invocationBuilder.post(Entity.entity(email, MediaType.APPLICATION_JSON));
-				//TODO:No se como meter varios parametros. Estono funciona:
-				//invocationBuilder.post(Entity.entity(email, MediaType.APPLICATION_JSON), Entity.entity(contrasena, MediaType.APPLICATION_JSON));
-		if (response.getStatus() != Status.OK.getStatusCode()) {
-			//TODO:Añadir gestion de errores
-			return null;
-		}
-		Date token = response.readEntity(Date.class);
-		return token;
-	}
+        WebTarget donationsWebTarget = webTarget.path("prueba/login");
+        Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+        List<Object> requestBody = new ArrayList<Object>();
+        requestBody.add(email);
+        requestBody.add(contrasena);
+        Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
+        if (response.getStatus() == 200) {
+            Date token = response.readEntity(Date.class);
+            System.out.println(token);
+            return token;
+        }
+        return null;
+    }
 	//Post
 	public boolean updateUser(Date token, String nombre, String correo, String contrsena, String foto, List<Plaza> plazas) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/updateUser");

@@ -43,19 +43,24 @@ public class MainServer {
 	
 	
 	@POST
-	@Path("/login")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response login(@FormParam("correo") String correo, @FormParam("contrasena") String contrasena) {
-			
-        Usuario u = UsuariosDAO.getInstance().find(correo);
-        if (u != null) {
-        	Date token = new Date();
-        	tokenUsuarios.put(token, u);
-        	return Response.ok(token).build();
+    @Path("/login")
+    public Response login(List<Object> requestBody) {
+        String correo = (String) requestBody.get(0);
+        String contrasena = (String) requestBody.get(1);
+        try {
+            Usuario u = UsuariosDAO.getInstance().find(correo);
+            if (u != null) {
+                if (u.getContrasena().equals(contrasena)) {
+                    Date token = new Date();
+                    tokenUsuarios.put(token, u);
+                    return Response.ok(token).build();
+                }
+            }
+        } catch (Exception e) {
+
         }
         return Response.status(401, "Correo/Contraseña incorrectos").build();
-   	}
-	
+       }
 	
 	@POST
 	@Path("/updateUser")
