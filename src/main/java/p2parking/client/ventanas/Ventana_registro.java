@@ -8,6 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
+
+import p2parking.client.Remote;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -32,7 +35,7 @@ public class Ventana_registro extends JFrame {
 	public Ventana_registro() {
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
-    	setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_registro.class.getResource("/p2parking/client/ventanas/P2.jpg")));
+    	//setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_registro.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 481);
 		panelPricipal = new JPanel();
@@ -48,6 +51,19 @@ public class Ventana_registro extends JFrame {
 		panelabajo.add(panel_inutil_1);
 		
 		JButton inicio_sesion = new JButton("Registrar");
+		inicio_sesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean temp = Remote.getInstance().registro(txtnombre.getText(), txtcorreo.getText(), txtcontrasena.getText(), "foto");
+				if(temp) {
+					Inicio_sesion.main(null);
+					//TODO: añadid popUp de echo
+					dispose();
+				}
+				else {
+					//TODO: añadir popUp error
+				}
+			}
+		});
 		panelabajo.add(inicio_sesion);
 		
 		JPanel panel_inutil_2 = new JPanel();
@@ -64,7 +80,7 @@ public class Ventana_registro extends JFrame {
 		panel_arriba.setLayout(new GridLayout(1, 4, 5, 25));
 		
 		JLabel imagen = new JLabel("");
-		imagen.setIcon(new ImageIcon(Ventana_registro.class.getResource("/p2parking/client/ventanas/P2.jpg")));
+		//imagen.setIcon(new ImageIcon(Ventana_registro.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		panel_arriba.add(imagen);
 		
 		JPanel panel_central = new JPanel();
