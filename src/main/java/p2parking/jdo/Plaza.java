@@ -20,7 +20,6 @@ public class Plaza {
     @Persistent(table="favoritos")
     @Join(column="PLAZA_ID")
     @Element(column="correo")
-    @onDeleteCascade
 	private List<Usuario> usuariosFavoritos;
 	
 	public Plaza(float precio, String localizacion, ArrayList<String> fotos, long fechaPublicacion) {
