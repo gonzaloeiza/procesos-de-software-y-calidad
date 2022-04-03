@@ -47,11 +47,11 @@ public class Ventana_alquiler_principal extends JFrame {
 		JButton perfil = new JButton("");
 		perfil.setBounds(new Rectangle(2, 2, 1, 1));
 		perfil.setBackground(SystemColor.activeCaptionBorder);
-		perfil.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/usuario3.jpg")));
+		//perfil.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/usuario3.jpg")));
 		panel_arriba.add(perfil);
 		
 		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/p2larfo.jpg")));
+		//logo.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/p2larfo.jpg")));
 		panel_arriba.add(logo);
 		
 		JPanel panel_arribaderecha = new JPanel();
