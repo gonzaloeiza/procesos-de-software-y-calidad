@@ -25,11 +25,18 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	private static String path = "prueba";
 	private static Remote instance;
 	private static Usuario yoMismo;
+	private static Date token;
 	
-	protected static Usuario getUser() {
+	public static Date getToken() {
+		return token;
+	}
+	public static void setToken(Date toke) {
+		token = toke;
+	}
+	public static Usuario getUser() {
 		return yoMismo;
 	}
-	protected static void setUser(Usuario usr) {
+	public static void setUser(Usuario usr) {
 		yoMismo = usr;
 	}
 	
