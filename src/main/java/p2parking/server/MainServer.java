@@ -71,12 +71,12 @@ public class MainServer {
 			if(tokenUsuarios.containsKey(token)) {
 				tokenUsuarios.put(token, usuario);
 				UsuariosDAO.getInstance().save(tokenUsuarios.get(token));
-				return Response.ok("Usuario actualizado correctamente").build();
+				return Response.ok(true).build();
 			} else {
-				return Response.status(401, "No estas autenticado").build();
+				return Response.ok(false).build();
 			}
 		} else {
-			return Response.status(400, "Ha ocurrido un error").build();
+			return Response.ok(false).build();
 		}
 		
 	}
