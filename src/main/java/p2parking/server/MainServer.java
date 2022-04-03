@@ -36,7 +36,7 @@ public class MainServer {
 			Date token = new Date();
 			tokenUsuarios.put(token, usr);
 			UsuariosDAO.getInstance().save(usr);
-			return Response.ok().build();
+			return Response.ok(true).build();
 		}		
 		return Response.notModified().build();
 	}
