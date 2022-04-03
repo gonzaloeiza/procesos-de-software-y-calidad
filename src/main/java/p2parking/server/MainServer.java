@@ -83,13 +83,20 @@ public class MainServer {
 	
 	/*IMPORTANTE:   Nombre de usuario: "p2parkingCliente@gmail.com"; contrasena: "Q1w2E3r4" */
 	@GET
-	@Path("servicioCliente")
+	@Path("/servicioCliente")
 	public Response getServCliente() {
 		String resultado = "Si tienes algun problema contacta con: p2parkingCliente@gmail.com";// TODO: definir servicio al cliente
 		return Response.ok(resultado).build();
 	}
 
 	
+	/*IMPORTANTE:   Nombre de usuario: "p2parkingCliente@gmail.com"; contrasena: "Q1w2E3r4" */
+	@POST
+	@Path("/alquiler")
+	public Response crearAlquiler() {
+		String resultado = "Si tienes algun problema contacta con: p2parkingCliente@gmail.com";// TODO: definir servicio al cliente
+		return Response.ok(resultado).build();
+	}
 	
 /* NO HACEN FALTA ESTOS METODOS, SI CREAS, ACTUALIZAS O BORRAS LAS PLAZAS USANDO LOS GETTERS Y SETTERS DE LA CLASE USUARIO
  * Y LLAMAS A /API/PRUEBA/UPDATEUSER (YA PROGRAMADO ARRIBA) SE ACTUALIZAN LA LISTA DE PLAZAS DEL USUARIO EN LA BD
