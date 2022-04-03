@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package p2parking.client.ventanas;
 
 import java.awt.EventQueue;
-import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
@@ -16,10 +11,10 @@ import p2parking.client.Remote;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -107,7 +102,13 @@ public class Inicio_sesion extends JFrame {
     	inicio_sesion.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
 //    			Remote.getInstance().logIn(user.getText(), password.getText());
-    			Remote.getInstance().registro("gonzaloese", "gonzalo@prueba.come", "1234", "");
+    			Date temp = Remote.getInstance().logIn(user.getText(), password.getText());
+    			if (temp == null) {
+    				//TODO: mostrar error
+    			}
+    			else {
+    				Remote.getInstance().setToken(temp);
+    			}
     		}
     	});
     	panelabajo.add(inicio_sesion);
@@ -122,6 +123,8 @@ public class Inicio_sesion extends JFrame {
     	panelabajo.add(registro);
     	registro.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
+    			Ventana_registro.main(null);
+    			dispose();
     		}
     	});
     	
