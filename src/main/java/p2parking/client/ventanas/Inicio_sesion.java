@@ -28,6 +28,10 @@ import javax.swing.JPasswordField;
  */
 public class Inicio_sesion extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel panelPricipal;
 	private JTextField user;
 	private JPasswordField password;
@@ -100,7 +104,8 @@ public class Inicio_sesion extends JFrame {
     	
     	JButton inicio_sesion = new JButton("Iniciar Sesion");
     	inicio_sesion.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent e) {
+    		@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
 //    			Remote.getInstance().logIn(user.getText(), password.getText());
     			Date temp = Remote.getInstance().logIn(user.getText(), password.getText());
     			if (temp == null) {
@@ -108,6 +113,8 @@ public class Inicio_sesion extends JFrame {
     			}
     			else {
     				Remote.getInstance().setToken(temp);
+    				Ventana_alquiler_principal.main(null);
+    				dispose();
     			}
     		}
     	});
