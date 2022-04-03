@@ -2,7 +2,6 @@ package p2parking.client;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.ws.rs.client.Client;
@@ -27,16 +26,16 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	private static Usuario yoMismo;
 	private static Date token;
 	
-	public static Date getToken() {
+	public Date getToken() {
 		return token;
 	}
-	public static void setToken(Date toke) {
+	public void setToken(Date toke) {
 		token = toke;
 	}
-	public static Usuario getUser() {
+	public Usuario getUser() {
 		return yoMismo;
 	}
-	public static void setUser(Usuario usr) {
+	public void setUser(Usuario usr) {
 		yoMismo = usr;
 	}
 	
