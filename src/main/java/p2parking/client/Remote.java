@@ -77,13 +77,14 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
         requestBody.add(contrasena);
         Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
         if (response.getStatus() == 200) {
-        	Date temp = response.readEntity(Date.class);
-            //ArrayList<Object> temp = response.readEntity(ArrayList.class);
-            Remote.getInstance().setToken(temp);
-            //Remote.getInstance().setUser((Usuario)temp.get(1));
-            
-            System.out.println(temp);
-            return temp;
+        	Gson gson = new Gson();
+        	ArrayList<String> temp = response.readEntity(ArrayList.class);
+        	System.out.println(temp);
+        	Date token = gson.fromJson(temp.get(0), Date.class);
+        	Usuario usr = gson.fromJson(temp.get(1), Usuario.class);
+            Remote.getInstance().setToken(token);
+            Remote.getInstance().setUser(usr);
+            return token;
         }
         return null;
     }
@@ -101,10 +102,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	        }
 		else {
 			return false;
-		}
-		
-		
-		
+		}		
 	}
 	//Get
 	public String getServCliente() {//Ejemplo metodo GET
@@ -145,7 +143,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		WebTarget donationsWebTarget = webTarget.path(path +  "/updatePlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
-		Plaza plazanew = new Plaza(precio, localizacion, fotos, fecha);
+		Plaza plazanew = new Plaza(precio, localizacion, fotos, fecha);		
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 				//TODO:No se como meter varios parametros. Estono funciona:
 				//invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON), Entity.entity(plaza, MediaType.APPLICATION_JSON), Entity.entity(plazaNew, MediaType.APPLICATION_JSON));

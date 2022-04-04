@@ -51,18 +51,21 @@ public class MainServer {
 	
 	@POST
     @Path("/login")
-    public Response login(List<Object> requestBody) {
+    public Response login(List<String> requestBody) {
         String correo = (String) requestBody.get(0);
         String contrasena = (String) requestBody.get(1);
         try {
             Usuario u = UsuariosDAO.getInstance().find(correo);
             if (u != null) {
                 if (u.getContrasena().equals(contrasena)) {
+                	Gson gson = new Gson();
                     Date token = new Date();
                     tokenUsuarios.put(token, u);
-                    ArrayList<Object> temp = new ArrayList<>();
-                    temp.add(token); temp.add(u);
-                    return Response.ok(token).build();
+                    ArrayList<String> temp = new ArrayList<>();
+                    temp.add(gson.toJson(token)); temp.add(gson.toJson(u));
+                    System.out.println(token); System.out.println(u.getNombre());
+                    System.out.println(temp);
+                    return Response.ok(temp).build();
                 }
             }
         } catch (Exception e) {
@@ -73,13 +76,14 @@ public class MainServer {
 	
 	@POST
 	@Path("/updateUser")
-	public Response updateUser(List<Object> requestBody) {
-		if (requestBody.size() == 2 && requestBody.get(0) instanceof Date && requestBody.get(0) instanceof Usuario) {			
-			Date token = (Date) requestBody.get(0);
-			Usuario usuario = (Usuario) requestBody.get(1);
+	public Response updateUser(List<String> requestBody) {
+		if (requestBody.size() == 2) {
+			Gson gson = new Gson();
+			Date token = gson.fromJson(requestBody.get(0), Date.class);
+			Usuario usuario = gson.fromJson(requestBody.get(1), Usuario.class);
 			if(tokenUsuarios.containsKey(token)) {
-				tokenUsuarios.put(token, usuario);
-				UsuariosDAO.getInstance().save(tokenUsuarios.get(token));
+				tokenUsuarios.replace(token, usuario);
+				UsuariosDAO.getInstance().save(usuario);
 				return Response.ok(true).build();
 			} else {
 				return Response.ok(false).build();
@@ -97,29 +101,18 @@ public class MainServer {
 		String resultado = "Si tienes algun problema contacta con: p2parkingCliente@gmail.com";// TODO: definir servicio al cliente
 		return Response.ok(resultado).build();
 	}
-
-	
-	/*IMPORTANTE:   Nombre de usuario: "p2parkingCliente@gmail.com"; contrasena: "Q1w2E3r4" */
-	@POST
-	@Path("/alquiler")
-	public Response crearAlquiler() {
-		String resultado = "Si tienes algun problema contacta con: p2parkingCliente@gmail.com";// TODO: definir servicio al cliente
-		return Response.ok(resultado).build();
-	}
 	
 	/*Metodos gestion Plaza*/
 	@POST
 	@Path("/addPlaza")
 	public Response addPlaza(ArrayList<String> requestBody) {
-		System.out.println("llega");
-
 		Gson gson = new Gson();
 		Date token = gson.fromJson(requestBody.get(0), Date.class);
 		Plaza plaza = gson.fromJson(requestBody.get(1), Plaza.class);
-		System.out.println("entra");
 		if(tokenUsuarios.containsKey(token)) {
-			Usuario temp = tokenUsuarios.get(token);
+			Usuario temp = UsuariosDAO.getInstance().find(tokenUsuarios.get(token).getCorreo());
 			temp.addPlaza(plaza);
+			tokenUsuarios.replace(token, temp);
 			UsuariosDAO.getInstance().save(temp);
 			return Response.ok("Plaza añadida correctamente").build();	
 		} else {

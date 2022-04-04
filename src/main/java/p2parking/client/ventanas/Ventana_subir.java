@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JFrame;
@@ -64,7 +65,7 @@ public class Ventana_subir extends JFrame {
 		btnSubir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean temp = Remote.getInstance().addPlaza(Remote.getInstance().getToken(), Float.valueOf(textPrecio.getText()), textUbicacion.getText(),
-						null, (new Date()).getTime());//TODO: cambiar null por las imagenes
+						new ArrayList<>(), (new Date()).getTime());//TODO: cambiar null por las imagenes
 				if(temp) {
 					//TODO: popUp de satisfactorio
 					dispose();
