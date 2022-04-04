@@ -1,6 +1,7 @@
 package p2parking.jdo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.jdo.annotations.Element;
@@ -15,14 +16,14 @@ public class Plaza {
 	private String localizacion;
 	private ArrayList<String> fotos; // guardamos solo los links para no tener que crear una nueva tabla en la base
 										// de datos
-	private long fechaPublicacion;
+	private Date fechaPublicacion;
 	private Usuario propietario;
     @Persistent(table="favoritos")
     @Join(column="PLAZA_ID")
     @Element(column="correo")
 	private List<Usuario> usuariosFavoritos;
 	
-	public Plaza(float precio, String localizacion, ArrayList<String> fotos, long fechaPublicacion) {
+	public Plaza(float precio, String localizacion, ArrayList<String> fotos, Date fechaPublicacion) {
 		this.precioDia = precio;
 		this.localizacion = localizacion;
 		this.fotos = fotos;
@@ -53,11 +54,11 @@ public class Plaza {
 		this.fotos = fotos;
 	}
 
-	public long getFechaPublicacion() {
+	public Date getFechaPublicacion() {
 		return fechaPublicacion;
 	}
 
-	public void setFechaPublicacion(long fechaPublicacion) {
+	public void setFechaPublicacion(Date fechaPublicacion) {
 		this.fechaPublicacion = fechaPublicacion;
 	}
 
