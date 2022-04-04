@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,6 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
+
+import p2parking.client.Remote;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
@@ -57,6 +61,19 @@ public class Ventana_subir extends JFrame {
 		
 		JButton btnSubir = new JButton("Subir");
 		panel_abajo.add(btnSubir);
+		btnSubir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean temp = Remote.getInstance().addPlaza(Remote.getInstance().getToken(), Float.valueOf(textPrecio.getText()), textUbicacion.getText(),
+						null, new Date());//TODO: cambiar null por las imagenes
+				if(temp) {
+					//TODO: popUp de satisfactorio
+					dispose();
+				}
+				else {
+					//TODO: popUp de error
+				}
+			}
+		});
 		
 		JPanel panel_central = new JPanel();
 		panelPricipal.add(panel_central, BorderLayout.CENTER);
@@ -167,7 +184,7 @@ public class Ventana_subir extends JFrame {
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Inicio_sesion frame = new Inicio_sesion();
+					Ventana_subir frame = new Ventana_subir();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
