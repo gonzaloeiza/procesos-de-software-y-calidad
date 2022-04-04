@@ -75,9 +75,12 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
         requestBody.add(contrasena);
         Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
         if (response.getStatus() == 200) {
-            Date token = response.readEntity(Date.class);
-            System.out.println(token);
-            return token;
+            ArrayList<Object> temp = response.readEntity(ArrayList.class);
+            Remote.getInstance().setToken((Date)temp.get(0));
+            Remote.getInstance().setUser((Usuario)temp.get(1));
+            
+            System.out.println(temp);
+            return (Date)temp.get(0);
         }
         return null;
     }

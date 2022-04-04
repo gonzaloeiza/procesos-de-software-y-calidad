@@ -1,5 +1,6 @@
 package p2parking.server;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -56,7 +57,9 @@ public class MainServer {
                 if (u.getContrasena().equals(contrasena)) {
                     Date token = new Date();
                     tokenUsuarios.put(token, u);
-                    return Response.ok(token).build();
+                    ArrayList<Object> temp = new ArrayList<>();
+                    temp.add(token); temp.add(u);
+                    return Response.ok(temp).build();
                 }
             }
         } catch (Exception e) {
