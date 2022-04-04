@@ -17,6 +17,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -53,15 +54,25 @@ public class Ventana_registro extends JFrame {
 		JButton inicio_sesion = new JButton("Registrar");
 		inicio_sesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean temp = Remote.getInstance().registro(txtnombre.getText(), txtcorreo.getText(), txtcontrasena.getText(), "foto");
-				if(temp) {
-					Inicio_sesion.main(null);
-					//TODO: añadid popUp de echo
-					dispose();
+				if (txtnombre.getText().equals("") || txtcorreo.getText().equals("")||txtcontrasena.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "Rellene todos los campos");
+					
+				}else {
+					try {
+					boolean temp = Remote.getInstance().registro(txtnombre.getText(), txtcorreo.getText(), txtcontrasena.getText(), "foto");
+					if(temp) {
+						Inicio_sesion.main(null);
+						JOptionPane.showMessageDialog(null, "Registro correcto");
+						dispose();
+					}
+					else {
+						  JOptionPane.showMessageDialog(null, "No se ha podido realizar el registro");
+					}
+					}catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "No se ha podido conectar con el servidor");
+					}
 				}
-				else {
-					//TODO: añadir popUp error
-				}
+				
 			}
 		});
 		panelabajo.add(inicio_sesion);
