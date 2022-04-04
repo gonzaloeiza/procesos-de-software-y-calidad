@@ -21,7 +21,6 @@ public class AlquilerDAO extends DataAccessObjectBase implements iAccesoObjeto<A
 		if (instance == null) {
 			instance = new AlquilerDAO();
 		}		
-		
 		return instance;
 	}
 	
