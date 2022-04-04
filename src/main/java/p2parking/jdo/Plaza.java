@@ -16,14 +16,14 @@ public class Plaza {
 	private String localizacion;
 	private ArrayList<String> fotos; // guardamos solo los links para no tener que crear una nueva tabla en la base
 										// de datos
-	private Date fechaPublicacion;
+	private long fechaPublicacion;
 	private Usuario propietario;
     @Persistent(table="favoritos")
     @Join(column="PLAZA_ID")
     @Element(column="correo")
 	private List<Usuario> usuariosFavoritos;
 	
-	public Plaza(float precio, String localizacion, ArrayList<String> fotos, Date fechaPublicacion) {
+	public Plaza(float precio, String localizacion, ArrayList<String> fotos, long fechaPublicacion) {
 		this.precioDia = precio;
 		this.localizacion = localizacion;
 		this.fotos = fotos;
@@ -54,11 +54,11 @@ public class Plaza {
 		this.fotos = fotos;
 	}
 
-	public Date getFechaPublicacion() {
+	public long getFechaPublicacion() {
 		return fechaPublicacion;
 	}
 
-	public void setFechaPublicacion(Date fechaPublicacion) {
+	public void setFechaPublicacion(long fechaPublicacion) {
 		this.fechaPublicacion = fechaPublicacion;
 	}
 
