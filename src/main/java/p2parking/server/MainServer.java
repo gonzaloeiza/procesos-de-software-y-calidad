@@ -13,6 +13,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.google.gson.Gson;
+import com.mysql.cj.protocol.x.Ok;
+
 import p2parking.dao.PlazasDAO;
 import p2parking.dao.UsuariosDAO;
 import p2parking.jdo.Plaza;
@@ -59,7 +62,7 @@ public class MainServer {
                     tokenUsuarios.put(token, u);
                     ArrayList<Object> temp = new ArrayList<>();
                     temp.add(token); temp.add(u);
-                    return Response.ok(temp).build();
+                    return Response.ok(token).build();
                 }
             }
         } catch (Exception e) {
@@ -107,16 +110,17 @@ public class MainServer {
 	/*Metodos gestion Plaza*/
 	@POST
 	@Path("/addPlaza")
-	public Response addPlaza(List<Object> requestBody) {
+	public Response addPlaza(ArrayList<String> requestBody) {
 		System.out.println("llega");
-		Date token = new Date((long)requestBody.get(0));
-		System.out.println(requestBody.get(1));
-		Plaza plaza = (Plaza) requestBody.get(1);
-		//TODO: conseguir alguna dorma de deserializar los objetos. Lo pasa como JSON pero no lo deserializa bien
+
+		Gson gson = new Gson();
+		Date token = gson.fromJson(requestBody.get(0), Date.class);
+		Plaza plaza = gson.fromJson(requestBody.get(1), Plaza.class);
 		System.out.println("entra");
 		if(tokenUsuarios.containsKey(token)) {
-			System.out.println("true");
-			PlazasDAO.getInstance().save(plaza);
+			Usuario temp = tokenUsuarios.get(token);
+			temp.addPlaza(plaza);
+			UsuariosDAO.getInstance().save(temp);
 			return Response.ok("Plaza añadida correctamente").build();	
 		} else {
 			return Response.status(401, "No estas autenticado").build();

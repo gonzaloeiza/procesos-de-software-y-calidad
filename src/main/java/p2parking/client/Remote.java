@@ -13,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.google.gson.Gson;
+
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
 
@@ -75,12 +77,13 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
         requestBody.add(contrasena);
         Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
         if (response.getStatus() == 200) {
-            ArrayList<Object> temp = response.readEntity(ArrayList.class);
-            Remote.getInstance().setToken((Date)temp.get(0));
-            Remote.getInstance().setUser((Usuario)temp.get(1));
+        	Date temp = response.readEntity(Date.class);
+            //ArrayList<Object> temp = response.readEntity(ArrayList.class);
+            Remote.getInstance().setToken(temp);
+            //Remote.getInstance().setUser((Usuario)temp.get(1));
             
             System.out.println(temp);
-            return (Date)temp.get(0);
+            return temp;
         }
         return null;
     }
@@ -123,9 +126,12 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		WebTarget donationsWebTarget = webTarget.path("prueba/addPlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		Plaza plaza = new Plaza(precio, localizacion, fotos, fecha);
-		List<Object> requestBody = new ArrayList<Object>();
-        requestBody.add(token.getTime());
-        requestBody.add(plaza);
+		List<String> requestBody = new ArrayList<String>();
+        
+        Gson gson = new Gson();
+        requestBody.add(gson.toJson(token));
+        String tem = gson.toJson(plaza);
+        requestBody.add(tem);
 		Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != Status.OK.getStatusCode()) {
 			//TODO:Añadir gestion de errores
