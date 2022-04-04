@@ -11,7 +11,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import p2parking.dao.PlazasDAO;
 import p2parking.dao.UsuariosDAO;
+import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
 
 
@@ -111,24 +114,25 @@ public class MainServer {
 
 	
 	
-/////*Metodos gestion Plaza*/
-//@POST
-//@Path("/addPlaza")
-//public Response addPlaza(List<Object> requestBody) {
-//	if (requestBody.size() == 2 && requestBody.get(0) instanceof Date && requestBody.get(0) instanceof Plaza) {			
-//		Date token = (Date) requestBody.get(0);
-//		Plaza plaza = (Plaza) requestBody.get(1);
-//		if(tokenUsuarios.containsKey(token)) {
-//			tokenUsuarios.get(token).getPlazas().add(plaza);
-//			UsuariosDAO.getInstance().save(tokenUsuarios.get(token));
-//			return Response.ok("Plaza añadida correctamente").build();
-//		} else {
-//			return Response.status(401, "No estas autenticado").build();
-//		}
-//	} else {
-//		return Response.status(400, "Ha ocurrido un error").build();
-//	}
-//}
+///*Metodos gestion Plaza*/
+@POST
+@Path("/addPlaza")
+public Response addPlaza(List<Object> requestBody) {
+	if (requestBody.size() == 2 && requestBody.get(0) instanceof Date && requestBody.get(0) instanceof Plaza) {			
+		Date token = (Date) requestBody.get(0);
+		Plaza plaza = (Plaza) requestBody.get(1);
+		if(tokenUsuarios.containsKey(token)) {
+			//tokenUsuarios.get(token).getPlazas().add(plaza);
+			//UsuariosDAO.getInstance().save(tokenUsuarios.get(token));
+			PlazasDAO.getInstance().save(plaza);
+			return Response.ok("Plaza añadida correctamente").build();
+		} else {
+			return Response.status(401, "No estas autenticado").build();
+		}
+	} else {
+		return Response.status(400, "Ha ocurrido un error").build();
+	}
+}
 //	@POST
 //	@Path("/updatePlaza")
 //	public Response updatePlaza(Date token, Plaza plazaOld, Plaza plazaNew) {
