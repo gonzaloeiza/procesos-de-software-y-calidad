@@ -86,6 +86,15 @@ public class Ventana_registro extends JFrame {
 		JPanel panle_inutil4 = new JPanel();
 		panelabajo.add(panle_inutil4);
 		
+		JButton btnAtras = new JButton("Atras");
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Inicio_sesion.main(null);
+				dispose();
+			}
+		});
+		panelabajo.add(btnAtras);
+		
 		JPanel panel_arriba = new JPanel();
 		panelPricipal.add(panel_arriba, BorderLayout.NORTH);
 		panel_arriba.setLayout(new GridLayout(1, 4, 5, 25));
