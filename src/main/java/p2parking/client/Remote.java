@@ -116,7 +116,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	
 	/*Metodos gestion Plaza*/
 	//Post
-	public boolean addPlaza(Date token, float precio, String localizacion, ArrayList<String> fotos, long fecha) {
+	public boolean addPlaza(Date token, float precio, String localizacion, ArrayList<String> fotos, Date fecha) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/addPlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
@@ -132,7 +132,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	}
 	//Post
 
-	public boolean updatePlaza(Date token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos, long fecha) {
+	public boolean updatePlaza(Date token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos, Date fecha) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/updatePlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
