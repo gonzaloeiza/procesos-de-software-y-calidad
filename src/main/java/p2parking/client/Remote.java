@@ -117,13 +117,13 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	/*Metodos gestion Plaza*/
 	//Post
 	public boolean addPlaza(Date token, float precio, String localizacion, ArrayList<String> fotos, Date fecha) {
-		WebTarget donationsWebTarget = webTarget.path(path +  "/addPlaza");
+		WebTarget donationsWebTarget = webTarget.path("prueba/addPlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
-		
 		Plaza plaza = new Plaza(precio, localizacion, fotos, fecha);
-		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
-				//TODO:No se como meter varios parametros. Estono funciona:
-				//invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON), Entity.entity(plaza, MediaType.APPLICATION_JSON));
+		List<Object> requestBody = new ArrayList<Object>();
+        requestBody.add(token.getTime());
+        requestBody.add(plaza);
+		Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != Status.OK.getStatusCode()) {
 			//TODO:Añadir gestion de errores
 			return false;

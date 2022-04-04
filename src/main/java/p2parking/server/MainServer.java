@@ -101,6 +101,25 @@ public class MainServer {
 		return Response.ok(resultado).build();
 	}
 	
+	/*Metodos gestion Plaza*/
+	@POST
+	@Path("/addPlaza")
+	public Response addPlaza(List<Object> requestBody) {
+		System.out.println("llega");
+		Date token = new Date((long)requestBody.get(0));
+		System.out.println(requestBody.get(1));
+		Plaza plaza = (Plaza) requestBody.get(1);
+		//TODO: conseguir alguna dorma de deserializar los objetos. Lo pasa como JSON pero no lo deserializa bien
+		System.out.println("entra");
+		if(tokenUsuarios.containsKey(token)) {
+			System.out.println("true");
+			PlazasDAO.getInstance().save(plaza);
+			return Response.ok("Plaza añadida correctamente").build();	
+		} else {
+			return Response.status(401, "No estas autenticado").build();
+		}
+	}
+	
 /* NO HACEN FALTA ESTOS METODOS, SI CREAS, ACTUALIZAS O BORRAS LAS PLAZAS USANDO LOS GETTERS Y SETTERS DE LA CLASE USUARIO
  * Y LLAMAS A /API/PRUEBA/UPDATEUSER (YA PROGRAMADO ARRIBA) SE ACTUALIZAN LA LISTA DE PLAZAS DEL USUARIO EN LA BD
  * 
@@ -114,25 +133,7 @@ public class MainServer {
 
 	
 	
-///*Metodos gestion Plaza*/
-@POST
-@Path("/addPlaza")
-public Response addPlaza(List<Object> requestBody) {
-	if (requestBody.size() == 2 && requestBody.get(0) instanceof Date && requestBody.get(0) instanceof Plaza) {			
-		Date token = (Date) requestBody.get(0);
-		Plaza plaza = (Plaza) requestBody.get(1);
-		if(tokenUsuarios.containsKey(token)) {
-			//tokenUsuarios.get(token).getPlazas().add(plaza);
-			//UsuariosDAO.getInstance().save(tokenUsuarios.get(token));
-			PlazasDAO.getInstance().save(plaza);
-			return Response.ok("Plaza añadida correctamente").build();
-		} else {
-			return Response.status(401, "No estas autenticado").build();
-		}
-	} else {
-		return Response.status(400, "Ha ocurrido un error").build();
-	}
-}
+
 //	@POST
 //	@Path("/updatePlaza")
 //	public Response updatePlaza(Date token, Plaza plazaOld, Plaza plazaNew) {
