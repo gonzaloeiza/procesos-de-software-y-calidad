@@ -38,20 +38,13 @@ public abstract class InsertarEjemplos {
 	    
 	    Plaza miCasa = new Plaza(87, "tebfdvs", new ArrayList<>(), (new Date()).getTime());
 	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	   	  /*  
+	     
 	    UsuariosDAO.getInstance().save(u1);
 	    UsuariosDAO.getInstance().save(u2);
 	    UsuariosDAO.getInstance().save(u3);
 	    UsuariosDAO.getInstance().save(u4);
 	    UsuariosDAO.getInstance().save(u5); 
-*/
+
 //	    //añadir favoritos
 	    Usuario u = UsuariosDAO.getInstance().find("gonzaloeizaguirre@opendeusto.es");
 	    Usuario uu = UsuariosDAO.getInstance().find("javier@opendeusto.es");
