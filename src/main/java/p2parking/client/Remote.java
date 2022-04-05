@@ -26,12 +26,12 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	private static String path = "prueba";
 	private static Remote instance;
 	private static Usuario yoMismo;
-	private static Date token;
+	private static long token;
 	
-	public Date getToken() {
+	public long getToken() {
 		return token;
 	}
-	public void setToken(Date toke) {
+	public void setToken(long toke) {
 		token = toke;
 	}
 	public Usuario getUser() {
@@ -69,7 +69,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
         return false;
     }
 	//Post
-	public Date logIn(String email, String contrasena) {
+	public long logIn(String email, String contrasena) {
         WebTarget donationsWebTarget = webTarget.path("prueba/login");
         Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
         List<Object> requestBody = new ArrayList<Object>();
@@ -80,16 +80,16 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
         	Gson gson = new Gson();
         	ArrayList<String> temp = response.readEntity(ArrayList.class);
         	System.out.println(temp);
-        	Date token = gson.fromJson(temp.get(0), Date.class);
+        	Long token = gson.fromJson(temp.get(0), Long.class);
         	Usuario usr = gson.fromJson(temp.get(1), Usuario.class);
             Remote.getInstance().setToken(token);
             Remote.getInstance().setUser(usr);
             return token;
         }
-        return null;
+        return 0;
     }
 	//Post
-	public boolean updateUser(Date token, Usuario usuario) {
+	public boolean updateUser(long token, Usuario usuario) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/updateUser");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
@@ -120,7 +120,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	
 	/*Metodos gestion Plaza*/
 	//Post
-	public boolean addPlaza(Date token, float precio, String localizacion, ArrayList<String> fotos, long fecha) {
+	public boolean addPlaza(long token, float precio, String localizacion, ArrayList<String> fotos, long fecha) {
 		WebTarget donationsWebTarget = webTarget.path("prueba/addPlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		Plaza plaza = new Plaza(precio, localizacion, fotos, fecha);
@@ -139,7 +139,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	}
 	//Post
 
-	public boolean updatePlaza(Date token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos, long fecha) {
+	public boolean updatePlaza(long token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos, long fecha) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/updatePlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
@@ -154,7 +154,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		return true;
 	}
 	//Post
-	public boolean borrarPlaza(Date token, Plaza plaza) {
+	public boolean borrarPlaza(long token, Plaza plaza) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/borrarPlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
@@ -168,7 +168,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		return true;
 	}
 	//Post
-	public ArrayList<Plaza> getMisPlazas(Date token) {
+	public ArrayList<Plaza> getMisPlazas(long token) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/getMisPlazas");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
@@ -181,7 +181,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		return resultado;
 	}
 	//Post
-	public boolean addPlazaFav(Date token, Plaza plaza) {
+	public boolean addPlazaFav(long token, Plaza plaza) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/addPlazaFav");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
@@ -195,7 +195,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		return true;
 	}
 	//Post
-	public ArrayList<Plaza> getMisFav(Date token){
+	public ArrayList<Plaza> getMisFav(long token){
 		WebTarget donationsWebTarget = webTarget.path(path +  "/getMisFab");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
