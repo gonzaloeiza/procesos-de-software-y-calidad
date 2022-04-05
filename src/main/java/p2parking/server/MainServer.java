@@ -60,8 +60,6 @@ public class MainServer {
                     tokenUsuarios.put(token, u);
                     ArrayList<String> temp = new ArrayList<>();
                     temp.add(gson.toJson(token)); temp.add(gson.toJson(u));
-                    System.out.println(token); System.out.println(u.getNombre());
-                    System.out.println(temp);
                     return Response.ok(temp).build();
                 }
             }
@@ -106,12 +104,6 @@ public class MainServer {
 		Gson gson = new Gson();
 		long token = gson.fromJson(requestBody.get(0), Long.class);
 		Plaza plaza = gson.fromJson(requestBody.get(1), Plaza.class);
-		System.out.println("recivido " + token);
-		System.out.println(tokenUsuarios.size());
-		for(long temp: tokenUsuarios.keySet()) {
-			System.out.println("Guardado " + temp);
-		}
-		System.out.println(tokenUsuarios.containsKey(token));
 		if(tokenUsuarios.containsKey(token)) {
 			Usuario temp = UsuariosDAO.getInstance().find(tokenUsuarios.get(token).getCorreo());
 			temp.addPlaza(plaza);

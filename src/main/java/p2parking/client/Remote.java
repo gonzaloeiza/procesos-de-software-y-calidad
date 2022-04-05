@@ -79,7 +79,6 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
         if (response.getStatus() == 200) {
         	Gson gson = new Gson();
         	ArrayList<String> temp = response.readEntity(ArrayList.class);
-        	System.out.println(temp);
         	Long token = gson.fromJson(temp.get(0), Long.class);
         	Usuario usr = gson.fromJson(temp.get(1), Usuario.class);
             Remote.getInstance().setToken(token);
