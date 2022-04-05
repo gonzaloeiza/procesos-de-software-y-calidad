@@ -85,6 +85,10 @@ public class Usuario {
 	public void setPlazas(List<Plaza> plazas) {
 		this.plazas = plazas;
 	}
+	
+	public void addPlaza(Plaza plaza) {
+		this.plazas.add(plaza);
+	}
 
 	public List<Plaza> getPlazasFavoritos() {
 		return plazasFavoritos;

@@ -13,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.google.gson.Gson;
+
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
 
@@ -24,12 +26,12 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	private static String path = "prueba";
 	private static Remote instance;
 	private static Usuario yoMismo;
-	private static Date token;
+	private static long token;
 	
-	public Date getToken() {
+	public long getToken() {
 		return token;
 	}
-	public void setToken(Date toke) {
+	public void setToken(long toke) {
 		token = toke;
 	}
 	public Usuario getUser() {
@@ -67,7 +69,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
         return false;
     }
 	//Post
-	public Date logIn(String email, String contrasena) {
+	public long logIn(String email, String contrasena) {
         WebTarget donationsWebTarget = webTarget.path("prueba/login");
         Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
         List<Object> requestBody = new ArrayList<Object>();
@@ -75,14 +77,19 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
         requestBody.add(contrasena);
         Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
         if (response.getStatus() == 200) {
-            Date token = response.readEntity(Date.class);
-            System.out.println(token);
+        	Gson gson = new Gson();
+        	ArrayList<String> temp = response.readEntity(ArrayList.class);
+        	System.out.println(temp);
+        	Long token = gson.fromJson(temp.get(0), Long.class);
+        	Usuario usr = gson.fromJson(temp.get(1), Usuario.class);
+            Remote.getInstance().setToken(token);
+            Remote.getInstance().setUser(usr);
             return token;
         }
-        return null;
+        return 0;
     }
 	//Post
-	public boolean updateUser(Date token, Usuario usuario) {
+	public boolean updateUser(long token, Usuario usuario) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/updateUser");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
@@ -95,10 +102,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	        }
 		else {
 			return false;
-		}
-		
-		
-		
+		}		
 	}
 	//Get
 	public String getServCliente() {//Ejemplo metodo GET
@@ -116,14 +120,17 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	
 	/*Metodos gestion Plaza*/
 	//Post
-	public boolean addPlaza(Date token, float precio, String localizacion, ArrayList<String> fotos, long fecha) {
-		WebTarget donationsWebTarget = webTarget.path(path +  "/addPlaza");
+	public boolean addPlaza(long token, float precio, String localizacion, ArrayList<String> fotos, long fecha) {
+		WebTarget donationsWebTarget = webTarget.path("prueba/addPlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
-		
 		Plaza plaza = new Plaza(precio, localizacion, fotos, fecha);
-		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
-				//TODO:No se como meter varios parametros. Estono funciona:
-				//invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON), Entity.entity(plaza, MediaType.APPLICATION_JSON));
+		List<String> requestBody = new ArrayList<String>();
+        
+        Gson gson = new Gson();
+        requestBody.add(gson.toJson(token));
+        String tem = gson.toJson(plaza);
+        requestBody.add(tem);
+		Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != Status.OK.getStatusCode()) {
 			//TODO:Añadir gestion de errores
 			return false;
@@ -132,11 +139,11 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 	}
 	//Post
 
-	public boolean updatePlaza(Date token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos, long fecha) {
+	public boolean updatePlaza(long token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos, long fecha) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/updatePlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
-		Plaza plazanew = new Plaza(precio, localizacion, fotos, fecha);
+		Plaza plazanew = new Plaza(precio, localizacion, fotos, fecha);		
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 				//TODO:No se como meter varios parametros. Estono funciona:
 				//invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON), Entity.entity(plaza, MediaType.APPLICATION_JSON), Entity.entity(plazaNew, MediaType.APPLICATION_JSON));
@@ -147,7 +154,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		return true;
 	}
 	//Post
-	public boolean borrarPlaza(Date token, Plaza plaza) {
+	public boolean borrarPlaza(long token, Plaza plaza) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/borrarPlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
@@ -161,7 +168,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		return true;
 	}
 	//Post
-	public ArrayList<Plaza> getMisPlazas(Date token) {
+	public ArrayList<Plaza> getMisPlazas(long token) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/getMisPlazas");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
@@ -174,7 +181,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		return resultado;
 	}
 	//Post
-	public boolean addPlazaFav(Date token, Plaza plaza) {
+	public boolean addPlazaFav(long token, Plaza plaza) {
 		WebTarget donationsWebTarget = webTarget.path(path +  "/addPlazaFav");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
@@ -188,7 +195,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		return true;
 	}
 	//Post
-	public ArrayList<Plaza> getMisFav(Date token){
+	public ArrayList<Plaza> getMisFav(long token){
 		WebTarget donationsWebTarget = webTarget.path(path +  "/getMisFab");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		

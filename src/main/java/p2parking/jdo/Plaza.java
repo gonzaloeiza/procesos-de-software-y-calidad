@@ -1,6 +1,7 @@
 package p2parking.jdo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.jdo.annotations.Element;

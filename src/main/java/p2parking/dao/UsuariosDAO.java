@@ -13,7 +13,7 @@ public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<U
 
 	private PersistenceManager pm = null;
 	private PersistenceManagerFactory pmf=null;
-	private static UsuariosDAO instance = new UsuariosDAO();
+	private static UsuariosDAO instance;
 	
 	private UsuariosDAO(){
 		System.out.println("Constructor UsuariosDAO");
@@ -22,6 +22,9 @@ public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<U
 	}
 	
 	public static UsuariosDAO getInstance(){
+		if(instance == null) {
+			instance =  new UsuariosDAO();
+		}
 		return instance;
 	}
 	

@@ -13,7 +13,7 @@ public class PlazasDAO extends DataAccessObjectBase implements iAccesoObjeto<Pla
 
 	private PersistenceManager pm = null;
 	private PersistenceManagerFactory pmf=null;
-	private static PlazasDAO instance = new PlazasDAO();
+	private static PlazasDAO instance;
 	
 	private PlazasDAO(){
 		System.out.println("Constructor PlazasDAO");
@@ -22,6 +22,9 @@ public class PlazasDAO extends DataAccessObjectBase implements iAccesoObjeto<Pla
 	}
 	
 	public static PlazasDAO getInstance(){
+		if(instance == null) {
+			instance = new PlazasDAO();
+		}
 		return instance;
 	}
 	
@@ -31,7 +34,6 @@ public class PlazasDAO extends DataAccessObjectBase implements iAccesoObjeto<Pla
 		tx.begin();
 		pm.makePersistent(plaza);
 		tx.commit();
-		
 	}
 
 	@Override

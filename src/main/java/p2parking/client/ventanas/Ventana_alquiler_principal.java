@@ -11,6 +11,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
+import p2parking.client.Remote;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
@@ -111,6 +113,11 @@ public class Ventana_alquiler_principal extends JFrame {
 		panelPricipal.add(panel_abjo, BorderLayout.SOUTH);
 		
 		JButton btnsubir = new JButton("Publicar Anuncio");
+		btnsubir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana_subir.main(null);
+			}
+		});
 		panel_abjo.add(btnsubir);
 	}
 
