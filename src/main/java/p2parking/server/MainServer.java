@@ -14,9 +14,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
-import com.mysql.cj.protocol.x.Ok;
-
-import p2parking.dao.PlazasDAO;
 import p2parking.dao.UsuariosDAO;
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
@@ -27,7 +24,7 @@ import p2parking.jdo.Usuario;
 public class MainServer {
 	
 	
-	HashMap<Date, Usuario> tokenUsuarios = new HashMap<>(); //mapa de usuarios logeados
+	private static HashMap<Long, Usuario> tokenUsuarios = new HashMap<>(); //mapa de usuarios logeados
 	@GET
 	@Path("/test")
 	public Response addDonation() {
@@ -40,8 +37,8 @@ public class MainServer {
 	@Path("/registro")
 	public Response registro(Usuario usr) {
 		if(UsuariosDAO.getInstance().find(usr.getCorreo()) == null){
-			Date token = new Date();
-			tokenUsuarios.put(token, usr);
+			//long token = (new Date()).getTime();
+			//tokenUsuarios.put(token, usr);
 			UsuariosDAO.getInstance().save(usr);
 			return Response.ok(true).build();
 		}		
@@ -59,7 +56,7 @@ public class MainServer {
             if (u != null) {
                 if (u.getContrasena().equals(contrasena)) {
                 	Gson gson = new Gson();
-                    Date token = new Date();
+                    long token = (new Date()).getTime();
                     tokenUsuarios.put(token, u);
                     ArrayList<String> temp = new ArrayList<>();
                     temp.add(gson.toJson(token)); temp.add(gson.toJson(u));
@@ -79,7 +76,7 @@ public class MainServer {
 	public Response updateUser(List<String> requestBody) {
 		if (requestBody.size() == 2) {
 			Gson gson = new Gson();
-			Date token = gson.fromJson(requestBody.get(0), Date.class);
+			long token = gson.fromJson(requestBody.get(0), Long.class);
 			Usuario usuario = gson.fromJson(requestBody.get(1), Usuario.class);
 			if(tokenUsuarios.containsKey(token)) {
 				tokenUsuarios.replace(token, usuario);
@@ -107,8 +104,14 @@ public class MainServer {
 	@Path("/addPlaza")
 	public Response addPlaza(ArrayList<String> requestBody) {
 		Gson gson = new Gson();
-		Date token = gson.fromJson(requestBody.get(0), Date.class);
+		long token = gson.fromJson(requestBody.get(0), Long.class);
 		Plaza plaza = gson.fromJson(requestBody.get(1), Plaza.class);
+		System.out.println("recivido " + token);
+		System.out.println(tokenUsuarios.size());
+		for(long temp: tokenUsuarios.keySet()) {
+			System.out.println("Guardado " + temp);
+		}
+		System.out.println(tokenUsuarios.containsKey(token));
 		if(tokenUsuarios.containsKey(token)) {
 			Usuario temp = UsuariosDAO.getInstance().find(tokenUsuarios.get(token).getCorreo());
 			temp.addPlaza(plaza);
