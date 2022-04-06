@@ -16,10 +16,7 @@ buildNumber.properties
 .settings
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
-<<<<<<< HEAD
-/bin/
-=======
-
+bin
+.idea
 #log
 datanucleus.log
->>>>>>> refs/remotes/origin/master
