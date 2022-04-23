@@ -19,6 +19,9 @@ public class Usuario {
     @Persistent(mappedBy="usuariosFavoritos")
 	private List<Plaza> plazasFavoritos;
     private String telefono;
+    @Persistent(mappedBy="usuario")
+	private List<Incidencia> incidencia;
+   
     
 	public Usuario(String nombre, String correo, String contrasena, String foto, List<Plaza> set) {
 		super();
