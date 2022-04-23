@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response.Status;
 
 import com.google.gson.Gson;
 
+import p2parking.jdo.Incidencia;
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
 
@@ -128,6 +129,26 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
         Gson gson = new Gson();
         requestBody.add(gson.toJson(token));
         String tem = gson.toJson(plaza);
+        requestBody.add(tem);
+		Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			//TODO:Añadir gestion de errores
+			return false;
+		}
+		return true;
+	}
+	
+	
+	//Post para crear incidencia
+	public boolean crearincidencia(String titulo, String cuerpo) {
+		WebTarget donationsWebTarget = webTarget.path("prueba/addPlaza");
+		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		Incidencia incidencia = new Incidencia(titulo, cuerpo);
+		List<String> requestBody = new ArrayList<String>();
+        
+        Gson gson = new Gson();
+        requestBody.add(gson.toJson(getToken()));
+        String tem = gson.toJson(incidencia);
         requestBody.add(tem);
 		Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != Status.OK.getStatusCode()) {

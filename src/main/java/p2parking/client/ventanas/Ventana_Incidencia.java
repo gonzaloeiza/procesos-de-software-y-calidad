@@ -9,10 +9,15 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
+
+import p2parking.client.Remote;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.DropMode;
 import javax.swing.SwingConstants;
@@ -85,6 +90,16 @@ public class Ventana_Incidencia extends JFrame {
 		JButton btnSunir = new JButton("Establecer incidencia");
 		btnSunir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean temp = Remote.getInstance().crearincidencia(txtTitulo.getText(),txtMensaje.getText());
+
+				if(temp) {
+			
+					dispose();
+				}
+				else {
+					//TODO: popUp de error
+				}
+			
 			}
 		});
 		panelPricipal.add(btnSunir, BorderLayout.SOUTH);
