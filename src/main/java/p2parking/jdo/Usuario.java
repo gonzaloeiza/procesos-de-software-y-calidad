@@ -20,7 +20,7 @@ public class Usuario {
 	private List<Plaza> plazasFavoritos;
     private String telefono;
     @Persistent(mappedBy="usuario")
-	private List<Incidencia> incidencia;
+	private List<Incidencia> incidencias;
    
     
 	public Usuario(String nombre, String correo, String contrasena, String foto, List<Plaza> set) {
@@ -41,6 +41,7 @@ public class Usuario {
 		this.foto = foto;
 		this.plazas = new ArrayList<Plaza>();
 		this.telefono = null;
+		this.incidencias = new ArrayList<Incidencia>();
 	}
 
 
@@ -112,5 +113,27 @@ public class Usuario {
 	public void setNumeroTelefono(String numeroTelefono) {
 		this.telefono = numeroTelefono;
 	}
+	
+	public void createIncidencia(Incidencia incidencia) {
+		this.incidencias.add(incidencia);
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public List<Incidencia> getIncidencias() {
+		return incidencias;
+	}
+
+	public void setIncidencias(List<Incidencia> incidencia) {
+		this.incidencias = incidencia;
+	}
+	
+	
 
 }

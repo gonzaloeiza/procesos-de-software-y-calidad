@@ -2,6 +2,8 @@ package p2parking.dao;
 
 import java.util.Date;
 import java.util.ArrayList;
+
+import p2parking.jdo.Incidencia;
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
 
@@ -34,7 +36,15 @@ public abstract class InsertarEjemplos {
 	    u1.getPlazas().add(p2);
 	    u2.getPlazas().add(p3);
 	    
+	    Incidencia i1 = new Incidencia("No hay luz", "En la plaza que he reservado no hay electricidad y no puedo ver correctamente");
+	    Incidencia i2 = new Incidencia("La puerta no funciona", "La puerta de entrada al garaje no funciona y no puedo sacar el coche");
+	    Incidencia i3 = new Incidencia("La aplicación se ha caido", "No consigo conectarme a la aplicación. Me da un error del sistema");
+	    Incidencia i4 = new Incidencia("El cliente no ha pagado", "El cliente se ha marchado y no ha pagado el alquiler. Quiero sus datos para hacer una denuncua");
 	    
+	    u1.createIncidencia(i1);
+	    u4.createIncidencia(i2);
+	    u5.createIncidencia(i3);
+	    u5.createIncidencia(i4);
 	    
 	    Plaza miCasa = new Plaza(87, "tebfdvs", new ArrayList<>(), (new Date()).getTime());
 	    
