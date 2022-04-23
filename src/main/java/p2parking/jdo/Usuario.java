@@ -18,6 +18,8 @@ public class Usuario {
 	private List<Plaza> plazas;
     @Persistent(mappedBy="usuariosFavoritos")
 	private List<Plaza> plazasFavoritos;
+    private String telefono;
+    
 	public Usuario(String nombre, String correo, String contrasena, String foto, List<Plaza> set) {
 		super();
 		this.nombre = nombre;
@@ -25,6 +27,7 @@ public class Usuario {
 		this.contrasena = contrasena;
 		this.foto = foto;
 		this.plazas = set;
+		this.telefono = null;
 	}
 	
 	public Usuario(String nombre, String correo, String contrasena, String foto) {
@@ -34,6 +37,7 @@ public class Usuario {
 		this.contrasena = contrasena;
 		this.foto = foto;
 		this.plazas = new ArrayList<Plaza>();
+		this.telefono = null;
 	}
 
 
@@ -96,6 +100,14 @@ public class Usuario {
 
 	public void setPlazasFavoritos(List<Plaza> plazasFavoritos) {
 		this.plazasFavoritos = plazasFavoritos;
+	}
+
+	public String getNumeroTelefono() {
+		return telefono;
+	}
+
+	public void setNumeroTelefono(String numeroTelefono) {
+		this.telefono = numeroTelefono;
 	}
 
 }
