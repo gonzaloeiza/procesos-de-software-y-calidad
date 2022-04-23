@@ -12,19 +12,22 @@ public class Usuario {
 	private String nombre;
 	@PrimaryKey
 	private String correo;
+	private int puntuacion;
 	private String contrasena;
 	private String foto;
 	@Persistent(mappedBy="propietario")
 	private List<Plaza> plazas;
     @Persistent(mappedBy="usuariosFavoritos")
 	private List<Plaza> plazasFavoritos;
-	public Usuario(String nombre, String correo, String contrasena, String foto, List<Plaza> set) {
+	public Usuario(String nombre, String correo, int puntuacion, String contrasena, String foto, List<Plaza> set) {
 		super();
 		this.nombre = nombre;
 		this.correo = correo;
+		this.puntuacion = puntuacion;
 		this.contrasena = contrasena;
 		this.foto = foto;
 		this.plazas = set;
+		
 	}
 	
 	public Usuario(String nombre, String correo, String contrasena, String foto) {
@@ -96,6 +99,14 @@ public class Usuario {
 
 	public void setPlazasFavoritos(List<Plaza> plazasFavoritos) {
 		this.plazasFavoritos = plazasFavoritos;
+	}
+
+	public int getPuntuacion() {
+		return puntuacion;
+	}
+
+	public void setPuntuacion(int puntuacion) {
+		this.puntuacion = puntuacion;
 	}
 
 }
