@@ -112,7 +112,9 @@ public class Usuario {
 	public int getPuntuacion() {
 		return puntuacion;
 	}
-
+	public void newPuntuacion(int p) {
+		this.puntuacion = (this.puntuacion + p)/2;
+	}
 	public void setPuntuacion(int puntuacion) {
 		this.puntuacion = puntuacion;
 	}
