@@ -244,7 +244,23 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		ArrayList<Alquiler> ret = response.readEntity(ArrayList.class);
 		return ret;
 	}
-	
+	//Post
+	public Usuario getTlf(long token, Usuario usr){
+		WebTarget donationsWebTarget = webTarget.path(path +  "/getTlf");
+		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		Gson gson = new Gson();
+		List<Object> requestBody = new ArrayList<Object>(); 
+		requestBody.add(token);
+		requestBody.add(usr);
+		Response response = invocationBuilder.post(Entity.entity(gson.toJson(requestBody), MediaType.APPLICATION_JSON));
+		if(response.getStatus() != Status.OK.getStatusCode()) {
+			//TODO: Añadir gestion de errores
+			return null;
+		}
+		Usuario ret = response.readEntity(Usuario.class);
+		
+		return ret;
+	}
 	
 	/**/
 	public static void main(String[] args) {

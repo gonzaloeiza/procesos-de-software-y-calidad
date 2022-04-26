@@ -156,6 +156,19 @@ public class MainServer {
 		return Response.status(401, "No estas autenticado").build();			
 	}
 	
+	@POST
+	@Path("/getTlf")
+	public Response getTlf(ArrayList<String> requestBody) {
+		Gson gson = new Gson();
+		long token = gson.fromJson(requestBody.get(0), Long.class);
+		if(tokenUsuarios.containsKey(token)) {
+			String emial = requestBody.get(1);
+			Usuario usr = UsuariosDAO.getInstance().find(emial);
+			return Response.ok(usr).build();
+		}
+		return Response.status(401, "No estas autenticado").build();	
+	}
+	
 	
 /* NO HACEN FALTA ESTOS METODOS, SI CREAS, ACTUALIZAS O BORRAS LAS PLAZAS USANDO LOS GETTERS Y SETTERS DE LA CLASE USUARIO
  * Y LLAMAS A /API/PRUEBA/UPDATEUSER (YA PROGRAMADO ARRIBA) SE ACTUALIZAN LA LISTA DE PLAZAS DEL USUARIO EN LA BD
