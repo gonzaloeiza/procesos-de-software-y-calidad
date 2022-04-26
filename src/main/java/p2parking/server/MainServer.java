@@ -14,7 +14,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
+
+import p2parking.dao.AlquilerDAO;
 import p2parking.dao.UsuariosDAO;
+import p2parking.jdo.Alquiler;
 import p2parking.jdo.Incidencia;
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
@@ -133,6 +136,26 @@ public class MainServer {
 			return Response.status(401, "No estas autenticado").build();
 		}
 	}
+	@POST
+	@Path("/getAlquilados")
+	public Response getAlquilados(ArrayList<String> requestBody) {
+		Gson gson = new Gson();
+		long token = gson.fromJson(requestBody.get(0), Long.class);
+		if(tokenUsuarios.containsKey(token)) {
+			Plaza plaza = gson.fromJson(requestBody.get(1), Plaza.class);
+			Usuario usr = tokenUsuarios.get(token);	
+			ArrayList<Alquiler> temp = AlquilerDAO.getInstance().findAll(usr.getCorreo());
+			ArrayList<Alquiler> dev = new ArrayList<>();
+			for(Alquiler a: temp) {
+				if(a.getPlaza().equals(plaza)) {
+					dev.add(a);
+				}
+			}
+			return Response.ok(dev).build();	
+		}
+		return Response.status(401, "No estas autenticado").build();			
+	}
+	
 	
 /* NO HACEN FALTA ESTOS METODOS, SI CREAS, ACTUALIZAS O BORRAS LAS PLAZAS USANDO LOS GETTERS Y SETTERS DE LA CLASE USUARIO
  * Y LLAMAS A /API/PRUEBA/UPDATEUSER (YA PROGRAMADO ARRIBA) SE ACTUALIZAN LA LISTA DE PLAZAS DEL USUARIO EN LA BD
