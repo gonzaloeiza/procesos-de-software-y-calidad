@@ -29,7 +29,7 @@ public class Usuario {
 		super();
 		this.nombre = nombre;
 		this.correo = correo;
-		this.puntuacion = puntuacion;
+		this.puntuacion = 0;
 		this.contrasena = contrasena;
 		this.foto = foto;
 		this.plazas = set;
