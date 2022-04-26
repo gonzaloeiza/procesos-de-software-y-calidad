@@ -89,4 +89,31 @@ public class AlquilerDAO extends DataAccessObjectBase implements iAccesoObjeto<A
 		}
 		return devolver;
     }
+    
+    public ArrayList<Alquiler> findAll(String param) {//suponiendo param =usrAlquilador.getEmail();
+    	PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		
+		ArrayList<Alquiler> devolver = new ArrayList<>();
+		try {
+			tx.begin();
+			Alquiler result = null;
+			Query<?> query = pm.newQuery("SELECT FROM " + Alquiler.class.getName() +"," + Usuario.class.getName() + " WHERE usuario_email == '" + param + "'");
+			query.setUnique(true);
+			result = (Alquiler) query.execute();
+			try {
+				Alquiler temp = new Alquiler(result.getFechaIni(), result.getFechaFin(), result.getPrecio(), result.getAlquilador(), result.getPlaza());
+				devolver.add(temp);
+			} catch(Exception e) {}
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("  $ Error querying an Plaza: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return devolver;
+    }
 }

@@ -93,5 +93,39 @@ public class UsuarioTest {
 		
 	}
 	
+	@Test
+	public void testTelefono() {
+		
+		usuario1.setNumeroTelefono("+34 234837439");
+		usuario2.setNumeroTelefono("+34 000000000");
+		usuario3.setNumeroTelefono("+34 827364838");
+		
+		assertEquals("+34 234837439", usuario1.getNumeroTelefono());
+		assertEquals("+34 000000000", usuario2.getNumeroTelefono());
+		assertEquals("+34 827364838", usuario3.getNumeroTelefono());
+	}
 	
+	@Test
+	public void testIncidencias() {
+		
+		usuario1.setIncidencias(new ArrayList<Incidencia>());
+		usuario2.setIncidencias(new ArrayList<Incidencia>());
+		usuario3.setIncidencias(new ArrayList<Incidencia>());
+		
+		assertEquals(0, usuario1.getIncidencias().size());
+		assertEquals(0, usuario2.getIncidencias().size());
+		assertEquals(0, usuario3.getIncidencias().size());
+		
+		Incidencia i1 = new Incidencia("No hay luz", "En la plaza que he reservado no hay electricidad y no puedo ver correctamente");
+	    Incidencia i2 = new Incidencia("La puerta no funciona", "La puerta de entrada al garaje no funciona y no puedo sacar el coche");
+	    Incidencia i3 = new Incidencia("La aplicación se ha caido", "No consigo conectarme a la aplicación. Me da un error del sistema");
+	
+	    usuario1.createIncidencia(i1);
+	    usuario1.createIncidencia(i2);
+	    usuario2.createIncidencia(i3);
+	    
+	    assertEquals(2, usuario1.getIncidencias().size());
+		assertEquals(1, usuario2.getIncidencias().size());
+	
+	}
 }

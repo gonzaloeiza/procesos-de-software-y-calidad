@@ -25,15 +25,15 @@ public class Usuario {
 	private List<Incidencia> incidencias;
    
     
-	public Usuario(String nombre, String correo, String contrasena, String foto, List<Plaza> set) {
+	public Usuario(String nombre, String correo, String contrasena, String foto, List<Plaza> set, String tlf, int punt) {
 		super();
 		this.nombre = nombre;
 		this.correo = correo;
-		this.puntuacion = 0;
+		this.puntuacion = punt;
 		this.contrasena = contrasena;
 		this.foto = foto;
 		this.plazas = set;
-		this.telefono = null;
+		this.telefono = tlf;
 	}
 	
 	public Usuario(String nombre, String correo, String contrasena, String foto) {
@@ -45,6 +45,7 @@ public class Usuario {
 		this.plazas = new ArrayList<Plaza>();
 		this.telefono = null;
 		this.incidencias = new ArrayList<Incidencia>();
+		this.puntuacion = 0;
 	}
 
 
