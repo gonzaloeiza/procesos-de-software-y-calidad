@@ -15,13 +15,13 @@ public class PlazaTest {
 	private Plaza plaza1;
 	private Plaza plaza2;
 	private Plaza plaza3;
-	long fecha1;
-	long fecha2;
-	long fecha3;
+	private long fecha1;
+	private long fecha2;
+	private long fecha3;
 	private Usuario usuario1;
 	private Usuario usuario2;
 	private Usuario usuario3;
-	private ArrayList<Usuario> listaFavoritos;
+	private List<Usuario> listaFavoritos;
 	
 	@Before
 	public void setUp() {
@@ -32,7 +32,10 @@ public class PlazaTest {
 		plaza2 = new Plaza(24.2f, "C/Pozas 13", new ArrayList<String>(), fecha2);
 		plaza3 = new Plaza(17.7f, "C/Ribera 5", new ArrayList<String>(), fecha3);
 		usuario1 = new Usuario("Oier","oier.deusto@opendeusto,es", "1234", "");
+		usuario2 = new Usuario("Lander","l.deusto@opendeusto,es", "1234", "");
+		usuario3 = new Usuario("Gonzalo","g.deusto@opendeusto,es", "1234", "");
 		plaza1.setPropietario(usuario1);
+		listaFavoritos = new ArrayList<Usuario>();
 		listaFavoritos.add(usuario2);
 		listaFavoritos.add(usuario3);
 		plaza1.setUsuariosFavoritos(listaFavoritos);
@@ -40,9 +43,9 @@ public class PlazaTest {
 	
 	@Test
 	public void testGetPrecio() {
-		assertEquals(13.5f, plaza1.getPrecio());
-		assertEquals(24.2f, plaza2.getPrecio());
-		assertEquals(17.7f, plaza3.getPrecio());
+		assertEquals(13.5f, plaza1.getPrecio(),0);
+		assertEquals(24.2f, plaza2.getPrecio(),0);
+		assertEquals(17.7f, plaza3.getPrecio(),0);
 	}
 
 	@Test
@@ -54,9 +57,9 @@ public class PlazaTest {
 	
 	@Test
 	public void testGetFotos() {
-		assertEquals(null, plaza1.getFotos());
-		assertEquals(null, plaza2.getFotos());
-		assertEquals(null, plaza3.getFotos());
+		assertEquals(new ArrayList<String>(), plaza1.getFotos());
+		assertEquals(new ArrayList<String>(), plaza2.getFotos());
+		assertEquals(new ArrayList<String>(), plaza3.getFotos());
 	}
 
 	@Test
@@ -90,7 +93,7 @@ public class PlazaTest {
 	@Test
 	public void testSetPrecio() {
 		plaza1.setPrecio(19.1f);
-		assertEquals(19.1f, plaza1.getPrecio());	
+		assertEquals(19.1f, plaza1.getPrecio(),0);	
 	}
 	
 	@Test
@@ -99,7 +102,7 @@ public class PlazaTest {
 	}
 
 	@Test
-	public void testSetPropietario(Usuario propietario) {
+	public void testSetPropietario() {
 		Usuario usuario2 = new Usuario("Imanol", "imanol@gmail.com", "12345", "");
 		plaza1.setPropietario(usuario2);
 		assertEquals(usuario2, plaza1.getPropietario());
@@ -111,7 +114,7 @@ public class PlazaTest {
 	}
 
 	@Test
-	public void testSetUsuariosFavoritos(List<Usuario> usuariosFavoritos) {
+	public void testSetUsuariosFavoritos() {
 		listaFavoritos.remove(usuario2);
 		plaza1.setUsuariosFavoritos(listaFavoritos);
 		assertEquals(listaFavoritos, plaza1.getUsuariosFavoritos());
