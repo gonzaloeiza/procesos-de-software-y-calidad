@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response.Status;
 
 import com.google.gson.Gson;
 
+import p2parking.jdo.Alquiler;
 import p2parking.jdo.Incidencia;
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
@@ -226,6 +227,39 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		}
 		ArrayList<Plaza> resultado = response.readEntity(ArrayList.class);
 		return resultado;
+	}
+	//Post
+	public ArrayList<Alquiler> getAlquilados(long token, Plaza plaza){
+		WebTarget donationsWebTarget = webTarget.path(path +  "/getAlquilados");
+		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		Gson gson = new Gson();
+		List<Object> requestBody = new ArrayList<Object>(); 
+		requestBody.add(token);
+		requestBody.add(plaza);
+		Response response = invocationBuilder.post(Entity.entity(gson.toJson(requestBody), MediaType.APPLICATION_JSON));
+		if(response.getStatus() != Status.OK.getStatusCode()) {
+			//TODO: Añadir gestion de errores
+			return null;
+		}
+		ArrayList<Alquiler> ret = response.readEntity(ArrayList.class);
+		return ret;
+	}
+	//Post
+	public Usuario getTlf(long token, Usuario usr){
+		WebTarget donationsWebTarget = webTarget.path(path +  "/getTlf");
+		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		Gson gson = new Gson();
+		List<Object> requestBody = new ArrayList<Object>(); 
+		requestBody.add(token);
+		requestBody.add(usr);
+		Response response = invocationBuilder.post(Entity.entity(gson.toJson(requestBody), MediaType.APPLICATION_JSON));
+		if(response.getStatus() != Status.OK.getStatusCode()) {
+			//TODO: Añadir gestion de errores
+			return null;
+		}
+		Usuario ret = response.readEntity(Usuario.class);
+		
+		return ret;
 	}
 	
 	/**/
