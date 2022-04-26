@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 import p2parking.dao.UsuariosDAO;
+import p2parking.jdo.Incidencia;
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
 
@@ -110,6 +111,24 @@ public class MainServer {
 			tokenUsuarios.replace(token, temp);
 			UsuariosDAO.getInstance().save(temp);
 			return Response.ok("Plaza añadida correctamente").build();	
+		} else {
+			return Response.status(401, "No estas autenticado").build();
+		}
+	}
+	
+	/*Metodo para crear una nueva incidencia*/
+	@POST
+	@Path("/createIncidencia")
+	public Response createIncidencia(ArrayList<String> requestBody) {
+		Gson gson = new Gson();
+		long token = gson.fromJson(requestBody.get(0), Long.class);
+		Incidencia incidencia = gson.fromJson(requestBody.get(1), Incidencia.class);
+		if(tokenUsuarios.containsKey(token)) {
+			Usuario temp = UsuariosDAO.getInstance().find(tokenUsuarios.get(token).getCorreo());
+			temp.createIncidencia(incidencia);
+			tokenUsuarios.replace(token, temp);
+			UsuariosDAO.getInstance().save(temp);
+			return Response.ok("Incidencia creada correctamente").build();	
 		} else {
 			return Response.status(401, "No estas autenticado").build();
 		}

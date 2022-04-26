@@ -71,9 +71,10 @@ public class Ventana_alquiler_principal extends JFrame {
 		panel_arribaderecha.add(lblhora_fecha);
 		*/
 		JPanel panel_medio = new JPanel();
-		panelPricipal.add(panel_medio, BorderLayout.SOUTH);
+		panelPricipal.add(panel_medio, BorderLayout.CENTER);
 		
 		JList list = new JList();
+		list.setVisibleRowCount(1);
 		list.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
 			}
@@ -84,11 +85,11 @@ public class Ventana_alquiler_principal extends JFrame {
 		
 		JPanel panel_actualizar = new JPanel();
 		list.add(panel_actualizar);
-		panel_actualizar.setLayout(new GridLayout(1,3 , 0, 0));
+		panel_actualizar.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_izquierda = new JPanel();
-		panel_actualizar.add(panel_izquierda);
-		panel_izquierda.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel_actualizar.add(panel_izquierda, BorderLayout.WEST);
+		panel_izquierda.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel titulo_parking = new JLabel("New label");
 		panel_izquierda.add(titulo_parking);
@@ -96,17 +97,21 @@ public class Ventana_alquiler_principal extends JFrame {
 		JLabel descripcion_parking = new JLabel("New label");
 		panel_izquierda.add(descripcion_parking);
 		
-		JPanel panel_centro = new JPanel();
-		panel_actualizar.add(panel_centro);
+		JPanel panel_derecha = new JPanel();
+		panel_actualizar.add(panel_derecha, BorderLayout.WEST);
+		panel_derecha.setLayout(new GridLayout(3, 1, 0, 0));
 		
-		JButton btnFavoritos = new JButton("New button");
-		panel_centro.add(btnFavoritos);
+		JButton btnFavoritos = new JButton("Favoritos");
+		panel_derecha.add(btnFavoritos);
+		
+		JButton btnReportar = new JButton("Reportar usuario");
+		panel_derecha.add(btnReportar);
 		
 		JLabel Precio = new JLabel("New label");
-		panel_centro.add(Precio);
+		panel_derecha.add(Precio);
 		
 		JLabel imagen = new JLabel("New label");
-		panel_actualizar.add(imagen);
+		panel_actualizar.add(imagen, BorderLayout.CENTER);
 		
 		
 		JPanel panel_abjo = new JPanel();

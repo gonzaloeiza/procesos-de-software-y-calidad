@@ -19,7 +19,13 @@ public class Usuario {
 	private List<Plaza> plazas;
     @Persistent(mappedBy="usuariosFavoritos")
 	private List<Plaza> plazasFavoritos;
-	public Usuario(String nombre, String correo, int puntuacion, String contrasena, String foto, List<Plaza> set) {
+
+	private String telefono;
+    @Persistent(mappedBy="usuario")
+	private List<Incidencia> incidencias;
+   
+    
+	public Usuario(String nombre, String correo, String contrasena, String foto, List<Plaza> set) {
 		super();
 		this.nombre = nombre;
 		this.correo = correo;
@@ -27,7 +33,7 @@ public class Usuario {
 		this.contrasena = contrasena;
 		this.foto = foto;
 		this.plazas = set;
-		
+		this.telefono = null;
 	}
 	
 	public Usuario(String nombre, String correo, String contrasena, String foto) {
@@ -37,6 +43,8 @@ public class Usuario {
 		this.contrasena = contrasena;
 		this.foto = foto;
 		this.plazas = new ArrayList<Plaza>();
+		this.telefono = null;
+		this.incidencias = new ArrayList<Incidencia>();
 	}
 
 
@@ -108,5 +116,33 @@ public class Usuario {
 	public void setPuntuacion(int puntuacion) {
 		this.puntuacion = puntuacion;
 	}
+	public String getNumeroTelefono() {
+		return telefono;
+	}
 
+	public void setNumeroTelefono(String numeroTelefono) {
+		this.telefono = numeroTelefono;
+	}
+	
+	public void createIncidencia(Incidencia incidencia) {
+		this.incidencias.add(incidencia);
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public List<Incidencia> getIncidencias() {
+		return incidencias;
+	}
+
+	public void setIncidencias(List<Incidencia> incidencia) {
+		this.incidencias = incidencia;
+	}
+	
+	
 }
