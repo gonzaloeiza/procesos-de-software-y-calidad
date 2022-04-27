@@ -283,6 +283,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 		if(response.getStatus() != Status.OK.getStatusCode()) {
 			//TODO: añadir gestion de errores
+			System.out.println(response.getStatus());
 			return null;
 		}
 		ArrayList<Plaza> ret = response.readEntity(ArrayList.class);
