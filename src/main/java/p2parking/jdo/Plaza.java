@@ -22,6 +22,8 @@ public class Plaza {
     @Join(column="PLAZA_ID")
     @Element(column="correo")
 	private List<Usuario> usuariosFavoritos;
+    private String titulo;
+    private String descripcion;
 	
 	public Plaza(float precio, String localizacion, ArrayList<String> fotos, long fechaPublicacion) {
 		this.precioDia = precio;
@@ -84,6 +86,22 @@ public class Plaza {
 
 	public void setUsuariosFavoritos(List<Usuario> usuariosFavoritos) {
 		this.usuariosFavoritos = usuariosFavoritos;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 }
