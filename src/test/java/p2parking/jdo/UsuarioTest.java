@@ -61,7 +61,7 @@ public class UsuarioTest {
 		usuario3.setNombre("3");
 		assertEquals("1", usuario1.getNombre());
 		assertEquals("2", usuario2.getNombre());
-		assertEquals("2", usuario3.getNombre());
+		assertEquals("3", usuario3.getNombre());
 		
 	}
 	
@@ -90,9 +90,9 @@ public class UsuarioTest {
 	
 	@Test
 	public void testSetContrasena() {
-		usuario1.setCorreo("1");
-		usuario2.setCorreo("2");
-		usuario3.setCorreo("3");
+		usuario1.setContrasena("1");
+		usuario2.setContrasena("2");
+		usuario3.setContrasena("3");
 		assertEquals("1", usuario1.getContrasena());
 		assertEquals("2", usuario2.getContrasena());
 		assertEquals("3", usuario3.getContrasena());
