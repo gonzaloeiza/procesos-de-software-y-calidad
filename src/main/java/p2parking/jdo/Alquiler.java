@@ -58,7 +58,6 @@ public class Alquiler {
 	}
 	
 	public Alquiler(Date fechaIni, Date fechaFin, float precio, Usuario alquilador, Plaza plaza) {
-		super();
 		this.fechaIni = fechaIni;
 		this.fechaFin = fechaFin;
 		this.precio = precio;

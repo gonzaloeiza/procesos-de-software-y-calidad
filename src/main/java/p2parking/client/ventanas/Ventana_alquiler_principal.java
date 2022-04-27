@@ -12,6 +12,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import p2parking.client.Remote;
+import p2parking.jdo.Plaza;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -26,6 +27,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.event.InputMethodListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.awt.event.InputMethodEvent;
 
 public class Ventana_alquiler_principal extends JFrame {
@@ -73,14 +76,12 @@ public class Ventana_alquiler_principal extends JFrame {
 		JPanel panel_medio = new JPanel();
 		panelPricipal.add(panel_medio, BorderLayout.CENTER);
 		
-		JList list = new JList();
+		
+		
+		//igual hay que generar un arraylist de peneles 
+		
+		JList<JPanel> list = new JList<JPanel>();
 		list.setVisibleRowCount(1);
-		list.addInputMethodListener(new InputMethodListener() {
-			public void caretPositionChanged(InputMethodEvent event) {
-			}
-			public void inputMethodTextChanged(InputMethodEvent event) {
-			}
-		});
 		panel_medio.add(list);
 		
 		JPanel panel_actualizar = new JPanel();
@@ -102,9 +103,26 @@ public class Ventana_alquiler_principal extends JFrame {
 		panel_derecha.setLayout(new GridLayout(3, 1, 0, 0));
 		
 		JButton btnFavoritos = new JButton("Favoritos");
+		btnFavoritos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean temp = Remote.getInstance().addPlazaFav(Remote.getInstance().getToken(), null);
+				if(temp) {
+			
+				}
+				else {
+
+				}
+			}
+		});
+		
 		panel_derecha.add(btnFavoritos);
 		
 		JButton btnReportar = new JButton("Reportar usuario");
+		btnReportar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana_Incidencia.main(null);
+			}
+		});
 		panel_derecha.add(btnReportar);
 		
 		JLabel Precio = new JLabel("New label");
@@ -121,6 +139,11 @@ public class Ventana_alquiler_principal extends JFrame {
 		btnsubir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Ventana_subir.main(null);
+				dispose();
+				ArrayList<Plaza> plazas = Remote.getInstance().getAllPlazas(Remote.getInstance().getToken());
+				/*for (int i = 0; i < plazas.size(); i++) {
+					System.out.println(plazas.get(i).getPrecio());
+				}*/
 			}
 		});
 		panel_abjo.add(btnsubir);

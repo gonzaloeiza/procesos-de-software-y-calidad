@@ -67,7 +67,7 @@ public class Ventana_subir extends JFrame {
 				boolean temp = Remote.getInstance().addPlaza(Remote.getInstance().getToken(), Float.valueOf(textPrecio.getText()), textUbicacion.getText(),
 						new ArrayList<>(), (new Date()).getTime());//TODO: cambiar null por las imagenes
 				if(temp) {
-					//TODO: popUp de satisfactorio
+					Ventana_alquiler_principal.main(null);
 					dispose();
 				}
 				else {

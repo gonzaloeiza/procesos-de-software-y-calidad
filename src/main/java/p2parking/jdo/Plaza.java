@@ -65,14 +65,6 @@ public class Plaza {
 		this.fechaPublicacion = fechaPublicacion;
 	}
 
-	public float getPrecioDia() {
-		return precioDia;
-	}
-
-	public void setPrecioDia(float precioDia) {
-		this.precioDia = precioDia;
-	}
-
 	public Usuario getPropietario() {
 		return propietario;
 	}

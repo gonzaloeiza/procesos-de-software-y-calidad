@@ -90,14 +90,12 @@ public class Ventana_Incidencia extends JFrame {
 		JButton btnSunir = new JButton("Establecer incidencia");
 		btnSunir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean temp = Remote.getInstance().crearincidencia(txtTitulo.getText(),txtMensaje.getText());
-
+				boolean temp = Remote.getInstance().addPlazaFav(ABORT, null);
 				if(temp) {
 			
-					dispose();
 				}
 				else {
-					//TODO: popUp de error
+
 				}
 			
 			}

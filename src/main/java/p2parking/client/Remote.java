@@ -258,9 +258,39 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 			return null;
 		}
 		Usuario ret = response.readEntity(Usuario.class);
-		
 		return ret;
 	}
+	//Post
+	public boolean setPuntuacion(long token, Usuario usr, int punt){
+		WebTarget donationsWebTarget = webTarget.path(path +  "/setPuntuacion");
+		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		Gson gson = new Gson();
+		List<Object> requestBody = new ArrayList<Object>(); 
+		requestBody.add(token);
+		requestBody.add(punt);
+		requestBody.add(usr.getCorreo());
+		Response response = invocationBuilder.post(Entity.entity(gson.toJson(requestBody), MediaType.APPLICATION_JSON));
+		if(response.getStatus() != Status.OK.getStatusCode()) {
+			//TODO: añadir gestion de errores
+			return false;
+		}
+		return true;
+	}
+	//Post
+	public ArrayList<Plaza> getAllPlazas(long token){
+		WebTarget donationsWebTarget = webTarget.path(path +  "/getAllPlazas");
+		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
+		if(response.getStatus() != Status.OK.getStatusCode()) {
+			//TODO: añadir gestion de errores
+			System.out.println(response.getStatus());
+			return null;
+		}
+		ArrayList<Plaza> ret = response.readEntity(ArrayList.class);
+		return ret;
+	}
+			
+	
 	
 	/**/
 	public static void main(String[] args) {
