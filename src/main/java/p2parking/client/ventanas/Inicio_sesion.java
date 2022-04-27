@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import p2parking.client.Remote;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -17,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.SystemColor;
+import java.awt.Toolkit;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -37,7 +40,7 @@ public class Inicio_sesion extends JFrame {
 	private JTextField user;
 	private JPasswordField password;
 
-//	private TextPrompt panelHolderUsuario;
+	private TextPrompt panelHolderUsuario;
 	/**
 	 * @param args the command line arguments
 	 */
@@ -76,7 +79,7 @@ public class Inicio_sesion extends JFrame {
 	public Inicio_sesion() {
 		setTitle("P2Parking");
 		setForeground(SystemColor.windowBorder);
-//    	setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio_sesion.class.getResource("/p2parking/client/ventanas/P2.jpg")));
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio_sesion.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 481);
 		panelPricipal = new JPanel();
@@ -136,7 +139,7 @@ public class Inicio_sesion extends JFrame {
 		panel_arriba.setLayout(new GridLayout(1, 4, 5, 25));
 
 		JLabel imagen = new JLabel("");
-//    	imagen.setIcon(new ImageIcon(Inicio_sesion.class.getResource("/p2parking/client/ventanas/P2.jpg")));
+    	imagen.setIcon(new ImageIcon(Inicio_sesion.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		panel_arriba.add(imagen);
 
 		JPanel panel_central = new JPanel();
@@ -162,9 +165,9 @@ public class Inicio_sesion extends JFrame {
 		user = new JTextField();
 		panel_central_arriba.add(user);
 		user.setHorizontalAlignment(SwingConstants.CENTER);
-//    	panelHolderUsuario = new TextPrompt("Usuario", user);
-//		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-//		panelHolderUsuario.changeAlpha(0.75f);
+		panelHolderUsuario = new TextPrompt("Usuario", user);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
 		user.setColumns(10);
 
 		JPanel panel_inutil_9 = new JPanel();
@@ -205,6 +208,9 @@ public class Inicio_sesion extends JFrame {
 		panel_central_abajo.add(panel_6);
 
 		password = new JPasswordField();
+		panelHolderUsuario = new TextPrompt("Contraseña", password);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
 		password.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_central_abajo.add(password);
 		JPanel panel_7 = new JPanel();

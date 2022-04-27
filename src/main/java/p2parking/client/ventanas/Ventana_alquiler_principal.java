@@ -37,7 +37,7 @@ public class Ventana_alquiler_principal extends JFrame {
 	public Ventana_alquiler_principal() {
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
-    	//setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 428);
 		panelPricipal = new JPanel();
@@ -49,20 +49,28 @@ public class Ventana_alquiler_principal extends JFrame {
 		panelPricipal.add(panel_arriba, BorderLayout.NORTH);
 		panel_arriba.setLayout(new GridLayout(1, 3, 0, 0));
 		
-		JButton perfil = new JButton("");
+		JButton perfil = new JButton("Usuario");
+		perfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		perfil.setBounds(new Rectangle(2, 2, 1, 1));
 		perfil.setBackground(SystemColor.activeCaptionBorder);
-		//perfil.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/usuario3.jpg")));
+		
 		panel_arriba.add(perfil);
 		
-		JLabel logo = new JLabel("");
-		//logo.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/p2larfo.jpg")));
-		panel_arriba.add(logo);
+		
 		
 		JPanel panel_arribaderecha = new JPanel();
 		panel_arriba.add(panel_arribaderecha);
 		panel_arribaderecha.setLayout(new GridLayout(2, 1, 0, 0));
+		
+		
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/p2larfo.jpg")));
+		panel_arriba.add(logo);
 		/*
+		 * 
 		JButton btnlogout = new JButton("Log Out");
 		btnlogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
