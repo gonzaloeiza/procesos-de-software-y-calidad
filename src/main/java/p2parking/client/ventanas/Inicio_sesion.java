@@ -103,7 +103,10 @@ public class Inicio_sesion extends JFrame {
 				} else {
 					if (temp == 0) {
 						JOptionPane.showMessageDialog(null, "No se ha podido realizar el inicio de sesion");
-					} else {
+					} else if (temp == 403) {
+						JOptionPane.showMessageDialog(null, "Estás baneado. No puedes iniciar sesión");
+					}
+					else {
 						Remote.getInstance().setToken(temp);
 						Ventana_alquiler_principal.main(null);
 						dispose();

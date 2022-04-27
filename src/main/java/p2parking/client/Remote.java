@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import p2parking.jdo.Alquiler;
 import p2parking.jdo.Incidencia;
@@ -283,10 +284,12 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 		if(response.getStatus() != Status.OK.getStatusCode()) {
 			//TODO: añadir gestion de errores
-			System.out.println(response.getStatus());
+			//System.out.println(response.getStatus());
 			return null;
 		}
-		ArrayList<Plaza> ret = response.readEntity(ArrayList.class);
+		Gson gson = new Gson();
+		String r = response.readEntity(String.class);
+		ArrayList<Plaza> ret = gson.fromJson(r, new TypeToken<List<Plaza>>(){}.getType());
 		return ret;
 	}
 			

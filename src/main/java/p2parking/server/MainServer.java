@@ -28,6 +28,13 @@ import p2parking.jdo.Usuario;
 @Produces(MediaType.APPLICATION_JSON)//TODO: Añadir metodos de BD
 public class MainServer {
 	
+	public static void main(String[] args) {
+		ArrayList<Plaza> ret = PlazasDAO.getInstance().getAll();
+		for (Plaza p : ret) {
+			System.out.println(p.getTitulo());
+		}
+	}
+	
 	
 	private static HashMap<Long, Usuario> tokenUsuarios = new HashMap<>(); //mapa de usuarios logeados
 	@GET
@@ -59,14 +66,18 @@ public class MainServer {
         try {
             Usuario u = UsuariosDAO.getInstance().find(correo);
             if (u != null) {
-                if (u.getContrasena().equals(contrasena)) {
-                	Gson gson = new Gson();
-                    long token = (new Date()).getTime();
-                    tokenUsuarios.put(token, u);
-                    ArrayList<String> temp = new ArrayList<>();
-                    temp.add(gson.toJson(token)); temp.add(gson.toJson(u));
-                    return Response.ok(temp).build();
-                }
+            	if (!u.isBanned()) {
+	                if (u.getContrasena().equals(contrasena)) {
+	                	Gson gson = new Gson();
+	                    long token = (new Date()).getTime();
+	                    tokenUsuarios.put(token, u);
+	                    ArrayList<String> temp = new ArrayList<>();
+	                    temp.add(gson.toJson(token)); temp.add(gson.toJson(u));
+	                    return Response.ok(temp).build();
+	                }
+            	} else {
+            		return Response.status(403).build();
+            	}
             }
         } catch (Exception e) {
 
@@ -190,8 +201,9 @@ public class MainServer {
 	@Path("/getAllPlazas")
 	public Response setgetAllPlazas(long token) {
 		if(tokenUsuarios.containsKey(token)) {
-			List<Plaza> ret = PlazasDAO.getInstance().getAll();
-			return Response.ok(ret).build();
+			ArrayList<Plaza> ret = PlazasDAO.getInstance().getAll();
+			Gson gson = new Gson();
+			return Response.ok(gson.toJson(ret)).build();
 		}
 		return Response.status(401, "No estas autenticado").build();	
 	}
