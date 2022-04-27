@@ -1,11 +1,14 @@
 package p2parking.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
+
+import org.datanucleus.store.Extent;
 
 import p2parking.jdo.Plaza;
 
@@ -46,18 +49,23 @@ public class PlazasDAO implements iAccesoObjeto<Plaza>{
 	}
 
 	@Override
-	public List<Plaza> getAll() {
+	public ArrayList<Plaza> getAll() {
 		Transaction tx = pm.currentTransaction();
 		List<Plaza> tempPlaza = null;
+		ArrayList<Plaza> aDevolver = new ArrayList<Plaza>();
 		try {
-		tx.begin();
-		Query query = pm.newQuery("SELECT FROM " + Plaza.class.getName());
-		tempPlaza = (List<Plaza>)query.execute();
-		tx.commit();
+			tx.begin();
+			Query query = pm.newQuery("SELECT FROM " + Plaza.class.getName());
+			tempPlaza = (List<Plaza>) query.execute();
+			tx.commit();
 		} catch(Exception ex) {
-			System.out.println("EXCEPCION AL OBTENER LA PLAZA: \n"+ ex.getMessage());
+			//System.out.println("EXCEPCION AL OBTENER LA PLAZA: \n"+ ex.getMessage());
 		}
-		return tempPlaza;
+		
+		for (int x=0; x<tempPlaza.size(); x++) {
+			aDevolver.add(tempPlaza.get(x));
+		}
+		return aDevolver;
 	}
 
 	@Override

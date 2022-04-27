@@ -23,6 +23,7 @@ public class Usuario {
 	private String telefono;
     @Persistent(mappedBy="usuario")
 	private List<Incidencia> incidencias;
+    private boolean baneado;
    
     
 	public Usuario(String nombre, String correo, String contrasena, String foto, List<Plaza> set, String tlf, int punt, List<Plaza> plazasFav, List<Incidencia> inc) {
@@ -36,6 +37,7 @@ public class Usuario {
 		this.telefono = tlf;
 		this.plazasFavoritos = plazasFav;
 		this.incidencias = inc;
+		this.baneado = false;
 	}
 	
 	public Usuario(String nombre, String correo, String contrasena, String foto) {
@@ -49,6 +51,7 @@ public class Usuario {
 		this.incidencias = new ArrayList<Incidencia>();
 		this.puntuacion = 0;
 		this.plazasFavoritos = new ArrayList<Plaza>();
+		this.baneado = false;
 	}
 
 	public String getNombre() {
@@ -142,5 +145,8 @@ public class Usuario {
 		this.incidencias = incidencia;
 	}
 	
+	public boolean isBanned() {
+		return(this.baneado);
+	}
 	
 }

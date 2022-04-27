@@ -29,6 +29,7 @@ import java.awt.FlowLayout;
 import java.awt.event.InputMethodListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.awt.event.InputMethodEvent;
 
 public class Ventana_alquiler_principal extends JFrame {
@@ -140,9 +141,9 @@ public class Ventana_alquiler_principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Ventana_subir.main(null);
 				dispose();
-				ArrayList<Plaza> plazas = Remote.getInstance().getAllPlazas(Remote.getInstance().getToken());
-				/*for (int i = 0; i < plazas.size(); i++) {
-					System.out.println(plazas.get(i).getPrecio());
+				/*ArrayList<Plaza> plazas = Remote.getInstance().getAllPlazas(Remote.getInstance().getToken());
+				for (Plaza plaza : plazas) {
+					System.out.println(plaza);
 				}*/
 			}
 		});
