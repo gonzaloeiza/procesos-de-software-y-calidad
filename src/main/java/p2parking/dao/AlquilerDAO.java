@@ -7,15 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.Extent;
+import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-public class AlquilerDAO extends DataAccessObjectBase implements iAccesoObjeto<Alquiler> {
+public class AlquilerDAO implements iAccesoObjeto<Alquiler> {
 	
+	private PersistenceManager pm = null;
+	private PersistenceManagerFactory pmf=null;
 	private static AlquilerDAO instance;	
 	
-	private AlquilerDAO() { }
+	private AlquilerDAO() {
+		System.out.println("Constructor AlquierDAO");
+		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+		pm=pmf.getPersistenceManager();
+	}
 	
 	public static AlquilerDAO getInstance() {
 		if (instance == null) {
@@ -25,13 +33,19 @@ public class AlquilerDAO extends DataAccessObjectBase implements iAccesoObjeto<A
 	}
 	
     @Override
-    public void save(Alquiler object) {
-    	super.saveObject(object);
+    public void save(Alquiler alquier) {
+    	Transaction tx = pm.currentTransaction();
+		tx.begin();
+		pm.makePersistent(alquier);
+		tx.commit();
     }
 
     @Override
-    public void delete(Alquiler object) {
-    	super.deleteObject(object);
+    public void delete(Alquiler alquier) {
+		Transaction tx = pm.currentTransaction();
+		tx.begin();
+		pm.deletePersistent(alquier);
+		tx.commit();
     }
 
     @Override
@@ -90,6 +104,7 @@ public class AlquilerDAO extends DataAccessObjectBase implements iAccesoObjeto<A
 		return devolver;
     }
     
+    @Override
     public ArrayList<Alquiler> findAll(String param) {//suponiendo param =usrAlquilador.getEmail();
     	PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();

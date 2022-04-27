@@ -9,7 +9,7 @@ import javax.jdo.Transaction;
 
 import p2parking.jdo.Usuario;
 
-public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<Usuario> {
+public class UsuariosDAO implements iAccesoObjeto<Usuario> {
 
 	private PersistenceManager pm = null;
 	private PersistenceManagerFactory pmf=null;
@@ -75,5 +75,11 @@ public class UsuariosDAO extends DataAccessObjectBase implements iAccesoObjeto<U
 			System.out.println("EXCEPCION AL OBTENER LA USUARIO: \n"+ ex.getMessage());
 		}	
 		return tempUsuario;
+	}
+
+	@Override
+	public List<Usuario> findAll(String param) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
