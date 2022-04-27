@@ -66,6 +66,7 @@ public class MainServer {
         try {
             Usuario u = UsuariosDAO.getInstance().find(correo);
             if (u != null) {
+            	System.out.println(u.isBanned());
             	if (!u.isBanned()) {
 	                if (u.getContrasena().equals(contrasena)) {
 	                	Gson gson = new Gson();

@@ -87,8 +87,9 @@ public class Remote {
             Remote.getInstance().setToken(token);
             Remote.getInstance().setUser(usr);
             return token;
+        } else {
+        	return response.getStatus();
         }
-        return 0;
     }
 	//Post
 	public boolean updateUser(long token, Usuario usuario) {
