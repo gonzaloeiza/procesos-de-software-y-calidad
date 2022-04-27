@@ -1,15 +1,16 @@
 package p2parking.client;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 public class MainTest {
 	
-	@Before
-	public void setUp() {}
-	
 	@Test
-	public void testGetNombre() {}
+	public void testGetNombre() {
+		String[] temp = {"0.0.0.0", "8080"};
+		assertTrue(Main.main(temp));
+	}
 }
