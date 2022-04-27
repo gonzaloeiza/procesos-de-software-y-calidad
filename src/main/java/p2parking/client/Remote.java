@@ -276,6 +276,18 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		}
 		return true;
 	}
+	//Post
+	public ArrayList<Plaza> getAllPlazas(long token){
+		WebTarget donationsWebTarget = webTarget.path(path +  "/getAllPlazas");
+		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
+		if(response.getStatus() != Status.OK.getStatusCode()) {
+			//TODO: añadir gestion de errores
+			return null;
+		}
+		ArrayList<Plaza> ret = response.readEntity(ArrayList.class);
+		return ret;
+	}
 			
 	
 	
