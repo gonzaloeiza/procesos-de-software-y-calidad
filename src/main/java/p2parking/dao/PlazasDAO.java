@@ -9,7 +9,7 @@ import javax.jdo.Transaction;
 
 import p2parking.jdo.Plaza;
 
-public class PlazasDAO extends DataAccessObjectBase implements iAccesoObjeto<Plaza>{
+public class PlazasDAO implements iAccesoObjeto<Plaza>{
 
 	private PersistenceManager pm = null;
 	private PersistenceManagerFactory pmf=null;
@@ -78,5 +78,11 @@ public class PlazasDAO extends DataAccessObjectBase implements iAccesoObjeto<Pla
 			System.out.println("EXCEPCION AL OBTENER LA PLAZA: \n"+ ex.getMessage());
 		}
 		return tempPlaza;
+	}
+
+	@Override
+	public List<Plaza> findAll(String param) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
