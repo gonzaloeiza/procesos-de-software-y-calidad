@@ -1,3 +1,5 @@
+![java ci workflow](https://github.com/gonzaloeiza/procesos-de-software-y-calidad/actions/workflows/java-ci.yml/badge.svg)
+
 COMANDOS
 ----------------------------------------------------------
 
