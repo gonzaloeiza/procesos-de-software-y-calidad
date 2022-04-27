@@ -118,13 +118,6 @@ public class Usuario {
 	public void setPuntuacion(int puntuacion) {
 		this.puntuacion = puntuacion;
 	}
-	public String getNumeroTelefono() {
-		return telefono;
-	}
-
-	public void setNumeroTelefono(String numeroTelefono) {
-		this.telefono = numeroTelefono;
-	}
 	
 	public void createIncidencia(Incidencia incidencia) {
 		this.incidencias.add(incidencia);
