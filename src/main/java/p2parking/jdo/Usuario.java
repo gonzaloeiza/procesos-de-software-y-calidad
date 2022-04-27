@@ -25,7 +25,7 @@ public class Usuario {
 	private List<Incidencia> incidencias;
    
     
-	public Usuario(String nombre, String correo, String contrasena, String foto, List<Plaza> set, String tlf, int punt) {
+	public Usuario(String nombre, String correo, String contrasena, String foto, List<Plaza> set, String tlf, int punt, List<Plaza> plazasFav, List<Incidencia> inc) {
 		super();
 		this.nombre = nombre;
 		this.correo = correo;
@@ -34,6 +34,8 @@ public class Usuario {
 		this.foto = foto;
 		this.plazas = set;
 		this.telefono = tlf;
+		this.plazasFavoritos = plazasFav;
+		this.incidencias = inc;
 	}
 	
 	public Usuario(String nombre, String correo, String contrasena, String foto) {
@@ -45,6 +47,8 @@ public class Usuario {
 		this.plazas = new ArrayList<Plaza>();
 		this.telefono = null;
 		this.incidencias = new ArrayList<Incidencia>();
+		this.plazasFavoritos = new ArrayList<>();
+		this.incidencias = new ArrayList<>();
 	}
 
 
