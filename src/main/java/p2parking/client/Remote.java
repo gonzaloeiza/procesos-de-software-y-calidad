@@ -22,12 +22,12 @@ import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
 
 
-public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro por funcion
+public class Remote {
 
 	private Client client;
 	private WebTarget webTarget;
 	private static String path = "prueba";
-	private static Remote instance;
+	private static Remote instance = null;
 	private static Usuario yoMismo;
 	private static long token;
 	
@@ -300,7 +300,7 @@ public class Remote {//TODO: buscar unasolucion para enviar mas de un parametro 
 		String hostname = args[0];
 		String port = args[1];
 
-		Remote rem = new Remote(hostname, port);
+		new Remote(hostname, port);
 	}
 }
 
