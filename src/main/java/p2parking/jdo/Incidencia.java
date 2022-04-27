@@ -10,6 +10,13 @@ public class Incidencia {
 	private String mensaje;
 	private boolean resuelto;
 	
+	public Incidencia(Usuario usr, String titulo, String men, boolean res) {
+		this.usuario = usr;
+		this.titulo = titulo;
+		this.mensaje = men;
+		this.resuelto = res;
+	}
+	
 	public Incidencia(String titulo, String mensaje){
 		this.titulo = titulo;
 		this.mensaje = mensaje;
