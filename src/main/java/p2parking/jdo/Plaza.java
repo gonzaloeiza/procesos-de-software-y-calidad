@@ -24,6 +24,7 @@ public class Plaza {
 	private List<Usuario> usuariosFavoritos;
     private String titulo;
     private String descripcion;
+    private boolean seguro;
 	
 	public Plaza(float precio, String localizacion, ArrayList<String> fotos, long fechaPublicacion) {
 		this.precioDia = precio;
@@ -102,6 +103,14 @@ public class Plaza {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+	public boolean isSeguro() {
+		return seguro;
+	}
+
+	public void setSeguro(boolean seguro) {
+		this.seguro = seguro;
 	}
 
 }
