@@ -190,7 +190,7 @@ public class MainServer {
 	@Path("/getAllPlazas")
 	public Response setgetAllPlazas(long token) {
 		if(tokenUsuarios.containsKey(token)) {
-			ArrayList<Plaza> ret = (ArrayList<Plaza>) PlazasDAO.getInstance().getAll();
+			List<Plaza> ret = PlazasDAO.getInstance().getAll();
 			return Response.ok(ret).build();
 		}
 		return Response.status(401, "No estas autenticado").build();	
