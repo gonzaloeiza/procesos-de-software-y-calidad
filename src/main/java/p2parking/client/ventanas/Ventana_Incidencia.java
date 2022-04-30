@@ -3,6 +3,7 @@ package p2parking.client.ventanas;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -30,6 +31,10 @@ public class Ventana_Incidencia extends JFrame {
 	private JPanel panelPricipal;
 	private JTextField txtTitulo;
 	private JTextField txtMensaje;
+	private TextPrompt panelHolderUsuario;
+	private JPanel panel;
+	private JButton btnSunir;
+	private JButton btnCancel;
 	
 	public static void main(String[] args) {
 		try {
@@ -70,7 +75,7 @@ public class Ventana_Incidencia extends JFrame {
 	public Ventana_Incidencia() {
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
-    	//setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 428);
 		panelPricipal = new JPanel();
@@ -80,27 +85,37 @@ public class Ventana_Incidencia extends JFrame {
 		
 		txtTitulo = new JTextField();
 		panelPricipal.add(txtTitulo, BorderLayout.NORTH);
+		panelHolderUsuario = new TextPrompt("Titulo", txtTitulo);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
 		txtTitulo.setColumns(10);
 		
 		txtMensaje = new JTextField();
 		txtMensaje.setDropMode(DropMode.INSERT);
+		panelHolderUsuario = new TextPrompt("Mensaje", txtMensaje);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
 		panelPricipal.add(txtMensaje, BorderLayout.CENTER);
 		txtMensaje.setColumns(10);
 		
-		JButton btnSunir = new JButton("Establecer incidencia");
+		panel = new JPanel();
+		panelPricipal.add(panel, BorderLayout.SOUTH);
+		
+		btnSunir = new JButton("Establecer incidencia");
 		btnSunir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean temp = Remote.getInstance().addPlazaFav(ABORT, null);
-				if(temp) {
-			
-				}
-				else {
-
-				}
-			
 			}
 		});
-		panelPricipal.add(btnSunir, BorderLayout.SOUTH);
+		panel.add(btnSunir);
+		
+		btnCancel = new JButton("Volver");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana_alquiler_principal.main(null);
+				dispose();
+			}
+		});
+		panel.add(btnCancel);
 		
 		
 		

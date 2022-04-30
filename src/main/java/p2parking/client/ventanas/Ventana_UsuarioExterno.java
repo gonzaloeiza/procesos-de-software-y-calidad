@@ -3,6 +3,7 @@ package p2parking.client.ventanas;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -50,7 +51,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 	public Ventana_UsuarioExterno() {
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
-    	//setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 428);
 		panelPricipal = new JPanel();
