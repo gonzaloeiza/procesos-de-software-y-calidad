@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import p2parking.client.Remote;
 
 import javax.swing.ImageIcon;
@@ -78,7 +77,6 @@ public class Inicio_sesion extends JFrame {
 
 	public Inicio_sesion() {
 		setTitle("P2Parking");
-		setForeground(SystemColor.windowBorder);
     	//setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio_sesion.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 481);
