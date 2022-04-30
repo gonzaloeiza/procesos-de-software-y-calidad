@@ -83,22 +83,20 @@ public class Ventana_alquiler_principal extends JFrame {
 		*/
 		JPanel panel_medio = new JPanel();
 		panelPricipal.add(panel_medio, BorderLayout.CENTER);
+		panel_medio.setLayout(new BorderLayout(0, 0));
 		
+		JPanel panel_medio_medio = new JPanel();
+		panel_medio.add(panel_medio_medio, BorderLayout.CENTER);
+		panel_medio_medio.setLayout(new BorderLayout(0, 0));
 		
-		
-		//igual hay que generar un arraylist de peneles 
-		
-		JList<JPanel> list = new JList<JPanel>();
-		list.setVisibleRowCount(1);
-		panel_medio.add(list);
 		
 		JPanel panel_actualizar = new JPanel();
-		list.add(panel_actualizar);
+		panel_medio_medio.add(panel_actualizar);
 		panel_actualizar.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_izquierda = new JPanel();
-		panel_actualizar.add(panel_izquierda, BorderLayout.WEST);
-		panel_izquierda.setLayout(new GridLayout(0, 2, 0, 0));
+		panel_actualizar.add(panel_izquierda, BorderLayout.CENTER);
+		panel_izquierda.setLayout(new GridLayout(2, 1, 0, 0));
 		
 		JLabel titulo_parking = new JLabel("New label");
 		panel_izquierda.add(titulo_parking);
@@ -107,7 +105,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		panel_izquierda.add(descripcion_parking);
 		
 		JPanel panel_derecha = new JPanel();
-		panel_actualizar.add(panel_derecha, BorderLayout.WEST);
+		panel_actualizar.add(panel_derecha, BorderLayout.EAST);
 		panel_derecha.setLayout(new GridLayout(3, 1, 0, 0));
 		
 		JButton btnFavoritos = new JButton("Favoritos");
@@ -137,7 +135,35 @@ public class Ventana_alquiler_principal extends JFrame {
 		panel_derecha.add(Precio);
 		
 		JLabel imagen = new JLabel("New label");
-		panel_actualizar.add(imagen, BorderLayout.CENTER);
+		panel_actualizar.add(imagen, BorderLayout.WEST);
+		
+		
+		JPanel panel_medio_abajo = new JPanel();
+		panel_medio.add(panel_medio_abajo, BorderLayout.SOUTH);
+		panel_medio_abajo.setLayout(new GridLayout(1, 6, 0, 0));
+		
+		JButton btnPlaza_Anterior = new JButton("Anterior");
+		btnPlaza_Anterior.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		panel_medio_abajo.add(btnPlaza_Anterior);
+		
+		JPanel panel = new JPanel();
+		panel_medio_abajo.add(panel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_medio_abajo.add(panel_1);
+		
+		JPanel panel_2 = new JPanel();
+		panel_medio_abajo.add(panel_2);
+		
+		JPanel panel_3 = new JPanel();
+		panel_medio_abajo.add(panel_3);
+		
+		JButton btnPlazaSiguiente = new JButton("Siguiente");
+		panel_medio_abajo.add(btnPlazaSiguiente);
+		
 		
 		
 		JPanel panel_abjo = new JPanel();
@@ -175,9 +201,7 @@ public class Ventana_alquiler_principal extends JFrame {
 	       // handle exception
 	    }
 	    	
-	
-	
-    	
+
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -188,8 +212,6 @@ public class Ventana_alquiler_principal extends JFrame {
 				}
 			}
 		});
-
-	
 
 	}
 
