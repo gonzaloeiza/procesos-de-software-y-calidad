@@ -311,4 +311,10 @@ public class UsuarioTest {
 		assertEquals((punt3+10)/2, usuario3.getPuntuacion());
 		
 	}
+	
+	@Test
+	public void testIsBanned() {
+		assertEquals(false, usuario1.isBanned());
+		
+	}
 }
