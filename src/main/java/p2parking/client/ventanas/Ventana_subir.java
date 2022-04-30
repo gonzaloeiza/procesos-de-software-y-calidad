@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,19 +20,23 @@ import javax.swing.border.EmptyBorder;
 
 import p2parking.client.Remote;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class Ventana_subir extends JFrame {
 	private JPanel panelPricipal;	
 	private JTextField textPrecio;
 	private JTextField textUbicacion;
+	private TextPrompt panelHolderUsuario;
+	
 	
 	public Ventana_subir() {
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
-//    	setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio_sesion.class.getResource("/p2parking/client/ventanas/P2.jpg")));
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio_sesion.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 481);
 		panelPricipal = new JPanel();
@@ -43,19 +48,25 @@ public class Ventana_subir extends JFrame {
 		panelPricipal.add(panel_arriba, BorderLayout.NORTH);
 		panel_arriba.setLayout(new GridLayout(1, 3, 0, 0));
 		
-		JButton perfil = new JButton("");
+		JButton perfil = new JButton("Volver");
+		perfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		perfil.setBounds(new Rectangle(2, 2, 1, 1));
 		perfil.setBackground(SystemColor.activeCaptionBorder);
 		//perfil.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/usuario3.jpg")));
 		panel_arriba.add(perfil);
 		
-		JLabel logo = new JLabel("");
-		//logo.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/p2larfo.jpg")));
-		panel_arriba.add(logo);
-		
 		JPanel panel_arribaderecha = new JPanel();
 		panel_arriba.add(panel_arribaderecha);
 		panel_arribaderecha.setLayout(new GridLayout(2, 1, 0, 0));
+		
+		JLabel logo = new JLabel("");
+		logo.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/p2larfo.jpg")));
+		panel_arriba.add(logo);
+		
+
 		
 		JPanel panel_abajo = new JPanel();
 		panelPricipal.add(panel_abajo, BorderLayout.SOUTH);
@@ -97,7 +108,10 @@ public class Ventana_subir extends JFrame {
 		panel_central.add(panel_3);
 		
 		textUbicacion = new JTextField();
-		textUbicacion.setText("Cual es la direccion?");
+		panelHolderUsuario = new TextPrompt("Usuario", textUbicacion);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
+
 		panel_central.add(textUbicacion);
 		textUbicacion.setColumns(10);
 		
@@ -118,7 +132,10 @@ public class Ventana_subir extends JFrame {
 		panel_central.add(panel_8);
 		
 		textPrecio = new JTextField();
-		textPrecio.setText("Precio");
+		panelHolderUsuario = new TextPrompt("Usuario", textPrecio);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
+
 		panel_central.add(textPrecio);
 		textPrecio.setColumns(10);
 		

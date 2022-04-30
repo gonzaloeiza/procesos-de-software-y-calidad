@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import p2parking.client.Remote;
 
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -31,12 +32,13 @@ public class Ventana_registro extends JFrame {
 	private JTextField txtnombre;
 	private JTextField txtcontrasena;
 	private JTextField txtcorreo;
+	private TextPrompt panelHolderUsuario;
 	
 	
 	public Ventana_registro() {
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
-    	//setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_registro.class.getResource("/p2parking/client/ventanas/P2.jpg")));
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_registro.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 481);
 		panelPricipal = new JPanel();
@@ -100,7 +102,7 @@ public class Ventana_registro extends JFrame {
 		panel_arriba.setLayout(new GridLayout(1, 4, 5, 25));
 		
 		JLabel imagen = new JLabel("");
-		//imagen.setIcon(new ImageIcon(Ventana_registro.class.getResource("/p2parking/client/ventanas/P2.jpg")));
+		imagen.setIcon(new ImageIcon(Ventana_registro.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		panel_arriba.add(imagen);
 		
 		JPanel panel_central = new JPanel();
@@ -112,6 +114,9 @@ public class Ventana_registro extends JFrame {
 		
 		txtnombre = new JTextField();
 		panel_central.add(txtnombre);
+		panelHolderUsuario = new TextPrompt("Usuario", txtnombre);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
 		txtnombre.setHorizontalAlignment(SwingConstants.CENTER);
     	txtnombre.setColumns(10);
 		
@@ -132,6 +137,9 @@ public class Ventana_registro extends JFrame {
 		
 		txtcorreo = new JTextField();
 		panel_central.add(txtcorreo);
+		panelHolderUsuario = new TextPrompt("Email", txtcorreo);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
 		txtcorreo.setHorizontalAlignment(SwingConstants.CENTER);
     	txtcorreo.setColumns(10);
 		
@@ -153,6 +161,9 @@ public class Ventana_registro extends JFrame {
 		
 		txtcontrasena = new JTextField();
 		panel_central.add(txtcontrasena);
+		panelHolderUsuario = new TextPrompt("Contraseña", txtcontrasena);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
 		txtcontrasena.setHorizontalAlignment(SwingConstants.CENTER);
     	txtcontrasena.setColumns(10);
 		
