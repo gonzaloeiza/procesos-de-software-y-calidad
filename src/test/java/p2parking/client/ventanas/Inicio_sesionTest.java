@@ -1,3 +1,4 @@
+/*
 package p2parking.client.ventanas;
 
 import org.junit.Test;
@@ -9,3 +10,4 @@ public class Inicio_sesionTest {
 		Inicio_sesion.cerarventana();
 	}
 }
+*/
