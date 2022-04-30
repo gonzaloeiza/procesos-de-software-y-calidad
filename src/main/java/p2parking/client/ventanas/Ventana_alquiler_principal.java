@@ -35,7 +35,6 @@ import java.awt.event.InputMethodEvent;
 public class Ventana_alquiler_principal extends JFrame {
 	private JPanel panelPricipal;
 	private ArrayList<Plaza> plazas;
-
 	private int indice=0;
 
 	
