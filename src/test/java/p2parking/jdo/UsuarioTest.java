@@ -297,11 +297,8 @@ public class UsuarioTest {
 	@Test 
 	public void testNewPuntuacion() {
 		int punt1 = usuario1.getPuntuacion();
-		System.out.println(punt1);
 		int punt2 = usuario2.getPuntuacion();
-		System.out.println(punt2);
 		int punt3 = usuario3.getPuntuacion();
-		System.out.println(punt3);
 		usuario1.newPuntuacion(7);
 		usuario2.newPuntuacion(6);
 		usuario3.newPuntuacion(10);

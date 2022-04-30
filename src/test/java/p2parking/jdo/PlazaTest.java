@@ -29,7 +29,7 @@ public class PlazaTest {
 		fecha2 = new Date(2022, 02, 22).getTime();
 		fecha3 = new Date(2022, 01, 07).getTime();
 		plaza1 = new Plaza(13.5f, "C/Iturribide 7", new ArrayList<String>(), fecha1);
-		plaza2 = new Plaza(24.2f, "C/Pozas 13", new ArrayList<String>(), fecha2);
+		plaza2 = new Plaza(24.2f, "C/Pozas 13", new ArrayList<String>(), fecha2, "Plaza Paco", "Plaza Amplia", true);
 		plaza3 = new Plaza(17.7f, "C/Ribera 5", new ArrayList<String>(), fecha3);
 		usuario1 = new Usuario("Oier","oier.deusto@opendeusto,es", "1234", "");
 		usuario2 = new Usuario("Lander","l.deusto@opendeusto,es", "1234", "");
@@ -119,6 +119,45 @@ public class PlazaTest {
 		plaza1.setUsuariosFavoritos(listaFavoritos);
 		assertEquals(listaFavoritos, plaza1.getUsuariosFavoritos());
 	}
+	
+	@Test 
+	public void testSetDescripcion() {
+		plaza2.setDescripcion("Plaza para 2 coches");
+		assertEquals("Plaza para 2 coches", plaza2.getDescripcion());
+		
+		
+	}
+	@Test
+	public void testSetTitulo() {
+		plaza2.setTitulo("Plaza Gonzalo");
+		assertEquals("Plaza Gonzalo", plaza2.getTitulo());
+	}
+	
+	@Test 
+	public void testSetSeguro() {
+		plaza2.setSeguro(false);
+		assertEquals(false, plaza2.isSeguro());
+		
+	}
+	
+	@Test 
+	public void testIsSeguro() {
+		assertEquals(true, plaza2.isSeguro());
+	}
+	
+	@Test
+	public void testGetTitulo() {
+		assertEquals("Plaza Paco", plaza2.getTitulo());
+		
+	}
+	
+	@Test 
+	public void testGetDescripcion() {
+		assertEquals("Plaza Amplia", plaza2.getDescripcion());
+		
+		
+	}
+	
 
 	
 	

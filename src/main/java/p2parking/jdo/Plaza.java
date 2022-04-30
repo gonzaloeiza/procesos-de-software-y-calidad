@@ -33,6 +33,18 @@ public class Plaza {
 		this.fechaPublicacion = fechaPublicacion;
 	}
 
+	public Plaza(float precioDia, String localizacion, ArrayList<String> fotos, long fechaPublicacion,
+			 String titulo, String descripcion, boolean seguro) {
+		super();
+		this.precioDia = precioDia;
+		this.localizacion = localizacion;
+		this.fotos = fotos;
+		this.fechaPublicacion = fechaPublicacion;
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.seguro = seguro;
+	}
+
 	public float getPrecio() {
 		return precioDia;
 	}
