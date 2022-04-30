@@ -294,4 +294,21 @@ public class UsuarioTest {
 		assertEquals(t2, usuario2.getIncidencias());
 		assertEquals(t3, usuario3.getIncidencias());
 	}
+	@Test 
+	public void testNewPuntuacion() {
+		int punt1 = usuario1.getPuntuacion();
+		System.out.println(punt1);
+		int punt2 = usuario2.getPuntuacion();
+		System.out.println(punt2);
+		int punt3 = usuario3.getPuntuacion();
+		System.out.println(punt3);
+		usuario1.newPuntuacion(7);
+		usuario2.newPuntuacion(6);
+		usuario3.newPuntuacion(10);
+		
+		assertEquals((punt1+7)/2, usuario1.getPuntuacion());
+		assertEquals((punt2+6)/2, usuario2.getPuntuacion());
+		assertEquals((punt3+10)/2, usuario3.getPuntuacion());
+		
+	}
 }
