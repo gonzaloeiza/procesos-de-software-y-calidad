@@ -21,8 +21,8 @@ jobs:
         with:
           java-version: "11"
           distribution: "adopt"
-      - name: Build with Maven
-        run: mvn clean compile
+      # - name: Build with Maven
+      - run: mvn clean compile
         # run: mvn datanucleus:enhance
         # - run: mvn datanucleus:enhance
         # run: mvn exec:java -PinsertarEjemplos
