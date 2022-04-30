@@ -35,9 +35,9 @@ import java.awt.event.InputMethodEvent;
 public class Ventana_alquiler_principal extends JFrame {
 	private JPanel panelPricipal;
 	private ArrayList<Plaza> plazas;
+
 	private int indice=0;
-	
-	
+
 	
 	public Ventana_alquiler_principal() {
 		plazas= Remote.getInstance().getAllPlazas(Remote.getInstance().getToken());
@@ -269,6 +269,24 @@ public class Ventana_alquiler_principal extends JFrame {
 			}
 		});
 
+	}
+	
+	private void ordenarPlaza() {
+		int indexAtras;
+		
+		if (plazas.size() < 2)
+			return;
+		
+		for (int index=1; index<plazas.size(); index++) {
+			indexAtras = index;
+			if (plazas.get(index).getPrecio() < plazas.get(index - 1).getPrecio()) {
+				while (plazas.get(index).getPrecio() <  plazas.get(indexAtras).getPrecio()) {
+					indexAtras = indexAtras - 1;
+				}
+				plazas.add(indexAtras, plazas.get(index));
+				plazas.remove(index+1);
+			}
+		}
 	}
 
 }

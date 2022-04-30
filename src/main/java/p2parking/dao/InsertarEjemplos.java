@@ -30,7 +30,15 @@ public abstract class InsertarEjemplos {
 	    
 	    Plaza p1 = new Plaza(12.2f, "", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
 	    Plaza p2 = new Plaza(12.2f, "", new ArrayList<String>(),  new Date(2000, 03, 15).getTime());
-	    Plaza p3 = new Plaza(12.2f, "", new ArrayList<String>(), new Date(2000, 03, 15).getTime());  
+	    Plaza p3 = new Plaza(12.2f, "", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
+	    
+	    p1.setTitulo("Plaza en Bilbao");
+	    p1.setDescripcion("Plaza amplia en el centro de bilbao");
+	    p2.setTitulo("Plaza en Moyua");
+	    p2.setDescripcion("Plaza en el parking de Moyua");
+	    p3.setTitulo("Plaza en el parking de San Mamés");
+	    p3.setDescripcion("Plaza en el parking en el estadio San Mamés");
+	    
 	    
 	    u1.getPlazas().add(p1);
 	    u1.getPlazas().add(p2);
