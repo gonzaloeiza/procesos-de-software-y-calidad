@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import p2parking.dao.AlquilerDAO;
 import p2parking.dao.PlazasDAO;
 import p2parking.dao.UsuariosDAO;
+import p2parking.dao.iAccesoObjeto;
 import p2parking.jdo.Alquiler;
 import p2parking.jdo.Incidencia;
 import p2parking.jdo.Plaza;
@@ -28,30 +29,25 @@ import p2parking.jdo.Usuario;
 @Produces(MediaType.APPLICATION_JSON)//TODO: Añadir metodos de BD
 public class MainServer {
 	
-	public static void main(String[] args) {
-		ArrayList<Plaza> ret = PlazasDAO.getInstance().getAll();
-		for (Plaza p : ret) {
-			System.out.println(p.getTitulo());
-		}
-	}
-	
-	
 	private static HashMap<Long, Usuario> tokenUsuarios = new HashMap<>(); //mapa de usuarios logeados
-	@GET
-	@Path("/test")
-	public Response addDonation() {
-		return Response.ok("funcionando").build();
+	
+	UsuariosDAO usuarioDAO = UsuariosDAO.getInstance();
+
+	
+	public void setUsuarioDAO(UsuariosDAO usuarioDAO) {
+		this.usuarioDAO = usuarioDAO;
 	}
+	
 	
 	
 	/*Metodos gestion cuenta*/
 	@POST
 	@Path("/registro")
 	public Response registro(Usuario usr) {
-		if(UsuariosDAO.getInstance().find(usr.getCorreo()) == null){
+		if(usuarioDAO.find(usr.getCorreo()) == null){
 			//long token = (new Date()).getTime();
 			//tokenUsuarios.put(token, usr);
-			UsuariosDAO.getInstance().save(usr);
+			usuarioDAO.save(usr);
 			return Response.ok(true).build();
 		}		
 		return Response.notModified().build();
@@ -64,7 +60,7 @@ public class MainServer {
         String correo = (String) requestBody.get(0);
         String contrasena = (String) requestBody.get(1);
         try {
-            Usuario u = UsuariosDAO.getInstance().find(correo);
+            Usuario u = usuarioDAO.find(correo);
             if (u != null) {
             	System.out.println(u.isBanned());
             	if (!u.isBanned()) {
