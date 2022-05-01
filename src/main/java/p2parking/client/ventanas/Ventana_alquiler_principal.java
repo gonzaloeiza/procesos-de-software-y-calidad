@@ -78,7 +78,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		
 		
 		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/p2larfo.jpg")));
+		//logo.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/p2larfo.jpg")));
 		panel_arriba.add(logo);
 		/*
 		 * 
