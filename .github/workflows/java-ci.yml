@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
-          mysql database: 'p2parkingdb' # Optional, default value is "test". The specified database which will be create
-          mysql root password: ${{ secrets.RootPassword }} # Required if "mysql user" is empty, default is empty. The root superuser password
-          mysql user: 'spq' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
-          mysql password: ${{ secrets.DatabasePassword }} # Required if "mysql user" exists. The password for the "mysql user"
+      # - uses: mirromutth/mysql-action@v1.1
+      #   with:
+      #     mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
+      #     mysql database: 'p2parkingdb' # Optional, default value is "test". The specified database which will be create
+      #     mysql root password: ${{ secrets.RootPassword }} # Required if "mysql user" is empty, default is empty. The root superuser password
+      #     mysql user: 'spq' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
+      #     mysql password: ${{ secrets.DatabasePassword }} # Required if "mysql user" exists. The password for the "mysql user"
       
       - uses: actions/checkout@v3
       - name: Set up JDK 11
@@ -22,9 +22,9 @@ jobs:
           java-version: "11"
           distribution: "adopt"
       # - name: Build with Maven
-      - run: mvn clean compile
-      - run: mvn datanucleus:enhance
-      - run: mvn datanucleus:schema-create
-      - run: mvn exec:java -PinsertarEjemplos
-      - run: mvn test
-        # run: mvn --batch-mode --update-snapshots verify
+      # - run: mvn clean compile
+      # - run: mvn datanucleus:enhance
+      # - run: mvn datanucleus:schema-create
+      # - run: mvn exec:java -PinsertarEjemplos
+      # - run: mvn test
+        run: mvn --batch-mode --update-snapshots verify
