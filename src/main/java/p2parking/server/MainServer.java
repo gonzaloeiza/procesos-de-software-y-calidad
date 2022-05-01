@@ -148,6 +148,11 @@ public class MainServer {
 			temp.createIncidencia(incidencia);
 			tokenUsuarios.replace(token, temp);
 			usuarioDAO.save(temp);
+			if (temp != null) {
+				temp.createIncidencia(incidencia);
+				UsuariosDAO.getInstance().save(temp);
+				tokenUsuarios.replace(token, temp);
+			}
 			return Response.ok("Incidencia creada correctamente").build();	
 		} else {
 			return Response.status(401, "No estas autenticado").build();

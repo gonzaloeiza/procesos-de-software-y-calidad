@@ -15,6 +15,7 @@ import p2parking.client.Remote;
 import p2parking.jdo.Plaza;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 
@@ -23,6 +24,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
@@ -35,17 +38,17 @@ import java.awt.event.InputMethodEvent;
 public class Ventana_alquiler_principal extends JFrame {
 	private JPanel panelPricipal;
 	private ArrayList<Plaza> plazas;
+	private ArrayList<Plaza> plazasFav;
 	private int indice=0;
 
 	
 	public Ventana_alquiler_principal() {
 		plazas= Remote.getInstance().getAllPlazas(Remote.getInstance().getToken());
-		
-		
+		plazasFav=Remote.getInstance().getMisFav(Remote.getInstance().getToken());
 		
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
-    	setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
+    	//setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 428);
 		panelPricipal = new JPanel();
@@ -75,7 +78,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		
 		
 		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/p2larfo.jpg")));
+		//logo.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/p2larfo.jpg")));
 		panel_arriba.add(logo);
 		/*
 		 * 
@@ -115,17 +118,20 @@ public class Ventana_alquiler_principal extends JFrame {
 		
 		JPanel panel_derecha = new JPanel();
 		panel_actualizar.add(panel_derecha, BorderLayout.EAST);
-		panel_derecha.setLayout(new GridLayout(3, 1, 0, 0));
+		panel_derecha.setLayout(new GridLayout(6, 1, 0, 0));
 		
 		JButton btnFavoritos = new JButton("Favoritos");
 		btnFavoritos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean temp = Remote.getInstance().addPlazaFav(Remote.getInstance().getToken(), null);
+				boolean temp = Remote.getInstance().addPlazaFav(Remote.getInstance().getToken(), plazas.get(indice));
 				if(temp) {
-			
+					JOptionPane.showMessageDialog(panelPricipal, "Plaza añadida a favoritos");
+					panel_izquierda.setBackground(Color.green);
+					panel_derecha.setBackground(Color.green);
+
 				}
 				else {
-
+					
 				}
 			}
 		});
@@ -136,15 +142,58 @@ public class Ventana_alquiler_principal extends JFrame {
 		btnReportar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Ventana_Incidencia.main(null);
+				dispose();
 			}
 		});
 		panel_derecha.add(btnReportar);
 		
-		JLabel Precio = new JLabel("New label");
+		JLabel Precio = new JLabel();
 		panel_derecha.add(Precio);
+		
+		JButton btnEvaluarUsuario = new JButton("Evaluar/Info Usuario");
+		btnEvaluarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana_UsuarioExterno.main(null,plazas.get(indice));
+				dispose();
+			}
+		});
+		panel_derecha.add(btnEvaluarUsuario);
+		
+		JLabel lblPuntuacion = new JLabel();
+		panel_derecha.add(lblPuntuacion);
+		
+		JLabel lblSeguro = new JLabel();
+		panel_derecha.add(lblSeguro);
 		
 		JLabel imagen = new JLabel("No hay imagen");
 		panel_actualizar.add(imagen, BorderLayout.WEST);
+		
+		JPanel panel_top = new JPanel();
+		panel_actualizar.add(panel_top, BorderLayout.NORTH);
+		panel_top.setLayout(new GridLayout(1, 6, 0, 0));
+		
+		JButton btnOrden = new JButton("Ordenar Plazas");
+		btnOrden.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		panel_top.add(btnOrden);
+		
+		JPanel panel_4 = new JPanel();
+		panel_top.add(panel_4);
+		
+		JPanel panel_5 = new JPanel();
+		panel_top.add(panel_5);
+		
+		JPanel panel_6 = new JPanel();
+		panel_top.add(panel_6);
+		
+		JPanel panel_7 = new JPanel();
+		panel_top.add(panel_7);
+		
+		JPanel panel_8 = new JPanel();
+		panel_top.add(panel_8);
 		
 		
 		JPanel panel_medio_abajo = new JPanel();
@@ -155,8 +204,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		btnPlaza_Anterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				indice-=1;
-				System.out.println(plazas.get(indice).getTitulo());
-				if(indice<0) {
+				if(indice<=0) {
 					indice=0;
 				}
 				if(plazas.get(indice).getTitulo()==null) {
@@ -164,20 +212,43 @@ public class Ventana_alquiler_principal extends JFrame {
 				}else {
 					titulo_parking.setText(plazas.get(indice).getTitulo());
 				}
+				
 				if(plazas.get(indice).getDescripcion()==null) {
 					descripcion_parking.setText("No hay descripcion");
 				}else {
 					descripcion_parking.setText(plazas.get(indice).getDescripcion());
 				}
+				
 				if(String.valueOf(plazas.get(indice).getPrecio())==null) {
-					Precio.setText("No hay descripcion");
+					Precio.setText("No hay precio");
 				}else {
-					
-					Precio.setText(String.valueOf(plazas.get(indice).getPrecio()));
+					Precio.setText("El precio es de:" + String.valueOf(plazas.get(indice).getPrecio()));
 				}
+				//lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 				
-				
+				if(plazas.get(indice).isSeguro()==true) {
+					lblSeguro.setText("La plaza tiene seguro");
+				}else if(plazas.get(indice).isSeguro()==false) {
+					lblSeguro.setText("La plaza tiene seguro");
+				}else {
+					lblSeguro.setText("No tenemos informacion");
+				}
+				/*
+	
+				for(int u=0;u<plazasFav.size();u++) {
+					if(plazas.get(indice)==plazasFav.get(u)) {
+						panel_izquierda.setBackground(Color.green);
+						panel_derecha.setBackground(Color.green);
+					}
+				}
+				*/
 				titulo_parking.repaint();
+				descripcion_parking.repaint();
+				Precio.repaint();
+				lblPuntuacion.repaint();
+				lblSeguro.repaint();
+				
+				
 			}
 		});
 		panel_medio_abajo.add(btnPlaza_Anterior);
@@ -188,6 +259,8 @@ public class Ventana_alquiler_principal extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_medio_abajo.add(panel_1);
 		
+	
+		
 		JPanel panel_2 = new JPanel();
 		panel_medio_abajo.add(panel_2);
 		
@@ -197,11 +270,13 @@ public class Ventana_alquiler_principal extends JFrame {
 		JButton btnPlazaSiguiente = new JButton("Siguiente");
 		btnPlazaSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			
 				indice+=1;
-				if(indice>plazas.size()) {
-					indice=plazas.size();
+			
+				if(indice>=plazas.size()) {
+					indice=plazas.size()-1;
 				}
-				
+			
 				if(plazas.get(indice).getTitulo()==null) {
 					titulo_parking.setText("No hay titulo");
 				}else {
@@ -213,10 +288,72 @@ public class Ventana_alquiler_principal extends JFrame {
 					descripcion_parking.setText(plazas.get(indice).getDescripcion());
 				}
 				
+				if(String.valueOf(plazas.get(indice).getPrecio())==null) {
+					Precio.setText("No hay precio");
+				}else {
+					Precio.setText("El precio es de:" + String.valueOf(plazas.get(indice).getPrecio()));
+				}
+				
+				//lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
+				
+				if(plazas.get(indice).isSeguro()==true) {
+					lblSeguro.setText("La plaza tiene seguro");
+				}else if(plazas.get(indice).isSeguro()==false) {
+					lblSeguro.setText("La plaza tiene seguro");
+				}else {
+					lblSeguro.setText("No tenemos informacion");
+				}
+				/*
+				for(int u=0;u<plazasFav.size();u++) {
+					if(plazas.get(indice)==plazasFav.get(u)) {
+						panel_izquierda.setBackground(Color.green);
+						panel_derecha.setBackground(Color.green);
+					}
+				}
+				*/
 				titulo_parking.repaint();
+				descripcion_parking.repaint();
+				Precio.repaint();
+				lblPuntuacion.repaint();
+				lblSeguro.repaint();
 			}
 		});
 		panel_medio_abajo.add(btnPlazaSiguiente);
+		
+		
+		if(plazas.get(indice).getTitulo()==null) {
+			titulo_parking.setText("No hay titulo");
+		}else {
+			titulo_parking.setText(plazas.get(indice).getTitulo());
+		}
+		if(plazas.get(indice).getDescripcion()==null) {
+			descripcion_parking.setText("No hay descripcion");
+		}else {
+			descripcion_parking.setText(plazas.get(indice).getDescripcion());
+		}
+		
+		if(String.valueOf(plazas.get(indice).getPrecio())==null) {
+			Precio.setText("No hay precio");
+		}else {
+			Precio.setText("El precio es de:" + String.valueOf(plazas.get(indice).getPrecio()));
+		}
+		
+		//lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
+		if(plazas.get(indice).isSeguro()==true) {
+			lblSeguro.setText("La plaza tiene seguro");
+		}else if(plazas.get(indice).isSeguro()==false) {
+			lblSeguro.setText("La plaza tiene seguro");
+		}else {
+			lblSeguro.setText("No tenemos informacion");
+		}
+		/*
+		for(int u=0;u<plazasFav.size();u++) {
+			if(plazas.get(indice)==plazasFav.get(u)) {
+				panel_izquierda.setBackground(Color.green);
+				panel_derecha.setBackground(Color.green);
+			}
+		}
+		*/
 		
 		
 		
