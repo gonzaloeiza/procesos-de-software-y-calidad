@@ -32,10 +32,18 @@ public class MainServer {
 	private static HashMap<Long, Usuario> tokenUsuarios = new HashMap<>(); //mapa de usuarios logeados
 	
 	UsuariosDAO usuarioDAO = UsuariosDAO.getInstance();
+	AlquilerDAO alquilerDAO = AlquilerDAO.getInstance();
 
 	
 	public void setUsuarioDAO(UsuariosDAO usuarioDAO) {
 		this.usuarioDAO = usuarioDAO;
+	}
+	
+	public void setMap(HashMap<Long, Usuario> tokens) {
+		tokenUsuarios = tokens;
+	}
+	public void serAlquilerDAO(AlquilerDAO alq) {
+		this.alquilerDAO = alq;
 	}
 	
 	
@@ -91,13 +99,13 @@ public class MainServer {
 			Usuario usuario = gson.fromJson(requestBody.get(1), Usuario.class);
 			if(tokenUsuarios.containsKey(token)) {
 				tokenUsuarios.replace(token, usuario);
-				UsuariosDAO.getInstance().save(usuario);
+				usuarioDAO.save(usuario);
 				return Response.ok(true).build();
 			} else {
-				return Response.ok(false).build();
+				return Response.status(401).build();
 			}
 		} else {
-			return Response.ok(false).build();
+			return Response.status(401).build();
 		}
 		
 	}
@@ -118,10 +126,10 @@ public class MainServer {
 		long token = gson.fromJson(requestBody.get(0), Long.class);
 		Plaza plaza = gson.fromJson(requestBody.get(1), Plaza.class);
 		if(tokenUsuarios.containsKey(token)) {
-			Usuario temp = UsuariosDAO.getInstance().find(tokenUsuarios.get(token).getCorreo());
+			Usuario temp = usuarioDAO.find(tokenUsuarios.get(token).getCorreo());
 			temp.addPlaza(plaza);
 			tokenUsuarios.replace(token, temp);
-			UsuariosDAO.getInstance().save(temp);
+			usuarioDAO.save(temp);
 			return Response.ok("Plaza añadida correctamente").build();	
 		} else {
 			return Response.status(401, "No estas autenticado").build();
@@ -136,10 +144,10 @@ public class MainServer {
 		long token = gson.fromJson(requestBody.get(0), Long.class);
 		Incidencia incidencia = gson.fromJson(requestBody.get(1), Incidencia.class);
 		if(tokenUsuarios.containsKey(token)) {
-			Usuario temp = UsuariosDAO.getInstance().find(tokenUsuarios.get(token).getCorreo());
+			Usuario temp = usuarioDAO.find(tokenUsuarios.get(token).getCorreo());
 			temp.createIncidencia(incidencia);
 			tokenUsuarios.replace(token, temp);
-			UsuariosDAO.getInstance().save(temp);
+			usuarioDAO.save(temp);
 			return Response.ok("Incidencia creada correctamente").build();	
 		} else {
 			return Response.status(401, "No estas autenticado").build();
@@ -153,7 +161,7 @@ public class MainServer {
 		if(tokenUsuarios.containsKey(token)) {
 			Plaza plaza = gson.fromJson(requestBody.get(1), Plaza.class);
 			Usuario usr = tokenUsuarios.get(token);	
-			ArrayList<Alquiler> temp = AlquilerDAO.getInstance().findAll(usr.getCorreo());
+			ArrayList<Alquiler> temp = alquilerDAO.findAll(usr.getCorreo());
 			ArrayList<Alquiler> dev = new ArrayList<>();
 			for(Alquiler a: temp) {
 				if(a.getPlaza().equals(plaza)) {
@@ -172,7 +180,7 @@ public class MainServer {
 		long token = gson.fromJson(requestBody.get(0), Long.class);
 		if(tokenUsuarios.containsKey(token)) {
 			String emial = requestBody.get(1);
-			Usuario usr = UsuariosDAO.getInstance().find(emial);
+			Usuario usr = usuarioDAO.find(emial);
 			return Response.ok(usr).build();
 		}
 		return Response.status(401, "No estas autenticado").build();	
@@ -186,9 +194,9 @@ public class MainServer {
 		if(tokenUsuarios.containsKey(token)) {
 			int puntuacion = gson.fromJson(requestBody.get(1), Integer.class);
 			String email = requestBody.get(2);
-			Usuario usr = UsuariosDAO.getInstance().find(email);
+			Usuario usr = usuarioDAO.find(email);
 			usr.newPuntuacion(puntuacion);
-			UsuariosDAO.getInstance().save(usr);
+			usuarioDAO.save(usr);
 			return Response.ok().build();
 		}
 		return Response.status(401, "No estas autenticado").build();	
