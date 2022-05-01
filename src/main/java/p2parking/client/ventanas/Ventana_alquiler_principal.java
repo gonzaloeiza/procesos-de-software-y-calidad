@@ -38,12 +38,17 @@ import java.awt.event.InputMethodEvent;
 public class Ventana_alquiler_principal extends JFrame {
 	private JPanel panelPricipal;
 	private ArrayList<Plaza> plazas;
+	private ArrayList<Plaza> plazasOrdenadas;
+	private boolean ordenado;
 	private ArrayList<Plaza> plazasFav;
 	private int indice=0;
 
 	
 	public Ventana_alquiler_principal() {
 		plazas= Remote.getInstance().getAllPlazas(Remote.getInstance().getToken());
+		plazasOrdenadas = new ArrayList<Plaza>();
+		ordenarPlazas();
+		ordenado = false;
 		plazasFav=Remote.getInstance().getMisFav(Remote.getInstance().getToken());
 		
 		setTitle("P2Parking");
@@ -402,22 +407,28 @@ public class Ventana_alquiler_principal extends JFrame {
 
 	}
 	
-	private void ordenarPlaza() {
-		int indexAtras;
+	// ordena la lista de menor a mayor
+	private void ordenarPlazas() {
+		float ultimoPrecio = (float) 0;
+		int index;
 		
-		if (plazas.size() < 2)
-			return;
+		ArrayList<Plaza> aux = plazas;
+		Plaza aMeter;
 		
-		for (int index=1; index<plazas.size(); index++) {
-			indexAtras = index;
-			if (plazas.get(index).getPrecio() < plazas.get(index - 1).getPrecio()) {
-				while (plazas.get(index).getPrecio() <  plazas.get(indexAtras).getPrecio()) {
-					indexAtras = indexAtras - 1;
+		while(plazas.size() > 0) {
+			index = 0;
+			aMeter = null;
+			while(index < plazas.size()) {
+				if (aMeter == null || plazas.get(index).getPrecio() >= ultimoPrecio) {
+					aMeter = plazas.get(index);
+					ultimoPrecio = aMeter.getPrecio();
 				}
-				plazas.add(indexAtras, plazas.get(index));
-				plazas.remove(index+1);
+				index++;
 			}
+			plazasOrdenadas.add(aMeter);
+			aux.remove(index);
 		}
+		
 	}
 
 }
