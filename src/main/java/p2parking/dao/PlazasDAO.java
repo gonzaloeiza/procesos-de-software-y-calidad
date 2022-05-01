@@ -32,19 +32,21 @@ public class PlazasDAO implements iAccesoObjeto<Plaza>{
 	}
 	
 	@Override
-	public void save(Plaza plaza) {
+	public boolean save(Plaza plaza) {
 		Transaction tx = pm.currentTransaction();
 		tx.begin();
 		pm.makePersistent(plaza);
 		tx.commit();
+		return true;
 	}
 
 	@Override
-	public void delete(Plaza plaza) {
+	public boolean delete(Plaza plaza) {
 		Transaction tx = pm.currentTransaction();
 		tx.begin();
 		pm.deletePersistent(plaza);
 		tx.commit();
+		return true;
 		
 	}
 

@@ -29,20 +29,22 @@ public class UsuariosDAO implements iAccesoObjeto<Usuario> {
 	}
 	
 	@Override
-	public void save(Usuario usuario) {
+	public boolean save(Usuario usuario) {
 		Transaction tx = pm.currentTransaction();
 		tx.begin();
 		pm.makePersistent(usuario);
 		tx.commit();
+		return true;
 		
 	}
 
 	@Override
-	public void delete(Usuario usuario) {
+	public boolean delete(Usuario usuario) {
 		Transaction tx = pm.currentTransaction();
 		tx.begin();
 		pm.deletePersistent(usuario);
 		tx.commit();
+		return true;
 		
 	}
 
