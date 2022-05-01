@@ -75,7 +75,7 @@ public class Ventana_Incidencia extends JFrame {
 	public Ventana_Incidencia() {
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
-    	setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
+    	//setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 428);
 		panelPricipal = new JPanel();
@@ -104,6 +104,9 @@ public class Ventana_Incidencia extends JFrame {
 		btnSunir = new JButton("Establecer incidencia");
 		btnSunir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Remote.getInstance().crearincidencia(txtTitulo.getText(), txtMensaje.getText());
+				Ventana_alquiler_principal.main(null);
+				dispose();
 			}
 		});
 		panel.add(btnSunir);

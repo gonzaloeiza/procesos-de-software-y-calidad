@@ -137,9 +137,11 @@ public class MainServer {
 		Incidencia incidencia = gson.fromJson(requestBody.get(1), Incidencia.class);
 		if(tokenUsuarios.containsKey(token)) {
 			Usuario temp = UsuariosDAO.getInstance().find(tokenUsuarios.get(token).getCorreo());
-			temp.createIncidencia(incidencia);
-			tokenUsuarios.replace(token, temp);
-			UsuariosDAO.getInstance().save(temp);
+			if (temp != null) {
+				temp.createIncidencia(incidencia);
+				UsuariosDAO.getInstance().save(temp);
+				tokenUsuarios.replace(token, temp);
+			}
 			return Response.ok("Incidencia creada correctamente").build();	
 		} else {
 			return Response.status(401, "No estas autenticado").build();

@@ -25,12 +25,21 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
 
 public class Ventana_subir extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel panelPricipal;	
-	private JTextField textPrecio;
-	private JTextField textUbicacion;
 	private TextPrompt panelHolderUsuario;
+	private JTextField txtTitulo;
+	private boolean seguro;
+	private JTextField txtUbi;
+	private JTextField txtDescipcion;
+	private JTextField txtPrecio;
 	
 	
 	public Ventana_subir() {
@@ -75,8 +84,8 @@ public class Ventana_subir extends JFrame {
 		panel_abajo.add(btnSubir);
 		btnSubir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean temp = Remote.getInstance().addPlaza(Remote.getInstance().getToken(), Float.valueOf(textPrecio.getText()), textUbicacion.getText(),
-						new ArrayList<>(), (new Date()).getTime());//TODO: cambiar null por las imagenes
+				boolean temp = Remote.getInstance().addPlaza(Remote.getInstance().getToken(), Float.valueOf(txtPrecio.getText()), txtUbi.getText(),
+						new ArrayList<>(), (new Date()).getTime(),txtTitulo.getText(),txtDescipcion.getText(),seguro);//TODO: cambiar null por las imagenes
 				if(temp) {
 					Ventana_alquiler_principal.main(null);
 					dispose();
@@ -89,92 +98,103 @@ public class Ventana_subir extends JFrame {
 		
 		JPanel panel_central = new JPanel();
 		panelPricipal.add(panel_central, BorderLayout.CENTER);
-		panel_central.setLayout(new GridLayout(7, 4, 0, 0));
+		panel_central.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		
-	
-		JPanel panel = new JPanel();
-		panel_central.add(panel);
-		
-	
+		JPanel panle_medio_arriba = new JPanel();
+		panel_central.add(panle_medio_arriba);
+		panle_medio_arriba.setLayout(new GridLayout(5, 3, 0, 0));
 		
 		JPanel panel_1 = new JPanel();
-		panel_central.add(panel_1);
+		panle_medio_arriba.add(panel_1);
 		
-		JPanel panel_2 = new JPanel();
-		panel_central.add(panel_2);
-		
-		JPanel panel_3 = new JPanel();
-		panel_central.add(panel_3);
-		
-		textUbicacion = new JTextField();
-		panelHolderUsuario = new TextPrompt("Usuario", textUbicacion);
+		txtTitulo = new JTextField();
+		txtTitulo.setColumns(10);
+		panelHolderUsuario = new TextPrompt("Tirulo", txtTitulo);
 		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		panelHolderUsuario.changeAlpha(0.75f);
-
-		panel_central.add(textUbicacion);
-		textUbicacion.setColumns(10);
-		
-		JPanel panel_4 = new JPanel();
-		panel_central.add(panel_4);
+		panle_medio_arriba.add(txtTitulo);
 		
 		
-		JPanel panel_5 = new JPanel();
-		panel_central.add(panel_5);
+		JPanel panel_2_1 = new JPanel();
+		panle_medio_arriba.add(panel_2_1);
 		
-		JPanel panel_6 = new JPanel();
-		panel_central.add(panel_6);
+		JPanel panel_6_1 = new JPanel();
+		panle_medio_arriba.add(panel_6_1);
 		
-		JPanel panel_7 = new JPanel();
-		panel_central.add(panel_7);
-		
-		JPanel panel_8 = new JPanel();
-		panel_central.add(panel_8);
-		
-		textPrecio = new JTextField();
-		panelHolderUsuario = new TextPrompt("Usuario", textPrecio);
+		txtPrecio = new JTextField();
+		panle_medio_arriba.add(txtPrecio);
+		panelHolderUsuario = new TextPrompt("Precio", txtPrecio);
 		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		panelHolderUsuario.changeAlpha(0.75f);
+		txtPrecio.setColumns(10);
 
-		panel_central.add(textPrecio);
-		textPrecio.setColumns(10);
+		JPanel panel_8_1 = new JPanel();
+		panle_medio_arriba.add(panel_8_1);
 		
-		JPanel panel_9 = new JPanel();
-		panel_central.add(panel_9);
+		JPanel panel_9_1 = new JPanel();
+		panle_medio_arriba.add(panel_9_1);
 		
-		JPanel panel_10 = new JPanel();
-		panel_central.add(panel_10);
+
 		
-		JPanel panel_11 = new JPanel();
-		panel_central.add(panel_11);
+		txtUbi = new JTextField();
+		txtUbi.setColumns(10);
+		panle_medio_arriba.add(txtUbi);
+		panelHolderUsuario = new TextPrompt("Ubicacion", txtUbi);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
 		
-		JPanel panel_12 = new JPanel();
-		panel_central.add(panel_12);
+	
+		JPanel panel_10_1 = new JPanel();
+		panle_medio_arriba.add(panel_10_1);
 		
-		JPanel panel_13 = new JPanel();
-		panel_central.add(panel_13);
+		JPanel panel_11_1 = new JPanel();
+		panle_medio_arriba.add(panel_11_1);
 		
-		JButton btnNewButton = new JButton("Fotos de la Plaza");
-		btnNewButton.addActionListener(new ActionListener() {
+		JCheckBox chckbxseguro = new JCheckBox("Tienes Seguro");
+		chckbxseguro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser filechoser=new JFileChooser();
-				filechoser.showOpenDialog(panel_central);
+				if(seguro==true) {
+					seguro=false;
+				}else
+					seguro=true;
 			}
 		});
-		panel_central.add(btnNewButton);
+		panle_medio_arriba.add(chckbxseguro);
 		
-		JPanel panel_14 = new JPanel();
-		panel_central.add(panel_14);
 		
-		JPanel panel_15 = new JPanel();
-		panel_central.add(panel_15);
+		JPanel panel_13_1 = new JPanel();
+		panle_medio_arriba.add(panel_13_1);
 		
-		JPanel panel_16 = new JPanel();
-		panel_central.add(panel_16);
+		JPanel panel = new JPanel();
+		panle_medio_arriba.add(panel);
 		
-		JPanel panel_17 = new JPanel();
-		panel_central.add(panel_17);
+		JButton btnNewButton_1 = new JButton("Fotos de la Plaza");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		panle_medio_arriba.add(btnNewButton_1);
 		
+		
+		
+		
+	
+
+	
+		
+		
+		JPanel panel_medio_abajo = new JPanel();
+		panel_central.add(panel_medio_abajo);
+		panel_medio_abajo.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		txtDescipcion = new JTextField();
+		panelHolderUsuario = new TextPrompt("Descipcion", txtDescipcion);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
+		panel_medio_abajo.add(txtDescipcion);
+		txtDescipcion.setColumns(10);
+		
+
 		
 	}
 
