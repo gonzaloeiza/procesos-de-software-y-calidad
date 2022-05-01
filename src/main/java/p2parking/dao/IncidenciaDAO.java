@@ -29,19 +29,21 @@ public class IncidenciaDAO implements iAccesoObjeto<Incidencia> {
 	}
 
     @Override
-    public void save(Incidencia incidencia) {
+    public boolean save(Incidencia incidencia) {
     	Transaction tx = pm.currentTransaction();
 		tx.begin();
 		pm.makePersistent(incidencia);
 		tx.commit();
+		return true;
     }
 
 	@Override
-	public void delete(Incidencia incidencia) {
+	public boolean delete(Incidencia incidencia) {
 		Transaction tx = pm.currentTransaction();
 		tx.begin();
 		pm.deletePersistent(incidencia);
 		tx.commit();
+		return true;
 	}
 
 	@Override

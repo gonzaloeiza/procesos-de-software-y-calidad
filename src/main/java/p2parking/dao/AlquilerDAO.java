@@ -33,19 +33,21 @@ public class AlquilerDAO implements iAccesoObjeto<Alquiler> {
 	}
 	
     @Override
-    public void save(Alquiler alquier) {
+    public boolean save(Alquiler alquier) {
     	Transaction tx = pm.currentTransaction();
 		tx.begin();
 		pm.makePersistent(alquier);
 		tx.commit();
+		return true;
     }
 
     @Override
-    public void delete(Alquiler alquier) {
+    public boolean delete(Alquiler alquier) {
 		Transaction tx = pm.currentTransaction();
 		tx.begin();
 		pm.deletePersistent(alquier);
 		tx.commit();
+		return true;
     }
 
     @Override
