@@ -153,8 +153,6 @@ public class Ventana_alquiler_principal extends JFrame {
 		JButton btnEvaluarUsuario = new JButton("Evaluar/Info Usuario");
 		btnEvaluarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(plazas.get(indice).getPropietario().getNombre());
-				System.out.println(plazas.get(indice).getPropietario());
 				Ventana_UsuarioExterno.main(null,plazas.get(indice));
 				dispose();
 			}
@@ -225,11 +223,13 @@ public class Ventana_alquiler_principal extends JFrame {
 				
 				if(plazas.get(indice).isSeguro()==true) {
 					lblSeguro.setText("La plaza tiene seguro");
-				}else {
+				}else if(plazas.get(indice).isSeguro()==false) {
 					lblSeguro.setText("La plaza tiene seguro");
+				}else {
+					lblSeguro.setText("No tenemos informacion");
 				}
 				/*
-				lblSeguro.setText("No hay seguro");
+	
 				for(int u=0;u<plazasFav.size();u++) {
 					if(plazas.get(indice)==plazasFav.get(u)) {
 						panel_izquierda.setBackground(Color.green);
