@@ -143,13 +143,11 @@ public class Remote {
 	
 	
 	//Post para crear incidencia
-	public boolean crearincidencia(String titulo, String cuerpo, String emailUsuario) {
-		WebTarget donationsWebTarget = webTarget.path("prueba/addPlaza");
+	public boolean crearincidencia(String titulo, String cuerpo) {
+		WebTarget donationsWebTarget = webTarget.path(path + "/createIncidencia");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		Incidencia incidencia = new Incidencia(titulo, cuerpo);
 		List<String> requestBody = new ArrayList<String>();
-        
-		System.out.println(incidencia.getTitulo());
         
 		Gson gson = new Gson();
         requestBody.add(gson.toJson(getToken()));
