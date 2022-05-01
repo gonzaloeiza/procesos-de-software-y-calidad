@@ -10,6 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
+
+import p2parking.client.Remote;
+import p2parking.jdo.Plaza;
+
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,7 +26,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel panelPricipal;
 	private int valorevaluacion;
-	public static void main(String[] args) {
+	public static void main(String[] args,Plaza a) {
 		try {
 			// Set cross-platform Java L&F (also called "Metal")
 			UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
@@ -38,8 +42,10 @@ public class Ventana_UsuarioExterno extends JFrame {
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				System.out.println(a.getPropietario().getNombre());
+				System.out.println(a.getPropietario());
 				try {
-					Ventana_UsuarioExterno frame = new Ventana_UsuarioExterno();
+					Ventana_UsuarioExterno frame = new Ventana_UsuarioExterno(a);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +54,8 @@ public class Ventana_UsuarioExterno extends JFrame {
 		});
 	}
 
-	public Ventana_UsuarioExterno() {
+	public Ventana_UsuarioExterno(Plaza a) {
+	
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
     	setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
@@ -86,8 +93,14 @@ public class Ventana_UsuarioExterno extends JFrame {
 		JPanel panel_16 = new JPanel();
 		panel_3.add(panel_16);
 		
-		JLabel lblNewLabel_3 = new JLabel("el numero");
+		JLabel lblNewLabel_3 = new JLabel();
 		panel_3.add(lblNewLabel_3);
+		if(a.getPropietario().getTelefono()==null) {
+			lblNewLabel_3.setText("No tenemos su numero");
+		}else {
+			lblNewLabel_3.setText(a.getPropietario().getTelefono());
+		}
+		
 		
 		JPanel panel_18 = new JPanel();
 		panel_3.add(panel_18);
@@ -105,12 +118,15 @@ public class Ventana_UsuarioExterno extends JFrame {
 		JPanel panel_22 = new JPanel();
 		panel_3.add(panel_22);
 		
-	
-		
-	
 
-		JLabel lblNewLabel_5 = new JLabel("el correo");
+		JLabel lblNewLabel_5 = new JLabel();
 		panel_3.add(lblNewLabel_5);
+		if(a.getPropietario().getCorreo()==null) {
+			lblNewLabel_5.setText("No tenemos su correo");
+		}else {
+			lblNewLabel_5.setText(a.getPropietario().getCorreo());
+		}
+		
 		
 		JPanel panel_5 = new JPanel();
 		panel_medio.add(panel_5);
@@ -132,7 +148,14 @@ public class Ventana_UsuarioExterno extends JFrame {
 		btnEvaluar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 String valorevaluacion = JOptionPane.showInputDialog(panelPricipal,"Que nota le pones a este usuario?(1-5)", "Evaluacion", 1);
-				 System.out.println(valorevaluacion);
+				 if(Integer.parseInt(valorevaluacion)>5) {
+					 Remote.getInstance().setPuntuacion(Remote.getInstance().getToken(), a.getPropietario(),5); 
+				 }else if(Integer.parseInt(valorevaluacion)<=0) {
+					 Remote.getInstance().setPuntuacion(Remote.getInstance().getToken(), a.getPropietario(),1); 
+				 }else{
+					 Remote.getInstance().setPuntuacion(Remote.getInstance().getToken(), a.getPropietario(),Integer.parseInt(valorevaluacion)); 
+				 }
+				 
 			}
 		});
 		panel_5.add(btnEvaluar);
@@ -164,9 +187,15 @@ public class Ventana_UsuarioExterno extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_arriba.add(panel_2);
 		
-		JLabel lblNewLabel_1 = new JLabel("Nombre del usuario a evaluar");
+		JLabel lblNewLabel_1 = new JLabel();
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_arriba.add(lblNewLabel_1);
+		if(a.getPropietario().getNombre()==null) {
+			lblNewLabel_1.setText("No tenemos su nombre");
+		}else {
+			lblNewLabel_1.setText(a.getPropietario().getNombre());
+		}
+		
 		
 		JPanel panel_4 = new JPanel();
 		panel_arriba.add(panel_4);

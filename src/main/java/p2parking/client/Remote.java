@@ -123,10 +123,10 @@ public class Remote {
 	
 	/*Metodos gestion Plaza*/
 	//Post
-	public boolean addPlaza(long token, float precio, String localizacion, ArrayList<String> fotos, long fecha) {
+	public boolean addPlaza(long token, float precio, String localizacion, ArrayList<String> fotos, long fecha,String titulo, String descripcion, boolean seguro) {
 		WebTarget donationsWebTarget = webTarget.path("prueba/addPlaza");
 		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
-		Plaza plaza = new Plaza(precio, localizacion, fotos, fecha);
+		Plaza plaza = new Plaza(precio, localizacion, fotos, fecha,titulo,descripcion,seguro);
 		List<String> requestBody = new ArrayList<String>();
         
         Gson gson = new Gson();

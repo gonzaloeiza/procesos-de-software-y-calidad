@@ -104,6 +104,9 @@ public class Ventana_Incidencia extends JFrame {
 		btnSunir = new JButton("Establecer incidencia");
 		btnSunir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Remote.getInstance().crearincidencia(txtTitulo.getText(), txtMensaje.getText());
+				Ventana_alquiler_principal.main(null);
+				dispose();
 			}
 		});
 		panel.add(btnSunir);
