@@ -554,21 +554,22 @@ public class Ventana_alquiler_principal extends JFrame {
 		float ultimoPrecio = (float) 0;
 		int index;
 		
-		ArrayList<Plaza> aux = plazas;
+		ArrayList<Plaza> aux = (ArrayList<Plaza>) plazas.clone();
 		Plaza aMeter;
 		
-		while(plazas.size() > 0) {
+		while(aux.size() > 0) {
 			index = 0;
 			aMeter = null;
-			while(index < plazas.size()) {
-				if (aMeter == null || plazas.get(index).getPrecio() >= ultimoPrecio) {
-					aMeter = plazas.get(index);
+			while(index < aux.size()) {
+				System.out.println("I: " + index + "\tS: " + aux.size());
+				if (aMeter == null || aux.get(index).getPrecio() < ultimoPrecio) {
+					aMeter = aux.get(index);
 					ultimoPrecio = aMeter.getPrecio();
 				}
 				index++;
 			}
 			plazasOrdenadas.add(aMeter);
-			aux.remove(index);
+			aux.remove(aMeter);
 		}
 		
 	}
