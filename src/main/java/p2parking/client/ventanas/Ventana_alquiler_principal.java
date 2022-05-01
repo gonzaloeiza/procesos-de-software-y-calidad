@@ -123,15 +123,15 @@ public class Ventana_alquiler_principal extends JFrame {
 		JButton btnFavoritos = new JButton("Favoritos");
 		btnFavoritos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean temp = Remote.getInstance().addPlazaFav(Remote.getInstance().getToken(), null);
+				boolean temp = Remote.getInstance().addPlazaFav(Remote.getInstance().getToken(), plazas.get(indice));
 				if(temp) {
-					JOptionPane.showConfirmDialog(panelPricipal, "Plaza añadida a favoritos");
+					JOptionPane.showMessageDialog(panelPricipal, "Plaza añadida a favoritos");
 					panel_izquierda.setBackground(Color.green);
 					panel_derecha.setBackground(Color.green);
-					
+
 				}
 				else {
-					JOptionPane.showConfirmDialog(panelPricipal, "Plaza añadida a favoritos");
+					
 				}
 			}
 		});
