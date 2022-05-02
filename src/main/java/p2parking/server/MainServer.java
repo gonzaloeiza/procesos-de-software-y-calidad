@@ -199,7 +199,7 @@ public class MainServer {
 		long token = gson.fromJson(requestBody.get(0), Long.class);
 		if(tokenUsuarios.containsKey(token)) {
 			int puntuacion = gson.fromJson(requestBody.get(1), Integer.class);
-			String email = requestBody.get(2);
+			String email = gson.fromJson(requestBody.get(2), Usuario.class).getCorreo();
 			Usuario usr = usuarioDAO.find(email);
 			usr.newPuntuacion(puntuacion);
 			usuarioDAO.save(usr);

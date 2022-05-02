@@ -229,20 +229,20 @@ public class MainServerTest {
 	@Test
 	public void testsetPuntuacion() {
 		when(t.containsKey((long)1234)).thenReturn(true);
-		when(usuariosDAO.find("javier@gmail.com")).thenReturn(u2);
+		when(usuariosDAO.find(u2.getCorreo())).thenReturn(u2);
 		
 		Gson gson = new Gson();
 		ArrayList<String> requestBody = new ArrayList<String>();
 		requestBody.add(gson.toJson((long)1234));
 		requestBody.add(gson.toJson(5));
-		requestBody.add("javier@gmail.com");
+		requestBody.add(gson.toJson(u2));
 		
 		assertEquals(200, mainServer.setPuntuacion(requestBody).getStatus());
 		
 		ArrayList<String> requestBody2 = new ArrayList<String>();
 		requestBody2.add(gson.toJson((long)12345));
 		requestBody2.add(gson.toJson(5));
-		requestBody2.add("javier@gmail.com");
+		requestBody2.add(gson.toJson(u2));
 		
 		assertEquals(401, mainServer.setPuntuacion(requestBody2).getStatus());
 	}

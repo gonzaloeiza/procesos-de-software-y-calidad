@@ -156,7 +156,7 @@ public class Remote {
 		return true;
 	}
 	//Post
-
+	/*
 	public boolean updatePlaza(long token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos, long fecha) {
 		donationsWebTarget = webTarget.path(path +  "/updatePlaza");
 		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
@@ -224,16 +224,12 @@ public class Remote {
 		}
 		ArrayList<Plaza> resultado = response.readEntity(ArrayList.class);
 		return resultado;
-	}
+	}*/
 	//Post
-	public ArrayList<Alquiler> getAlquilados(long token, Plaza plaza){
+	public ArrayList<Alquiler> getAlquilados(ArrayList<String> requestBody){
 		donationsWebTarget = webTarget.path(path +  "/getAlquilados");
 		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
-		Gson gson = new Gson();
-		List<Object> requestBody = new ArrayList<Object>(); 
-		requestBody.add(token);
-		requestBody.add(plaza);
-		Response response = invocationBuilder.post(Entity.entity(gson.toJson(requestBody), MediaType.APPLICATION_JSON));
+		Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
 		if(response.getStatus() != Status.OK.getStatusCode()) {
 			//TODO: Añadir gestion de errores
 			return null;
@@ -242,14 +238,10 @@ public class Remote {
 		return ret;
 	}
 	//Post
-	public Usuario getTlf(long token, Usuario usr){
+	public Usuario getTlf(ArrayList<String> requestBody){
 		donationsWebTarget = webTarget.path(path +  "/getTlf");
 		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
-		Gson gson = new Gson();
-		List<Object> requestBody = new ArrayList<Object>(); 
-		requestBody.add(token);
-		requestBody.add(usr);
-		Response response = invocationBuilder.post(Entity.entity(gson.toJson(requestBody), MediaType.APPLICATION_JSON));
+		Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
 		if(response.getStatus() != Status.OK.getStatusCode()) {
 			//TODO: Añadir gestion de errores
 			return null;
@@ -258,15 +250,10 @@ public class Remote {
 		return ret;
 	}
 	//Post
-	public boolean setPuntuacion(long token, Usuario usr, int punt){
+	public boolean setPuntuacion(ArrayList<String> requestBody){
 		donationsWebTarget = webTarget.path(path +  "/setPuntuacion");
 		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
-		Gson gson = new Gson();
-		List<Object> requestBody = new ArrayList<Object>(); 
-		requestBody.add(token);
-		requestBody.add(punt);
-		requestBody.add(usr.getCorreo());
-		Response response = invocationBuilder.post(Entity.entity(gson.toJson(requestBody), MediaType.APPLICATION_JSON));
+		Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
 		if(response.getStatus() != Status.OK.getStatusCode()) {
 			//TODO: añadir gestion de errores
 			return false;
@@ -289,7 +276,14 @@ public class Remote {
 		return ret;
 	}
 			
-	
+	public static ArrayList<String> constructorRequest(Object... args){
+		ArrayList<String> ret = new ArrayList<>();
+		Gson gson = new Gson();
+		for(Object obj: args) {
+			ret.add(gson.toJson(obj));
+		}
+		return ret;
+	}
 	
 	/**/
 	public static void main(String[] args) {

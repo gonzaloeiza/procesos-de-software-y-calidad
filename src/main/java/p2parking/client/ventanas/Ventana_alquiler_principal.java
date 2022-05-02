@@ -49,7 +49,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		plazasOrdenadas = new ArrayList<Plaza>();
 		ordenarPlazas();
 		ordenado = false;
-		plazasFav=Remote.getInstance().getMisFav(Remote.getInstance().getToken());
+		//plazasFav=Remote.getInstance().getMisFav(Remote.getInstance().getToken());
 		
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
@@ -128,7 +128,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		JButton btnFavoritos = new JButton("Favoritos");
 		btnFavoritos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean temp = Remote.getInstance().addPlazaFav(Remote.getInstance().getToken(), plazas.get(indice));
+				boolean temp = false;//Remote.getInstance().addPlazaFav(Remote.getInstance().getToken(), plazas.get(indice));
 				if(temp) {
 					JOptionPane.showMessageDialog(panelPricipal, "Plaza añadida a favoritos");
 					panel_izquierda.setBackground(Color.green);

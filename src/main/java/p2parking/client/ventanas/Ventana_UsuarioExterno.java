@@ -149,11 +149,12 @@ public class Ventana_UsuarioExterno extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				 String valorevaluacion = JOptionPane.showInputDialog(panelPricipal,"Que nota le pones a este usuario?(1-5)", "Evaluacion", 1);
 				 if(Integer.parseInt(valorevaluacion)>5) {
-					 Remote.getInstance().setPuntuacion(Remote.getInstance().getToken(), a.getPropietario(),5); 
+					 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),5)); 
 				 }else if(Integer.parseInt(valorevaluacion)<=0) {
-					 Remote.getInstance().setPuntuacion(Remote.getInstance().getToken(), a.getPropietario(),1); 
+					 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),1)); 
 				 }else{
-					 Remote.getInstance().setPuntuacion(Remote.getInstance().getToken(), a.getPropietario(),Integer.parseInt(valorevaluacion)); 
+					 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),
+							 Integer.parseInt(valorevaluacion))); 
 				 }
 				 
 			}
