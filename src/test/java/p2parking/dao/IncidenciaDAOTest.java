@@ -1,11 +1,7 @@
 package p2parking.dao;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.Date;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
@@ -14,37 +10,37 @@ import javax.jdo.PersistenceManagerFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import p2parking.jdo.Plaza;
+import p2parking.jdo.Incidencia;
 
-public class PlazasDAOTest {
-	
+public class IncidenciaDAOTest {
+
 	PersistenceManager pm;
 	PersistenceManagerFactory pmf;
-	PlazasDAO plazasDAO;
+	IncidenciaDAO incidenciaDAO;
 	
-	Plaza p1;
+	Incidencia i1;
 	
 	@Before
 	public void setUp() {
-		plazasDAO = PlazasDAO.getInstance();
+		incidenciaDAO = IncidenciaDAO.getInstance();
 		pm = org.mockito.Mockito.mock(PersistenceManager.class);
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		
 		when(pm.currentTransaction()).thenReturn(pmf.getPersistenceManager().currentTransaction());
-		plazasDAO.setPm(pm);
+		incidenciaDAO.setPm(pm);
 		
-		p1 = new Plaza(12.2f, "", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
+		i1 = new Incidencia("No hay luz", "En la plaza que he reservado no hay electricidad y no puedo ver correctamente");
 	}
 	
 	@Test
 	public void testSave() {
-		when(pm.makePersistent(p1)).thenReturn(p1);
-		assertTrue(plazasDAO.save(p1));
+		when(pm.makePersistent(i1)).thenReturn(i1);
+		assertTrue(incidenciaDAO.save(i1));
 	}
 	
 	@Test
 	public void testDelete() {
-		when(pm.makePersistent(p1)).thenReturn(p1);
-		assertTrue(plazasDAO.delete(p1));
+		when(pm.makePersistent(i1)).thenReturn(i1);
+		assertTrue(incidenciaDAO.delete(i1));
 	}
 }

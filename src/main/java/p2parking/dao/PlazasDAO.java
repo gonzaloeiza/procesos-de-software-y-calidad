@@ -31,6 +31,10 @@ public class PlazasDAO implements iAccesoObjeto<Plaza>{
 		return instance;
 	}
 	
+	public void setPm(PersistenceManager pm) {
+		this.pm = pm;
+	}
+	
 	@Override
 	public boolean save(Plaza plaza) {
 		Transaction tx = pm.currentTransaction();
