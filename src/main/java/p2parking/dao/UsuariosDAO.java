@@ -59,7 +59,9 @@ public class UsuariosDAO implements iAccesoObjeto<Usuario> {
 		try {
 		tx.begin();
 		Query query = pm.newQuery("SELECT FROM " + Usuario.class.getName());
+		System.out.println(query);
 		tempUsuario = (List<Usuario>)query.execute();
+		System.out.println(query.execute());
 		tx.commit();
 		} catch(Exception ex) {
 			System.out.println("EXCEPCION AL OBTENER EL USUARIO: \n"+ ex.getMessage());

@@ -1,5 +1,6 @@
 package p2parking.dao;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -42,5 +43,20 @@ public class IncidenciaDAOTest {
 	public void testDelete() {
 		when(pm.makePersistent(i1)).thenReturn(i1);
 		assertTrue(incidenciaDAO.delete(i1));
+	}
+	
+	@Test
+	public void testGetAll() {
+		assertNull(incidenciaDAO.getAll());
+	}
+	
+	@Test
+	public void testFind() {
+		assertNull(incidenciaDAO.find(""));
+	}
+	
+	@Test
+	public void testFindAll() {
+		assertNull(incidenciaDAO.findAll(""));
 	}
 }

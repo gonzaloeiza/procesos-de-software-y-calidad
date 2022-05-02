@@ -1,17 +1,12 @@
 package p2parking.dao;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.Transaction;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,12 +49,7 @@ public class UsuariosDAOTest {
 	}
 	
 	@Test
-	public void testGetAll() {
-//		List<Usuario> tempUsuario = new ArrayList<Usuario>();
-//		tempUsuario.add(u1);
-//		tempUsuario.add(u2);
-//		when(pm.newQuery("SELECT FROM " + Usuario.class.getName()).execute()).thenReturn(tempUsuario);
-		
-		
+	public void testFindAll() {
+		assertNull(usuariosDAO.findAll(""));
 	}
 }
