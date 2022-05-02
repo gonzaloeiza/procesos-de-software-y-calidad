@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import javax.ws.rs.core.Response;
+
+import javax.jdo.JDOException;
 import javax.ws.rs.core.Response.Status;
 
 import org.junit.Before;
@@ -17,7 +18,9 @@ import org.junit.Test;
 import com.google.gson.Gson;
 
 import p2parking.dao.AlquilerDAO;
+import p2parking.dao.PlazasDAO;
 import p2parking.dao.UsuariosDAO;
+import p2parking.jdo.Alquiler;
 import p2parking.jdo.Incidencia;
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
@@ -29,12 +32,14 @@ public class MainServerTest {
 
 	UsuariosDAO usuariosDAO;
 	AlquilerDAO alqDAO;
+	PlazasDAO plazasDAO;
 	
 	MainServer mainServer;
 
 	HashMap<Long, Usuario> t;
 	
 	Usuario u1;
+	Usuario u2;
 	Plaza p1;
 	Incidencia i1;
 	
@@ -43,17 +48,19 @@ public class MainServerTest {
 		usuariosDAO = org.mockito.Mockito.mock(UsuariosDAO.class);
 		t = org.mockito.Mockito.mock(HashMap.class);
 		alqDAO = org.mockito.Mockito.mock(AlquilerDAO.class);
+		plazasDAO = org.mockito.Mockito.mock(PlazasDAO.class);
+		
 		p1 = new Plaza(12.2f, "", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
 		i1 = new Incidencia("No hay luz", "En la plaza que he reservado no hay electricidad y no puedo ver correctamente");
-	    
-		
 		
 		mainServer = new MainServer();
 		mainServer.setUsuarioDAO(usuariosDAO);
 		mainServer.serAlquilerDAO(alqDAO);
+		mainServer.setPlazaDAO(plazasDAO);
 		mainServer.setMap(t);
 		
 		u1 = new Usuario("gonzalo", "gonzaloeizaguirre@opendeusto.es", "1234", "ss");
+		u2 = new Usuario("javier", "javier@gmail.com", "1234", "ss");
 		
 		when(t.containsKey((long)1234)).thenReturn(true);
 		when(t.put((long) 1234, u1)).thenReturn(u1);
@@ -61,7 +68,8 @@ public class MainServerTest {
 		when(t.get((long)1234)).thenReturn(u1);
 
 		when(usuariosDAO.save(u1)).thenReturn(true);
-		
+		when(usuariosDAO.save(u2)).thenReturn(true);
+
 		when(alqDAO.findAll(null)).thenReturn(null);
 	}
 
@@ -70,6 +78,10 @@ public class MainServerTest {
 	public void testLogin() {
 		when(usuariosDAO.find("gonzaloeizaguirre@opendeusto.es")).thenReturn(u1);
 		when(usuariosDAO.find("a")).thenReturn(null);
+		when(usuariosDAO.find("b")).thenThrow(JDOException.class);
+		
+		u2.setBanned(true);
+		when(usuariosDAO.find("javier@gmail.com")).thenReturn(u2);
 		
 		List<String> requestBody = new ArrayList<String>();
 		requestBody.add("gonzaloeizaguirre@opendeusto.es");
@@ -81,6 +93,17 @@ public class MainServerTest {
 		requestBody2.add("1234");
 		
 		assertEquals(mainServer.login(requestBody2).getStatus(), 401);
+		
+		List<String> requestBody3 = new ArrayList<String>();
+		requestBody3.add("b");
+		requestBody3.add("1234");
+		assertEquals(mainServer.login(requestBody3).getStatus(), 401);
+		
+		List<String> requestBody4 = new ArrayList<String>();
+		requestBody4.add("javier@gmail.com");
+		requestBody4.add("1234");
+		assertEquals(403, mainServer.login(requestBody4).getStatus());
+	
 	}
 	
 	@Test
@@ -109,12 +132,17 @@ public class MainServerTest {
 		
 		when(t.containsKey((long)1234)).thenReturn(false);
 		assertEquals(mainServer.updateUser(requestBody).getStatus(), 401);
+		
+		requestBody.remove(1);
+		assertEquals(401, mainServer.updateUser(requestBody).getStatus());
 				
 	}
+	
 	@Test
 	public void testgetServCliente() {
 		assertEquals(mainServer.getServCliente().getStatus(), 200);
 	}
+	
 	@Test
 	public void testaddPlaza() {
 		when(usuariosDAO.find("gonzaloeizaguirre@opendeusto.es")).thenReturn(u1);
@@ -131,48 +159,103 @@ public class MainServerTest {
 		when(t.containsKey((long)1234)).thenReturn(false);
 		assertEquals(mainServer.addPlaza(requestBody).getStatus(), 401);
 	}
+	
 	@Test
 	public void testcreateIncidencia() {
 		when(usuariosDAO.find("gonzaloeizaguirre@opendeusto.es")).thenReturn(u1);
 		when(usuariosDAO.find("a")).thenReturn(null);
-		Gson gson = new Gson();
 		
+		Gson gson = new Gson();
 		ArrayList<String> requestBody = new ArrayList<String>();
 		requestBody.add(gson.toJson((long)1234));
 		requestBody.add(gson.toJson(i1));
-
+		
 		when(t.containsKey((long)1234)).thenReturn(true);
-		assertEquals(mainServer.addPlaza(requestBody).getStatus(), 200);
+		assertEquals(200, mainServer.createIncidencia(requestBody).getStatus());
+	
+		ArrayList<String> requestBody2 = new ArrayList<String>();
+		requestBody2.add(gson.toJson((long)12345));
+		requestBody2.add(gson.toJson(i1));
 		
-		when(t.containsKey((long)1234)).thenReturn(false);
-		assertEquals(mainServer.addPlaza(requestBody).getStatus(), 401);
+		assertEquals(401, mainServer.createIncidencia(requestBody2).getStatus());
 	}
+	
 	@Test
-	public void testgetAlquilados() {//TODO: terminar
-		when(usuariosDAO.find("gonzaloeizaguirre@opendeusto.es")).thenReturn(u1);
-		when(usuariosDAO.find("a")).thenReturn(null);
+	public void testgetAlquilados() {
+		when(t.containsKey((long)1234)).thenReturn(true);
+	
 		Gson gson = new Gson();
-		
 		ArrayList<String> requestBody = new ArrayList<String>();
 		requestBody.add(gson.toJson((long)1234));
 		requestBody.add(gson.toJson(p1));
 
-		when(t.containsKey((long)1234)).thenReturn(true);
-		assertEquals(mainServer.addPlaza(requestBody).getStatus(), 200);
+		assertEquals(200, mainServer.getAlquilados(requestBody).getStatus());
+
+		ArrayList<String> requestBody2 = new ArrayList<String>();
+		requestBody2.add(gson.toJson((long)12345));
+		requestBody2.add(gson.toJson(i1));
 		
-		when(t.containsKey((long)1234)).thenReturn(false);
-		assertEquals(mainServer.addPlaza(requestBody).getStatus(), 401);
+		assertEquals(401, mainServer.getAlquilados(requestBody2).getStatus());
+
+		ArrayList<Alquiler> listaAlquilar = new ArrayList<>();
+		Alquiler a = new Alquiler(null, null, 0, u1, p1);
+		a.setPlaza(p1);
+		listaAlquilar.add(a);
+		when(alqDAO.findAll(u1.getCorreo())).thenReturn(listaAlquilar);
+		
+		assertEquals(200, mainServer.getAlquilados(requestBody).getStatus());
 	}
+	
 	@Test
 	public void testgetTlf() {
+		when(t.containsKey((long)1234)).thenReturn(true);
+		when(usuariosDAO.find("javier@gmail.com")).thenReturn(u2);
 		
+		Gson gson = new Gson();
+		ArrayList<String> requestBody = new ArrayList<String>();
+		requestBody.add(gson.toJson((long)1234));
+		requestBody.add(gson.toJson("javier@gmail.com"));
+		
+		assertEquals(200, mainServer.getTlf(requestBody).getStatus());
+		
+		ArrayList<String> requestBody2 = new ArrayList<String>();
+		requestBody2.add(gson.toJson((long)12345));
+		requestBody2.add(gson.toJson(i1));
+		
+		assertEquals(401, mainServer.getTlf(requestBody2).getStatus());
 	}
+	
+	
 	@Test
 	public void testsetPuntuacion() {
+		when(t.containsKey((long)1234)).thenReturn(true);
+		when(usuariosDAO.find("javier@gmail.com")).thenReturn(u2);
 		
+		Gson gson = new Gson();
+		ArrayList<String> requestBody = new ArrayList<String>();
+		requestBody.add(gson.toJson((long)1234));
+		requestBody.add(gson.toJson(5));
+		requestBody.add("javier@gmail.com");
+		
+		assertEquals(200, mainServer.setPuntuacion(requestBody).getStatus());
+		
+		ArrayList<String> requestBody2 = new ArrayList<String>();
+		requestBody2.add(gson.toJson((long)12345));
+		requestBody2.add(gson.toJson(5));
+		requestBody2.add("javier@gmail.com");
+		
+		assertEquals(401, mainServer.setPuntuacion(requestBody2).getStatus());
 	}
+	
 	@Test
 	public void testsetgetAllPlazas() {
+		when(t.containsKey((long)1234)).thenReturn(true);
+		ArrayList<Plaza> listaPlazas = new ArrayList<Plaza>();
+		listaPlazas.add(p1);
+		when(plazasDAO.getAll()).thenReturn(listaPlazas);
+		
+		assertEquals(200, mainServer.setgetAllPlazas(1234).getStatus());
+		assertEquals(401, mainServer.setgetAllPlazas(12345).getStatus());
 		
 	}
 }
