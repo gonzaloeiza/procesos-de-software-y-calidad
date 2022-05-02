@@ -33,7 +33,7 @@ public class MainServer {
 	
 	UsuariosDAO usuarioDAO = UsuariosDAO.getInstance();
 	AlquilerDAO alquilerDAO = AlquilerDAO.getInstance();
-
+	PlazasDAO plazaDAO = PlazasDAO.getInstance();
 	
 	public void setUsuarioDAO(UsuariosDAO usuarioDAO) {
 		this.usuarioDAO = usuarioDAO;
@@ -46,7 +46,9 @@ public class MainServer {
 		this.alquilerDAO = alq;
 	}
 	
-	
+	public void setPlazaDAO(PlazasDAO plazasDAO) {
+		this.plazaDAO = plazasDAO;
+	}
 	
 	/*Metodos gestion cuenta*/
 	@POST
@@ -70,7 +72,6 @@ public class MainServer {
         try {
             Usuario u = usuarioDAO.find(correo);
             if (u != null) {
-            	System.out.println(u.isBanned());
             	if (!u.isBanned()) {
 	                if (u.getContrasena().equals(contrasena)) {
 	                	Gson gson = new Gson();
@@ -150,7 +151,7 @@ public class MainServer {
 			usuarioDAO.save(temp);
 			if (temp != null) {
 				temp.createIncidencia(incidencia);
-				UsuariosDAO.getInstance().save(temp);
+				usuarioDAO.save(temp);
 				tokenUsuarios.replace(token, temp);
 			}
 			return Response.ok("Incidencia creada correctamente").build();	
@@ -204,75 +205,17 @@ public class MainServer {
 			usuarioDAO.save(usr);
 			return Response.ok().build();
 		}
-		return Response.status(401, "No estas autenticado").build();	
+		return Response.status(401, "No estas autenticado").build();
 	}
 	
 	@POST
 	@Path("/getAllPlazas")
 	public Response setgetAllPlazas(long token) {
 		if(tokenUsuarios.containsKey(token)) {
-			ArrayList<Plaza> ret = PlazasDAO.getInstance().getAll();
+			ArrayList<Plaza> ret = plazaDAO.getAll();
 			Gson gson = new Gson();
 			return Response.ok(gson.toJson(ret)).build();
 		}
 		return Response.status(401, "No estas autenticado").build();	
 	}
-		
-	
-/* NO HACEN FALTA ESTOS METODOS, SI CREAS, ACTUALIZAS O BORRAS LAS PLAZAS USANDO LOS GETTERS Y SETTERS DE LA CLASE USUARIO
- * Y LLAMAS A /API/PRUEBA/UPDATEUSER (YA PROGRAMADO ARRIBA) SE ACTUALIZAN LA LISTA DE PLAZAS DEL USUARIO EN LA BD
- * 
- * usuario u = new Usuario(...);
- * u.setPlazas(new ArrayList<Plaza>();
- * UsuariosDAO.getInstance().save(u);
- *
- * En este ejemplo estarias sustituyendo todas las plazas del usuario por un arraylist vacio (borrarias todas las plazas),
- * y los cambios se actualizarian en la BD
-*/
-
-	
-	
-
-//	@POST
-//	@Path("/updatePlaza")
-//	public Response updatePlaza(Date token, Plaza plazaOld, Plaza plazaNew) {
-//		boolean resultado = true;// TODO:funacionalidad updatePlaza
-//		return Response.ok(resultado).build();
-//	}
-//	@POST
-//	@Path("/borrarPlaza")
-//	public Response borrarPlaza(Date token, Plaza plaza) {
-//		boolean resultado = true;// TODO:funacionalidad borrarPlaza
-//		return Response.ok(resultado).build();
-//	}
-//	@POST
-//	@Path("getMisPlazas")
-//	public Response getMisPlazas(Date token) {
-//		ArrayList<Plaza> resultado = new ArrayList<>();// TODO:funacionalidad getMisPlazas
-//		return Response.ok(resultado).build();
-//	}
-	
-
-	
-	
-//	@POST
-//	@Path("addPlazaFav")
-//	public Response addPlazaFav(Date token, Plaza plaza) {
-//		if(tokenUsuarios.containsKey(token)) {
-//			Usuario usr = tokenUsuarios.get(token);
-//			usr.addFav(plaza);
-//			tokenUsuarios.replace(token, usr);
-//			return Response.ok(true).build();
-//		}
-//		return Response.ok(false).build();
-//	}
-//	@POST
-//	@Path("getMisFav")
-//	public Response getMisFav(Date token) {
-//		if(tokenUsuarios.containsKey(token)) {
-//			ArrayList<Plaza> resultado = tokenUsuarios.get(token).getFav();
-//			return Response.ok(resultado).build();
-//		}
-//		return Response.ok(null).build();
-//	}
 }
