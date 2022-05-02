@@ -11,6 +11,7 @@ import p2parking.client.Remote;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
@@ -97,7 +98,9 @@ public class Inicio_sesion extends JFrame {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 //    			Remote.getInstance().logIn(user.getText(), password.getText());
-				long temp = Remote.getInstance().logIn(user.getText(), password.getText());
+				ArrayList<String> data = new ArrayList<>();
+				data.add(user.getText()); data.add(password.getText());
+				long temp = Remote.getInstance().logIn(data);
 				if (user.getText().equals("") || password.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Rellene todos los campos");
 

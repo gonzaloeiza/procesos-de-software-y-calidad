@@ -11,7 +11,10 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
+import com.google.gson.Gson;
+
 import p2parking.client.Remote;
+import p2parking.jdo.Incidencia;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -104,7 +107,11 @@ public class Ventana_Incidencia extends JFrame {
 		btnSunir = new JButton("Establecer incidencia");
 		btnSunir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Remote.getInstance().crearincidencia(txtTitulo.getText(), txtMensaje.getText());
+				ArrayList<String> data = new ArrayList<>();
+				Gson gson = new Gson();
+				data.add(gson.toJson(new Incidencia(txtTitulo.getText(), txtMensaje.getText())));
+				
+				Remote.getInstance().crearincidencia(data);
 				Ventana_alquiler_principal.main(null);
 				dispose();
 			}

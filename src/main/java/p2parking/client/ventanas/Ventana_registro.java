@@ -10,7 +10,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import p2parking.client.Remote;
-
+import p2parking.jdo.Usuario;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -61,7 +61,7 @@ public class Ventana_registro extends JFrame {
 					
 				}else {
 					try {
-					boolean temp = Remote.getInstance().registro(txtnombre.getText(), txtcorreo.getText(), txtcontrasena.getText(), "foto");
+					boolean temp = Remote.getInstance().registro(new Usuario(txtnombre.getText(), txtcorreo.getText(), txtcontrasena.getText(), "foto"));
 					if(temp) {
 						Inicio_sesion.main(null);
 						JOptionPane.showMessageDialog(null, "Registro correcto");

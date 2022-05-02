@@ -63,6 +63,9 @@ public class Remote {
 		}
 		return instance;
 	}
+	public static void setInstance(Remote rem) {
+		instance = rem;
+	}
 
 	public Remote(String hostname, String port) {
 		this.client = ClientBuilder.newClient();
@@ -72,26 +75,21 @@ public class Remote {
 	
 	/*Metodos gestion Usuario*/
 	//Post
-	public boolean registro(String nombre, String correo, String contrsena, String foto) {//Ejmplo metodo POST
+	public boolean registro(Usuario temp) {//Ejmplo metodo POST
         donationsWebTarget = webTarget.path(path +  "/registro");
         invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
-
-        Usuario temp = new Usuario(nombre, correo, contrsena, foto);
         Response response = invocationBuilder.post(Entity.entity(temp, MediaType.APPLICATION_JSON));
         if (response.getStatus() == 200) {
             yoMismo = temp;
-            return response.readEntity(Boolean.class);
+            return true;
         }
         return false;
     }
 	//Post
-	public long logIn(String email, String contrasena) {
-        donationsWebTarget = webTarget.path("prueba/login");
-        invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
-        List<Object> requestBody = new ArrayList<Object>();
-        requestBody.add(email);
-        requestBody.add(contrasena);
-        Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
+	public long logIn(List<String> requestBody) {
+       donationsWebTarget = webTarget.path("prueba/login");
+       invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+       Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
         if (response.getStatus() == 200) {
         	Gson gson = new Gson();
         	ArrayList<String> temp = response.readEntity(ArrayList.class);
@@ -105,13 +103,10 @@ public class Remote {
         }
     }
 	//Post
-	public boolean updateUser(long token, Usuario usuario) {
+	public boolean updateUser(ArrayList<Object> requestBody) {
 		donationsWebTarget = webTarget.path(path +  "/updateUser");
 		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
-		List<Object> requestBody = new ArrayList<Object>(); 
-		requestBody.add(token);
-		requestBody.add(usuario);
 		Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
 		if (response.getStatus() == 200) {
 	           return true;
@@ -136,16 +131,10 @@ public class Remote {
 	
 	/*Metodos gestion Plaza*/
 	//Post
-	public boolean addPlaza(long token, float precio, String localizacion, ArrayList<String> fotos, long fecha,String titulo, String descripcion, boolean seguro) {
+	public boolean addPlaza(ArrayList<String> requestBody) {
 		donationsWebTarget = webTarget.path("prueba/addPlaza");
 		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
-		Plaza plaza = new Plaza(precio, localizacion, fotos, fecha,titulo,descripcion,seguro);
-		List<String> requestBody = new ArrayList<String>();
-        
-        Gson gson = new Gson();
-        requestBody.add(gson.toJson(token));
-        String tem = gson.toJson(plaza);
-        requestBody.add(tem);
+		
 		Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != Status.OK.getStatusCode()) {
 			//TODO:Añadir gestion de errores
@@ -156,16 +145,9 @@ public class Remote {
 	
 	
 	//Post para crear incidencia
-	public boolean crearincidencia(String titulo, String cuerpo) {
+	public boolean crearincidencia(ArrayList<String> requestBody) {
 		donationsWebTarget = webTarget.path(path + "/createIncidencia");
 		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
-		Incidencia incidencia = new Incidencia(titulo, cuerpo);
-		List<String> requestBody = new ArrayList<String>();
-        
-		Gson gson = new Gson();
-        requestBody.add(gson.toJson(getToken()));
-        String tem = gson.toJson(incidencia);
-        requestBody.add(tem);
 		Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != Status.OK.getStatusCode()) {
 			//TODO:Añadir gestion de errores

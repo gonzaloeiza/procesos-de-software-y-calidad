@@ -18,7 +18,10 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
+import com.google.gson.Gson;
+
 import p2parking.client.Remote;
+import p2parking.jdo.Plaza;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -84,8 +87,12 @@ public class Ventana_subir extends JFrame {
 		panel_abajo.add(btnSubir);
 		btnSubir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean temp = Remote.getInstance().addPlaza(Remote.getInstance().getToken(), Float.valueOf(txtPrecio.getText()), txtUbi.getText(),
-						new ArrayList<>(), (new Date()).getTime(),txtTitulo.getText(),txtDescipcion.getText(),seguro);//TODO: cambiar null por las imagenes
+				Gson gson = new Gson();
+				ArrayList<String> data = new ArrayList<>();
+				data.add(gson.toJson(Remote.getInstance().getToken()));
+				data.add(gson.toJson(new Plaza( Float.valueOf(txtPrecio.getText()), txtUbi.getText(), new ArrayList<>(),
+						(new Date()).getTime(),txtTitulo.getText(),txtDescipcion.getText(),seguro)));
+				boolean temp = Remote.getInstance().addPlaza(data);//TODO: cambiar null por las imagenes
 				if(temp) {
 					Ventana_alquiler_principal.main(null);
 					dispose();
