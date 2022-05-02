@@ -28,6 +28,10 @@ public class IncidenciaDAO implements iAccesoObjeto<Incidencia> {
 		return instance;
 	}
 
+	public void setPm(PersistenceManager pm) {
+		this.pm = pm;
+	}
+	
     @Override
     public boolean save(Incidencia incidencia) {
     	Transaction tx = pm.currentTransaction();

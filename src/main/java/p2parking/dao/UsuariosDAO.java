@@ -15,7 +15,7 @@ public class UsuariosDAO implements iAccesoObjeto<Usuario> {
 	private PersistenceManagerFactory pmf=null;
 	private static UsuariosDAO instance;
 	
-	private UsuariosDAO(){
+	public UsuariosDAO(){
 		System.out.println("Constructor UsuariosDAO");
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		pm=pmf.getPersistenceManager();
@@ -26,6 +26,10 @@ public class UsuariosDAO implements iAccesoObjeto<Usuario> {
 			instance =  new UsuariosDAO();
 		}
 		return instance;
+	}
+	
+	public void setPm(PersistenceManager pm) {
+		this.pm = pm;
 	}
 	
 	@Override

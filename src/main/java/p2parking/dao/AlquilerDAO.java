@@ -32,6 +32,10 @@ public class AlquilerDAO implements iAccesoObjeto<Alquiler> {
 		return instance;
 	}
 	
+	public void setPm(PersistenceManager pm) {
+		this.pm = pm;
+	}
+	
     @Override
     public boolean save(Alquiler alquier) {
     	Transaction tx = pm.currentTransaction();
