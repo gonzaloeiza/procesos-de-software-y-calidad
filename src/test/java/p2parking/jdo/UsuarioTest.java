@@ -311,7 +311,11 @@ public class UsuarioTest {
 	
 	@Test
 	public void testIsBanned() {
-		assertEquals(false, usuario1.isBanned());
-		
+		assertEquals(false, usuario1.isBanned());	
+	}
+	
+	@Test public void testsetBaneado() {
+		usuario1.setBanned(true);
+		assertEquals(true, usuario1.isBanned());
 	}
 }

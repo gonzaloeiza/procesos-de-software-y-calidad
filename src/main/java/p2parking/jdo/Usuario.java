@@ -149,4 +149,8 @@ public class Usuario {
 		return(this.baneado);
 	}
 	
+	public void setBanned(boolean baneado) {
+		this.baneado = baneado;
+	}
+	
 }
