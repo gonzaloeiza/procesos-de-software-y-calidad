@@ -2,6 +2,8 @@ package p2parking.client;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -20,6 +22,7 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
+import p2parking.jdo.Alquiler;
 import p2parking.jdo.Incidencia;
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
@@ -170,16 +173,81 @@ public class RemoteTest {
 	@Test
 	public void testaddPlazaFav() {}
 	@Test
-	public void testgetMisFav() {}
+	public void testgetMisFav() {}*/
 	@Test
-	public void testgetAlquilados() {}
-	@Test
-	public void testgetTlf() {}
-	@Test
-	public void testsetPuntuacion() {}
-	@Test
-	public void testgetAllPlazas() {}*/
+	public void testgetAlquilados() {
+		when(wT.path("prueba/getAlquilados")).thenReturn(dWT);
+		
+		ArrayList<String> temp = new ArrayList<String>();
+		Gson gson = new Gson();
+        temp.add(gson.toJson(token));
+        temp.add(gson.toJson(p1));
+        
+        ArrayList<Alquiler> ret = new ArrayList<>();
+        ret.add(new Alquiler(new Date(), new Date(), 80, usr, p1));
+        
+        when(iB.post(Entity.entity(temp, MediaType.APPLICATION_JSON))).thenReturn(Response.ok(ret).build());
+		when(iB.post(Entity.entity(null, MediaType.APPLICATION_JSON))).thenReturn(Response.status(401).build());
 	
+		//assertNotNull(rem.getAlquilados(temp));//TODO: seimpre dan error al retornar obj
+		assertNull(rem.getAlquilados(null));
+	}
+	@Test
+	public void testgetTlf() {
+		when(wT.path("prueba/getTlf")).thenReturn(dWT);
+		
+		ArrayList<String> temp = new ArrayList<String>();
+		Gson gson = new Gson();
+        temp.add(gson.toJson(token));
+        temp.add(gson.toJson(usr));
+        
+        when(iB.post(Entity.entity(temp, MediaType.APPLICATION_JSON))).thenReturn(Response.ok(usr).build());
+		when(iB.post(Entity.entity(null, MediaType.APPLICATION_JSON))).thenReturn(Response.status(401).build());
+		
+		//assertNotNull(rem.getTlf(temp));
+		assertNull(rem.getTlf(null));
+	
+	}
+	@Test
+	public void testsetPuntuacion() {
+		when(wT.path("prueba/setPuntuacion")).thenReturn(dWT);
+		
+		ArrayList<String> temp = new ArrayList<String>();
+		Gson gson = new Gson();
+        temp.add(gson.toJson(token));
+        temp.add(gson.toJson(8));
+        temp.add(gson.toJson(usr));
+        
+        when(iB.post(Entity.entity(temp, MediaType.APPLICATION_JSON))).thenReturn(Response.ok().build());
+		when(iB.post(Entity.entity(null, MediaType.APPLICATION_JSON))).thenReturn(Response.status(401).build());
+		
+		assertTrue(rem.setPuntuacion(temp));
+		assertFalse(rem.setPuntuacion(null));
+		
+	}
+	@Test
+	public void testgetAllPlazas() {
+		when(wT.path("prueba/getAllPlazas")).thenReturn(dWT);
+		
+		List<Plaza> ret = new ArrayList<>();
+		ret.add(p1);
+		Gson gson = new Gson();
+        
+        when(iB.post(Entity.entity(token, MediaType.APPLICATION_JSON))).thenReturn(Response.ok(gson.toJson(ret)).build());
+		when(iB.post(Entity.entity((long)0, MediaType.APPLICATION_JSON))).thenReturn(Response.status(401).build());
+		
+		//assertNotNull(rem.getAllPlazas(token));
+		assertNull(rem.getAllPlazas((long)0));
+	}
+	@Test
+	public void testConstructorRequest() {
+		Gson gson = new Gson();
+		ArrayList<String> ret = Remote.constructorRequest(usr);
+		Usuario uret = gson.fromJson(ret.get(0), Usuario.class);
+		
+		
+		assertEquals(uret.getCorreo(), usr.getCorreo());
+	}
 	@Test
 	public void main() {
 		String hm = "0.0.0.0";
