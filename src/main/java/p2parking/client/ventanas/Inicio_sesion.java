@@ -98,9 +98,7 @@ public class Inicio_sesion extends JFrame {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 //    			Remote.getInstance().logIn(user.getText(), password.getText());
-				ArrayList<String> data = new ArrayList<>();
-				data.add(user.getText()); data.add(password.getText());
-				long temp = Remote.getInstance().logIn(data);
+				long temp = Remote.getInstance().logIn(Remote.constructorRequest(user.getText(), password.getText()));
 				if (user.getText().equals("") || password.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Rellene todos los campos");
 

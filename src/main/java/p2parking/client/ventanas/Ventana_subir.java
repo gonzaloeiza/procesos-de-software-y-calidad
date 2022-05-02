@@ -87,12 +87,8 @@ public class Ventana_subir extends JFrame {
 		panel_abajo.add(btnSubir);
 		btnSubir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Gson gson = new Gson();
-				ArrayList<String> data = new ArrayList<>();
-				data.add(gson.toJson(Remote.getInstance().getToken()));
-				data.add(gson.toJson(new Plaza( Float.valueOf(txtPrecio.getText()), txtUbi.getText(), new ArrayList<>(),
-						(new Date()).getTime(),txtTitulo.getText(),txtDescipcion.getText(),seguro)));
-				boolean temp = Remote.getInstance().addPlaza(data);//TODO: cambiar null por las imagenes
+				boolean temp = Remote.getInstance().addPlaza(Remote.constructorRequest(Remote.getInstance().getToken(), new Plaza( Float.valueOf(txtPrecio.getText()), txtUbi.getText(), new ArrayList<>(),
+						(new Date()).getTime(),txtTitulo.getText(),txtDescipcion.getText(),seguro)));//TODO: cambiar null por las imagenes
 				if(temp) {
 					Ventana_alquiler_principal.main(null);
 					dispose();

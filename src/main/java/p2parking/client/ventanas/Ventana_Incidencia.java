@@ -107,11 +107,7 @@ public class Ventana_Incidencia extends JFrame {
 		btnSunir = new JButton("Establecer incidencia");
 		btnSunir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<String> data = new ArrayList<>();
-				Gson gson = new Gson();
-				data.add(gson.toJson(new Incidencia(txtTitulo.getText(), txtMensaje.getText())));
-				
-				Remote.getInstance().crearincidencia(data);
+				Remote.getInstance().crearincidencia(Remote.constructorRequest(new Incidencia(txtTitulo.getText(), txtMensaje.getText())));
 				Ventana_alquiler_principal.main(null);
 				dispose();
 			}
