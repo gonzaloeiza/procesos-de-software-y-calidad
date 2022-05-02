@@ -272,7 +272,7 @@ public class Remote {
 		}
 		Gson gson = new Gson();
 		String r = response.readEntity(String.class);
-		ArrayList<Plaza> ret = gson.fromJson(r, new TypeToken<List<Plaza>>(){}.getType());
+		ArrayList<Plaza> ret = gson.fromJson(r, ArrayList.class);
 		return ret;
 	}
 			

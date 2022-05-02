@@ -103,15 +103,23 @@ public class RemoteTest {
 	public void testlogIn() {
 		List<String> temp = new ArrayList<>();
 		temp.add(usr.getCorreo()); temp.add(usr.getContrasena());
-		when(wT.path("prueba/login")).thenReturn(dWT);
-		
 		Gson gson = new Gson();
+		
+		
 		ArrayList<String> ret = new ArrayList<>();
 		ret.add(gson.toJson(token)); ret.add(gson.toJson(usr));
-		when(iB.post(Entity.entity(temp, MediaType.APPLICATION_JSON))).thenReturn(Response.ok(ret).build());
+		
+		when(wT.path("prueba/login")).thenReturn(dWT);
+		
+		Response res = org.mockito.Mockito.mock(Response.class);
+		when(res.readEntity(ArrayList.class)).thenReturn(ret);
+		when(res.getStatus()).thenReturn(200);
+		
+		
+		when(iB.post(Entity.entity(temp, MediaType.APPLICATION_JSON))).thenReturn(res);
 		when(iB.post(Entity.entity(null, MediaType.APPLICATION_JSON))).thenReturn(Response.status(403).build());
 		
-		//assertEquals(rem.logIn(temp), token); //TODO: da error
+		assertEquals(rem.logIn(temp), token); 
 		assertEquals(rem.logIn(null), 403);
 	}
 	@Test
@@ -128,10 +136,13 @@ public class RemoteTest {
 	}
 	@Test
 	public void testgetServCliente() {
+		Response res = org.mockito.Mockito.mock(Response.class);
+		when(res.readEntity(String.class)).thenReturn("prueba");
+		when(res.getStatus()).thenReturn(200);
 		
 		when(wT.path("prueba/servicioCliente")).thenReturn(dWT);
-		when(iB.get()).thenReturn(Response.ok(("prueba")).build());
-		//assertEquals(rem.getServCliente(), "prueba");//TODO: tambien da error
+		when(iB.get()).thenReturn(res);
+		assertEquals(rem.getServCliente(), "prueba");
 		when(iB.get()).thenReturn(Response.status(401).build());
 		assertEquals(rem.getServCliente(), null);
 	}
@@ -186,10 +197,14 @@ public class RemoteTest {
         ArrayList<Alquiler> ret = new ArrayList<>();
         ret.add(new Alquiler(new Date(), new Date(), 80, usr, p1));
         
-        when(iB.post(Entity.entity(temp, MediaType.APPLICATION_JSON))).thenReturn(Response.ok(ret).build());
+        Response res = org.mockito.Mockito.mock(Response.class);
+		when(res.readEntity(ArrayList.class)).thenReturn(ret);
+		when(res.getStatus()).thenReturn(200);
+        
+        when(iB.post(Entity.entity(temp, MediaType.APPLICATION_JSON))).thenReturn(res);
 		when(iB.post(Entity.entity(null, MediaType.APPLICATION_JSON))).thenReturn(Response.status(401).build());
 	
-		//assertNotNull(rem.getAlquilados(temp));//TODO: seimpre dan error al retornar obj
+		assertNotNull(rem.getAlquilados(temp));
 		assertNull(rem.getAlquilados(null));
 	}
 	@Test
@@ -201,10 +216,14 @@ public class RemoteTest {
         temp.add(gson.toJson(token));
         temp.add(gson.toJson(usr));
         
-        when(iB.post(Entity.entity(temp, MediaType.APPLICATION_JSON))).thenReturn(Response.ok(usr).build());
+        Response res = org.mockito.Mockito.mock(Response.class);
+		when(res.readEntity(Usuario.class)).thenReturn(usr);
+		when(res.getStatus()).thenReturn(200);
+        
+        when(iB.post(Entity.entity(temp, MediaType.APPLICATION_JSON))).thenReturn(res);
 		when(iB.post(Entity.entity(null, MediaType.APPLICATION_JSON))).thenReturn(Response.status(401).build());
-		
-		//assertNotNull(rem.getTlf(temp));
+				
+		assertNotNull(rem.getTlf(temp));
 		assertNull(rem.getTlf(null));
 	
 	}
@@ -229,14 +248,19 @@ public class RemoteTest {
 	public void testgetAllPlazas() {
 		when(wT.path("prueba/getAllPlazas")).thenReturn(dWT);
 		
-		List<Plaza> ret = new ArrayList<>();
+		ArrayList<Plaza> ret = new ArrayList<>();
 		ret.add(p1);
 		Gson gson = new Gson();
         
-        when(iB.post(Entity.entity(token, MediaType.APPLICATION_JSON))).thenReturn(Response.ok(gson.toJson(ret)).build());
+		 Response res = org.mockito.Mockito.mock(Response.class);
+			when(res.readEntity(String.class)).thenReturn(gson.toJson(ret));
+			when(res.getStatus()).thenReturn(200);
+	        
+		
+        when(iB.post(Entity.entity(token, MediaType.APPLICATION_JSON))).thenReturn(res);
 		when(iB.post(Entity.entity((long)0, MediaType.APPLICATION_JSON))).thenReturn(Response.status(401).build());
 		
-		//assertNotNull(rem.getAllPlazas(token));
+		assertNotNull(rem.getAllPlazas(token));
 		assertNull(rem.getAllPlazas((long)0));
 	}
 	@Test
