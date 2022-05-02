@@ -25,11 +25,24 @@ import p2parking.jdo.Usuario;
 public class Remote {
 
 	private Client client;
-	private WebTarget webTarget;
 	private static String path = "prueba";
 	private static Remote instance = null;
 	private static Usuario yoMismo;
 	private static long token;
+	
+	private WebTarget donationsWebTarget;
+	private WebTarget webTarget;
+	private Invocation.Builder invocationBuilder;
+	
+	public void setWebTarget(WebTarget wt) {
+		this.webTarget = wt;
+	}
+	public void setDonationWebTarget(WebTarget wt) {
+		this.donationsWebTarget = wt;
+	}
+	public void setInvocationBuilder(Invocation.Builder iB) {
+		this.invocationBuilder = iB;
+	}
 	
 	public long getToken() {
 		return token;
@@ -60,8 +73,8 @@ public class Remote {
 	/*Metodos gestion Usuario*/
 	//Post
 	public boolean registro(String nombre, String correo, String contrsena, String foto) {//Ejmplo metodo POST
-        WebTarget donationsWebTarget = webTarget.path(path +  "/registro");
-        Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+        donationsWebTarget = webTarget.path(path +  "/registro");
+        invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 
         Usuario temp = new Usuario(nombre, correo, contrsena, foto);
         Response response = invocationBuilder.post(Entity.entity(temp, MediaType.APPLICATION_JSON));
@@ -73,8 +86,8 @@ public class Remote {
     }
 	//Post
 	public long logIn(String email, String contrasena) {
-        WebTarget donationsWebTarget = webTarget.path("prueba/login");
-        Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+        donationsWebTarget = webTarget.path("prueba/login");
+        invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
         List<Object> requestBody = new ArrayList<Object>();
         requestBody.add(email);
         requestBody.add(contrasena);
@@ -93,8 +106,8 @@ public class Remote {
     }
 	//Post
 	public boolean updateUser(long token, Usuario usuario) {
-		WebTarget donationsWebTarget = webTarget.path(path +  "/updateUser");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		donationsWebTarget = webTarget.path(path +  "/updateUser");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
 		List<Object> requestBody = new ArrayList<Object>(); 
 		requestBody.add(token);
@@ -109,8 +122,8 @@ public class Remote {
 	}
 	//Get
 	public String getServCliente() {//Ejemplo metodo GET
-		WebTarget donationsWebTarget = webTarget.path(path + "/servicioCliente");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		donationsWebTarget = webTarget.path(path + "/servicioCliente");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		Response response = invocationBuilder.get();
 		if (response.getStatus() == Status.OK.getStatusCode()) {
 			String servicio = response.readEntity(String.class);
@@ -124,8 +137,8 @@ public class Remote {
 	/*Metodos gestion Plaza*/
 	//Post
 	public boolean addPlaza(long token, float precio, String localizacion, ArrayList<String> fotos, long fecha,String titulo, String descripcion, boolean seguro) {
-		WebTarget donationsWebTarget = webTarget.path("prueba/addPlaza");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		donationsWebTarget = webTarget.path("prueba/addPlaza");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		Plaza plaza = new Plaza(precio, localizacion, fotos, fecha,titulo,descripcion,seguro);
 		List<String> requestBody = new ArrayList<String>();
         
@@ -144,8 +157,8 @@ public class Remote {
 	
 	//Post para crear incidencia
 	public boolean crearincidencia(String titulo, String cuerpo) {
-		WebTarget donationsWebTarget = webTarget.path(path + "/createIncidencia");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		donationsWebTarget = webTarget.path(path + "/createIncidencia");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		Incidencia incidencia = new Incidencia(titulo, cuerpo);
 		List<String> requestBody = new ArrayList<String>();
         
@@ -163,8 +176,8 @@ public class Remote {
 	//Post
 
 	public boolean updatePlaza(long token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos, long fecha) {
-		WebTarget donationsWebTarget = webTarget.path(path +  "/updatePlaza");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		donationsWebTarget = webTarget.path(path +  "/updatePlaza");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
 		Plaza plazanew = new Plaza(precio, localizacion, fotos, fecha);		
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
@@ -178,8 +191,8 @@ public class Remote {
 	}
 	//Post
 	public boolean borrarPlaza(long token, Plaza plaza) {
-		WebTarget donationsWebTarget = webTarget.path(path +  "/borrarPlaza");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		donationsWebTarget = webTarget.path(path +  "/borrarPlaza");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 				//TODO:No se como meter varios parametros. Estono funciona:
@@ -192,8 +205,8 @@ public class Remote {
 	}
 	//Post
 	public ArrayList<Plaza> getMisPlazas(long token) {
-		WebTarget donationsWebTarget = webTarget.path(path +  "/getMisPlazas");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		donationsWebTarget = webTarget.path(path +  "/getMisPlazas");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != Status.OK.getStatusCode()) {
@@ -205,8 +218,8 @@ public class Remote {
 	}
 	//Post
 	public boolean addPlazaFav(long token, Plaza plaza) {
-		WebTarget donationsWebTarget = webTarget.path(path +  "/addPlazaFav");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		donationsWebTarget = webTarget.path(path +  "/addPlazaFav");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 				//TODO:No se como meter varios parametros. Estono funciona:
@@ -219,8 +232,8 @@ public class Remote {
 	}
 	//Post
 	public ArrayList<Plaza> getMisFav(long token){
-		WebTarget donationsWebTarget = webTarget.path(path +  "/getMisFab");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		donationsWebTarget = webTarget.path(path +  "/getMisFab");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != Status.OK.getStatusCode()) {
@@ -232,8 +245,8 @@ public class Remote {
 	}
 	//Post
 	public ArrayList<Alquiler> getAlquilados(long token, Plaza plaza){
-		WebTarget donationsWebTarget = webTarget.path(path +  "/getAlquilados");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		donationsWebTarget = webTarget.path(path +  "/getAlquilados");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		Gson gson = new Gson();
 		List<Object> requestBody = new ArrayList<Object>(); 
 		requestBody.add(token);
@@ -248,8 +261,8 @@ public class Remote {
 	}
 	//Post
 	public Usuario getTlf(long token, Usuario usr){
-		WebTarget donationsWebTarget = webTarget.path(path +  "/getTlf");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		donationsWebTarget = webTarget.path(path +  "/getTlf");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		Gson gson = new Gson();
 		List<Object> requestBody = new ArrayList<Object>(); 
 		requestBody.add(token);
@@ -264,8 +277,8 @@ public class Remote {
 	}
 	//Post
 	public boolean setPuntuacion(long token, Usuario usr, int punt){
-		WebTarget donationsWebTarget = webTarget.path(path +  "/setPuntuacion");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		donationsWebTarget = webTarget.path(path +  "/setPuntuacion");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		Gson gson = new Gson();
 		List<Object> requestBody = new ArrayList<Object>(); 
 		requestBody.add(token);
@@ -280,8 +293,8 @@ public class Remote {
 	}
 	//Post
 	public ArrayList<Plaza> getAllPlazas(long token){
-		WebTarget donationsWebTarget = webTarget.path(path +  "/getAllPlazas");
-		Invocation.Builder invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		donationsWebTarget = webTarget.path(path +  "/getAllPlazas");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 		if(response.getStatus() != Status.OK.getStatusCode()) {
 			//TODO: añadir gestion de errores
