@@ -1,4 +1,4 @@
-package p2parking.client.ventanas;
+/*package p2parking.client.ventanas;
 
 import org.junit.Test;
 
@@ -8,3 +8,4 @@ public class Ventana_subirTest {
 		Ventana_subir.main(null);
 	}
 }
+*/
