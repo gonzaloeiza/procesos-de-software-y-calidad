@@ -268,13 +268,15 @@ public class Remote {
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
 		if(response.getStatus() != Status.OK.getStatusCode()) {
 			//TODO: añadir gestion de errores
-			//System.out.println(response.getStatus());
-			return null;
+			System.out.println(response.getStatus());
+			return new ArrayList<Plaza>();
 		}
 		Gson gson = new Gson();
 		String r = response.readEntity(String.class);
-		ArrayList<Plaza> ret = gson.fromJson(r, ArrayList.class);
-		System.out.println(ret);
+
+		ArrayList<Plaza> ret = gson.fromJson(r, new TypeToken<List<Plaza>>(){}.getType());
+		for (Plaza p : ret)
+			System.out.println(p.getPrecio());
 		return ret;
 	}
 			
