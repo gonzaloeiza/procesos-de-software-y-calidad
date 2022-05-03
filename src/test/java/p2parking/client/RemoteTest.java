@@ -260,8 +260,8 @@ public class RemoteTest {
         when(iB.post(Entity.entity(token, MediaType.APPLICATION_JSON))).thenReturn(res);
 		when(iB.post(Entity.entity((long)0, MediaType.APPLICATION_JSON))).thenReturn(Response.status(401).build());
 		
-		assertNotNull(rem.getAllPlazas(token));
-		assertNull(rem.getAllPlazas((long)0));
+		assertTrue(rem.getAllPlazas(token).size() > 0);
+		assertEquals(rem.getAllPlazas((long)0).size(), 0);
 	}
 	@Test
 	public void testConstructorRequest() {
