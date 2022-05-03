@@ -27,6 +27,9 @@ public class Ventana_UsuarioExterno extends JFrame {
 	private JPanel panelPricipal;
 	private int valorevaluacion;
 	public static void main(String[] args,Plaza a) {
+		
+		System.out.println(a.getTitulo());
+		
 		try {
 			// Set cross-platform Java L&F (also called "Metal")
 			UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
@@ -55,8 +58,9 @@ public class Ventana_UsuarioExterno extends JFrame {
 	}
 
 	public Ventana_UsuarioExterno(Plaza a) {
+		System.out.println(a.getTitulo());
 	
-		/*setTitle("P2Parking");
+		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
     	setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,7 +105,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 			lblNewLabel_3.setText(a.getPropietario().getTelefono());
 		}
 		
-		
+		System.out.println(a.getTitulo());
 		JPanel panel_18 = new JPanel();
 		panel_3.add(panel_18);
 		
@@ -118,7 +122,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 		JPanel panel_22 = new JPanel();
 		panel_3.add(panel_22);
 		
-
+		System.out.println(a.getTitulo());
 		JLabel lblNewLabel_5 = new JLabel();
 		panel_3.add(lblNewLabel_5);
 		if(a.getPropietario().getCorreo()==null) {
@@ -143,8 +147,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 		
 		JPanel panel_9 = new JPanel();
 		panel_5.add(panel_9);
-		*/
-		
+		System.out.println(a.getTitulo());
 		JButton btnEvaluar = new JButton("Evaluame");
 		btnEvaluar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -198,7 +201,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 			lblNewLabel_1.setText(a.getPropietario().getNombre());
 		}
 		
-		
+		System.out.println(a.getTitulo());
 		JPanel panel_4 = new JPanel();
 		panel_arriba.add(panel_4);
 	}
