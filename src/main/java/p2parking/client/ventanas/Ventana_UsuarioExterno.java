@@ -45,8 +45,6 @@ public class Ventana_UsuarioExterno extends JFrame {
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				System.out.println(a.getPropietario());
-				System.out.println(a.getPropietario().getNombre());
 				try {
 					Ventana_UsuarioExterno frame = new Ventana_UsuarioExterno(a);
 					frame.setVisible(true);
