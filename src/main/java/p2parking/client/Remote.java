@@ -273,10 +273,9 @@ public class Remote {
 		}
 		Gson gson = new Gson();
 		String r = response.readEntity(String.class);
-
 		ArrayList<Plaza> ret = gson.fromJson(r, new TypeToken<List<Plaza>>(){}.getType());
 		for (Plaza p : ret)
-			System.out.println(p.getPrecio());
+			System.out.println("CACa: " + p.getPropietario().getCorreo());
 		return ret;
 	}
 			
