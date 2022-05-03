@@ -87,10 +87,10 @@ public class Remote {
     }
 	//Post
 	public long logIn(List<String> requestBody) {
-       donationsWebTarget = webTarget.path("prueba/login");
-       invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
-       Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
-        if (response.getStatus() == 200) {
+		donationsWebTarget = webTarget.path("prueba/login");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
+		if (response.getStatus() == 200) {
         	Gson gson = new Gson();
         	ArrayList<String> temp = response.readEntity(ArrayList.class);
         	Long token = gson.fromJson(temp.get(0), Long.class);
@@ -262,6 +262,7 @@ public class Remote {
 	}
 	//Post
 	public ArrayList<Plaza> getAllPlazas(long token){
+		System.out.println("en remote: " + token);
 		donationsWebTarget = webTarget.path(path +  "/getAllPlazas");
 		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		Response response = invocationBuilder.post(Entity.entity(token, MediaType.APPLICATION_JSON));
@@ -273,6 +274,7 @@ public class Remote {
 		Gson gson = new Gson();
 		String r = response.readEntity(String.class);
 		ArrayList<Plaza> ret = gson.fromJson(r, ArrayList.class);
+		System.out.println(ret);
 		return ret;
 	}
 			

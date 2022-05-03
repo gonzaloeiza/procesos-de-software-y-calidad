@@ -98,12 +98,12 @@ public class Inicio_sesion extends JFrame {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 //    			Remote.getInstance().logIn(user.getText(), password.getText());
-				long temp = Remote.getInstance().logIn(Remote.constructorRequest(user.getText(), password.getText()));
 				if (user.getText().equals("") || password.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Rellene todos los campos");
 
 				} else {
-					if (temp == 0) {
+					long temp = Remote.getInstance().logIn(Remote.constructorRequest(user.getText(), password.getText()));
+					if (temp == 0 || temp == 401) {
 						JOptionPane.showMessageDialog(null, "No se ha podido realizar el inicio de sesion");
 					} else if (temp == 403) {
 						JOptionPane.showMessageDialog(null, "Estás baneado. No puedes iniciar sesión");

@@ -67,16 +67,16 @@ public class MainServer {
 	@POST
     @Path("/login")
     public Response login(List<String> requestBody) {
-        String correo = (String) requestBody.get(0);
-        String contrasena = (String) requestBody.get(1);
-        try {
+		Gson gson = new Gson();
+        String correo = gson.fromJson(requestBody.get(0), String.class);
+        String contrasena = gson.fromJson(requestBody.get(1), String.class);
+         try {
             Usuario u = usuarioDAO.find(correo);
-            if (u != null) {
+           if (u != null) {
             	if (!u.isBanned()) {
 	                if (u.getContrasena().equals(contrasena)) {
-	                	Gson gson = new Gson();
-	                    long token = (new Date()).getTime();
-	                    tokenUsuarios.put(token, u);
+	                	long token = (new Date()).getTime();
+	                	tokenUsuarios.put(token, u);
 	                    ArrayList<String> temp = new ArrayList<>();
 	                    temp.add(gson.toJson(token)); temp.add(gson.toJson(u));
 	                    return Response.ok(temp).build();
@@ -211,7 +211,10 @@ public class MainServer {
 	@POST
 	@Path("/getAllPlazas")
 	public Response setgetAllPlazas(long token) {
+		System.out.println("en server: "+ token);
+		System.out.println(tokenUsuarios.containsKey(token));
 		if(tokenUsuarios.containsKey(token)) {
+			System.out.println("entra");
 			ArrayList<Plaza> ret = plazaDAO.getAll();
 			Gson gson = new Gson();
 			return Response.ok(gson.toJson(ret)).build();
