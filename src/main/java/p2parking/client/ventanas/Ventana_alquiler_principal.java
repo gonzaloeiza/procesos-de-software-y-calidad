@@ -45,7 +45,7 @@ public class Ventana_alquiler_principal extends JFrame {
 
 	
 	public Ventana_alquiler_principal() {
-		plazas= Remote.getInstance().getAllPlazas(Remote.getInstance().getToken());
+		plazas = Remote.getInstance().getAllPlazas(Remote.getInstance().getToken());
 		plazasOrdenadas = new ArrayList<Plaza>();
 		ordenarPlazas();
 		ordenado = false;
@@ -571,7 +571,6 @@ public class Ventana_alquiler_principal extends JFrame {
 			plazasOrdenadas.add(aMeter);
 			aux.remove(aMeter);
 		}
-		
 	}
 	
 
