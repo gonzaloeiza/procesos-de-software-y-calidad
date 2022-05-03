@@ -56,7 +56,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 
 	public Ventana_UsuarioExterno(Plaza a) {
 	
-		setTitle("P2Parking");
+		/*setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
     	setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -143,6 +143,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 		
 		JPanel panel_9 = new JPanel();
 		panel_5.add(panel_9);
+		*/
 		
 		JButton btnEvaluar = new JButton("Evaluame");
 		btnEvaluar.addActionListener(new ActionListener() {
