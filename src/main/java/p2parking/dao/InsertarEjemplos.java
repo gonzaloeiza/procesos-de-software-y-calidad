@@ -27,10 +27,12 @@ public abstract class InsertarEjemplos {
 	    Usuario u3 = new Usuario("endika", "endika@opendeusto.es", "1234", "ss");
 	    Usuario u4 = new Usuario("oier", "oier@opendeusto.es", "1234", "ss");
 	    Usuario u5 = new Usuario("imanol", "imanol.gutierrez@opendeusto.es", "1234", "ss");
+	    Usuario u6 =new Usuario("a", "a", "1", "ss");
 	    
 	    Plaza p1 = new Plaza(12.2f, "", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
 	    Plaza p2 = new Plaza(12.2f, "", new ArrayList<String>(),  new Date(2000, 03, 15).getTime());
 	    Plaza p3 = new Plaza(12.2f, "", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
+	    Plaza p4 = new Plaza(13.2f, "", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
 	    
 	    p1.setTitulo("Plaza en Bilbao");
 	    p1.setDescripcion("Plaza amplia en el centro de bilbao");
@@ -38,11 +40,14 @@ public abstract class InsertarEjemplos {
 	    p2.setDescripcion("Plaza en el parking de Moyua");
 	    p3.setTitulo("Plaza en el parking de San Mamés");
 	    p3.setDescripcion("Plaza en el parking en el estadio San Mamés");
+	    p4.setTitulo("Plaza en Torres isosaki");
+	    p4.setDescripcion("Plaza en el debajop de las torres");
 	    
 	    
 	    u1.getPlazas().add(p1);
 	    u1.getPlazas().add(p2);
 	    u2.getPlazas().add(p3);
+	    u6.getPlazas().add(p4);
 	    
 	    Incidencia i1 = new Incidencia("No hay luz", "En la plaza que he reservado no hay electricidad y no puedo ver correctamente");
 	    Incidencia i2 = new Incidencia("La puerta no funciona", "La puerta de entrada al garaje no funciona y no puedo sacar el coche");
@@ -62,7 +67,7 @@ public abstract class InsertarEjemplos {
 	    UsuariosDAO.getInstance().save(u3);
 	    UsuariosDAO.getInstance().save(u4);
 	    UsuariosDAO.getInstance().save(u5); 
-
+	    UsuariosDAO.getInstance().save(u6); 
 //	    //añadir favoritos
 	    Usuario u = UsuariosDAO.getInstance().find("gonzaloeizaguirre@opendeusto.es");
 	    Usuario uu = UsuariosDAO.getInstance().find("javier@opendeusto.es");
