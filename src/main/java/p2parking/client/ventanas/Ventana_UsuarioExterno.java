@@ -26,37 +26,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel panelPricipal;
 	private int valorevaluacion;
-	public static void main(String[] args,Plaza a) {
-		
-		
-		
-		try {
-			// Set cross-platform Java L&F (also called "Metal")
-			UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
-		} catch (UnsupportedLookAndFeelException e) {
-			// handle exception
-		} catch (ClassNotFoundException e) {
-			// handle exception
-		} catch (InstantiationException e) {
-			// handle exception
-		} catch (IllegalAccessException e) {
-			// handle exception
-		}
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				System.out.println(a.getPropietario());
-				System.out.println(a.getPropietario().getNombre());
-				try {
-					Ventana_UsuarioExterno frame = new Ventana_UsuarioExterno(a);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	public Ventana_UsuarioExterno(Plaza a) {
 		
 		System.out.println(a.getPropietario().getCorreo());
@@ -80,6 +50,12 @@ public class Ventana_UsuarioExterno extends JFrame {
 		
 		JButton btnvolver = new JButton("Volver a ventana principal");
 		panel_bajo.add(btnvolver);
+		btnvolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana_alquiler_principal.main(null);
+				dispose();
+			}
+		});
 		
 		JPanel panel_1 = new JPanel();
 		panel_bajo.add(panel_1);
@@ -222,4 +198,33 @@ public class Ventana_UsuarioExterno extends JFrame {
 		JPanel panel_4 = new JPanel();
 		panel_arriba.add(panel_4);
 	}
+public static void main(String[] args,Plaza a) {
+		
+		try {
+			// Set cross-platform Java L&F (also called "Metal")
+			UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+		} catch (UnsupportedLookAndFeelException e) {
+			// handle exception
+		} catch (ClassNotFoundException e) {
+			// handle exception
+		} catch (InstantiationException e) {
+			// handle exception
+		} catch (IllegalAccessException e) {
+			// handle exception
+		}
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				System.out.println(a.getPropietario());
+				System.out.println(a.getPropietario().getNombre());
+				try {
+					Ventana_UsuarioExterno frame = new Ventana_UsuarioExterno(a);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
 }
