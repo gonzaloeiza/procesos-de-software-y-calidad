@@ -123,6 +123,16 @@ public class Inicio_sesion extends JFrame {
 
 		JPanel panel_inutil3 = new JPanel();
 		panelabajo.add(panel_inutil3);
+		panel_inutil3.setLayout(new BorderLayout(0, 0));
+		
+		JButton contacto = new JButton("Contacto");
+		panel_inutil3.add(contacto);
+		contacto.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Correo de contacto: p2parkingCliente@gmail.com");
+			}
+		});
+
 
 		JButton registro = new JButton("Registrarse");
 		panelabajo.add(registro);
@@ -135,6 +145,15 @@ public class Inicio_sesion extends JFrame {
 
 		JPanel panle_inutil4 = new JPanel();
 		panelabajo.add(panle_inutil4);
+		panle_inutil4.setLayout(new BorderLayout(0, 0));
+		
+		JButton compartir = new JButton("Compartir");
+		panle_inutil4.add(compartir);
+		compartir.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Enlace de github: https://github.com/gonzaloeiza/procesos-de-software-y-calidad/releases/tag/sprint-2");
+			}
+		});
 
 		JPanel panel_arriba = new JPanel();
 		panelPricipal.add(panel_arriba, BorderLayout.NORTH);

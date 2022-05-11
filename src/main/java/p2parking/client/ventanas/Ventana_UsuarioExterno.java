@@ -109,12 +109,28 @@ public class Ventana_UsuarioExterno extends JFrame {
 		
 		JPanel panel_18 = new JPanel();
 		panel_3.add(panel_18);
+		panel_18.setLayout(null);
+		
+		JLabel puntuacion = new JLabel("Puntuacion");
+		puntuacion.setBounds(0, 0, 214, 57);
+		panel_18.add(puntuacion);
 		
 		JPanel panel_19 = new JPanel();
 		panel_3.add(panel_19);
 		
 		JPanel panel_20 = new JPanel();
 		panel_3.add(panel_20);
+		panel_20.setLayout(null);
+		
+		JLabel lblNewLabel_7 = new JLabel();
+		lblNewLabel_7.setBounds(0, 0, 214, 57);
+		panel_20.add(lblNewLabel_7);
+		if(a.getPropietario().getPuntuacion()==-1) {
+			lblNewLabel_7.setText("No tenemos su puntuacion");
+		}else {
+			lblNewLabel_7.setText(String.valueOf(a.getPropietario().getPuntuacion()));
+		}
+		
 		
 		JLabel lblNewLabel_4 = new JLabel("Correo de contacto:");
 		panel_3.add(lblNewLabel_4);
@@ -206,5 +222,4 @@ public class Ventana_UsuarioExterno extends JFrame {
 		JPanel panel_4 = new JPanel();
 		panel_arriba.add(panel_4);
 	}
-
 }

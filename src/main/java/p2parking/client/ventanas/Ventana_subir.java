@@ -63,6 +63,8 @@ public class Ventana_subir extends JFrame {
 		JButton perfil = new JButton("Volver");
 		perfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Ventana_alquiler_principal.main(null);
+				dispose();
 			}
 		});
 		perfil.setBounds(new Rectangle(2, 2, 1, 1));
