@@ -29,10 +29,10 @@ public abstract class InsertarEjemplos {
 	    Usuario u5 = new Usuario("imanol", "imanol.gutierrez@opendeusto.es", "1234", "ss");
 	    Usuario u6 =new Usuario("a", "a", "1", "ss");
 	    
-	    Plaza p1 = new Plaza(12.2f, "43.263602, -2.946801", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
-	    Plaza p2 = new Plaza(12.2f, "43.264572, -2.931619", new ArrayList<String>(),  new Date(2000, 03, 15).getTime());
-	    Plaza p3 = new Plaza(12.2f, "43.254857, -2.926034", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
-	    Plaza p4 = new Plaza(13.2f, "43.263847, -2.911272", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
+	    Plaza p1 = new Plaza(12.2f, "43°15'53.7\"N 2°56'37.1\"W", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
+	    Plaza p2 = new Plaza(12.2f, "43°15'51.9\"N 2°55'47.1\"W", new ArrayList<String>(),  new Date(2000, 03, 15).getTime());
+	    Plaza p3 = new Plaza(12.2f, "43°15'20.2\"N 2°55'53.3\"W", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
+	    Plaza p4 = new Plaza(13.2f, "43°15'42.8\"N 2°54'16.2\"W", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
 	    
 	    p1.setTitulo("Plaza en Bilbao");
 	    p1.setDescripcion("Plaza amplia en el centro de bilbao");

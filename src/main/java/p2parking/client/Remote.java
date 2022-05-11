@@ -143,6 +143,19 @@ public class Remote {
 		return true;
 	}
 	
+	//Post
+	public String getLocalizacion(ArrayList<String> requestBody) {
+		donationsWebTarget = webTarget.path("prueba/getLocalizacion");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		
+		Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			//TODO:Añadir gestion de errores
+			return null;
+		}
+		return response.readEntity(String.class);
+	}
+	
 	
 	//Post para crear incidencia
 	public boolean crearincidencia(ArrayList<String> requestBody) {
