@@ -254,8 +254,8 @@ public class MainServerTest {
 		listaPlazas.add(p1);
 		when(plazasDAO.getAll()).thenReturn(listaPlazas);
 		
-		assertEquals(200, mainServer.setgetAllPlazas(1234).getStatus());
-		assertEquals(401, mainServer.setgetAllPlazas(12345).getStatus());
+		assertEquals(200, mainServer.getAllPlazas(1234).getStatus());
+		assertEquals(401, mainServer.getAllPlazas(12345).getStatus());
 		
 	}
 }
