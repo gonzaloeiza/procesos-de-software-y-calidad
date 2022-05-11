@@ -216,6 +216,9 @@ public class MainServer {
 		if(tokenUsuarios.containsKey(token)) {
 			System.out.println("entra");
 			ArrayList<Plaza> ret = plazaDAO.getAll();
+			for (int i = 0; i < ret.size(); i++) {
+				ret.get(i).getPropietario();
+			}
 			Gson gson = new Gson();
 			return Response.ok(gson.toJson(ret)).build();
 		}

@@ -7,6 +7,7 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import p2parking.client.Remote;
+import p2parking.client.ventanas.funcionalidad.Inicio_sesion_funcionalidad;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -35,6 +36,7 @@ public class Inicio_sesion extends JFrame {
 	/**
 	 * 
 	 */
+	private static Inicio_sesion frame;
 	private static final long serialVersionUID = 1L;
 	private JPanel panelPricipal;
 	private JTextField user;
@@ -71,7 +73,7 @@ public class Inicio_sesion extends JFrame {
 	}
 
 	public static Inicio_sesion cerarventana() {
-		Inicio_sesion frame = new Inicio_sesion();
+		frame = new Inicio_sesion();
 		frame.setVisible(true);
 		return frame;
 	}
@@ -97,23 +99,8 @@ public class Inicio_sesion extends JFrame {
 		inicio_sesion.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-//    			Remote.getInstance().logIn(user.getText(), password.getText());
-				if (user.getText().equals("") || password.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "Rellene todos los campos");
-
-				} else {
-					long temp = Remote.getInstance().logIn(Remote.constructorRequest(user.getText(), password.getText()));
-					if (temp == 0 || temp == 401) {
-						JOptionPane.showMessageDialog(null, "No se ha podido realizar el inicio de sesion");
-					} else if (temp == 403) {
-						JOptionPane.showMessageDialog(null, "Estás baneado. No puedes iniciar sesión");
-					}
-					else {
-						Remote.getInstance().setToken(temp);
-						Ventana_alquiler_principal.main(null);
-						dispose();
-					}
-				}
+				Inicio_sesion_funcionalidad.botonInicioSesion(user.getText(),password.getText());
+				dispose();
 			}
 		});
 		panelabajo.add(inicio_sesion);
@@ -129,7 +116,7 @@ public class Inicio_sesion extends JFrame {
 		panel_inutil3.add(contacto);
 		contacto.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Correo de contacto: p2parkingCliente@gmail.com");
+				Inicio_sesion_funcionalidad.botonContacto();
 			}
 		});
 
@@ -138,7 +125,7 @@ public class Inicio_sesion extends JFrame {
 		panelabajo.add(registro);
 		registro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_registro.main(null);
+				Inicio_sesion_funcionalidad.botonRegistro();
 				dispose();
 			}
 		});
@@ -151,7 +138,7 @@ public class Inicio_sesion extends JFrame {
 		panle_inutil4.add(compartir);
 		compartir.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Enlace de github: https://github.com/gonzaloeiza/procesos-de-software-y-calidad/releases/tag/sprint-2");
+				Inicio_sesion_funcionalidad.botonCompartir();
 			}
 		});
 
