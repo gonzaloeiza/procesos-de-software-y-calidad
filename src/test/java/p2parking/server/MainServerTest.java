@@ -248,7 +248,7 @@ public class MainServerTest {
 	}
 	
 	@Test
-	public void testsetgetAllPlazas() {
+	public void testgetAllPlazas() {
 		when(t.containsKey((long)1234)).thenReturn(true);
 		ArrayList<Plaza> listaPlazas = new ArrayList<Plaza>();
 		listaPlazas.add(p1);
@@ -256,6 +256,20 @@ public class MainServerTest {
 		
 		assertEquals(200, mainServer.getAllPlazas(1234).getStatus());
 		assertEquals(401, mainServer.getAllPlazas(12345).getStatus());
+		
+	}
+	@Test
+	public void testgetLocalizacion() {
+		when(t.containsKey((long)1234)).thenReturn(true);
+		Plaza plaza = new Plaza(12.2f, "43°15'53.7\"N 2°56'37.1\"W", new ArrayList<String>(), new Date(2000, 03, 15).getTime());		
+		
+		Gson gson = new Gson();
+		ArrayList<String> requestBody = new ArrayList<String>();
+		requestBody.add(gson.toJson((long)1234));
+		requestBody.add(gson.toJson(plaza));
+		assertEquals(200, mainServer.getLocalizacion(requestBody).getStatus());
+		when(t.containsKey((long)1234)).thenReturn(false);
+		assertEquals(401, mainServer.getLocalizacion(requestBody).getStatus());
 		
 	}
 }
