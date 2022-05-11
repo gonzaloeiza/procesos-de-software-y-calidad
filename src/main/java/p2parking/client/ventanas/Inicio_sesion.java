@@ -41,6 +41,7 @@ public class Inicio_sesion extends JFrame {
 	private JPanel panelPricipal;
 	private JTextField user;
 	private JPasswordField password;
+	
 
 	private TextPrompt panelHolderUsuario;
 	/**
@@ -63,7 +64,7 @@ public class Inicio_sesion extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Inicio_sesion frame = new Inicio_sesion();
+					frame = new Inicio_sesion();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -99,8 +100,7 @@ public class Inicio_sesion extends JFrame {
 		inicio_sesion.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				Inicio_sesion_funcionalidad.botonInicioSesion(user.getText(),password.getText());
-				dispose();
+				Inicio_sesion_funcionalidad.botonInicioSesion(frame,user.getText(),password.getText());
 			}
 		});
 		panelabajo.add(inicio_sesion);
@@ -125,8 +125,7 @@ public class Inicio_sesion extends JFrame {
 		panelabajo.add(registro);
 		registro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Inicio_sesion_funcionalidad.botonRegistro();
-				dispose();
+				Inicio_sesion_funcionalidad.botonRegistro(frame);
 			}
 		});
 

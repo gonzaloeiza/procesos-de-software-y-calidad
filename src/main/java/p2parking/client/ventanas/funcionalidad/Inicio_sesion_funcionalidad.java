@@ -9,7 +9,7 @@ import p2parking.client.ventanas.Ventana_registro;
 
 public class Inicio_sesion_funcionalidad {
 
-	public static void botonInicioSesion(String a, String password) {
+	public static void botonInicioSesion(Inicio_sesion vent, String a, String password) {
 //	Remote.getInstance().logIn(user.getText(), password.getText());
 		if (a.equals("") || password.equals("")) {
 			JOptionPane.showMessageDialog(null, "Rellene todos los campos");
@@ -26,14 +26,16 @@ public class Inicio_sesion_funcionalidad {
 				
 			}
 		}
+		vent.dispose();
 	}
 	
 	public static void botonContacto() {
 		JOptionPane.showMessageDialog(null, "Correo de contacto: p2parkingCliente@gmail.com");
 	}
 	
-	public static void botonRegistro() {
+	public static void botonRegistro(Inicio_sesion vent) {
 		Ventana_registro.main(null);
+		vent.dispose();
 		
 		
 	}
