@@ -245,16 +245,37 @@ public class RemoteTest {
 		
 	}
 	@Test
-	public void testgetAllPlazas() {
+	public void testgetLocalizacion() {
+		when(wT.path("prueba/getLocalizacion")).thenReturn(dWT);
+		
+		ArrayList<String> temp = new ArrayList<>();
+		Gson gson = new Gson();
+		temp.add(gson.toJson(token));
+		temp.add(gson.toJson(new Plaza(token, null, temp, token)));
+		
+        
+		Response res = org.mockito.Mockito.mock(Response.class);
+		when(res.getStatus()).thenReturn(200);
+		when(res.readEntity(String.class)).thenReturn("");
+			
+		when(iB.post(Entity.entity(temp, MediaType.APPLICATION_JSON))).thenReturn(res);
+		when(iB.post(Entity.entity(null, MediaType.APPLICATION_JSON))).thenReturn(Response.status(401).build());
+		
+		assertNotNull(rem.getLocalizacion(temp));
+		when(res.getStatus()).thenReturn(401);
+		assertNull(rem.getLocalizacion(temp));
+	}
+	@Test
+	public void testgeAllPlazas() {
 		when(wT.path("prueba/getAllPlazas")).thenReturn(dWT);
 		
 		ArrayList<Plaza> ret = new ArrayList<>();
 		ret.add(p1);
 		Gson gson = new Gson();
         
-		 Response res = org.mockito.Mockito.mock(Response.class);
-			when(res.readEntity(String.class)).thenReturn(gson.toJson(ret));
-			when(res.getStatus()).thenReturn(200);
+		Response res = org.mockito.Mockito.mock(Response.class);
+		when(res.readEntity(String.class)).thenReturn(gson.toJson(ret));
+		when(res.getStatus()).thenReturn(200);
 	        
 		
         when(iB.post(Entity.entity(token, MediaType.APPLICATION_JSON))).thenReturn(res);
