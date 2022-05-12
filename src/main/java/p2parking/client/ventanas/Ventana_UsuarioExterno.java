@@ -12,6 +12,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import p2parking.client.Remote;
+import p2parking.client.ventanas.funcionalidad.Ventana_UsuarioExterno_funcionalidad;
 import p2parking.jdo.Plaza;
 
 import java.awt.GridLayout;
@@ -26,6 +27,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel panelPricipal;
 	private int valorevaluacion;
+	private static Ventana_UsuarioExterno frame;
 	
 	public Ventana_UsuarioExterno(Plaza a) {
 		
@@ -52,8 +54,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 		panel_bajo.add(btnvolver);
 		btnvolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_alquiler_principal.main(null);
-				dispose();
+				Ventana_UsuarioExterno_funcionalidad.botonVolver(frame);
 			}
 		});
 		
@@ -144,15 +145,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 		JButton btnEvaluar = new JButton("Evaluame");
 		btnEvaluar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 String valorevaluacion = JOptionPane.showInputDialog(panelPricipal,"Que nota le pones a este usuario?(1-5)", "Evaluacion", 1);
-				 if(Integer.parseInt(valorevaluacion)>5) {
-					 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),5)); 
-				 }else if(Integer.parseInt(valorevaluacion)<=0) {
-					 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),1)); 
-				 }else{
-					 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),
-							 Integer.parseInt(valorevaluacion))); 
-				 }
+				 Ventana_UsuarioExterno_funcionalidad.botonEvaluar(panelPricipal, a);
 				 
 			}
 		});
@@ -218,7 +211,7 @@ public static void main(String[] args,Plaza a) {
 				System.out.println(a.getPropietario());
 				System.out.println(a.getPropietario().getNombre());
 				try {
-					Ventana_UsuarioExterno frame = new Ventana_UsuarioExterno(a);
+					frame = new Ventana_UsuarioExterno(a);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
