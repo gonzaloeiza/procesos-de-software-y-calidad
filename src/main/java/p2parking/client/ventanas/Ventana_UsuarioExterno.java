@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 
 public class Ventana_UsuarioExterno extends JFrame {
@@ -153,13 +154,18 @@ public class Ventana_UsuarioExterno extends JFrame {
 		btnEvaluar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 String valorevaluacion = JOptionPane.showInputDialog(panelPricipal,"Que nota le pones a este usuario?(1-5)", "Evaluacion", 1);
-				 if(Integer.parseInt(valorevaluacion)>5) {
-					 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),5)); 
-				 }else if(Integer.parseInt(valorevaluacion)<=0) {
-					 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),1)); 
-				 }else{
-					 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),
-							 Integer.parseInt(valorevaluacion))); 
+				 
+				 if (valorevaluacion.matches("-?\\d+")) {
+					 if(Integer.parseInt(valorevaluacion)>5) {
+						 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),5)); 
+					 }else if(Integer.parseInt(valorevaluacion)<=0) {
+						 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),1)); 
+					 }else{
+						 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),
+								 Integer.parseInt(valorevaluacion))); 
+					 }
+				 } else {
+					 JOptionPane.showMessageDialog(panelPricipal, "Introduce un número correcto");
 				 }
 				 
 			}
