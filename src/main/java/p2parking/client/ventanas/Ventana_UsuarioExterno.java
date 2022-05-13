@@ -12,6 +12,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import p2parking.client.Remote;
+import p2parking.client.ventanas.funcionalidad.Ventana_UsuarioExterno_funcionalidad;
 import p2parking.jdo.Plaza;
 
 import java.awt.GridLayout;
@@ -27,37 +28,8 @@ public class Ventana_UsuarioExterno extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel panelPricipal;
 	private int valorevaluacion;
-	public static void main(String[] args,Plaza a) {
-		
-		
-		
-		try {
-			// Set cross-platform Java L&F (also called "Metal")
-			UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
-		} catch (UnsupportedLookAndFeelException e) {
-			// handle exception
-		} catch (ClassNotFoundException e) {
-			// handle exception
-		} catch (InstantiationException e) {
-			// handle exception
-		} catch (IllegalAccessException e) {
-			// handle exception
-		}
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				System.out.println(a.getPropietario());
-				System.out.println(a.getPropietario().getNombre());
-				try {
-					Ventana_UsuarioExterno frame = new Ventana_UsuarioExterno(a);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	private static Ventana_UsuarioExterno frame;
+	
 	public Ventana_UsuarioExterno(Plaza a) {
 		
 		System.out.println(a.getPropietario().getCorreo());
@@ -81,6 +53,11 @@ public class Ventana_UsuarioExterno extends JFrame {
 		
 		JButton btnvolver = new JButton("Volver a ventana principal");
 		panel_bajo.add(btnvolver);
+		btnvolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana_UsuarioExterno_funcionalidad.botonVolver(frame);
+			}
+		});
 		
 		JPanel panel_1 = new JPanel();
 		panel_bajo.add(panel_1);
@@ -110,12 +87,28 @@ public class Ventana_UsuarioExterno extends JFrame {
 		
 		JPanel panel_18 = new JPanel();
 		panel_3.add(panel_18);
+		panel_18.setLayout(null);
+		
+		JLabel puntuacion = new JLabel("Puntuacion");
+		puntuacion.setBounds(0, 0, 214, 57);
+		panel_18.add(puntuacion);
 		
 		JPanel panel_19 = new JPanel();
 		panel_3.add(panel_19);
 		
 		JPanel panel_20 = new JPanel();
 		panel_3.add(panel_20);
+		panel_20.setLayout(null);
+		
+		JLabel lblNewLabel_7 = new JLabel();
+		lblNewLabel_7.setBounds(0, 0, 214, 57);
+		panel_20.add(lblNewLabel_7);
+		if(a.getPropietario().getPuntuacion()==-1) {
+			lblNewLabel_7.setText("No tenemos su puntuacion");
+		}else {
+			lblNewLabel_7.setText(String.valueOf(a.getPropietario().getPuntuacion()));
+		}
+		
 		
 		JLabel lblNewLabel_4 = new JLabel("Correo de contacto:");
 		panel_3.add(lblNewLabel_4);
@@ -153,6 +146,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 		JButton btnEvaluar = new JButton("Evaluame");
 		btnEvaluar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 				 String valorevaluacion = JOptionPane.showInputDialog(panelPricipal,"Que nota le pones a este usuario?(1-5)", "Evaluacion", 1);
 				 
 				 if (valorevaluacion.matches("-?\\d+")) {
@@ -167,6 +161,9 @@ public class Ventana_UsuarioExterno extends JFrame {
 				 } else {
 					 JOptionPane.showMessageDialog(panelPricipal, "Introduce un número correcto");
 				 }
+=======
+				 Ventana_UsuarioExterno_funcionalidad.botonEvaluar(panelPricipal, a);
+>>>>>>> 39f547797d018180f7b1b98b346fd8dc75b6afbb
 				 
 			}
 		});
@@ -211,6 +208,34 @@ public class Ventana_UsuarioExterno extends JFrame {
 		
 		JPanel panel_4 = new JPanel();
 		panel_arriba.add(panel_4);
+	}
+public static void main(String[] args,Plaza a) {
+		
+		try {
+			// Set cross-platform Java L&F (also called "Metal")
+			UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+		} catch (UnsupportedLookAndFeelException e) {
+			// handle exception
+		} catch (ClassNotFoundException e) {
+			// handle exception
+		} catch (InstantiationException e) {
+			// handle exception
+		} catch (IllegalAccessException e) {
+			// handle exception
+		}
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				System.out.println(a.getPropietario());
+				System.out.println(a.getPropietario().getNombre());
+				try {
+					frame = new Ventana_UsuarioExterno(a);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 }

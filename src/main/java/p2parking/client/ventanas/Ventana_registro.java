@@ -10,6 +10,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import p2parking.client.Remote;
+import p2parking.client.ventanas.funcionalidad.Ventana_registro_funcionalidad;
 import p2parking.jdo.Usuario;
 
 import javax.swing.JPanel;
@@ -33,7 +34,7 @@ public class Ventana_registro extends JFrame {
 	private JTextField txtcontrasena;
 	private JTextField txtcorreo;
 	private TextPrompt panelHolderUsuario;
-	
+	private static Ventana_registro frame;
 	
 	public Ventana_registro() {
 		setTitle("P2Parking");
@@ -56,24 +57,7 @@ public class Ventana_registro extends JFrame {
 		JButton inicio_sesion = new JButton("Registrar");
 		inicio_sesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (txtnombre.getText().equals("") || txtcorreo.getText().equals("")||txtcontrasena.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "Rellene todos los campos");
-					
-				}else {
-					try {
-					boolean temp = Remote.getInstance().registro(new Usuario(txtnombre.getText(), txtcorreo.getText(), txtcontrasena.getText(), "foto"));
-					if(temp) {
-						Inicio_sesion.main(null);
-						JOptionPane.showMessageDialog(null, "Registro correcto");
-						dispose();
-					}
-					else {
-						  JOptionPane.showMessageDialog(null, "No se ha podido realizar el registro");
-					}
-					}catch (Exception ex) {
-						JOptionPane.showMessageDialog(null, "No se ha podido conectar con el servidor");
-					}
-				}
+				Ventana_registro_funcionalidad.botonRegistro(frame, txtnombre.getText(),  txtcorreo.getText(), txtcontrasena.getText());
 				
 			}
 		});
@@ -91,7 +75,7 @@ public class Ventana_registro extends JFrame {
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Inicio_sesion.main(null);
+				Ventana_registro_funcionalidad.botonAtras();
 				dispose();
 			}
 		});
@@ -185,8 +169,7 @@ public class Ventana_registro extends JFrame {
 		JButton btnNewButton = new JButton("Foto de Perfil");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser filechoser=new JFileChooser();
-				filechoser.showOpenDialog(panel_central);
+				Ventana_registro_funcionalidad.botonFotoPerfil(panel_central);
 			}
 		});
 		panel_central.add(btnNewButton);
@@ -229,7 +212,7 @@ public class Ventana_registro extends JFrame {
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Ventana_registro frame = new Ventana_registro();
+					frame = new Ventana_registro();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

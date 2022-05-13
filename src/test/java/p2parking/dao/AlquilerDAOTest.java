@@ -52,5 +52,4 @@ public class AlquilerDAOTest {
 		when(pm.makePersistent(a1)).thenReturn(a1);
 		assertTrue(alquilerDAO.delete(a1));
 	}
-	
 }

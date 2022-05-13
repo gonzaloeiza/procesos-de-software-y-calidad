@@ -210,15 +210,33 @@ public class MainServer {
 	
 	@POST
 	@Path("/getAllPlazas")
-	public Response setgetAllPlazas(long token) {
+	public Response getAllPlazas(long token) {
 		System.out.println("en server: "+ token);
 		System.out.println(tokenUsuarios.containsKey(token));
 		if(tokenUsuarios.containsKey(token)) {
 			System.out.println("entra");
 			ArrayList<Plaza> ret = plazaDAO.getAll();
+			for (int i = 0; i < ret.size(); i++) {
+				ret.get(i).getPropietario();
+			}
 			Gson gson = new Gson();
 			return Response.ok(gson.toJson(ret)).build();
 		}
 		return Response.status(401, "No estas autenticado").build();	
+	}
+	
+	@POST
+	@Path("/getLocalizacion")
+	public Response getLocalizacion(ArrayList<String> requestBody) {
+		Gson gson = new Gson();
+		long token = gson.fromJson(requestBody.get(0), Long.class);
+		if(tokenUsuarios.containsKey(token)) {
+			Plaza plaza = gson.fromJson(requestBody.get(1), Plaza.class);
+			String loc = plaza.getLocalizacion();
+			String url = "https://www.google.com/maps/place/" + loc;
+			return Response.ok(url).build();
+		}
+		return Response.status(401, "No estas autenticado").build();
+		
 	}
 }

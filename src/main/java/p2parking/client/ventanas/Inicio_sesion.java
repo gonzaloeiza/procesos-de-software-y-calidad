@@ -7,6 +7,7 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import p2parking.client.Remote;
+import p2parking.client.ventanas.funcionalidad.Inicio_sesion_funcionalidad;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -35,10 +36,12 @@ public class Inicio_sesion extends JFrame {
 	/**
 	 * 
 	 */
+	private static Inicio_sesion frame;
 	private static final long serialVersionUID = 1L;
 	private JPanel panelPricipal;
 	private JTextField user;
 	private JPasswordField password;
+	
 
 	private TextPrompt panelHolderUsuario;
 	/**
@@ -61,7 +64,7 @@ public class Inicio_sesion extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Inicio_sesion frame = new Inicio_sesion();
+					frame = new Inicio_sesion();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -71,7 +74,7 @@ public class Inicio_sesion extends JFrame {
 	}
 
 	public static Inicio_sesion cerarventana() {
-		Inicio_sesion frame = new Inicio_sesion();
+		frame = new Inicio_sesion();
 		frame.setVisible(true);
 		return frame;
 	}
@@ -97,23 +100,7 @@ public class Inicio_sesion extends JFrame {
 		inicio_sesion.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-//    			Remote.getInstance().logIn(user.getText(), password.getText());
-				if (user.getText().equals("") || password.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "Rellene todos los campos");
-
-				} else {
-					long temp = Remote.getInstance().logIn(Remote.constructorRequest(user.getText(), password.getText()));
-					if (temp == 0 || temp == 401) {
-						JOptionPane.showMessageDialog(null, "No se ha podido realizar el inicio de sesion");
-					} else if (temp == 403) {
-						JOptionPane.showMessageDialog(null, "Estás baneado. No puedes iniciar sesión");
-					}
-					else {
-						Remote.getInstance().setToken(temp);
-						Ventana_alquiler_principal.main(null);
-						dispose();
-					}
-				}
+				Inicio_sesion_funcionalidad.botonInicioSesion(frame,user.getText(),password.getText());
 			}
 		});
 		panelabajo.add(inicio_sesion);
@@ -123,18 +110,36 @@ public class Inicio_sesion extends JFrame {
 
 		JPanel panel_inutil3 = new JPanel();
 		panelabajo.add(panel_inutil3);
+		panel_inutil3.setLayout(new BorderLayout(0, 0));
+		
+		JButton contacto = new JButton("Contacto");
+		panel_inutil3.add(contacto);
+		contacto.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				Inicio_sesion_funcionalidad.botonContacto();
+			}
+		});
+
 
 		JButton registro = new JButton("Registrarse");
 		panelabajo.add(registro);
 		registro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_registro.main(null);
-				dispose();
+				Inicio_sesion_funcionalidad.botonRegistro(frame);
 			}
 		});
 
 		JPanel panle_inutil4 = new JPanel();
 		panelabajo.add(panle_inutil4);
+		panle_inutil4.setLayout(new BorderLayout(0, 0));
+		
+		JButton compartir = new JButton("Compartir");
+		panle_inutil4.add(compartir);
+		compartir.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				Inicio_sesion_funcionalidad.botonCompartir();
+			}
+		});
 
 		JPanel panel_arriba = new JPanel();
 		panelPricipal.add(panel_arriba, BorderLayout.NORTH);
