@@ -24,7 +24,12 @@ public class AlquilerDAO implements iAccesoObjeto<Alquiler> {
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		pm=pmf.getPersistenceManager();
 	}
-	
+		
+	 /**
+	   * Metodo get para conseguir la instancia del Alquiler
+	   * 
+	   * @return devuelve una instancia 
+	   */  
 	public static AlquilerDAO getInstance() {
 		if (instance == null) {
 			instance = new AlquilerDAO();
@@ -32,10 +37,21 @@ public class AlquilerDAO implements iAccesoObjeto<Alquiler> {
 		return instance;
 	}
 	
+	 /**
+	   * Metodo para acceder al valor 
+	   * 
+	   * @param pm la variable de persistenceManager
+	   */  
 	public void setPm(PersistenceManager pm) {
 		this.pm = pm;
 	}
-	
+			
+	 /**
+	   * Metodo para guardar un alquiler
+	   * 
+	   * @param alquier el alquiler que quieres guardar
+	   * @return devuelve un boolean true
+	   */  
     @Override
     public boolean save(Alquiler alquier) {
     	Transaction tx = pm.currentTransaction();
@@ -44,7 +60,13 @@ public class AlquilerDAO implements iAccesoObjeto<Alquiler> {
 		tx.commit();
 		return true;
     }
-
+   
+    /**
+	   * Metodo que elimina un alquiler
+	   * 
+	   * @param alquier el alquiler que quieres elimanar
+	   * @return devuelve un boolean true
+	   */   
     @Override
     public boolean delete(Alquiler alquier) {
 		Transaction tx = pm.currentTransaction();
@@ -53,7 +75,12 @@ public class AlquilerDAO implements iAccesoObjeto<Alquiler> {
 		tx.commit();
 		return true;
     }
-
+  
+    /**
+	   * Metodo para recibir una lista completa de alquileres
+	   * 
+	   * @return devuelve la lista de alquileres
+	   */ 
     @Override
     public List<Alquiler> getAll() {
     	PersistenceManager pm = pmf.getPersistenceManager();
@@ -83,7 +110,13 @@ public class AlquilerDAO implements iAccesoObjeto<Alquiler> {
 
 		return alquileres;
 	}
-
+ 
+    /**
+	   * Metodo para encontrar un alquiler por su email
+	   * 
+	   * @param param un string que es el email asociado al alquiler que quieres borrar
+	   * @return devuelve el alquiler que quieres buscar
+	   */  
     @Override
     public Alquiler find(String param) {//suponiendo param =usrAlquilador.getEmail();
     	PersistenceManager pm = pmf.getPersistenceManager();
@@ -110,6 +143,12 @@ public class AlquilerDAO implements iAccesoObjeto<Alquiler> {
 		return devolver;
     }
     
+    /**
+	   * Metodo para encontrar todos los alquileres por su email
+	   * 
+	   * @param param un string que es el email asociado al alquiler que quieres borrar
+	   * @return devuelve un arraylist de los alquileres que quieres buscar
+	   */  
     @Override
     public ArrayList<Alquiler> findAll(String param) {//suponiendo param =usrAlquilador.getEmail();
     	PersistenceManager pm = pmf.getPersistenceManager();
