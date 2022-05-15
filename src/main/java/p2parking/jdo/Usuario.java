@@ -278,7 +278,7 @@ public class Usuario {
 
 	/**
 	 * Seter de las incidencias del usuario
-	 * @param incidencia
+	 * @param incidencia lista de incidencias de la plaza
 	 */
 	public void setIncidencias(List<Incidencia> incidencia) {
 		this.incidencias = incidencia;
