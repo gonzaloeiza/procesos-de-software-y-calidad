@@ -28,23 +28,24 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JPasswordField;
 
 /**
- *
- * @author lander
+ *	Ventana para inicio de sesion
+ * 
  */
 public class Inicio_sesion extends JFrame {
 
 	/**
-	 * 
+	 * Atributos de la ventana
 	 */
 	private static Inicio_sesion frame;
 	private static final long serialVersionUID = 1L;
 	private JPanel panelPricipal;
 	private JTextField user;
 	private JPasswordField password;
-	
-
 	private TextPrompt panelHolderUsuario;
+	
 	/**
+	 * Constructor de la ventana
+	 * 
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
@@ -73,12 +74,20 @@ public class Inicio_sesion extends JFrame {
 		});
 	}
 
+	/**
+	 * Funcion para cerrar la ventana
+	 * 
+	 * @return No usado
+	 */
 	public static Inicio_sesion cerarventana() {
 		frame = new Inicio_sesion();
 		frame.setVisible(true);
 		return frame;
 	}
 
+	/**
+	 * Creador de la parte visual de la ventana
+	 */
 	public Inicio_sesion() {
 		setTitle("P2Parking");
     	//setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio_sesion.class.getResource("/p2parking/client/ventanas/P2.jpg")));

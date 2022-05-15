@@ -28,6 +28,9 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ *Ventana para registrarse
+ */
 public class Ventana_registro extends JFrame {
 	private JPanel panelPricipal;
 	private JTextField txtnombre;
@@ -36,6 +39,9 @@ public class Ventana_registro extends JFrame {
 	private TextPrompt panelHolderUsuario;
 	private static Ventana_registro frame;
 	
+	/**
+	 * Constructor de la parte visual de la ventana
+	 */
 	public Ventana_registro() {
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
@@ -188,6 +194,10 @@ public class Ventana_registro extends JFrame {
 		panel_central.add(panel_19);
 	}
 
+	/**
+	 * Constructor de la ventana
+	 * @param args No usado
+	 */
 	public static void main(String[] args) {
 		try {
             // Set cross-platform Java L&F (also called "Metal")

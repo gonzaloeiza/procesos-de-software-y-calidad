@@ -31,10 +31,10 @@ import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 
+/**
+ * Ventana para subir una nueva plaza
+ */
 public class Ventana_subir extends JFrame {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel panelPricipal;	
 	private TextPrompt panelHolderUsuario;
@@ -44,7 +44,9 @@ public class Ventana_subir extends JFrame {
 	private JTextField txtDescipcion;
 	private JTextField txtPrecio;
 	
-	
+	/**
+	 * Constructor de la parte visual de la ventana
+	 */
 	public Ventana_subir() {
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
@@ -202,7 +204,11 @@ public class Ventana_subir extends JFrame {
 
 		
 	}
-
+	
+	/**
+	 * Constructor de la ventana
+	 * @param args No usado
+	 */
 	public static void main(String[] args) {
 		try {
             // Set cross-platform Java L&F (also called "Metal")
