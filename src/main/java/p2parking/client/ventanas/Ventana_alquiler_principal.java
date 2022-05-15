@@ -35,6 +35,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.awt.event.InputMethodEvent;
 
+/**
+ * Ventana para alquilar la plaza
+ *
+ */
 public class Ventana_alquiler_principal extends JFrame {
 	private JPanel panelPricipal;
 	private ArrayList<Plaza> plazas;
@@ -43,7 +47,9 @@ public class Ventana_alquiler_principal extends JFrame {
 	private ArrayList<Plaza> plazasFav;
 	private int indice=0;
 
-	
+	/**
+	 * Constructor de la parte visual de la ventana
+	 */
 	public Ventana_alquiler_principal() {
 		plazas = Remote.getInstance().getAllPlazas(Remote.getInstance().getToken());
 		plazasOrdenadas = new ArrayList<Plaza>();
@@ -516,6 +522,11 @@ public class Ventana_alquiler_principal extends JFrame {
 		panel_abjo.add(btnsubir);
 	}
 
+	/**
+	 * Constructor de la ventana
+	 * 
+	 * @param args No usado
+	 */
 	public static void main(String[] args) {
 		
 		try {
@@ -549,7 +560,9 @@ public class Ventana_alquiler_principal extends JFrame {
 
 	}
 	
-	// ordena la lista de menor a mayor
+	/**
+	 * Metodo para ordenar las plazas obtenidas
+	 */
 	private void ordenarPlazas() {
 		float ultimoPrecio = (float) 0;
 		int index;

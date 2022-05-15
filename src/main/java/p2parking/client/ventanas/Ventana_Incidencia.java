@@ -26,10 +26,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.DropMode;
 import javax.swing.SwingConstants;
 
+/**
+ * Ventanapara la publicacion de una incidencia
+ */
 public class Ventana_Incidencia extends JFrame {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel panelPricipal;
 	private JTextField txtTitulo;
@@ -39,6 +39,10 @@ public class Ventana_Incidencia extends JFrame {
 	private JButton btnSunir;
 	private JButton btnCancel;
 	
+	/**
+	 * Constructor de la ventana
+	 * @param args No usado
+	 */
 	public static void main(String[] args) {
 		try {
             // Set cross-platform Java L&F (also called "Metal")
@@ -70,11 +74,11 @@ public class Ventana_Incidencia extends JFrame {
 				}
 			}
 		});
-
-	
-
 	}
 
+	/**
+	 * Constructor de la parte visual de la ventana
+	 */
 	public Ventana_Incidencia() {
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
