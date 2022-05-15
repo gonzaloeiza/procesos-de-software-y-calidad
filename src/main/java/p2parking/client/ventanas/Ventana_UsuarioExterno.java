@@ -12,7 +12,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import p2parking.client.Remote;
-import p2parking.client.ventanas.funcionalidad.Ventana_UsuarioExterno_funcionalidad;
+//import p2parking.client.ventanas.funcionalidad.Ventana_UsuarioExterno_funcionalidad;
 import p2parking.jdo.Plaza;
 
 import java.awt.GridLayout;
@@ -55,7 +55,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 		panel_bajo.add(btnvolver);
 		btnvolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_UsuarioExterno_funcionalidad.botonVolver(frame);
+//				Ventana_UsuarioExterno_funcionalidad.botonVolver(frame);
 			}
 		});
 		
@@ -144,29 +144,29 @@ public class Ventana_UsuarioExterno extends JFrame {
 		panel_5.add(panel_9);
 		
 		JButton btnEvaluar = new JButton("Evaluame");
-		btnEvaluar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-				 String valorevaluacion = JOptionPane.showInputDialog(panelPricipal,"Que nota le pones a este usuario?(1-5)", "Evaluacion", 1);
-				 
-				 if (valorevaluacion.matches("-?\\d+")) {
-					 if(Integer.parseInt(valorevaluacion)>5) {
-						 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),5)); 
-					 }else if(Integer.parseInt(valorevaluacion)<=0) {
-						 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),1)); 
-					 }else{
-						 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),
-								 Integer.parseInt(valorevaluacion))); 
-					 }
-				 } else {
-					 JOptionPane.showMessageDialog(panelPricipal, "Introduce un número correcto");
-				 }
-=======
-				 Ventana_UsuarioExterno_funcionalidad.botonEvaluar(panelPricipal, a);
->>>>>>> 39f547797d018180f7b1b98b346fd8dc75b6afbb
-				 
-			}
-		});
+//		btnEvaluar.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//<<<<<<< HEAD
+//				 String valorevaluacion = JOptionPane.showInputDialog(panelPricipal,"Que nota le pones a este usuario?(1-5)", "Evaluacion", 1);
+//				 
+//				 if (valorevaluacion.matches("-?\\d+")) {
+//					 if(Integer.parseInt(valorevaluacion)>5) {
+//						 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),5)); 
+//					 }else if(Integer.parseInt(valorevaluacion)<=0) {
+//						 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),1)); 
+//					 }else{
+//						 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),
+//								 Integer.parseInt(valorevaluacion))); 
+//					 }
+//				 } else {
+//					 JOptionPane.showMessageDialog(panelPricipal, "Introduce un número correcto");
+//				 }
+//=======
+//				 Ventana_UsuarioExterno_funcionalidad.botonEvaluar(panelPricipal, a);
+//>>>>>>> 39f547797d018180f7b1b98b346fd8dc75b6afbb
+//				 
+//			}
+//		});
 		panel_5.add(btnEvaluar);
 		
 		JPanel panel_10 = new JPanel();

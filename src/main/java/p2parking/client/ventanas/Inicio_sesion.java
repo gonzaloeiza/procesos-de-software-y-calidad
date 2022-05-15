@@ -7,7 +7,7 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import p2parking.client.Remote;
-import p2parking.client.ventanas.funcionalidad.Inicio_sesion_funcionalidad;
+//import p2parking.client.ventanas.funcionalidad.Inicio_sesion_funcionalidad;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -100,7 +100,7 @@ public class Inicio_sesion extends JFrame {
 		inicio_sesion.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				Inicio_sesion_funcionalidad.botonInicioSesion(frame,user.getText(),password.getText());
+//				Inicio_sesion_funcionalidad.botonInicioSesion(frame,user.getText(),password.getText());
 			}
 		});
 		panelabajo.add(inicio_sesion);
@@ -116,7 +116,7 @@ public class Inicio_sesion extends JFrame {
 		panel_inutil3.add(contacto);
 		contacto.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				Inicio_sesion_funcionalidad.botonContacto();
+//				Inicio_sesion_funcionalidad.botonContacto();
 			}
 		});
 
@@ -125,7 +125,7 @@ public class Inicio_sesion extends JFrame {
 		panelabajo.add(registro);
 		registro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Inicio_sesion_funcionalidad.botonRegistro(frame);
+//				Inicio_sesion_funcionalidad.botonRegistro(frame);
 			}
 		});
 
@@ -137,7 +137,7 @@ public class Inicio_sesion extends JFrame {
 		panle_inutil4.add(compartir);
 		compartir.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				Inicio_sesion_funcionalidad.botonCompartir();
+//				Inicio_sesion_funcionalidad.botonCompartir();
 			}
 		});
 

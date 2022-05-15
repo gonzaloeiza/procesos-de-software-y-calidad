@@ -55,7 +55,7 @@ public class MainServerTest {
 		
 		mainServer = new MainServer();
 		mainServer.setUsuarioDAO(usuariosDAO);
-		mainServer.serAlquilerDAO(alqDAO);
+		mainServer.setAlquilerDAO(alqDAO);
 		mainServer.setPlazaDAO(plazasDAO);
 		mainServer.setMap(t);
 		

@@ -42,7 +42,7 @@ public class MainServer {
 	public void setMap(HashMap<Long, Usuario> tokens) {
 		tokenUsuarios = tokens;
 	}
-	public void serAlquilerDAO(AlquilerDAO alq) {
+	public void setAlquilerDAO(AlquilerDAO alq) {
 		this.alquilerDAO = alq;
 	}
 	
@@ -51,6 +51,13 @@ public class MainServer {
 	}
 	
 	/*Metodos gestion cuenta*/
+	
+	  /**
+	   * Ruta POST para realizar el registro de un usuario
+	   * 
+	   * @param usr	es el objeto Usuario que se quiere registrar
+	   * @return devuelve true si se realiza el registro correctamente
+	   */
 	@POST
 	@Path("/registro")
 	public Response registro(Usuario usr) {
@@ -63,7 +70,12 @@ public class MainServer {
 		return Response.notModified().build();
 	}
 	
-	
+	  /**
+	   * Ruta POST para realizar el login de un usuario
+	   * 
+	   * @param requestBody una lista con objetos deserializados necesarios para tramitar la peticion
+	   * @return devuelve una lista con un token deserializado y un objeto usuario deserializados
+	   */
 	@POST
     @Path("/login")
     public Response login(List<String> requestBody) {
@@ -91,6 +103,12 @@ public class MainServer {
         return Response.status(401, "Correo/Contraseña incorrectos").build();
        }
 	
+	/**
+	   * Ruta POST para actualizar los datos de un usuario
+	   * 
+	   * @param requestBody una lista con objetos deserializados necesarios para tramitar la peticion
+	   * @return devuelve true si se actualizan los datos correctamente 
+	   */
 	@POST
 	@Path("/updateUser")
 	public Response updateUser(List<String> requestBody) {
@@ -112,6 +130,12 @@ public class MainServer {
 	}
 	
 	/*IMPORTANTE:   Nombre de usuario: "p2parkingCliente@gmail.com"; contrasena: "Q1w2E3r4" */
+		
+	/**
+	   * Ruta GET para obtener la informacion de atención al cliente
+	   * 
+	   * @return devuelve la informacion de atencion al cliente
+	   */
 	@GET
 	@Path("/servicioCliente")
 	public Response getServCliente() {
@@ -120,6 +144,13 @@ public class MainServer {
 	}
 	
 	/*Metodos gestion Plaza*/
+	
+	/**
+	   * Ruta POST para que un usuario añada una nueva plaza
+	   * 
+	   * @param requestBody una lista con objetos deserializados necesarios para tramitar la peticion
+	   * @return devuelve un string "Plaza añadida correctamente" si todo ha ido bien
+	   */
 	@POST
 	@Path("/addPlaza")
 	public Response addPlaza(ArrayList<String> requestBody) {
@@ -138,6 +169,13 @@ public class MainServer {
 	}
 	
 	/*Metodo para crear una nueva incidencia*/
+	
+	/**
+	   * Ruta POST para crear una nueva incidencia
+	   * 
+	   * @param requestBody una lista con objetos deserializados necesarios para tramitar la peticion
+	   * @return devuelve un string "Incidencia creada correctamente" si todo ha ido bien
+	   */
 	@POST
 	@Path("/createIncidencia")
 	public Response createIncidencia(ArrayList<String> requestBody) {
@@ -159,6 +197,13 @@ public class MainServer {
 			return Response.status(401, "No estas autenticado").build();
 		}
 	}
+	
+	/**
+	   * Ruta POST para obtener las plazas alquiladas de un usuario
+	   * 
+	   * @param requestBody una lista con objetos deserializados necesarios para tramitar la peticion
+	   * @return devuelve una lista con las plazas alquiladas del usuario
+	   */
 	@POST
 	@Path("/getAlquilados")
 	public Response getAlquilados(ArrayList<String> requestBody) {
@@ -179,6 +224,12 @@ public class MainServer {
 		return Response.status(401, "No estas autenticado").build();			
 	}
 	
+	/**
+	   * Ruta POST para obtener datos de un usuario
+	   * 
+	   * @param requestBody una lista con objetos deserializados necesarios para tramitar la peticion
+	   * @return devuelve un objeto usuario
+	   */
 	@POST
 	@Path("/getTlf")
 	public Response getTlf(ArrayList<String> requestBody) {
@@ -192,6 +243,12 @@ public class MainServer {
 		return Response.status(401, "No estas autenticado").build();	
 	}
 	
+	/**
+	   * Ruta POST para poner una puntuacion a un usuario
+	   * 
+	   * @param requestBody una lista con objetos deserializados necesarios para tramitar la peticion
+	   * @return devuelve un estado 200 si todo ha ido bien
+	   */
 	@POST
 	@Path("/setPuntuacion")
 	public Response setPuntuacion(ArrayList<String> requestBody) {
@@ -208,6 +265,12 @@ public class MainServer {
 		return Response.status(401, "No estas autenticado").build();
 	}
 	
+	/**
+	   * Ruta POST para obtener todas las plazas de la base de datos
+	   * 
+	   * @param token una lista con objetos deserializados necesarios para tramitar la peticion
+	   * @return devuelve un lista con todas las plazas de la base de datos
+	   */
 	@POST
 	@Path("/getAllPlazas")
 	public Response getAllPlazas(long token) {
@@ -225,6 +288,12 @@ public class MainServer {
 		return Response.status(401, "No estas autenticado").build();	
 	}
 	
+	/**
+	   * Ruta POST para obtener la localizacion de una plaza
+	   * 
+	   * @param requestBody una lista con objetos deserializados necesarios para tramitar la peticion
+	   * @return devuelve un string con la url de la localizacion
+	   */
 	@POST
 	@Path("/getLocalizacion")
 	public Response getLocalizacion(ArrayList<String> requestBody) {

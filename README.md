@@ -4,13 +4,14 @@ COMANDOS
 ----------------------------------------------------------
 
 1. mvn compile
-2. mvn test
-3. mvn datanucleus:enhance
-4. mvn datanucleus:schema-create
-5. mvn jetty:run
-6. mvn exec:java -PinsertarEjemplos
-7. mvn exec:java -Pclient
-8. mvn datanucleus:schema-delete
+2. mvn javadoc:javadoc
+3. mvn test
+4. mvn datanucleus:enhance
+5. mvn datanucleus:schema-create
+6. mvn jetty:run
+7. mvn exec:java -PinsertarEjemplos
+8. mvn exec:java -Pclient
+9. mvn datanucleus:schema-delete
 
 
 Creación del usuario y el esquema en el servidor MYSQL

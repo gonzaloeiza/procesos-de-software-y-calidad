@@ -10,7 +10,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import p2parking.client.Remote;
-import p2parking.client.ventanas.funcionalidad.Ventana_registro_funcionalidad;
+//import p2parking.client.ventanas.funcionalidad.Ventana_registro_funcionalidad;
 import p2parking.jdo.Usuario;
 
 import javax.swing.JPanel;
@@ -57,7 +57,7 @@ public class Ventana_registro extends JFrame {
 		JButton inicio_sesion = new JButton("Registrar");
 		inicio_sesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_registro_funcionalidad.botonRegistro(frame, txtnombre.getText(),  txtcorreo.getText(), txtcontrasena.getText());
+//				Ventana_registro_funcionalidad.botonRegistro(frame, txtnombre.getText(),  txtcorreo.getText(), txtcontrasena.getText());
 				
 			}
 		});
@@ -75,7 +75,7 @@ public class Ventana_registro extends JFrame {
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_registro_funcionalidad.botonAtras();
+//				Ventana_registro_funcionalidad.botonAtras();
 				dispose();
 			}
 		});
@@ -169,7 +169,7 @@ public class Ventana_registro extends JFrame {
 		JButton btnNewButton = new JButton("Foto de Perfil");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_registro_funcionalidad.botonFotoPerfil(panel_central);
+//				Ventana_registro_funcionalidad.botonFotoPerfil(panel_central);
 			}
 		});
 		panel_central.add(btnNewButton);
