@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,7 +16,6 @@ import com.google.gson.Gson;
 import p2parking.dao.AlquilerDAO;
 import p2parking.dao.PlazasDAO;
 import p2parking.dao.UsuariosDAO;
-import p2parking.dao.iAccesoObjeto;
 import p2parking.jdo.Alquiler;
 import p2parking.jdo.Incidencia;
 import p2parking.jdo.Plaza;
@@ -35,17 +32,34 @@ public class MainServer {
 	AlquilerDAO alquilerDAO = AlquilerDAO.getInstance();
 	PlazasDAO plazaDAO = PlazasDAO.getInstance();
 	
+	/**
+	 * Seter para el usuario. Se utiliza para los teses
+	 * @param usuarioDAO Objeto usuario de la clase DAO
+	 */
 	public void setUsuarioDAO(UsuariosDAO usuarioDAO) {
 		this.usuarioDAO = usuarioDAO;
 	}
 	
+	/**
+	 * Seter para el hashmap de los tokens de usuario. Se utiliza para los teses
+	 * @param tokens HashMap de tokens
+	 */
 	public void setMap(HashMap<Long, Usuario> tokens) {
 		tokenUsuarios = tokens;
 	}
+	
+	/**
+	 * Seter para el objeto alquiler. Se utiliza para los teses
+	 * @param alq Clase de alquilerDao
+	 */
 	public void setAlquilerDAO(AlquilerDAO alq) {
 		this.alquilerDAO = alq;
 	}
 	
+	/**
+	 * Seter para la plazas. Se utiliza para los teses
+	 * @param plazasDAO Objeto de plazas DAO para los teses
+	 */
 	public void setPlazaDAO(PlazasDAO plazasDAO) {
 		this.plazaDAO = plazasDAO;
 	}
