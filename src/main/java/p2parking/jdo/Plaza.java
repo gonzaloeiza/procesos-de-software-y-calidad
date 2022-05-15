@@ -68,7 +68,7 @@ public class Plaza {
 
 	/**
 	 * Geter del precio de alquiler
-	 * @return
+	 * @return precio por hora de la plaza
 	 */
 	public float getPrecio() {
 		return precioDia;
