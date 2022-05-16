@@ -32,6 +32,12 @@ public class UsuariosDAO implements iAccesoObjeto<Usuario> {
 		this.pm = pm;
 	}
 	
+	/**
+	 * Metodo para guardar un usuario
+	 * 
+	 * @param usuario la plaza que quieres guardar
+	 * @return devuelve un boolean true
+	 */
 	@Override
 	public boolean save(Usuario usuario) {
 		Transaction tx = pm.currentTransaction();
@@ -41,7 +47,12 @@ public class UsuariosDAO implements iAccesoObjeto<Usuario> {
 		return true;
 		
 	}
-
+	/**
+	 * Metodo para guardar un usuario
+	 * 
+	 * @param usuario la plaza que quieres guardar
+	 * @return devuelve un boolean true
+	 */
 	@Override
 	public boolean delete(Usuario usuario) {
 		Transaction tx = pm.currentTransaction();
@@ -51,7 +62,11 @@ public class UsuariosDAO implements iAccesoObjeto<Usuario> {
 		return true;
 		
 	}
-
+	/**
+	 * Metodo para una lista de todos los usuarios
+	 * 
+	 * @return devuelve una lista de todas los usuarios
+	 */
 	@Override
 	public List<Usuario> getAll() {
 		Transaction tx = pm.currentTransaction();
@@ -68,7 +83,12 @@ public class UsuariosDAO implements iAccesoObjeto<Usuario> {
 		}
 		return tempUsuario;
 	}
-
+	/**
+	 * Metodo para econtrar un usuario por su correo
+	 * 
+	 * @param correo el correo que quieres buscar su usuario
+	 * @return devuelve un usuario
+	 */
 	@Override
 	public Usuario find(String correo) {
 		Transaction tx = pm.currentTransaction();
@@ -84,7 +104,11 @@ public class UsuariosDAO implements iAccesoObjeto<Usuario> {
 		}	
 		return tempUsuario;
 	}
-
+	/**
+	 * Metodo para encontrar plazas las plzas asociadas a un correo
+	 * 
+	 * @param param el correo que quieres ver los usuarios
+	 */
 	@Override
 	public List<Usuario> findAll(String param) {
 		// TODO Auto-generated method stub
