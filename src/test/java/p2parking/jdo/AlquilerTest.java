@@ -11,9 +11,16 @@ import org.databene.contiperf.junit.ContiPerfRule;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
+<<<<<<< HEAD
 @PerfTest(invocations = 5)
 @Required(max = 1200, average = 250)
+=======
+import p2parking.testCategories.UnitTest;
+
+@Category(UnitTest.class)
+>>>>>>> branch 'master' of https://github.com/gonzaloeiza/procesos-de-software-y-calidad.git
 public class AlquilerTest {
 	
 	@Rule
