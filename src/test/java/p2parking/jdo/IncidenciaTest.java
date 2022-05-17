@@ -6,7 +6,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
+import p2parking.testCategories.UnitTest;
+
+@Category(UnitTest.class)
 public class IncidenciaTest {
 	
 	private Incidencia inc;

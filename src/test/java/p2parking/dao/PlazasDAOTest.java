@@ -17,8 +17,12 @@ import org.databene.contiperf.junit.ContiPerfRule;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import p2parking.jdo.Plaza;
+import p2parking.testCategories.IntegrationTest;
+
+@Category(IntegrationTest.class)
 @PerfTest(invocations = 5)
 @Required(max = 1200, average = 250)
 public class PlazasDAOTest {
