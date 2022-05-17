@@ -12,10 +12,11 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-
-
 import p2parking.testCategories.UnitTest;
 
+
+@PerfTest(invocations = 5)
+@Required(max = 1200, average = 250)
 @Category(UnitTest.class)
 public class AlquilerTest {
 	
