@@ -7,14 +7,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.databene.contiperf.PerfTest;
+import org.databene.contiperf.Required;
+import org.databene.contiperf.junit.ContiPerfRule;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-
 import p2parking.testCategories.UnitTest;
 
+
+
+@PerfTest(invocations = 5)
+@Required(max = 1200, average = 250)
 @Category(UnitTest.class)
 public class PlazaTest {
+	
+	@Rule
+	public ContiPerfRule rule = new ContiPerfRule();
 	
 	private Plaza plaza1;
 	private Plaza plaza2;
