@@ -3,16 +3,24 @@
 COMANDOS
 ----------------------------------------------------------
 Para compilar el proyecto:
-```mvn compile```
+```
+mvn compile
+```
 
 Para generar la documentación:
-```mvn javadoc:javadoc```
+```
+mvn javadoc:javadoc
+```
 
 Para ejecutar los tests que no requieren que la base de datos esté corriendo:
-```mvn test```
+```
+mvn test
+```
 
 Para hacer persistentes las clases:
-```mvn datanucleus:enhance```
+```
+mvn datanucleus:enhance
+```
 
 Para la creación del usuario y el esquema en el servidor MYSQL:
 ```
@@ -24,19 +32,31 @@ GRANT ALL ON p2parkingDB.* TO 'spq'@'localhost';
 ```
 
 Para crear las tablas de la base de datos:
-```mvn datanucleus:schema-create```
+```
+mvn datanucleus:schema-create
+```
 
 Para insertar ejemplos en la base de datos:
-```mvn exec:java -PinsertarEjemplos```
+```
+mvn exec:java -PinsertarEjemplos
+```
 
 Para ejecutar los tests que requieren que la base de datos este corriendo:
-```mvn test -Dgroups="p2parking.testCategories.DBTests"```
+```
+mvn test -Dgroups="p2parking.testCategories.DBTests"
+```
 
 Para correr la API REST:
-```mvn jetty:run```
+```
+mvn jetty:run
+```
 
 Para ejecutar la aplicacion del cliente:
-```mvn exec:java -Pclient```
+```
+mvn exec:java -Pclient
+```
 
 Para borrar las tablas de la base de datos:
-```mvn datanucleus:schema-delete```
+```
+mvn datanucleus:schema-delete
+```
