@@ -40,9 +40,17 @@ public class Ventana_subir extends JFrame {
 	private TextPrompt panelHolderUsuario;
 	private JTextField txtTitulo;
 	private boolean seguro;
-	private JTextField txtUbi;
 	private JTextField txtDescipcion;
 	private JTextField txtPrecio;
+	private JTextField textField;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private String cordenada1;
+	private String cordenada2;
+	private String cordenadaT;
 	
 	/**
 	 * Constructor de la parte visual de la ventana
@@ -87,21 +95,7 @@ public class Ventana_subir extends JFrame {
 		JPanel panel_abajo = new JPanel();
 		panelPricipal.add(panel_abajo, BorderLayout.SOUTH);
 		
-		JButton btnSubir = new JButton("Subir");
-		panel_abajo.add(btnSubir);
-		btnSubir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				boolean temp = Remote.getInstance().addPlaza(Remote.constructorRequest(Remote.getInstance().getToken(), new Plaza( Float.valueOf(txtPrecio.getText()), txtUbi.getText(), new ArrayList<>(),
-						(new Date()).getTime(),txtTitulo.getText(),txtDescipcion.getText(),seguro)));//TODO: cambiar null por las imagenes
-				if(temp) {
-					Ventana_alquiler_principal.main(null);
-					dispose();
-				}
-				else {
-					//TODO: popUp de error
-				}
-			}
-		});
+	
 		
 		JPanel panel_central = new JPanel();
 		panelPricipal.add(panel_central, BorderLayout.CENTER);
@@ -116,7 +110,7 @@ public class Ventana_subir extends JFrame {
 		
 		txtTitulo = new JTextField();
 		txtTitulo.setColumns(10);
-		panelHolderUsuario = new TextPrompt("Tirulo", txtTitulo);
+		panelHolderUsuario = new TextPrompt("Titulo", txtTitulo);
 		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		panelHolderUsuario.changeAlpha(0.75f);
 		panle_medio_arriba.add(txtTitulo);
@@ -140,22 +134,111 @@ public class Ventana_subir extends JFrame {
 		
 		JPanel panel_9_1 = new JPanel();
 		panle_medio_arriba.add(panel_9_1);
+		panel_9_1.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblUbi = new JLabel("Ubicacion");
+		lblUbi.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_9_1.add(lblUbi);
 		
 
 		
-		txtUbi = new JTextField();
-		txtUbi.setColumns(10);
-		panle_medio_arriba.add(txtUbi);
-		panelHolderUsuario = new TextPrompt("Ubicacion", txtUbi);
-		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		panelHolderUsuario.changeAlpha(0.75f);
+	
 		
 	
 		JPanel panel_10_1 = new JPanel();
 		panle_medio_arriba.add(panel_10_1);
+		panel_10_1.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblC1 = new JLabel("Cordenada 1");
+		lblC1.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_10_1.add(lblC1);
 		
 		JPanel panel_11_1 = new JPanel();
 		panle_medio_arriba.add(panel_11_1);
+		panel_11_1.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblC2 = new JLabel("Cordenada 2");
+		lblC2.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_11_1.add(lblC2);
+		
+		
+		JPanel panel_13_1 = new JPanel();
+		panle_medio_arriba.add(panel_13_1);
+		panel_13_1.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel = new JPanel();
+		panle_medio_arriba.add(panel);
+		panel.setLayout(new GridLayout(1, 7, 0, 0));
+		
+		textField = new JTextField();
+		panelHolderUsuario = new TextPrompt("X", textField);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		textField_3 = new JTextField();
+		panelHolderUsuario = new TextPrompt("X", textField_3);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
+		
+		JLabel lblNewLabel = new JLabel("º");
+		panel.add(lblNewLabel);
+		panel.add(textField_3);
+		textField_3.setColumns(10);
+		
+		textField_4 = new JTextField();
+		panelHolderUsuario = new TextPrompt("   ", textField_4);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
+		
+		JLabel lblNewLabel_1 = new JLabel("'");
+		panel.add(lblNewLabel_1);
+		panel.add(textField_4);
+		textField_4.setColumns(10);
+		
+		JLabel lblN = new JLabel("N");
+		lblN.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblN);
+		
+		
+		
+		JPanel panel_2 = new JPanel();
+		panle_medio_arriba.add(panel_2);
+		panel_2.setLayout(new GridLayout(1, 7, 0, 0));
+		
+		textField_5 = new JTextField();
+		panelHolderUsuario = new TextPrompt("X", textField_5);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
+		panel_2.add(textField_5);
+		textField_5.setColumns(10);
+		
+		textField_7 = new JTextField();
+		panelHolderUsuario = new TextPrompt("X", textField_7);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
+		
+		JLabel lblNewLabel_2 = new JLabel("º");
+		panel_2.add(lblNewLabel_2);
+		panel_2.add(textField_7);
+		textField_7.setColumns(10);
+		
+		textField_6 = new JTextField();
+		panelHolderUsuario = new TextPrompt("", textField_6);
+		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHolderUsuario.changeAlpha(0.75f);
+		
+		JLabel lblNewLabel_3 = new JLabel("'");
+		panel_2.add(lblNewLabel_3);
+		panel_2.add(textField_6);
+		textField_6.setColumns(10);
+		
+		JLabel lblW = new JLabel("W");
+		lblW.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblW);
+		
+	
 		
 		JCheckBox chckbxseguro = new JCheckBox("Tienes Seguro");
 		chckbxseguro.addActionListener(new ActionListener() {
@@ -168,27 +251,8 @@ public class Ventana_subir extends JFrame {
 		});
 		panle_medio_arriba.add(chckbxseguro);
 		
-		
-		JPanel panel_13_1 = new JPanel();
-		panle_medio_arriba.add(panel_13_1);
-		
-		JPanel panel = new JPanel();
-		panle_medio_arriba.add(panel);
-		
-		JButton btnNewButton_1 = new JButton("Fotos de la Plaza");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		panle_medio_arriba.add(btnNewButton_1);
-		
-		
-		
-		
-	
-
-	
-		
+		JPanel panel_3 = new JPanel();
+		panle_medio_arriba.add(panel_3);
 		
 		JPanel panel_medio_abajo = new JPanel();
 		panel_central.add(panel_medio_abajo);
@@ -201,7 +265,26 @@ public class Ventana_subir extends JFrame {
 		panel_medio_abajo.add(txtDescipcion);
 		txtDescipcion.setColumns(10);
 		
-
+		JButton btnSubir = new JButton("Subir");
+		panel_abajo.add(btnSubir);
+		btnSubir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cordenada1=textField.getText()+"º"+textField_3.getText()+"'"+textField_4.getText()+"\"N";
+				cordenada2=textField_5.getText()+"º"+textField_7.getText()+"'"+textField_6.getText()+"\"W";
+				cordenadaT=cordenada1+" "+cordenada2;
+				
+				
+				boolean temp = Remote.getInstance().addPlaza(Remote.constructorRequest(Remote.getInstance().getToken(), new Plaza( Float.valueOf(txtPrecio.getText()), cordenadaT, new ArrayList<>(),
+						(new Date()).getTime(),txtTitulo.getText(),txtDescipcion.getText(),seguro)));//TODO: cambiar null por las imagenes
+				if(temp) {
+					Ventana_alquiler_principal.main(null);
+					dispose();
+				}
+				else {
+					//TODO: popUp de error
+				}
+			}
+		});
 		
 	}
 	
