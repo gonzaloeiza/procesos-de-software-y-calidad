@@ -14,7 +14,7 @@ mvn javadoc:javadoc
 
 Para ejecutar los tests que no requieren que la base de datos esté corriendo:
 ```
-mvn test
+mvn test -Dgroups="p2parking.testCategories.UnitTest"
 ```
 
 Para hacer persistentes las clases:
