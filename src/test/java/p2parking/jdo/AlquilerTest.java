@@ -5,10 +5,19 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.databene.contiperf.PerfTest;
+import org.databene.contiperf.Required;
+import org.databene.contiperf.junit.ContiPerfRule;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
+@PerfTest(invocations = 5)
+@Required(max = 1200, average = 250)
 public class AlquilerTest {
+	
+	@Rule
+	public ContiPerfRule rule = new ContiPerfRule();
 	
 	private Alquiler alquiler;
 	private Usuario usuario1;
