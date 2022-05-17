@@ -43,7 +43,7 @@ mvn exec:java -PinsertarEjemplos
 
 Para ejecutar los tests que requieren que la base de datos este corriendo:
 ```
-mvn test -Dgroups="p2parking.testCategories.DBTests"
+mvn test -Dgroups="p2parking.testCategories.IntegrationTest"
 ```
 
 Para correr la API REST:
