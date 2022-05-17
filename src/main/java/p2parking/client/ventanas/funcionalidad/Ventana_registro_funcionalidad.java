@@ -34,7 +34,6 @@ public class Ventana_registro_funcionalidad {
 				JOptionPane.showMessageDialog(null, "No se ha podido conectar con el servidor");
 			}
 		}
-		
 	}
 	
 	public static void botonFotoPerfil(JPanel panel) {

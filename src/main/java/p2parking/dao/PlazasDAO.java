@@ -12,29 +12,35 @@ import org.datanucleus.store.Extent;
 
 import p2parking.jdo.Plaza;
 
-public class PlazasDAO implements iAccesoObjeto<Plaza>{
+public class PlazasDAO implements iAccesoObjeto<Plaza> {
 
 	private PersistenceManager pm = null;
-	private PersistenceManagerFactory pmf=null;
+	private PersistenceManagerFactory pmf = null;
 	private static PlazasDAO instance;
-	
-	private PlazasDAO(){
+
+	private PlazasDAO() {
 		System.out.println("Constructor PlazasDAO");
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-		pm=pmf.getPersistenceManager();
+		pm = pmf.getPersistenceManager();
 	}
-	
-	public static PlazasDAO getInstance(){
-		if(instance == null) {
+
+	public static PlazasDAO getInstance() {
+		if (instance == null) {
 			instance = new PlazasDAO();
 		}
 		return instance;
 	}
-	
+
 	public void setPm(PersistenceManager pm) {
 		this.pm = pm;
 	}
-	
+
+	/**
+	 * Metodo para guardar una plaza
+	 * 
+	 * @param plaza la plaza que quieres guardar
+	 * @return devuelve un boolean true
+	 */
 	@Override
 	public boolean save(Plaza plaza) {
 		Transaction tx = pm.currentTransaction();
@@ -44,6 +50,12 @@ public class PlazasDAO implements iAccesoObjeto<Plaza>{
 		return true;
 	}
 
+	/**
+	 * Metodo para borrar una plaza
+	 * 
+	 * @param plaza la plaza que quieres eliminar
+	 * @return devuelve un boolean true
+	 */
 	@Override
 	public boolean delete(Plaza plaza) {
 		Transaction tx = pm.currentTransaction();
@@ -51,9 +63,14 @@ public class PlazasDAO implements iAccesoObjeto<Plaza>{
 		pm.deletePersistent(plaza);
 		tx.commit();
 		return true;
-		
+
 	}
 
+	/**
+	 * Metodo para encontrar plazas las plzas asociadas a un correo
+	 * 
+	 * @return devuelve una lista de todas las plazas
+	 */
 	@Override
 	public ArrayList<Plaza> getAll() {
 		Transaction tx = pm.currentTransaction();
@@ -64,36 +81,53 @@ public class PlazasDAO implements iAccesoObjeto<Plaza>{
 			Query query = pm.newQuery("SELECT FROM " + Plaza.class.getName());
 			tempPlaza = (List<Plaza>) query.execute();
 			tx.commit();
-		} catch(Exception ex) {
-			//System.out.println("EXCEPCION AL OBTENER LA PLAZA: \n"+ ex.getMessage());
+		} catch (Exception ex) {
+			// System.out.println("EXCEPCION AL OBTENER LA PLAZA: \n"+ ex.getMessage());
 		}
-		
-		for (int x=0; x<tempPlaza.size(); x++) {
+
+		for (int x = 0; x < tempPlaza.size(); x++) {
 			aDevolver.add(tempPlaza.get(x));
 		}
 		return aDevolver;
 	}
 
+	/**
+	 * Metodo para encontrar una plaza asociada a un correo
+	 * 
+	 * @param param el correo que quieres las plazas
+	 */
 	@Override
 	public Plaza find(String param) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Metodo para encontrar plazas las plzas asociadas a un correo
+	 * 
+	 * @param correo el correo que quieres las plazas
+	 * @return devuelve una lista de todas las plazas
+	 */
 	public List<Plaza> findPlazasDeUsuario(String correo) {
 		Transaction tx = pm.currentTransaction();
 		List<Plaza> tempPlaza = null;
 		try {
-		tx.begin();
-		Query query = pm.newQuery("SELECT FROM " + Plaza.class.getName() + " WHERE propietario.correo == '" + correo + "'");
-		tempPlaza = (List<Plaza>)query.execute();
-		tx.commit();
-		} catch(Exception ex) {
-			System.out.println("EXCEPCION AL OBTENER LA PLAZA: \n"+ ex.getMessage());
+			tx.begin();
+			Query query = pm
+					.newQuery("SELECT FROM " + Plaza.class.getName() + " WHERE propietario.correo == '" + correo + "'");
+			tempPlaza = (List<Plaza>) query.execute();
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("EXCEPCION AL OBTENER LA PLAZA: \n" + ex.getMessage());
 		}
 		return tempPlaza;
 	}
 
+	/**
+	 * Metodo para encontrar plazas las plzas asociadas a un correo
+	 * 
+	 * @param param el correo que quieres las plazas
+	 */
 	@Override
 	public List<Plaza> findAll(String param) {
 		// TODO Auto-generated method stub

@@ -8,7 +8,6 @@ import p2parking.jdo.Incidencia;
 public class Ventana_Incidencia_funcionalidad {
 	
 	public static void botonVolver(Ventana_Incidencia vent) {
-		
 		Ventana_alquiler_principal.main(null);
 		vent.dispose();
 	}
@@ -17,7 +16,6 @@ public class Ventana_Incidencia_funcionalidad {
 		Remote.getInstance().crearincidencia(Remote.constructorRequest(new Incidencia(a, b)));
 		Ventana_alquiler_principal.main(null);
 		frame.dispose();
-		
 	}
 
 }
