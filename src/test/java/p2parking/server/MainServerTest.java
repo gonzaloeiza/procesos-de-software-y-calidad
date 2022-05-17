@@ -18,6 +18,7 @@ import org.databene.contiperf.junit.ContiPerfRule;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import com.google.gson.Gson;
 
@@ -28,7 +29,10 @@ import p2parking.jdo.Alquiler;
 import p2parking.jdo.Incidencia;
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
+import p2parking.testCategories.IntegrationTest;
+import p2parking.testCategories.UnitTest;
 
+@Category(IntegrationTest.class)
 @PerfTest(invocations = 5)
 @Required(max = 1200, average = 250)
 public class MainServerTest {

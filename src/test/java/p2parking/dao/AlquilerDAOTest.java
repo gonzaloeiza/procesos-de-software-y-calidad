@@ -12,11 +12,14 @@ import javax.jdo.PersistenceManagerFactory;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import p2parking.jdo.Alquiler;
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
+import p2parking.testCategories.IntegrationTest;
 
+@Category(IntegrationTest.class)
 public class AlquilerDAOTest {
 	
 	PersistenceManager pm;

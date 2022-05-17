@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import com.google.gson.Gson;
 
@@ -26,9 +27,10 @@ import p2parking.jdo.Alquiler;
 import p2parking.jdo.Incidencia;
 import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
+import p2parking.testCategories.UnitTest;
 
 
-
+@Category(UnitTest.class)
 public class RemoteTest {
 	Remote rem;
 	long token;

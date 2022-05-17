@@ -1,6 +1,5 @@
 package p2parking.jdo;
 
-
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -9,7 +8,11 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
+import p2parking.testCategories.UnitTest;
+
+@Category(UnitTest.class)
 public class UsuarioTest {
 	private List<Plaza> plz1;
 	private List<Plaza> plz2;
