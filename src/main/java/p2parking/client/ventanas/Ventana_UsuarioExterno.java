@@ -159,7 +159,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 			 * Llama a la funcion para evaluar a los usuarios
 			 */
 			public void actionPerformed(ActionEvent e) {
-				 Ventana_UsuarioExterno_funcionalidad.botonEvaluar(panelPricipal, a);	// - llama a al funcion extern
+				 Ventana_UsuarioExterno_funcionalidad.botonEvaluar(frame, panelPricipal, a);	// - llama a al funcion extern
 				 
 			}
 		});

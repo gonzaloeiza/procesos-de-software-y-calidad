@@ -46,6 +46,7 @@ public class Ventana_alquiler_principal extends JFrame {
 	private boolean ordenado;
 	private ArrayList<Plaza> plazasFav;
 	private int indice=0;
+	public JButton btnPlaza_Anterior;
 
 	/**
 	 * Constructor de la parte visual de la ventana
@@ -257,7 +258,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		panel_medio.add(panel_medio_abajo, BorderLayout.SOUTH);
 		panel_medio_abajo.setLayout(new GridLayout(1, 6, 0, 0));
 		
-		JButton btnPlaza_Anterior = new JButton("Anterior");
+		btnPlaza_Anterior = new JButton("Anterior");
 		btnPlaza_Anterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				indice-=1;
@@ -526,7 +527,7 @@ public class Ventana_alquiler_principal extends JFrame {
 	 * 
 	 * @param args No usado
 	 */
-	public static void main(String[] args) {
+	public static Ventana_alquiler_principal main(String[] args) {
 		
 		try {
             // Set cross-platform Java L&F (also called "Metal")
@@ -545,18 +546,19 @@ public class Ventana_alquiler_principal extends JFrame {
 	       // handle exception
 	    }
 	    	
-
+		 Ventana_alquiler_principal frame = new Ventana_alquiler_principal();
         EventQueue.invokeLater(new Runnable() {
+        	
 			public void run() {
 				try {
-					Ventana_alquiler_principal frame = new Ventana_alquiler_principal();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
+        	
 		});
-
+        return frame;
 	}
 	
 	/**

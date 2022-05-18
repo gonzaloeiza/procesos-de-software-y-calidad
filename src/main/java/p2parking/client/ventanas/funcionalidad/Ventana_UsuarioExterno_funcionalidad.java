@@ -10,21 +10,24 @@ import p2parking.jdo.Plaza;
 
 public class Ventana_UsuarioExterno_funcionalidad {
 	
-	public static void botonEvaluar(JPanel panel, Plaza a) {
+	public static void botonEvaluar(Ventana_UsuarioExterno vent, JPanel panel, Plaza a) {
 		
 		 String valorevaluacion = JOptionPane.showInputDialog(panel,"Que nota le pones a este usuario?(1-5)", "Evaluacion", 1);
 		 if (valorevaluacion.matches("-?\\d+")) {
 			 if(Integer.parseInt(valorevaluacion)>5) {
-				 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),5)); 
+				 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), 5, a.getPropietario())); 
 			 }else if(Integer.parseInt(valorevaluacion)<=0) {
-				 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),1)); 
+				 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), 1, a.getPropietario())); 
 			 }else{
-				 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), a.getPropietario(),
-						 Integer.parseInt(valorevaluacion))); 
+				 Remote.getInstance().setPuntuacion(Remote.constructorRequest(Remote.getInstance().getToken(), Integer.parseInt(valorevaluacion),
+						 a.getPropietario())); 
 			 }
 		 } else {
 			 JOptionPane.showMessageDialog(panel, "Introduce un número correcto");
 		 }
+		 Ventana_alquiler_principal temp = Ventana_alquiler_principal.main(null);
+		 temp.btnPlaza_Anterior.doClick();
+		 vent.dispose();
 	}
 	
 	public static void botonVolver(Ventana_UsuarioExterno vent) {
