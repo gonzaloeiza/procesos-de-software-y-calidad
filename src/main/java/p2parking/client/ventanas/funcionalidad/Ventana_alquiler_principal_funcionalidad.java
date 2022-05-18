@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import p2parking.client.Remote;
+import p2parking.client.ventanas.Ventana_CopiarUbicacion;
 import p2parking.client.ventanas.Ventana_Incidencia;
 import p2parking.client.ventanas.Ventana_UsuarioExterno;
 import p2parking.client.ventanas.Ventana_alquiler_principal;
@@ -34,6 +36,10 @@ public class Ventana_alquiler_principal_funcionalidad {
 		Ventana_Incidencia.main(null);
 		vent.dispose();
 		
+	}
+	public static void botonUbi(Ventana_alquiler_principal vent,int indice) {
+		String ubi=Remote.getInstance().getAllPlazas(Remote.getInstance().getToken()).get(indice).getLocalizacion();
+		Ventana_CopiarUbicacion.main(null, ubi);
 	}
 	
 	public static void botonEvaluar(Ventana_alquiler_principal vent, ArrayList<Plaza> plazas, int indice) {

@@ -12,6 +12,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import p2parking.client.Remote;
+import p2parking.client.ventanas.funcionalidad.Ventana_alquiler_principal_funcionalidad;
 import p2parking.jdo.Plaza;
 
 import java.awt.BorderLayout;
@@ -46,6 +47,7 @@ public class Ventana_alquiler_principal extends JFrame {
 	private boolean ordenado;
 	private ArrayList<Plaza> plazasFav;
 	private int indice=0;
+	private static Ventana_alquiler_principal frame;
 
 	/**
 	 * Constructor de la parte visual de la ventana
@@ -251,6 +253,15 @@ public class Ventana_alquiler_principal extends JFrame {
 		
 		JPanel panel_8 = new JPanel();
 		panel_top.add(panel_8);
+		panel_8.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JButton btnUbicacion = new JButton("Ubicacion");
+		btnUbicacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana_alquiler_principal_funcionalidad.botonUbi(frame, indice);
+			}
+		});
+		panel_8.add(btnUbicacion);
 		
 		
 		JPanel panel_medio_abajo = new JPanel();
@@ -549,7 +560,7 @@ public class Ventana_alquiler_principal extends JFrame {
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Ventana_alquiler_principal frame = new Ventana_alquiler_principal();
+					frame = new Ventana_alquiler_principal();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
