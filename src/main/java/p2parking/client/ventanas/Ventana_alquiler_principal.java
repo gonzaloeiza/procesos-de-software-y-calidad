@@ -55,12 +55,11 @@ public class Ventana_alquiler_principal extends JFrame {
 		plazasOrdenadas = new ArrayList<Plaza>();
 		ordenarPlazas();
 		ordenado = false;
-		//plazasFav=Remote.getInstance().getMisFav(Remote.getInstance().getToken());
+		plazasFav=Remote.getInstance().getMisFav(Remote.getInstance().getToken());
 		
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
-    	//setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 428);
 		panelPricipal = new JPanel();
 		panelPricipal.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -89,7 +88,6 @@ public class Ventana_alquiler_principal extends JFrame {
 		
 		
 		JLabel logo = new JLabel("");
-		//logo.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/p2larfo.jpg")));
 		panel_arriba.add(logo);
 		/*
 		 * 
@@ -134,7 +132,8 @@ public class Ventana_alquiler_principal extends JFrame {
 		JButton btnFavoritos = new JButton("Favoritos");
 		btnFavoritos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean temp = false;//Remote.getInstance().addPlazaFav(Remote.getInstance().getToken(), plazas.get(indice));
+				boolean temp = false;
+				Remote.getInstance().addPlazaFav(Remote.constructorRequest(Remote.getInstance().getToken(), plazas.get(indice)));
 				if(temp) {
 					JOptionPane.showMessageDialog(panelPricipal, "Plaza añadida a favoritos");
 					panel_izquierda.setBackground(Color.green);
@@ -211,7 +210,7 @@ public class Ventana_alquiler_principal extends JFrame {
 				}else {
 					Precio.setText("El precio es de:" + String.valueOf(plazasOrdenadas.get(indice).getPrecio()));
 				}
-				//lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
+				lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 				
 				if(plazasOrdenadas.get(indice).isSeguro()==true) {
 					lblSeguro.setText("La plaza tiene seguro");
@@ -284,7 +283,7 @@ public class Ventana_alquiler_principal extends JFrame {
 					}else {
 						Precio.setText("El precio es de:" + String.valueOf(plazasOrdenadas.get(indice).getPrecio()));
 					}
-					//lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
+					lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 					
 					if(plazasOrdenadas.get(indice).isSeguro()==true) {
 						lblSeguro.setText("La plaza tiene seguro");
@@ -326,7 +325,7 @@ public class Ventana_alquiler_principal extends JFrame {
 				}else {
 					Precio.setText("El precio es de:" + String.valueOf(plazas.get(indice).getPrecio()));
 				}
-				//lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
+				lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 				
 				if(plazas.get(indice).isSeguro()==true) {
 					lblSeguro.setText("La plaza tiene seguro");
@@ -397,7 +396,7 @@ public class Ventana_alquiler_principal extends JFrame {
 					}else {
 						Precio.setText("El precio es de:" + String.valueOf(plazasOrdenadas.get(indice).getPrecio()));
 					}
-					//lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
+					lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 					
 					if(plazasOrdenadas.get(indice).isSeguro()==true) {
 						lblSeguro.setText("La plaza tiene seguro");
@@ -439,7 +438,7 @@ public class Ventana_alquiler_principal extends JFrame {
 				}else {
 					Precio.setText("El precio es de:" + String.valueOf(plazas.get(indice).getPrecio()));
 				}
-				//lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
+				lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 				
 				if(plazas.get(indice).isSeguro()==true) {
 					lblSeguro.setText("La plaza tiene seguro");
@@ -486,7 +485,7 @@ public class Ventana_alquiler_principal extends JFrame {
 			Precio.setText("El precio es de:" + String.valueOf(plazas.get(indice).getPrecio()));
 		}
 		
-		//lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
+		lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 		if(plazas.get(indice).isSeguro()==true) {
 			lblSeguro.setText("La plaza tiene seguro");
 		}else if(plazas.get(indice).isSeguro()==false) {
@@ -513,10 +512,10 @@ public class Ventana_alquiler_principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Ventana_subir.main(null);
 				dispose();
-				/*ArrayList<Plaza> plazas = Remote.getInstance().getAllPlazas(Remote.getInstance().getToken());
+				ArrayList<Plaza> plazas = Remote.getInstance().getAllPlazas(Remote.getInstance().getToken());
 				for (Plaza plaza : plazas) {
 					System.out.println(plaza);
-				}*/
+				}
 			}
 		});
 		panel_abjo.add(btnsubir);

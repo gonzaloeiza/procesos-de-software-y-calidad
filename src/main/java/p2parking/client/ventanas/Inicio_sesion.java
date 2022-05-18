@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import p2parking.client.Remote;
 //import p2parking.client.ventanas.funcionalidad.Inicio_sesion_funcionalidad;
+import p2parking.client.ventanas.funcionalidad.Inicio_sesion_funcionalidad;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -90,8 +91,7 @@ public class Inicio_sesion extends JFrame {
 	 */
 	public Inicio_sesion() {
 		setTitle("P2Parking");
-    	//setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio_sesion.class.getResource("/p2parking/client/ventanas/P2.jpg")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 481);
 		panelPricipal = new JPanel();
 		panelPricipal.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -109,7 +109,7 @@ public class Inicio_sesion extends JFrame {
 		inicio_sesion.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-//				Inicio_sesion_funcionalidad.botonInicioSesion(frame,user.getText(),password.getText());
+				Inicio_sesion_funcionalidad.botonInicioSesion(frame,user.getText(),password.getText());
 			}
 		});
 		panelabajo.add(inicio_sesion);
@@ -125,7 +125,7 @@ public class Inicio_sesion extends JFrame {
 		panel_inutil3.add(contacto);
 		contacto.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-//				Inicio_sesion_funcionalidad.botonContacto();
+				Inicio_sesion_funcionalidad.botonContacto();
 			}
 		});
 
@@ -134,7 +134,7 @@ public class Inicio_sesion extends JFrame {
 		panelabajo.add(registro);
 		registro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				Inicio_sesion_funcionalidad.botonRegistro(frame);
+				Inicio_sesion_funcionalidad.botonRegistro(frame);
 			}
 		});
 
@@ -146,7 +146,7 @@ public class Inicio_sesion extends JFrame {
 		panle_inutil4.add(compartir);
 		compartir.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-//				Inicio_sesion_funcionalidad.botonCompartir();
+				Inicio_sesion_funcionalidad.botonCompartir();
 			}
 		});
 
@@ -155,8 +155,7 @@ public class Inicio_sesion extends JFrame {
 		panel_arriba.setLayout(new GridLayout(1, 4, 5, 25));
 
 		JLabel imagen = new JLabel("");
-    	//imagen.setIcon(new ImageIcon(Inicio_sesion.class.getResource("/p2parking/client/ventanas/P2.jpg")));
-		panel_arriba.add(imagen);
+    	panel_arriba.add(imagen);
 
 		JPanel panel_central = new JPanel();
 		panelPricipal.add(panel_central, BorderLayout.CENTER);
