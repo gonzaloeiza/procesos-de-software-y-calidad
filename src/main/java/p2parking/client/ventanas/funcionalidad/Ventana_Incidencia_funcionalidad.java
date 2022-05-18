@@ -15,8 +15,7 @@ public class Ventana_Incidencia_funcionalidad {
 	public static void botonIncidencia(Ventana_Incidencia frame, String a, String b) {
 		System.out.println(Remote.getInstance().getToken());
 		Remote.getInstance().crearincidencia(Remote.constructorRequest(Remote.getInstance().getToken(), new Incidencia(a, b)));
-		Ventana_alquiler_principal.main(null);
-		frame.dispose();
+		botonVolver(frame);
 	}
 
 }
