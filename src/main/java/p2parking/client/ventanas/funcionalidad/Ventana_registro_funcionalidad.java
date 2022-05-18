@@ -11,8 +11,9 @@ import p2parking.jdo.Usuario;
 
 public class Ventana_registro_funcionalidad {
 
-	public static void botonAtras() {
-		Inicio_sesion.main(null);	
+	public static void botonAtras(Ventana_registro frame) {
+		Inicio_sesion.main(null);
+		frame.dispose();
 	}
 	
 	public static void botonRegistro(Ventana_registro ventana, String a, String b, String c) {
