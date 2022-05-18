@@ -77,6 +77,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		JButton perfil = new JButton("Usuario");
 		perfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Ventana_alquiler_principal_funcionalidad.ir_usuario(frame);
 			}
 		});
 		perfil.setBounds(new Rectangle(2, 2, 1, 1));
@@ -155,20 +156,20 @@ public class Ventana_alquiler_principal extends JFrame {
 		JButton btnReportar = new JButton("Reportar usuario");
 		btnReportar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_Incidencia.main(null);
-				dispose();
+				Ventana_alquiler_principal_funcionalidad.botonReportar(frame);
 			}
 		});
 		panel_derecha.add(btnReportar);
 		
 		JLabel Precio = new JLabel();
+		Precio.setText("0");
 		panel_derecha.add(Precio);
 		
 		JButton btnEvaluarUsuario = new JButton("Evaluar/Info Usuario");
 		btnEvaluarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_UsuarioExterno.main(null,plazas.get(indice));
-				dispose();
+				Ventana_alquiler_principal_funcionalidad.botonEvaluar(frame, plazas, indice);
+				
 			}
 		});
 		panel_derecha.add(btnEvaluarUsuario);
@@ -177,10 +178,8 @@ public class Ventana_alquiler_principal extends JFrame {
 		panel_derecha.add(lblPuntuacion);
 		
 		JLabel lblSeguro = new JLabel();
+		lblSeguro.setText("0");
 		panel_derecha.add(lblSeguro);
-		
-		JLabel imagen = new JLabel("No hay imagen");
-		panel_actualizar.add(imagen, BorderLayout.WEST);
 		
 		JPanel panel_top = new JPanel();
 		panel_actualizar.add(panel_top, BorderLayout.NORTH);
@@ -523,12 +522,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		JButton btnsubir = new JButton("Publicar Anuncio");
 		btnsubir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_subir.main(null);
-				dispose();
-				ArrayList<Plaza> plazas = Remote.getInstance().getAllPlazas(Remote.getInstance().getToken());
-				for (Plaza plaza : plazas) {
-					System.out.println(plaza);
-				}
+				Ventana_alquiler_principal_funcionalidad.subir(frame);
 			}
 		});
 		panel_abjo.add(btnsubir);
