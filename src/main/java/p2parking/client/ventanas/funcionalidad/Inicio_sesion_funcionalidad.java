@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import p2parking.client.Remote;
 import p2parking.client.ventanas.Inicio_sesion;
+import p2parking.client.ventanas.Ventana_CopiarUbicacion;
 import p2parking.client.ventanas.Ventana_alquiler_principal;
 import p2parking.client.ventanas.Ventana_registro;
 
@@ -30,7 +31,8 @@ public class Inicio_sesion_funcionalidad {
 	}
 	
 	public static void botonContacto() {
-		JOptionPane.showMessageDialog(null, "Correo de contacto: p2parkingCliente@gmail.com");
+		Ventana_CopiarUbicacion.main(null, "p2parkingCliente@gmail.com");
+		
 	}
 	
 	public static void botonRegistro(Inicio_sesion vent) {
@@ -41,7 +43,7 @@ public class Inicio_sesion_funcionalidad {
 	}
 	
 	public static void botonCompartir() {
-		JOptionPane.showMessageDialog(null, "Enlace de github: https://github.com/gonzaloeiza/procesos-de-software-y-calidad/releases/tag/sprint-2");
+		Ventana_CopiarUbicacion.main(null,"https://github.com/gonzaloeiza/procesos-de-software-y-calidad/releases/tag/sprint-2");
 		
 	}
 
