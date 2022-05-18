@@ -47,11 +47,9 @@ public class Ventana_alquiler_principal extends JFrame {
 	private boolean ordenado;
 	private ArrayList<Plaza> plazasFav;
 	private int indice=0;
-<<<<<<< HEAD
 	private static Ventana_alquiler_principal frame;
-=======
 	public JButton btnPlaza_Anterior;
->>>>>>> branch 'master' of https://github.com/gonzaloeiza/procesos-de-software-y-calidad.git
+
 
 	/**
 	 * Constructor de la parte visual de la ventana
@@ -560,15 +558,11 @@ public class Ventana_alquiler_principal extends JFrame {
 	       // handle exception
 	    }
 	    	
-		 Ventana_alquiler_principal frame = new Ventana_alquiler_principal();
+
         EventQueue.invokeLater(new Runnable() {
-        	
 			public void run() {
 				try {
-<<<<<<< HEAD
 					frame = new Ventana_alquiler_principal();
-=======
->>>>>>> branch 'master' of https://github.com/gonzaloeiza/procesos-de-software-y-calidad.git
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
