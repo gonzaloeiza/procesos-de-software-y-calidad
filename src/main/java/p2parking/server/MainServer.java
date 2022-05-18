@@ -196,6 +196,7 @@ public class MainServer {
 	@Path("/createIncidencia")
 	public Response createIncidencia(ArrayList<String> requestBody) {
 		Gson gson = new Gson();
+		System.out.println(requestBody.get(0));
 		long token = gson.fromJson(requestBody.get(0), Long.class);
 		Incidencia incidencia = gson.fromJson(requestBody.get(1), Incidencia.class);
 		if(tokenUsuarios.containsKey(token)) {
@@ -275,6 +276,7 @@ public class MainServer {
 			String email = gson.fromJson(requestBody.get(2), Usuario.class).getCorreo();
 			Usuario usr = usuarioDAO.find(email);
 			usr.newPuntuacion(puntuacion);
+			System.out.println(usr.getPuntuacion());
 			usuarioDAO.save(usr);
 			return Response.ok().build();
 		}
