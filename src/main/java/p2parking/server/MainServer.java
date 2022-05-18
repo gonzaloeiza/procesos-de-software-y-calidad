@@ -196,6 +196,7 @@ public class MainServer {
 	@Path("/createIncidencia")
 	public Response createIncidencia(ArrayList<String> requestBody) {
 		Gson gson = new Gson();
+		System.out.println(requestBody.get(0));
 		long token = gson.fromJson(requestBody.get(0), Long.class);
 		Incidencia incidencia = gson.fromJson(requestBody.get(1), Incidencia.class);
 		if(tokenUsuarios.containsKey(token)) {

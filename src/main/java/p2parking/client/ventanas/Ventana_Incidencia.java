@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import com.google.gson.Gson;
 
 import p2parking.client.Remote;
+import p2parking.client.ventanas.funcionalidad.Ventana_Incidencia_funcionalidad;
 import p2parking.jdo.Incidencia;
 
 import javax.swing.JLabel;
@@ -38,6 +39,7 @@ public class Ventana_Incidencia extends JFrame {
 	private JPanel panel;
 	private JButton btnSunir;
 	private JButton btnCancel;
+	private static Ventana_Incidencia frame;
 	
 	/**
 	 * Constructor de la ventana
@@ -67,7 +69,7 @@ public class Ventana_Incidencia extends JFrame {
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Ventana_Incidencia frame = new Ventana_Incidencia();
+					frame = new Ventana_Incidencia();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -110,7 +112,7 @@ public class Ventana_Incidencia extends JFrame {
 		btnSunir = new JButton("Establecer incidencia");
 		btnSunir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Remote.getInstance().crearincidencia(Remote.constructorRequest(new Incidencia(txtTitulo.getText(), txtMensaje.getText())));
+				Ventana_Incidencia_funcionalidad.botonIncidencia(frame, txtTitulo.getText(), txtMensaje.getText());
 				Ventana_alquiler_principal.main(null);
 				dispose();
 			}
