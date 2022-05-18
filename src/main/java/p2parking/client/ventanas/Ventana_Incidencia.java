@@ -113,8 +113,6 @@ public class Ventana_Incidencia extends JFrame {
 		btnSunir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Ventana_Incidencia_funcionalidad.botonIncidencia(frame, txtTitulo.getText(), txtMensaje.getText());
-				Ventana_alquiler_principal.main(null);
-				dispose();
 			}
 		});
 		panel.add(btnSunir);
@@ -122,8 +120,7 @@ public class Ventana_Incidencia extends JFrame {
 		btnCancel = new JButton("Volver");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_alquiler_principal.main(null);
-				dispose();
+				Ventana_Incidencia_funcionalidad.botonVolver(frame);
 			}
 		});
 		panel.add(btnCancel);
