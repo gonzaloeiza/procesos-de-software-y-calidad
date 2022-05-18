@@ -2,8 +2,6 @@ package p2parking.client.ventanas;
 
 import java.awt.EventQueue;
 import java.awt.SystemColor;
-import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -81,8 +79,7 @@ public class Ventana_registro extends JFrame {
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_registro_funcionalidad.botonAtras();
-				dispose();
+				Ventana_registro_funcionalidad.botonAtras(frame);
 			}
 		});
 		panelabajo.add(btnAtras);
