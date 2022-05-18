@@ -95,8 +95,8 @@ public class RemoteTest {
 	@Test
 	public void getInstance(){
 		assertEquals(rem, Remote.getInstance());
-		Remote.setInstance(null);
-		Remote.getInstance();
+//		Remote.setInstance(null);
+//		Remote.getInstance();
 	}
 	@Test
 	public void testregistro() {
