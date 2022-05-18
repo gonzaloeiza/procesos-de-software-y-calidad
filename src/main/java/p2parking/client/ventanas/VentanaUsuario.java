@@ -11,6 +11,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import p2parking.client.Remote;
+import p2parking.client.ventanas.funcionalidad.VentanaUsuario_funcionalidad;
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -22,6 +23,7 @@ public class VentanaUsuario extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel panelPricipal;
 	private int punt;
+	private static VentanaUsuario frame;
 
 	
 	
@@ -43,7 +45,7 @@ public class VentanaUsuario extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				VentanaUsuario_funcionalidad.botonVolver(frame);
 			}
 		});
 		panel.add(btnVolver);
@@ -177,7 +179,7 @@ public class VentanaUsuario extends JFrame {
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaUsuario frame = new VentanaUsuario();
+					frame = new VentanaUsuario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

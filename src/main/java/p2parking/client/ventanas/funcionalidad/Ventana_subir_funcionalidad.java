@@ -29,4 +29,12 @@ public class Ventana_subir_funcionalidad {
 		}
 		
 	}
+	
+	public static void checkBoxSeguro(boolean seguro) {
+		if(seguro==true) {
+			seguro=false;
+		}else
+			seguro=true;
+	
+	}
 }
