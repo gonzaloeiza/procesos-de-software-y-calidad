@@ -43,8 +43,7 @@ public class Ventana_UsuarioExterno extends JFrame {
 	public Ventana_UsuarioExterno(Plaza a) {
 		setTitle("P2Parking");	// - Establece el titulo de la ventana
     	setForeground(SystemColor.windowBorder);	// - 
-    	//setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/P2.jpg")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// - Operacion de cerar ventana
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// - Operacion de cerar ventana
 		setBounds(100, 100, 666, 428);	// - el tamano de la ventana
 		panelPricipal = new JPanel();	// - Crea el contenedor principal
 		panelPricipal.setBorder(new EmptyBorder(5, 5, 5, 5));	// - establecee los rangos del contenedor

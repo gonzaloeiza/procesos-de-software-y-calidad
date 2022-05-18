@@ -75,12 +75,14 @@ public class MainServer {
 	@POST
 	@Path("/registro")
 	public Response registro(Usuario usr) {
+		System.out.println("entra");
 		if(usuarioDAO.find(usr.getCorreo()) == null){
 			//long token = (new Date()).getTime();
 			//tokenUsuarios.put(token, usr);
 			usuarioDAO.save(usr);
 			return Response.ok(true).build();
-		}		
+		}
+		System.out.println("llega");
 		return Response.notModified().build();
 	}
 	

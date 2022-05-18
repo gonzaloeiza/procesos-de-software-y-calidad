@@ -58,7 +58,6 @@ public class Ventana_subir extends JFrame {
 	public Ventana_subir() {
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
-//    	setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio_sesion.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 481);
 		panelPricipal = new JPanel();
@@ -79,7 +78,6 @@ public class Ventana_subir extends JFrame {
 		});
 		perfil.setBounds(new Rectangle(2, 2, 1, 1));
 		perfil.setBackground(SystemColor.activeCaptionBorder);
-		//perfil.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/usuario3.jpg")));
 		panel_arriba.add(perfil);
 		
 		JPanel panel_arribaderecha = new JPanel();
@@ -87,7 +85,6 @@ public class Ventana_subir extends JFrame {
 		panel_arribaderecha.setLayout(new GridLayout(2, 1, 0, 0));
 		
 		JLabel logo = new JLabel("");
-//		logo.setIcon(new ImageIcon(Ventana_alquiler_principal.class.getResource("/p2parking/client/ventanas/p2larfo.jpg")));
 		panel_arriba.add(logo);
 		
 

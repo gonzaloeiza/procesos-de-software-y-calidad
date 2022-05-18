@@ -31,7 +31,6 @@ public class VentanaUsuario extends JFrame {
 		
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
-//    	setIconImage(Toolkit.getDefaultToolkit().getImage(Inicio_sesion.class.getResource("/p2parking/client/ventanas/P2.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 481);
 		panelPricipal = new JPanel();

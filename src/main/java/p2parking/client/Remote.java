@@ -79,7 +79,9 @@ public class Remote {
         donationsWebTarget = webTarget.path(path +  "/registro");
         invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.post(Entity.entity(temp, MediaType.APPLICATION_JSON));
+        System.out.println(response.getStatus());
         if (response.getStatus() == 200) {
+        	
             yoMismo = temp;
             return true;
         }
@@ -171,7 +173,7 @@ public class Remote {
 	//Post
 	/*
 	public boolean updatePlaza(long token, Plaza plaza, float precio, String localizacion, ArrayList<String> fotos, long fecha) {
-		donationsWebTarget = webTarget.path(path +  "/updatePlaza");
+		donatio/*nsWebTarget = webTarget.path(path +  "/updatePlaza");
 		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
 		Plaza plazanew = new Plaza(precio, localizacion, fotos, fecha);		
@@ -197,7 +199,7 @@ public class Remote {
 			return false;
 		}
 		return true;
-	}
+	}*/
 	//Post
 	public ArrayList<Plaza> getMisPlazas(long token) {
 		donationsWebTarget = webTarget.path(path +  "/getMisPlazas");
@@ -212,7 +214,7 @@ public class Remote {
 		return resultado;
 	}
 	//Post
-	public boolean addPlazaFav(long token, Plaza plaza) {
+	public boolean addPlazaFav(ArrayList<String> requestBody) {
 		donationsWebTarget = webTarget.path(path +  "/addPlazaFav");
 		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
 		
@@ -237,7 +239,7 @@ public class Remote {
 		}
 		ArrayList<Plaza> resultado = response.readEntity(ArrayList.class);
 		return resultado;
-	}*/
+	}
 	//Post
 	public ArrayList<Alquiler> getAlquilados(ArrayList<String> requestBody){
 		donationsWebTarget = webTarget.path(path +  "/getAlquilados");

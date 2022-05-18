@@ -10,7 +10,7 @@ import p2parking.client.ventanas.Ventana_registro;
 public class Inicio_sesion_funcionalidad {
 
 	public static void botonInicioSesion(Inicio_sesion vent, String a, String password) {
-//	Remote.getInstance().logIn(user.getText(), password.getText());
+	Remote.getInstance().logIn(Remote.constructorRequest(a, password));
 		if (a.equals("") || password.equals("")) {
 			JOptionPane.showMessageDialog(null, "Rellene todos los campos");
 

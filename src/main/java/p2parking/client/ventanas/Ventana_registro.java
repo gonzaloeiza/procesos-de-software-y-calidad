@@ -10,6 +10,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import p2parking.client.Remote;
+import p2parking.client.ventanas.funcionalidad.Ventana_registro_funcionalidad;
 //import p2parking.client.ventanas.funcionalidad.Ventana_registro_funcionalidad;
 import p2parking.jdo.Usuario;
 
@@ -45,8 +46,7 @@ public class Ventana_registro extends JFrame {
 	public Ventana_registro() {
 		setTitle("P2Parking");
     	setForeground(SystemColor.windowBorder);
-    	setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana_registro.class.getResource("/p2parking/client/ventanas/P2.jpg")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 481);
 		panelPricipal = new JPanel();
 		panelPricipal.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,7 +63,7 @@ public class Ventana_registro extends JFrame {
 		JButton inicio_sesion = new JButton("Registrar");
 		inicio_sesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				Ventana_registro_funcionalidad.botonRegistro(frame, txtnombre.getText(),  txtcorreo.getText(), txtcontrasena.getText());
+				Ventana_registro_funcionalidad.botonRegistro(frame, txtnombre.getText(),  txtcorreo.getText(), txtcontrasena.getText());
 				
 			}
 		});
@@ -81,7 +81,7 @@ public class Ventana_registro extends JFrame {
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				Ventana_registro_funcionalidad.botonAtras();
+				Ventana_registro_funcionalidad.botonAtras();
 				dispose();
 			}
 		});
@@ -91,9 +91,7 @@ public class Ventana_registro extends JFrame {
 		panelPricipal.add(panel_arriba, BorderLayout.NORTH);
 		panel_arriba.setLayout(new GridLayout(1, 4, 5, 25));
 		
-		JLabel imagen = new JLabel("");
-		imagen.setIcon(new ImageIcon(Ventana_registro.class.getResource("/p2parking/client/ventanas/P2.jpg")));
-		panel_arriba.add(imagen);
+		
 		
 		JPanel panel_central = new JPanel();
 		panelPricipal.add(panel_central, BorderLayout.CENTER);
@@ -170,16 +168,7 @@ public class Ventana_registro extends JFrame {
 		panel_central.add(panel_14);
 		
 		JPanel panel_15 = new JPanel();
-		panel_central.add(panel_15);
-		
-		JButton btnNewButton = new JButton("Foto de Perfil");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//				Ventana_registro_funcionalidad.botonFotoPerfil(panel_central);
-			}
-		});
-		panel_central.add(btnNewButton);
-	
+		panel_central.add(panel_15);	
 		
 		JPanel panel_16 = new JPanel();
 		panel_central.add(panel_16);
