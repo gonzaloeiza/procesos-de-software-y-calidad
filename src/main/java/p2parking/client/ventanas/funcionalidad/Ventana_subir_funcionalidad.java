@@ -3,6 +3,8 @@ package p2parking.client.ventanas.funcionalidad;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 import p2parking.client.Remote;
 import p2parking.client.ventanas.Ventana_alquiler_principal;
 import p2parking.client.ventanas.Ventana_subir;
@@ -16,25 +18,40 @@ public class Ventana_subir_funcionalidad {
 		
 	}
 	
-	public static void botonSubir(Ventana_subir vent, String a, String b, String c, String d, boolean e) {
+	public static void botonSubir(String elm1, String elm2, String elm3, String elm4, String elm5,String elm7,String titulo,
+			String descripcion,boolean seguro,String precio,Ventana_subir vent) {
+		String cordenada1= elm1+"º"+elm2+"'"+elm1+"\"N";
+		String cordenada2=elm4+"º"+elm5+"'"+elm7+"\"W";
+		String cordenadaT=cordenada1+" "+cordenada2;
+		if(seguro==false) {
+			int input=JOptionPane.showConfirmDialog(vent, "Quieres contratar un seguro automatico?", "Seguro", JOptionPane.YES_NO_OPTION);
+			if(input==0) {
+				seguro=true;
+			}else if(input==1) {
+				seguro=false;
+			}
+		}
 		
-		boolean temp = Remote.getInstance().addPlaza(Remote.constructorRequest(Remote.getInstance().getToken(), new Plaza( Float.valueOf(a), b, new ArrayList<>(),
-				(new Date()).getTime(),c,d,e)));//TODO: cambiar null por las imagenes
+		boolean temp = Remote.getInstance().addPlaza(Remote.constructorRequest(Remote.getInstance().getToken(), new Plaza( Float.valueOf(precio), cordenadaT, new ArrayList<>(),
+				(new Date()).getTime(),titulo,descripcion,seguro)));
 		if(temp) {
 			Ventana_alquiler_principal.main(null);
 			vent.dispose();
 		}
 		else {
-			//TODO: popUp de error
+			
 		}
+	
 		
 	}
 	
-	public static void checkBoxSeguro(boolean seguro) {
+	public static boolean checkBoxSeguro(boolean seguro) {
 		if(seguro==true) {
 			seguro=false;
-		}else
+		}else {
 			seguro=true;
-	
+		}
+		return seguro;
 	}
+	
 }
