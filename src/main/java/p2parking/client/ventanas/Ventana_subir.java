@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import com.google.gson.Gson;
 
 import p2parking.client.Remote;
+import p2parking.client.ventanas.funcionalidad.Ventana_subir_funcionalidad;
 import p2parking.jdo.Plaza;
 
 import javax.swing.ImageIcon;
@@ -51,6 +52,7 @@ public class Ventana_subir extends JFrame {
 	private String cordenada1;
 	private String cordenada2;
 	private String cordenadaT;
+	private static Ventana_subir frame;
 	
 	/**
 	 * Constructor de la parte visual de la ventana
@@ -72,8 +74,7 @@ public class Ventana_subir extends JFrame {
 		JButton perfil = new JButton("Volver");
 		perfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_alquiler_principal.main(null);
-				dispose();
+				Ventana_subir_funcionalidad.botonVolver(frame);
 			}
 		});
 		perfil.setBounds(new Rectangle(2, 2, 1, 1));
@@ -137,10 +138,6 @@ public class Ventana_subir extends JFrame {
 		lblUbi.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_9_1.add(lblUbi);
 		
-
-		
-	
-		
 	
 		JPanel panel_10_1 = new JPanel();
 		panle_medio_arriba.add(panel_10_1);
@@ -157,7 +154,6 @@ public class Ventana_subir extends JFrame {
 		JLabel lblC2 = new JLabel("Cordenada 2");
 		lblC2.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_11_1.add(lblC2);
-		
 		
 		JPanel panel_13_1 = new JPanel();
 		panle_medio_arriba.add(panel_13_1);
@@ -235,21 +231,18 @@ public class Ventana_subir extends JFrame {
 		lblW.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(lblW);
 		
+		JPanel panel_3 = new JPanel();
+		panle_medio_arriba.add(panel_3);
+		
 	
 		
-		JCheckBox chckbxseguro = new JCheckBox("Tienes Seguro");
+		JCheckBox chckbxseguro = new JCheckBox("Tienes Seguro?");
 		chckbxseguro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(seguro==true) {
-					seguro=false;
-				}else
-					seguro=true;
+				seguro=Ventana_subir_funcionalidad.checkBoxSeguro(seguro);
 			}
 		});
 		panle_medio_arriba.add(chckbxseguro);
-		
-		JPanel panel_3 = new JPanel();
-		panle_medio_arriba.add(panel_3);
 		
 		JPanel panel_medio_abajo = new JPanel();
 		panel_central.add(panel_medio_abajo);
@@ -266,10 +259,13 @@ public class Ventana_subir extends JFrame {
 		panel_abajo.add(btnSubir);
 		btnSubir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Ventana_subir_funcionalidad.botonSubir(textField.getText(),textField_3.getText(),textField_4.getText(),
+						textField_5.getText(),textField_7.getText(),textField_6.getText(),txtTitulo.getText(),
+						txtDescipcion.getText(),seguro,txtPrecio.getText(),frame);
+				/*
 				cordenada1=textField.getText()+"º"+textField_3.getText()+"'"+textField_4.getText()+"\"N";
 				cordenada2=textField_5.getText()+"º"+textField_7.getText()+"'"+textField_6.getText()+"\"W";
 				cordenadaT=cordenada1+" "+cordenada2;
-				
 				
 				boolean temp = Remote.getInstance().addPlaza(Remote.constructorRequest(Remote.getInstance().getToken(), new Plaza( Float.valueOf(txtPrecio.getText()), cordenadaT, new ArrayList<>(),
 						(new Date()).getTime(),txtTitulo.getText(),txtDescipcion.getText(),seguro)));//TODO: cambiar null por las imagenes
@@ -280,6 +276,7 @@ public class Ventana_subir extends JFrame {
 				else {
 					//TODO: popUp de error
 				}
+				*/
 			}
 		});
 		
@@ -313,7 +310,7 @@ public class Ventana_subir extends JFrame {
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Ventana_subir frame = new Ventana_subir();
+					frame = new Ventana_subir();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
