@@ -16,10 +16,21 @@ import p2parking.client.ventanas.Ventana_UsuarioExterno;
 import p2parking.client.ventanas.Ventana_alquiler_principal;
 import p2parking.client.ventanas.Ventana_subir;
 import p2parking.jdo.Plaza;
-
+/**
+ * 
+ * @author lander
+ *
+ */
 public class Ventana_alquiler_principal_funcionalidad {
-	
-	public static void botonFavoritos(JPanel panel1, JPanel panel2, JPanel panel3) {
+	/**
+	 * 
+	 * @param panel1 Panel principal de la ventana
+	 * @param panel2 Panel de la izquierda
+	 * @param panel3 Panel de la derecha
+	 * @param plazas Array de las plazas que añades a favoritos
+	 * @param indice Para seleccionar que plaza
+	 */
+	public static void botonFavoritos(JPanel panel1, JPanel panel2, JPanel panel3,ArrayList<Plaza> plazas,int indice) {
 		boolean temp = false;//Remote.getInstance().addPlazaFav(Remote.getInstance().getToken(), plazas.get(indice));
 		if(temp) {
 			JOptionPane.showMessageDialog(panel1, "Plaza añadida a favoritos");
@@ -28,26 +39,53 @@ public class Ventana_alquiler_principal_funcionalidad {
 
 		}
 		else {
-			
+			System.out.println("No se ha añadido a favoritos");
 		}
 		
 	}
-	
+	/**
+	 * 
+	 * @param vent Ventana de la que vienen
+	 */
 	public static void botonReportar(Ventana_alquiler_principal vent){
 		Ventana_Incidencia.main(null);
 		vent.dispose();
 		
 	}
+	/**
+	 * 
+	 * @param vent Ventana de la que vienen
+	 * @param indice Indice del array para saber en que plaza esta
+	 */
 	public static void botonUbi(Ventana_alquiler_principal vent,int indice) {
 		String ubi=Remote.getInstance().getAllPlazas(Remote.getInstance().getToken()).get(indice).getLocalizacion();
 		Ventana_CopiarUbicacion.main(null, ubi);
 	}
 	
+	/**
+	 * 
+	 * @param vent Ventana de la que vienen
+	 * @param plazas Array de las plazas
+	 * @param indice Indice del array para saber en que plaza esta
+	 */
 	public static void botonEvaluar(Ventana_alquiler_principal vent, ArrayList<Plaza> plazas, int indice) {
 		Ventana_UsuarioExterno.main(null,plazas.get(indice));
 		vent.dispose();
 	}
 	
+	/**
+	 * 
+	 * @param ordenado Si est ardenado o no
+	 * @param btnOrden El boton que clickado
+	 * @param plazasOrdenadas Arryde la plazas ordenadas
+	 * @param indice Indice de la plaza
+	 * @param titulo_parking El label del titulo
+	 * @param descripcion_parking El label de la descripcion
+	 * @param Precio El label del precio
+	 * @param lblSeguro el label del seguro
+	 * @param lblPuntuacion el label de la puntuacion
+	 * @param plazas Arraylist de todas las plazas
+	 */
 	public static void botonOrdenar(boolean ordenado, JButton btnOrden, ArrayList<Plaza> plazasOrdenadas, int indice, JLabel titulo_parking, JLabel descripcion_parking, JLabel Precio, JLabel lblSeguro, JLabel lblPuntuacion, ArrayList<Plaza> plazas) {
 		
 		ordenado=!ordenado;
@@ -101,6 +139,18 @@ public class Ventana_alquiler_principal_funcionalidad {
 		
 	}
 	
+	/**
+	 * 
+	 * @param ordenado Si esta ordenada o no
+	 * @param plazasOrdenadas Array de plazas ordenadas
+	 * @param indice Indice del array de plazas
+	 * @param titulo_parking label de titulo
+	 * @param descripcion_parking label de descripcion
+	 * @param Precio label de precio 
+	 * @param lblSeguro label de seguro 
+	 * @param lblPuntuacion label de puntuacion 
+	 * @param plazas array de plazas sin ordenar
+	 */
 	public static void botonSiguiente(boolean ordenado, ArrayList<Plaza> plazasOrdenadas, int indice, JLabel titulo_parking, JLabel descripcion_parking, JLabel Precio, JLabel lblSeguro, JLabel lblPuntuacion, ArrayList<Plaza> plazas) {
 		
 		indice+=1;
@@ -196,7 +246,18 @@ public class Ventana_alquiler_principal_funcionalidad {
 		}
 		
 	}
-	
+	 /**
+	  * 
+	 * @param ordenado Si esta ordenada o no
+	 * @param plazasOrdenadas Array de plazas ordenadas
+	 * @param indice Indice del array de plazas
+	 * @param titulo_parking label de titulo
+	 * @param descripcion_parking label de descripcion
+	 * @param Precio label de precio 
+	 * @param lblSeguro label de seguro 
+	 * @param lblPuntuacion label de puntuacion 
+	 * @param plazas array de plazas sin ordenar
+	  */
 	public static void botonAnterior(boolean ordenado, ArrayList<Plaza> plazasOrdenadas, int indice, JLabel titulo_parking, JLabel descripcion_parking, JLabel Precio, JLabel lblSeguro, JLabel lblPuntuacion, ArrayList<Plaza> plazas) {
 		
 		indice-=1;
@@ -290,12 +351,18 @@ public class Ventana_alquiler_principal_funcionalidad {
 		}
 		
 	}
-	
+	 /**
+	  * 
+	  * @param frame La ventana de la que viene
+	  */
 	public static void ir_usuario(Ventana_alquiler_principal frame) {
 		VentanaUsuario.main(null);
 		frame.dispose();
 	}
-	
+	/**
+	 * 
+	 * @param frame La ventana de la que viene
+	 */
 	public static void subir(Ventana_alquiler_principal frame) {
 		Ventana_subir.main(null);
 		frame.dispose();
