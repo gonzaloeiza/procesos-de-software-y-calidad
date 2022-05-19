@@ -7,9 +7,18 @@ import p2parking.client.ventanas.Inicio_sesion;
 import p2parking.client.ventanas.Ventana_CopiarUbicacion;
 import p2parking.client.ventanas.Ventana_alquiler_principal;
 import p2parking.client.ventanas.Ventana_registro;
-
+/**
+ * 
+ * @author lander
+ *
+ */
 public class Inicio_sesion_funcionalidad {
-
+	/**
+	 * 
+	 * @param vent La ventana de la que vine
+	 * @param a El usuario 
+	 * @param password la constraseña
+	 */
 	public static void botonInicioSesion(Inicio_sesion vent, String a, String password) {
 	Remote.getInstance().logIn(Remote.constructorRequest(a, password));
 		if (a.equals("") || password.equals("")) {
@@ -30,11 +39,18 @@ public class Inicio_sesion_funcionalidad {
 		vent.dispose();
 	}
 	
+	/**
+	 * Metodo que hace que salte la ventana para copiar el correo
+	 */
 	public static void botonContacto() {
 		Ventana_CopiarUbicacion.main(null, "p2parkingCliente@gmail.com");
 		
 	}
 	
+	/**
+	 * 
+	 * @param vent La ventana de la que proviene 
+	 */
 	public static void botonRegistro(Inicio_sesion vent) {
 		Ventana_registro.main(null);
 		vent.dispose();
@@ -42,6 +58,9 @@ public class Inicio_sesion_funcionalidad {
 		
 	}
 	
+	/**
+	 * Metodo para compartir el github dle proyecto
+	 */
 	public static void botonCompartir() {
 		Ventana_CopiarUbicacion.main(null,"https://github.com/gonzaloeiza/procesos-de-software-y-calidad/releases/tag/sprint-2");
 		
