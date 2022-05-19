@@ -8,14 +8,29 @@ import p2parking.client.Remote;
 import p2parking.client.ventanas.Inicio_sesion;
 import p2parking.client.ventanas.Ventana_registro;
 import p2parking.jdo.Usuario;
-
+/**
+ * 
+ * @author lander
+ *
+ */
 public class Ventana_registro_funcionalidad {
 
+	/**
+	 * 
+	 * @param frame La ventana en la que se muestra
+	 */
 	public static void botonAtras(Ventana_registro frame) {
 		Inicio_sesion.main(null);
 		frame.dispose();
 	}
 	
+	/**
+	 * 
+	 * @param ventana La ventana en la que se muestra
+	 * @param a Nombre usuario 
+	 * @param b Correo de usuario
+	 * @param c Contraseña de usuario
+	 */
 	public static void botonRegistro(Ventana_registro ventana, String a, String b, String c) {
 		if (a.equals("") || b.equals("")||c.equals("")) {
 			JOptionPane.showMessageDialog(null, "Rellene todos los campos");
@@ -37,6 +52,10 @@ public class Ventana_registro_funcionalidad {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param panel La ventana en la que se muestra
+	 */
 	public static void botonFotoPerfil(JPanel panel) {
 		JFileChooser filechoser=new JFileChooser();
 		filechoser.showOpenDialog(panel);
