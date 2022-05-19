@@ -137,8 +137,8 @@ public class Ventana_alquiler_principal extends JFrame {
 		JButton btnFavoritos = new JButton("Favoritos");
 		btnFavoritos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean temp = false;
-				Remote.getInstance().addPlazaFav(Remote.constructorRequest(Remote.getInstance().getToken(), plazas.get(indice)));
+				boolean temp = Remote.getInstance().addPlazaFav(Remote.constructorRequest(Remote.getInstance().getToken(), plazas.get(indice)));
+			
 				if(temp) {
 					JOptionPane.showMessageDialog(panelPricipal, "Plaza añadida a favoritos");
 					panel_izquierda.setBackground(Color.green);
@@ -146,7 +146,7 @@ public class Ventana_alquiler_principal extends JFrame {
 
 				}
 				else {
-					
+					System.out.println("No se ha añadido a favoritos");
 				}
 			}
 		});
@@ -218,7 +218,7 @@ public class Ventana_alquiler_principal extends JFrame {
 				if(plazasOrdenadas.get(indice).isSeguro()==true) {
 					lblSeguro.setText("La plaza tiene seguro");
 				}else if(plazasOrdenadas.get(indice).isSeguro()==false) {
-					lblSeguro.setText("La plaza tiene seguro");
+					lblSeguro.setText("La plaza no tiene seguro");
 				}else {
 					lblSeguro.setText("No tenemos informacion");
 				}
@@ -300,7 +300,7 @@ public class Ventana_alquiler_principal extends JFrame {
 					if(plazasOrdenadas.get(indice).isSeguro()==true) {
 						lblSeguro.setText("La plaza tiene seguro");
 					}else if(plazasOrdenadas.get(indice).isSeguro()==false) {
-						lblSeguro.setText("La plaza tiene seguro");
+						lblSeguro.setText("La plaza no tiene seguro");
 					}else {
 						lblSeguro.setText("No tenemos informacion");
 					}
@@ -342,7 +342,7 @@ public class Ventana_alquiler_principal extends JFrame {
 				if(plazas.get(indice).isSeguro()==true) {
 					lblSeguro.setText("La plaza tiene seguro");
 				}else if(plazas.get(indice).isSeguro()==false) {
-					lblSeguro.setText("La plaza tiene seguro");
+					lblSeguro.setText("La plaza no tiene seguro");
 				}else {
 					lblSeguro.setText("No tenemos informacion");
 				}
@@ -413,7 +413,7 @@ public class Ventana_alquiler_principal extends JFrame {
 					if(plazasOrdenadas.get(indice).isSeguro()==true) {
 						lblSeguro.setText("La plaza tiene seguro");
 					}else if(plazasOrdenadas.get(indice).isSeguro()==false) {
-						lblSeguro.setText("La plaza tiene seguro");
+						lblSeguro.setText("La plaza no tiene seguro");
 					}else {
 						lblSeguro.setText("No tenemos informacion");
 					}
@@ -455,7 +455,7 @@ public class Ventana_alquiler_principal extends JFrame {
 				if(plazas.get(indice).isSeguro()==true) {
 					lblSeguro.setText("La plaza tiene seguro");
 				}else if(plazas.get(indice).isSeguro()==false) {
-					lblSeguro.setText("La plaza tiene seguro");
+					lblSeguro.setText("La plaza no tiene seguro");
 				}else {
 					lblSeguro.setText("No tenemos informacion");
 				}
@@ -501,7 +501,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		if(plazas.get(indice).isSeguro()==true) {
 			lblSeguro.setText("La plaza tiene seguro");
 		}else if(plazas.get(indice).isSeguro()==false) {
-			lblSeguro.setText("La plaza tiene seguro");
+			lblSeguro.setText("La plaza no tiene seguro");
 		}else {
 			lblSeguro.setText("No tenemos informacion");
 		}
