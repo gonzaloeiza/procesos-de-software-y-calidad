@@ -199,7 +199,7 @@ public class Remote {
 			return false;
 		}
 		return true;
-	}*/
+	}
 	//Post
 	public ArrayList<Plaza> getMisPlazas(long token) {
 		donationsWebTarget = webTarget.path(path +  "/getMisPlazas");
@@ -212,7 +212,7 @@ public class Remote {
 		}
 		ArrayList<Plaza> resultado = response.readEntity(ArrayList.class);
 		return resultado;
-	}
+	}*/
 	//Post
 	public boolean addPlazaFav(ArrayList<String> requestBody) {
 		donationsWebTarget = webTarget.path(path +  "/addPlazaFav");
