@@ -23,12 +23,10 @@ import p2parking.testCategories.IntegrationTest;
 @PerfTest(invocations = 5)
 @Required(max = 1200, average = 250)
 public class IncidenciaDAOTest {
-
 	PersistenceManager pm;
 	PersistenceManagerFactory pmf;
 	IncidenciaDAO incidenciaDAO;
-	
-	Incidencia i1;
+	Incidencia caso1;
 	
 	@Rule
 	public ContiPerfRule rule = new ContiPerfRule();
@@ -38,37 +36,46 @@ public class IncidenciaDAOTest {
 		incidenciaDAO = IncidenciaDAO.getInstance();
 		pm = org.mockito.Mockito.mock(PersistenceManager.class);
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-		
 		when(pm.currentTransaction()).thenReturn(pmf.getPersistenceManager().currentTransaction());
 		incidenciaDAO.setPm(pm);
-		
-		i1 = new Incidencia("No hay luz", "En la plaza que he reservado no hay electricidad y no puedo ver correctamente");
+		caso1 = new Incidencia("Moto", "Hay una moto aparcada en la plaza reservada.");
 	}
+	
+	
 	
 	@Test
 	public void testSave() {
-		when(pm.makePersistent(i1)).thenReturn(i1);
-		assertTrue(incidenciaDAO.save(i1));
+		when(pm.makePersistent(caso1)).thenReturn(caso1);
+		assertTrue(incidenciaDAO.save(caso1));
 	}
+	
+	
 	
 	@Test
 	public void testDelete() {
-		when(pm.makePersistent(i1)).thenReturn(i1);
-		assertTrue(incidenciaDAO.delete(i1));
+		when(pm.makePersistent(caso1)).thenReturn(caso1);
+		assertTrue(incidenciaDAO.delete(caso1));
 	}
+	
+	
 	
 	@Test
 	public void testGetAll() {
 		assertNull(incidenciaDAO.getAll());
 	}
 	
+	
+	
 	@Test
 	public void testFind() {
 		assertNull(incidenciaDAO.find(""));
 	}
 	
+	
+	
 	@Test
 	public void testFindAll() {
 		assertNull(incidenciaDAO.findAll(""));
 	}
+	
 }
