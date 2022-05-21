@@ -18,6 +18,7 @@ import p2parking.client.ventanas.funcionalidad.Ventana_Incidencia_funcionalidad;
 import p2parking.jdo.Incidencia;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -62,10 +63,7 @@ public class Ventana_Incidencia extends JFrame {
 	    catch (IllegalAccessException e) {
 	       // handle exception
 	    }
-	    	
-	
-	
-    	
+	  		
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -111,15 +109,26 @@ public class Ventana_Incidencia extends JFrame {
 		panel = new JPanel();
 		panelPricipal.add(panel, BorderLayout.SOUTH);
 		
-		btnSunir = new JButton("Establecer incidencia");
+		btnSunir = new JButton("Crear incidencia");
 		btnSunir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if (txtTitulo.getText() == null || txtTitulo.getText().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Error. No has escrito ningún título");
+					return;
+				}
+				
+				if (txtMensaje.getText() == null || txtMensaje.getText().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Error. No has escrito ninguna explicación");
+					return;
+				}
+				
 				Ventana_Incidencia_funcionalidad.botonIncidencia(frame, txtTitulo.getText(), txtMensaje.getText());
 			}
 		});
 		panel.add(btnSunir);
 		
-		btnCancel = new JButton("Volver");
+		btnCancel = new JButton("Cancelar");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Ventana_Incidencia_funcionalidad.botonVolver(frame);
