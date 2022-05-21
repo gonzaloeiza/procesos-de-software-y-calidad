@@ -36,7 +36,6 @@ public class Inicio_sesion_funcionalidad {
 				
 			}
 		}
-		vent.dispose();
 	}
 	
 	/**
