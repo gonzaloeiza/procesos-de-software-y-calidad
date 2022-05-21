@@ -92,6 +92,7 @@ public class Ventana_Incidencia extends JFrame {
 		panelPricipal.setLayout(new BorderLayout(0, 0));
 		
 		txtTitulo = new JTextField();
+		txtTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		panelPricipal.add(txtTitulo, BorderLayout.NORTH);
 		panelHolderUsuario = new TextPrompt("Titulo", txtTitulo);
 		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
@@ -99,6 +100,7 @@ public class Ventana_Incidencia extends JFrame {
 		txtTitulo.setColumns(10);
 		
 		txtMensaje = new JTextField();
+		txtMensaje.setHorizontalAlignment(SwingConstants.CENTER);
 		txtMensaje.setDropMode(DropMode.INSERT);
 		panelHolderUsuario = new TextPrompt("Mensaje", txtMensaje);
 		panelHolderUsuario.setHorizontalAlignment(SwingConstants.CENTER);
