@@ -111,7 +111,7 @@ public class Ventana_alquiler_principal_funcionalidad {
 		if(String.valueOf(plazasOrdenadas.get(indice).getPrecio())==null) {
 			Precio.setText("No hay precio");
 		}else {
-			Precio.setText("El precio es de:" + String.valueOf(plazasOrdenadas.get(indice).getPrecio()));
+			Precio.setText("El precio es de: " + String.valueOf(plazasOrdenadas.get(indice).getPrecio()) + " €");
 		}
 		//lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 		
@@ -175,7 +175,7 @@ public class Ventana_alquiler_principal_funcionalidad {
 			if(String.valueOf(plazasOrdenadas.get(indice).getPrecio())==null) {
 				Precio.setText("No hay precio");
 			}else {
-				Precio.setText("El precio es de:" + String.valueOf(plazasOrdenadas.get(indice).getPrecio()));
+				Precio.setText("El precio es de: " + String.valueOf(plazasOrdenadas.get(indice).getPrecio()) + " €");
 			}
 			//lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 			
@@ -217,7 +217,7 @@ public class Ventana_alquiler_principal_funcionalidad {
 		if(String.valueOf(plazas.get(indice).getPrecio())==null) {
 			Precio.setText("No hay precio");
 		}else {
-			Precio.setText("El precio es de:" + String.valueOf(plazas.get(indice).getPrecio()));
+			Precio.setText("El precio es de: " + String.valueOf(plazasOrdenadas.get(indice).getPrecio()) + " €");
 		}
 		//lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 		
@@ -281,7 +281,7 @@ public class Ventana_alquiler_principal_funcionalidad {
 			if(String.valueOf(plazasOrdenadas.get(indice).getPrecio())==null) {
 				Precio.setText("No hay precio");
 			}else {
-				Precio.setText("El precio es de:" + String.valueOf(plazasOrdenadas.get(indice).getPrecio()));
+				Precio.setText("El precio es de: " + String.valueOf(plazasOrdenadas.get(indice).getPrecio()) + " €");
 			}
 			//lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 			
@@ -323,7 +323,7 @@ public class Ventana_alquiler_principal_funcionalidad {
 		if(String.valueOf(plazas.get(indice).getPrecio())==null) {
 			Precio.setText("No hay precio");
 		}else {
-			Precio.setText("El precio es de:" + String.valueOf(plazas.get(indice).getPrecio()));
+			Precio.setText("El precio es de: " + String.valueOf(plazasOrdenadas.get(indice).getPrecio()) + " €");
 		}
 		//lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 		

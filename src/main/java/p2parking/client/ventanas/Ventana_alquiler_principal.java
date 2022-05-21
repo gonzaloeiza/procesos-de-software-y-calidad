@@ -153,7 +153,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		
 		panel_derecha.add(btnFavoritos);
 		
-		JButton btnReportar = new JButton("Reportar usuario");
+		JButton btnReportar = new JButton("Crear una incidendia");
 		btnReportar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Ventana_alquiler_principal_funcionalidad.botonReportar(frame);
@@ -211,7 +211,7 @@ public class Ventana_alquiler_principal extends JFrame {
 				if(String.valueOf(plazasOrdenadas.get(indice).getPrecio())==null) {
 					Precio.setText("No hay precio");
 				}else {
-					Precio.setText("El precio es de:" + String.valueOf(plazasOrdenadas.get(indice).getPrecio()));
+					Precio.setText("El precio es de: " + String.valueOf(plazasOrdenadas.get(indice).getPrecio()) + " €");
 				}
 				lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 				
@@ -293,7 +293,7 @@ public class Ventana_alquiler_principal extends JFrame {
 					if(String.valueOf(plazasOrdenadas.get(indice).getPrecio())==null) {
 						Precio.setText("No hay precio");
 					}else {
-						Precio.setText("El precio es de:" + String.valueOf(plazasOrdenadas.get(indice).getPrecio()));
+						Precio.setText("El precio es de: " + String.valueOf(plazasOrdenadas.get(indice).getPrecio()) + " €");
 					}
 					lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 					
@@ -335,7 +335,7 @@ public class Ventana_alquiler_principal extends JFrame {
 				if(String.valueOf(plazas.get(indice).getPrecio())==null) {
 					Precio.setText("No hay precio");
 				}else {
-					Precio.setText("El precio es de:" + String.valueOf(plazas.get(indice).getPrecio()));
+					Precio.setText("El precio es de: " + String.valueOf(plazasOrdenadas.get(indice).getPrecio()) + " €");
 				}
 				lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 				
@@ -406,7 +406,7 @@ public class Ventana_alquiler_principal extends JFrame {
 					if(String.valueOf(plazasOrdenadas.get(indice).getPrecio())==null) {
 						Precio.setText("No hay precio");
 					}else {
-						Precio.setText("El precio es de:" + String.valueOf(plazasOrdenadas.get(indice).getPrecio()));
+						Precio.setText("El precio es de: " + String.valueOf(plazasOrdenadas.get(indice).getPrecio()) + " €");
 					}
 					lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 					
@@ -448,7 +448,7 @@ public class Ventana_alquiler_principal extends JFrame {
 				if(String.valueOf(plazas.get(indice).getPrecio())==null) {
 					Precio.setText("No hay precio");
 				}else {
-					Precio.setText("El precio es de:" + String.valueOf(plazas.get(indice).getPrecio()));
+					Precio.setText("El precio es de: " + String.valueOf(plazasOrdenadas.get(indice).getPrecio()) + " €");
 				}
 				lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
 				
@@ -494,7 +494,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		if(String.valueOf(plazas.get(indice).getPrecio())==null) {
 			Precio.setText("No hay precio");
 		}else {
-			Precio.setText("El precio es de:" + String.valueOf(plazas.get(indice).getPrecio()));
+			Precio.setText("El precio es de: " + String.valueOf(plazasOrdenadas.get(indice).getPrecio()) + " €");
 		}
 		
 		lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
