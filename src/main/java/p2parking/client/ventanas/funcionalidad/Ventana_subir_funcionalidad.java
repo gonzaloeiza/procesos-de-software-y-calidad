@@ -59,8 +59,8 @@ public class Ventana_subir_funcionalidad {
 				(new Date()).getTime(),titulo,descripcion,seguro)));
 		if(temp) {
 			Ventana_alquiler_principal.main(null);
+			vent.dispose();	// primero cerrar la ventana anterior para que no se vea por detrás de la JOptionPane
 			JOptionPane.showMessageDialog(null, "Se ha publicado tu plaza!");
-			vent.dispose();
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Ha habido un error al prublicar la plaza. Por favor inténtalo más tarde");
