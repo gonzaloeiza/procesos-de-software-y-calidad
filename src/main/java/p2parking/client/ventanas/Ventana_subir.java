@@ -10,9 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -259,9 +261,88 @@ public class Ventana_subir extends JFrame {
 		panel_abajo.add(btnSubir);
 		btnSubir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_subir_funcionalidad.botonSubir(textField.getText(),textField_3.getText(),textField_4.getText(),
-						textField_5.getText(),textField_7.getText(),textField_6.getText(),txtTitulo.getText(),
-						txtDescipcion.getText(),seguro,txtPrecio.getText(),frame);
+				
+				// comprobar que todos los text fields tengan texto
+				if (textField.getText() == null || textField.getText().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Rellena todos los campos antes de purblicar el anuncio");
+					return;
+				}
+				
+				if (textField_3.getText() == null || textField_3.getText().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Rellena todos los campos antes de purblicar el anuncio");
+					return;
+				}
+				
+				if (textField_4.getText() == null || textField_4.getText().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Rellena todos los campos antes de purblicar el anuncio");
+					return;
+				}
+				
+				if (textField_5.getText() == null || textField_5.getText().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Rellena todos los campos antes de purblicar el anuncio");
+					return;
+				}
+				
+				if (textField_7.getText() == null || textField_7.getText().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Rellena todos los campos antes de purblicar el anuncio");
+					return;
+				}
+				
+				if (textField_6.getText() == null || textField_6.getText().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Rellena todos los campos antes de purblicar el anuncio");
+					return;
+				}
+				
+				if (txtTitulo.getText() == null || txtTitulo.getText().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Rellena todos los campos antes de purblicar el anuncio");
+					return;
+				}
+				
+				if (txtDescipcion.getText() == null || txtDescipcion.getText().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Rellena todos los campos antes de purblicar el anuncio");
+					return;
+				}
+				
+				// comprobar el valor de los textfields de las coordenadas
+				if (!comprobarSiEsNumero(textField.getText())) {
+					JOptionPane.showMessageDialog(null, "El formato de las coordenadas no es correcto");
+					return;
+				}
+				
+				if (!comprobarSiEsNumero(textField_3.getText())) {
+					JOptionPane.showMessageDialog(null, "El formato de las coordenadas no es correcto");
+					return;
+				}
+				
+				if (!comprobarSiEsNumero(textField_4.getText())) {
+					JOptionPane.showMessageDialog(null, "El formato de las coordenadas no es correcto");
+					return;
+				}
+				
+				if (!comprobarSiEsNumero(textField_5.getText())) {
+					JOptionPane.showMessageDialog(null, "El formato de las coordenadas no es correcto");
+					return;
+				}
+				
+				if (!comprobarSiEsNumero(textField_7.getText())) {
+					JOptionPane.showMessageDialog(null, "El formato de las coordenadas no es correcto");
+					return;
+				}
+				
+				if (!comprobarSiEsNumero(textField_6.getText())) {
+					JOptionPane.showMessageDialog(null, "El formato de las coordenadas no es correcto");
+					return;
+				}
+				
+				// comprobar que el precio tenga un buen formato
+				if (!comprobarSiEsNumero(txtPrecio.getText())) {
+					JOptionPane.showMessageDialog(null, "El formato del precio no es correcto");
+					return;
+				}
+
+				Ventana_subir_funcionalidad.botonSubir(textField.getText(), textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_7.getText(), textField_6.getText(), txtTitulo.getText(), txtDescipcion.getText(), seguro, txtPrecio.getText(), frame);
+				
+				
 				/*
 				cordenada1=textField.getText()+"º"+textField_3.getText()+"'"+textField_4.getText()+"\"N";
 				cordenada2=textField_5.getText()+"º"+textField_7.getText()+"'"+textField_6.getText()+"\"W";
@@ -318,6 +399,16 @@ public class Ventana_subir extends JFrame {
 			}
 		});
     }
+	
+	private boolean comprobarSiEsNumero (String precio) {
+		Pattern regexEsNumeroMayorQueCero = Pattern.compile("-?\\d+(\\.\\d+)?");
+		
+		if (precio == null)
+			return(false);
+		else
+			return regexEsNumeroMayorQueCero.matcher(precio).matches();
+		
+	}
 
 
 }
