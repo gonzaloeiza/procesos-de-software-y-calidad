@@ -33,7 +33,7 @@ public class Inicio_sesion_funcionalidad {
 			} else {
 				Remote.getInstance().setToken(temp);
 				Ventana_alquiler_principal.main(null);
-				
+				vent.dispose();
 			}
 		}
 	}
