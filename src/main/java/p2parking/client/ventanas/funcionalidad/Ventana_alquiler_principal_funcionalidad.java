@@ -24,27 +24,6 @@ import p2parking.jdo.Plaza;
 public class Ventana_alquiler_principal_funcionalidad {
 	/**
 	 * 
-	 * @param panel1 Panel principal de la ventana
-	 * @param panel2 Panel de la izquierda
-	 * @param panel3 Panel de la derecha
-	 * @param plazas Array de las plazas que añades a favoritos
-	 * @param indice Para seleccionar que plaza
-	 */
-	public static void botonFavoritos(JPanel panel1, JPanel panel2, JPanel panel3,ArrayList<Plaza> plazas,int indice) {
-		boolean temp = false;//Remote.getInstance().addPlazaFav(Remote.getInstance().getToken(), plazas.get(indice));
-		if(temp) {
-			JOptionPane.showMessageDialog(panel1, "Plaza añadida a favoritos");
-			panel2.setBackground(Color.green);
-			panel3.setBackground(Color.green);
-
-		}
-		else {
-			System.out.println("No se ha añadido a favoritos");
-		}
-		
-	}
-	/**
-	 * 
 	 * @param vent Ventana de la que vienen
 	 */
 	public static void botonReportar(Ventana_alquiler_principal vent){

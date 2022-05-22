@@ -132,26 +132,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		
 		JPanel panel_derecha = new JPanel();
 		panel_actualizar.add(panel_derecha, BorderLayout.EAST);
-		panel_derecha.setLayout(new GridLayout(6, 1, 0, 0));
-		
-		JButton btnFavoritos = new JButton("Favoritos");
-		btnFavoritos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				boolean temp = Remote.getInstance().addPlazaFav(Remote.constructorRequest(Remote.getInstance().getToken(), plazas.get(indice)));
-			
-				if(temp) {
-					JOptionPane.showMessageDialog(panelPricipal, "Plaza añadida a favoritos");
-					panel_izquierda.setBackground(Color.green);
-					panel_derecha.setBackground(Color.green);
-
-				}
-				else {
-					System.out.println("No se ha añadido a favoritos");
-				}
-			}
-		});
-		
-		panel_derecha.add(btnFavoritos);
+		panel_derecha.setLayout(new GridLayout(5, 1, 0, 0));
 		
 		JButton btnReportar = new JButton("Crear una incidendia");
 		btnReportar.addActionListener(new ActionListener() {
@@ -164,15 +145,6 @@ public class Ventana_alquiler_principal extends JFrame {
 		JLabel Precio = new JLabel();
 		Precio.setText("0");
 		panel_derecha.add(Precio);
-		
-		JButton btnEvaluarUsuario = new JButton("Evaluar/Info Usuario");
-		btnEvaluarUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Ventana_alquiler_principal_funcionalidad.botonEvaluar(frame, plazas, indice);
-				
-			}
-		});
-		panel_derecha.add(btnEvaluarUsuario);
 		
 		JLabel lblPuntuacion = new JLabel();
 		panel_derecha.add(lblPuntuacion);
@@ -498,6 +470,15 @@ public class Ventana_alquiler_principal extends JFrame {
 		}
 		
 		lblPuntuacion.setText(Integer.toString(plazas.get(indice).getPropietario().getPuntuacion()));
+		
+		JButton btnEvaluarUsuario = new JButton("Evaluar/Info Usuario");
+		btnEvaluarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ventana_alquiler_principal_funcionalidad.botonEvaluar(frame, plazas, indice);
+				
+			}
+		});
+		panel_derecha.add(btnEvaluarUsuario);
 		if(plazas.get(indice).isSeguro()==true) {
 			lblSeguro.setText("La plaza tiene seguro");
 		}else if(plazas.get(indice).isSeguro()==false) {

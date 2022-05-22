@@ -20,8 +20,6 @@ import p2parking.jdo.Incidencia;
 import p2parking.testCategories.IntegrationTest;
 
 @Category(IntegrationTest.class)
-@PerfTest(invocations = 5)
-@Required(max = 1200, average = 250)
 public class IncidenciaDAOTest {
 
 
@@ -30,8 +28,8 @@ PersistenceManager pm;
 	IncidenciaDAO incidenciaDAO;
 	Incidencia caso1;
 	
-	@Rule
-	public ContiPerfRule rule = new ContiPerfRule();
+	
+
 	
 	@Before
 	public void setUp() {
