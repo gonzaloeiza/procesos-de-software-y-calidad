@@ -36,8 +36,8 @@ public class Ventana_alquiler_principal_funcionalidad {
 	 * @param vent Ventana de la que vienen
 	 * @param indice Indice del array para saber en que plaza esta
 	 */
-	public static void botonUbi(Ventana_alquiler_principal vent,int indice) {
-		String ubi=Remote.getInstance().getAllPlazas(Remote.getInstance().getToken()).get(indice).getLocalizacion();
+	public static void botonUbi(Ventana_alquiler_principal vent,int indice,ArrayList<Plaza> plaza) {
+		String ubi=Remote.getInstance().getLocalizacion(Remote.constructorRequest(Remote.getInstance().getToken(),plaza.get(indice)));
 		Ventana_CopiarUbicacion.main(null, ubi);
 	}
 	

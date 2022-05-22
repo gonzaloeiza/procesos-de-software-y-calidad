@@ -231,7 +231,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		JButton btnUbicacion = new JButton("Ubicacion");
 		btnUbicacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ventana_alquiler_principal_funcionalidad.botonUbi(frame, indice);
+				Ventana_alquiler_principal_funcionalidad.botonUbi(frame, indice,plazas);
 			}
 		});
 		panel_8.add(btnUbicacion);
