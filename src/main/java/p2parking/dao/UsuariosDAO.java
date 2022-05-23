@@ -20,14 +20,22 @@ public class UsuariosDAO implements iAccesoObjeto<Usuario> {
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		pm=pmf.getPersistenceManager();
 	}
-	
+	 /**
+	   * Metodo get para conseguir la instancia del Usuario
+	   * 
+	   * @return devuelve una instancia 
+	   */  
 	public static UsuariosDAO getInstance(){
 		if(instance == null) {
 			instance =  new UsuariosDAO();
 		}
 		return instance;
 	}
-	
+	/**
+	   * Metodo para acceder al valor 
+	   * 
+	   * @param pm la variable de persistenceManager
+	   */ 
 	public void setPm(PersistenceManager pm) {
 		this.pm = pm;
 	}
