@@ -24,6 +24,11 @@ public class PlazasDAO implements iAccesoObjeto<Plaza> {
 		pm = pmf.getPersistenceManager();
 	}
 
+	 /**
+	   * Metodo get para conseguir la instancia del Plaza
+	   * 
+	   * @return devuelve una instancia 
+	   */  
 	public static PlazasDAO getInstance() {
 		if (instance == null) {
 			instance = new PlazasDAO();
@@ -31,6 +36,11 @@ public class PlazasDAO implements iAccesoObjeto<Plaza> {
 		return instance;
 	}
 
+	/**
+	   * Metodo para acceder al valor 
+	   * 
+	   * @param pm la variable de persistenceManager
+	   */ 
 	public void setPm(PersistenceManager pm) {
 		this.pm = pm;
 	}

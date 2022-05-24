@@ -22,45 +22,49 @@ import org.junit.experimental.categories.Category;
 import p2parking.jdo.Plaza;
 import p2parking.testCategories.IntegrationTest;
 
+@PerfTest(invocations = 5)
+@Required(max = 1200, average = 250)
 @Category(IntegrationTest.class)
 public class PlazasDAOTest {
-	
+
 	PersistenceManager pm;
 	PersistenceManagerFactory pmf;
 	PlazasDAO plazasDAO;
-	
+
 	Plaza p1;
-	
-	
+
+	@Rule
+	public ContiPerfRule rule = new ContiPerfRule();
+
 	@Before
 	public void setUp() {
 		plazasDAO = PlazasDAO.getInstance();
 		pm = org.mockito.Mockito.mock(PersistenceManager.class);
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-		
+
 		when(pm.currentTransaction()).thenReturn(pmf.getPersistenceManager().currentTransaction());
 		plazasDAO.setPm(pm);
-		
+
 		p1 = new Plaza(12.2f, "", new ArrayList<String>(), new Date(2000, 03, 15).getTime());
 	}
-	
+
 	@Test
 	public void testSave() {
 		when(pm.makePersistent(p1)).thenReturn(p1);
 		assertTrue(plazasDAO.save(p1));
 	}
-	
+
 	@Test
 	public void testDelete() {
 		when(pm.makePersistent(p1)).thenReturn(p1);
 		assertTrue(plazasDAO.delete(p1));
 	}
-	
+
 	@Test
 	public void testFind() {
 		assertNull(plazasDAO.find(""));
 	}
-	
+
 	@Test
 	public void testFindAll() {
 		assertNull(plazasDAO.findAll(""));
