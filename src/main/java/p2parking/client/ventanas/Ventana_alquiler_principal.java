@@ -148,6 +148,7 @@ public class Ventana_alquiler_principal extends JFrame {
 		
 		JLabel lblPuntuacion = new JLabel();
 		panel_derecha.add(lblPuntuacion);
+		lblPuntuacion.setText(String.valueOf(plazas.get(indice).getPropietario().getPuntuacion()));
 		
 		JLabel lblSeguro = new JLabel();
 		lblSeguro.setText("0");
@@ -475,7 +476,8 @@ public class Ventana_alquiler_principal extends JFrame {
 		btnEvaluarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Ventana_alquiler_principal_funcionalidad.botonEvaluar(frame, plazas, indice);
-				
+				plazas=Remote.getInstance().getAllPlazas(Remote.getInstance().getToken());
+				repaint();
 			}
 		});
 		panel_derecha.add(btnEvaluarUsuario);
