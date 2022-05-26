@@ -291,7 +291,17 @@ public class Remote {
 		ArrayList<Plaza> ret = gson.fromJson(r, new TypeToken<List<Plaza>>(){}.getType());
 		return ret;
 	}
-			
+		
+	public boolean adminLogin(ArrayList<String> requestBody) {
+        donationsWebTarget = webTarget.path(path +  "/adminLogin");
+        invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+        Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
+        if(response.getStatus() != Status.OK.getStatusCode()) {
+            return false;
+        }
+        return true;
+    }
+	
 	public static ArrayList<String> constructorRequest(Object... args){
 		ArrayList<String> ret = new ArrayList<>();
 		Gson gson = new Gson();

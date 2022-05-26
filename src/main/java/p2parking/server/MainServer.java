@@ -27,6 +27,9 @@ import p2parking.jdo.Usuario;
 public class MainServer {
 	
 	private static HashMap<Long, Usuario> tokenUsuarios = new HashMap<>(); //mapa de usuarios logeados
+	private static boolean isAdminLoggedIn = false;
+	private static String adminPassword = "12345";
+
 	
 	UsuariosDAO usuarioDAO = UsuariosDAO.getInstance();
 	AlquilerDAO alquilerDAO = AlquilerDAO.getInstance();
@@ -326,4 +329,17 @@ public class MainServer {
 		return Response.status(401, "No estas autenticado").build();
 		
 	}
+	
+	@POST
+    @Path("/adminLogin")
+    public Response adminLogin(ArrayList<String> requestBody) {
+        Gson gson = new Gson();
+        String contrasena = gson.fromJson(requestBody.get(0), String.class);
+        System.out.println(contrasena);
+        if (contrasena.equals(adminPassword)) {
+            isAdminLoggedIn = true;
+            return Response.status(200, "Login administrador correcto").build();
+        }
+        return Response.status(401, "Contraseña incorrectos").build();
+    }
 }

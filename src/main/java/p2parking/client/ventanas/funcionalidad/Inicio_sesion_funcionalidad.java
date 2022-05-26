@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import p2parking.client.Remote;
 import p2parking.client.ventanas.Inicio_sesion;
+import p2parking.client.ventanas.VentanaAdminLogIn;
 import p2parking.client.ventanas.Ventana_CopiarUbicacion;
 import p2parking.client.ventanas.Ventana_alquiler_principal;
 import p2parking.client.ventanas.Ventana_registro;
@@ -65,6 +66,10 @@ public class Inicio_sesion_funcionalidad {
 		
 	}
 
+	public static void botonAdministrador(Inicio_sesion vent) {
+        VentanaAdminLogIn.main(null);
+        vent.dispose();
+    }
 	
 
 }

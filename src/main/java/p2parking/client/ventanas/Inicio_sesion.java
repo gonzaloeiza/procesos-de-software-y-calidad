@@ -29,8 +29,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JPasswordField;
 
 /**
- *	Ventana para inicio de sesion
- * 
+ * Ventana para inicio de sesion
+ *
  */
 public class Inicio_sesion extends JFrame {
 
@@ -43,24 +43,24 @@ public class Inicio_sesion extends JFrame {
 	private JTextField user;
 	private JPasswordField password;
 	private TextPrompt panelHolderUsuario;
-	
+
 	/**
 	 * Constructor de la ventana
-	 * 
+	 *
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
 		try {
-			// Set cross-platform Java L&F (also called "Metal")
+// Set cross-platform Java L&F (also called "Metal")
 			UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
 		} catch (UnsupportedLookAndFeelException e) {
-			// handle exception
+// handle exception
 		} catch (ClassNotFoundException e) {
-			// handle exception
+// handle exception
 		} catch (InstantiationException e) {
-			// handle exception
+// handle exception
 		} catch (IllegalAccessException e) {
-			// handle exception
+// handle exception
 		}
 
 		EventQueue.invokeLater(new Runnable() {
@@ -77,7 +77,7 @@ public class Inicio_sesion extends JFrame {
 
 	/**
 	 * Funcion para cerrar la ventana
-	 * 
+	 *
 	 * @return No usado
 	 */
 	public static Inicio_sesion cerarventana() {
@@ -91,7 +91,7 @@ public class Inicio_sesion extends JFrame {
 	 */
 	public Inicio_sesion() {
 		setTitle("P2Parking");
-    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 481);
 		panelPricipal = new JPanel();
 		panelPricipal.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -109,26 +109,22 @@ public class Inicio_sesion extends JFrame {
 		inicio_sesion.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				Inicio_sesion_funcionalidad.botonInicioSesion(frame,user.getText(),password.getText());
+				Inicio_sesion_funcionalidad.botonInicioSesion(frame, user.getText(), password.getText());
 			}
 		});
 		panelabajo.add(inicio_sesion);
 
-		JPanel panel_inutil_2 = new JPanel();
-		panelabajo.add(panel_inutil_2);
-
 		JPanel panel_inutil3 = new JPanel();
 		panelabajo.add(panel_inutil3);
 		panel_inutil3.setLayout(new BorderLayout(0, 0));
-		
+
 		JButton contacto = new JButton("Contacto");
 		panel_inutil3.add(contacto);
-		contacto.addActionListener(new ActionListener(){
+		contacto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Inicio_sesion_funcionalidad.botonContacto();
 			}
 		});
-
 
 		JButton registro = new JButton("Registrarse");
 		panelabajo.add(registro);
@@ -141,10 +137,18 @@ public class Inicio_sesion extends JFrame {
 		JPanel panle_inutil4 = new JPanel();
 		panelabajo.add(panle_inutil4);
 		panle_inutil4.setLayout(new BorderLayout(0, 0));
-		
+
 		JButton compartir = new JButton("Compartir");
 		panle_inutil4.add(compartir);
-		compartir.addActionListener(new ActionListener(){
+
+		JButton btnAdministrador = new JButton("Administrador");
+		btnAdministrador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Inicio_sesion_funcionalidad.botonAdministrador(frame);
+			}
+		});
+		panelabajo.add(btnAdministrador);
+		compartir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Inicio_sesion_funcionalidad.botonCompartir();
 			}
@@ -155,7 +159,7 @@ public class Inicio_sesion extends JFrame {
 		panel_arriba.setLayout(new GridLayout(1, 4, 5, 25));
 
 		JLabel imagen = new JLabel("");
-    	panel_arriba.add(imagen);
+		panel_arriba.add(imagen);
 
 		JPanel panel_central = new JPanel();
 		panelPricipal.add(panel_central, BorderLayout.CENTER);

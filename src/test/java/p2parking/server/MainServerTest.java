@@ -286,4 +286,18 @@ public class MainServerTest {
 		assertEquals(401, mainServer.getLocalizacion(requestBody).getStatus());
 		
 	}
+	
+	@Test
+    public void testAdminLogin() {
+        Gson gson = new Gson();
+        ArrayList<String> requestBody = new ArrayList<String>();
+        requestBody.add(gson.toJson("12345"));
+
+        assertEquals(200, mainServer.adminLogin(requestBody).getStatus());
+
+        ArrayList<String> requestBody2 = new ArrayList<String>();
+        requestBody2.add(gson.toJson("1234"));
+
+        assertEquals(401, mainServer.adminLogin(requestBody2).getStatus());
+    }
 }
