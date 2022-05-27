@@ -38,9 +38,13 @@ jobs:
       run: mysql -uroot -h127.0.0.1 < src/sql/create-p2parkingdb.sql  
     - name: compile the code
       run: mvn clean compile
-    - name: Test with Maven
-      run: mvn test
+    - name: Unit Tests with Maven
+      run: mvn test -Dgroups="p2parking.testCategories.UnitTest"
     - name: Datanucleus enhance
       run: mvn datanucleus:enhance
     - name: Create Datanucleus schema
       run: mvn datanucleus:schema-create
+    -name: Insert examples to database
+      run: mvn exec:java -PinsertarEjemplos
+    -name: Integration tests with Maven
+      run: mvn test -Dgroups="p2parking.testCategories.IntegrationTest"
