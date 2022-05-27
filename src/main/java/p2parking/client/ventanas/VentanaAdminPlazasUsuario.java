@@ -10,7 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import p2parking.client.Remote;
+import p2parking.client.ventanas.funcionalidad.VentanaAdminPlazasUsuarioFuncionalidad;
 import p2parking.client.ventanas.funcionalidad.VentanaAdminPrincipalFuncionalidad;
+import p2parking.jdo.Plaza;
 import p2parking.jdo.Usuario;
 
 import java.awt.Font;
@@ -20,23 +22,22 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class VentanaAdminPrincipal extends JFrame {
 
-	private static VentanaAdminPrincipal frame;
-	private static List<Usuario> listaUsuarios = Remote.getInstance().adminGetAllUsers();
-
+public class VentanaAdminPlazasUsuario extends JFrame {
+	
+	private static VentanaAdminPlazasUsuario frame;
 	/**
-	 * Constructor de la ventana
-	 * 
+	 *Constructor de la ventana
+
 	 * @param args No usado
 	 */
-	public static void main(String[] args) {
+	public static void main(String correoUsuario) {
 		// TODO Auto-generated method stub
-
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new VentanaAdminPrincipal();
+					frame = new VentanaAdminPlazasUsuario(correoUsuario);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,27 +47,27 @@ public class VentanaAdminPrincipal extends JFrame {
 
 	}
 
-	public VentanaAdminPrincipal() {
+	
+	public VentanaAdminPlazasUsuario(String correoUsuario) {
+		System.out.println(correoUsuario);
+		List<Plaza> listaPlazas = Remote.getInstance().adminGetPlazasUsuario(Remote.constructorRequest(correoUsuario));
+		System.out.println(listaPlazas);
+		
 		getContentPane().setLayout(null);
-
-		JLabel lblListadoDeUsuarios = new JLabel("Listado de Usuarios");
-		lblListadoDeUsuarios.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblListadoDeUsuarios.setBounds(243, 30, 165, 16);
-		getContentPane().add(lblListadoDeUsuarios);
-
+		
 		setTitle("P2Parking");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 666, 481);
-
+		
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setLocation(99, 81);
 		panel.setSize(382, 238);
 
 		List<String> myList = new ArrayList<>(10);
-		for (int i = 0; i < listaUsuarios.size(); i++) {
-			myList.add(listaUsuarios.get(i).getCorreo() + ": " + listaUsuarios.get(i).getNombre());
+		for (int i = 0; i < listaPlazas.size(); i++) {
+			myList.add(listaPlazas.get(i).getTitulo() + ": " + listaPlazas.get(i).getPrecio() + "$");
 		}
-
+		
 		JList<String> list = new JList<String>(myList.toArray(new String[myList.size()]));
 //		 JList<String> list = new JList<String>();
 		JScrollPane scrollPane = new JScrollPane();
@@ -75,15 +76,15 @@ public class VentanaAdminPrincipal extends JFrame {
 		panel.add(scrollPane);
 
 		getContentPane().add(panel);
-
-		JButton btnVisualizarPlazas = new JButton("ver plazas del usuario");
-		btnVisualizarPlazas.addActionListener(new ActionListener() {
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaAdminPrincipalFuncionalidad.verPlazasDeUsuario(frame, listaUsuarios, list.getSelectedIndex());
+				VentanaAdminPlazasUsuarioFuncionalidad.botonVolver(frame);
 			}
 		});
-		btnVisualizarPlazas.setBounds(99, 369, 165, 23);
-		getContentPane().add(btnVisualizarPlazas);
-
+		btnVolver.setBounds(99, 382, 89, 23);
+		getContentPane().add(btnVolver);
+		
 	}
 }

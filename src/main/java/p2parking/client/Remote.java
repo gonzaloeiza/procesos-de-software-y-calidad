@@ -314,6 +314,19 @@ public class Remote {
         ArrayList<Usuario> ret = gson.fromJson(r, new TypeToken<List<Usuario>>(){}.getType());
         return ret;
 	}
+	
+	public List<Plaza> adminGetPlazasUsuario(ArrayList<String> requestBody) {
+		donationsWebTarget = webTarget.path(path +  "/adminGetPlazasUsuario");
+        invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+        Response response = invocationBuilder.post(Entity.entity(requestBody, MediaType.APPLICATION_JSON));
+        if(response.getStatus() != Status.OK.getStatusCode()) {
+            return null;
+        }
+        Gson gson = new Gson();
+        String r = response.readEntity(String.class);
+        ArrayList<Plaza> ret = gson.fromJson(r, new TypeToken<List<Plaza>>(){}.getType());
+        return ret;
+	}
 	 
 	public static ArrayList<String> constructorRequest(Object... args){
 		ArrayList<String> ret = new ArrayList<>();

@@ -359,9 +359,20 @@ public class MainServer {
 			Gson gson = new Gson();
 			return Response.ok(gson.toJson(usuarios)).build();
 		}
-		System.out.println("error");
-		return Response.status(401, "No estás autorizado.").build();
-		
+		return Response.status(401, "No estás autorizado.").build();	
 	}
+	
+	
+	@POST
+    @Path("/adminGetPlazasUsuario")
+    public Response adminGetPlazasUsuario(ArrayList<String> requestBody) {
+		if (isAdminLoggedIn()) {
+			Gson gson = new Gson();
+			String correoUsuario = gson.fromJson(requestBody.get(0), String.class);
+			List<Plaza> plazasUsuario = plazaDAO.findPlazasDeUsuario(correoUsuario);
+			return Response.ok(gson.toJson(plazasUsuario)).build();
+		}
+        return Response.status(401, "Contraseña incorrectos").build();
+    }
 	
 }
