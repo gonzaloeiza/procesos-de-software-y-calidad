@@ -157,6 +157,10 @@ public class VentanaUsuario extends JFrame {
 	}
 	
 	
+	/**
+	 * Constructor de la ventana
+	 * @param args No usado
+	 */
 	public static void main(String[] args) {
 		try {
             // Set cross-platform Java L&F (also called "Metal")

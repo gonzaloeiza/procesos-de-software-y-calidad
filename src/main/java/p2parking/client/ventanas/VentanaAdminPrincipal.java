@@ -10,7 +10,11 @@ public class VentanaAdminPrincipal extends JFrame {
 	
 	private static VentanaAdminPrincipal frame;
 
+	/**
+	 *Constructor de la ventana
 
+	 * @param args No usado
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		

@@ -329,7 +329,12 @@ public class MainServer {
 		return Response.status(401, "No estas autenticado").build();
 		
 	}
-	
+	/**
+	   * Ruta POST para logearse como admin
+	   * 
+	   * @param requestBody una lista con objetos deserializados necesarios para tramitar la peticion
+	   * @return devuelve si se ha hecho login o no
+	   */
 	@POST
     @Path("/adminLogin")
     public Response adminLogin(ArrayList<String> requestBody) {

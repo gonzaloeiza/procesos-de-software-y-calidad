@@ -66,6 +66,11 @@ public class Inicio_sesion_funcionalidad {
 		
 	}
 
+	/**
+	   * Metodo para que el boton te lleve a la ventana de admin
+	   * 
+	   * @param vent La ventana de la que proviene 
+	   */
 	public static void botonAdministrador(Inicio_sesion vent) {
         VentanaAdminLogIn.main(null);
         vent.dispose();

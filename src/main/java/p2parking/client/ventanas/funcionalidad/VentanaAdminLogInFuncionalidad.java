@@ -9,6 +9,12 @@ import p2parking.client.ventanas.VentanaAdminPrincipal;
 
 public class VentanaAdminLogInFuncionalidad {
 
+	/**
+	 * Boton para inciar sesion
+	 * 
+	 * @param vent La ventana en la que se muestra
+	 * @param password la contrasena que se utiliza
+	 */
     public static void botonInicioSesion(VentanaAdminLogIn vent, String password) {
             System.out.println(password);
             if (Remote.getInstance().adminLogin(Remote.constructorRequest(password))) {
