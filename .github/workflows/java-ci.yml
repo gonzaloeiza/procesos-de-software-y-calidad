@@ -2,25 +2,6 @@ name: Java CI
 
 on: [push]
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - uses: actions/checkout@v3
-#       - name: Set up JDK 11
-#         uses: actions/setup-java@v3
-#         with:
-#           java-version: "11"
-#           distribution: "adopt"
-#       - name: Build with Maven
-#       # - run: mvn clean compile
-#       # - run: mvn datanucleus:enhance
-#       # - run: mvn datanucleus:schema-create
-#       # - run: mvn exec:java -PinsertarEjemplos
-#       # - run: mvn test
-#         run: mvn --batch-mode --update-snapshots verify
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -44,7 +25,7 @@ jobs:
       run: mvn datanucleus:enhance
     - name: Create Datanucleus schema
       run: mvn datanucleus:schema-create
-    -name: Insert examples to database
+    - name: Insert examples to database
       run: mvn exec:java -PinsertarEjemplos
-    -name: Integration tests with Maven
+    - name: Integration tests with Maven
       run: mvn test -Dgroups="p2parking.testCategories.IntegrationTest"
