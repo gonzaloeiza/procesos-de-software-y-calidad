@@ -15,16 +15,14 @@ public class VentanaAdminLogInFuncionalidad {
 	 * @param vent La ventana en la que se muestra
 	 * @param password la contrasena que se utiliza
 	 */
-    public static void botonInicioSesion(VentanaAdminLogIn vent, String password) {
-            System.out.println(password);
-            if (Remote.getInstance().adminLogin(Remote.constructorRequest(password))) {
-                System.out.println("login correcto");
-                VentanaAdminPrincipal.main(null);
-                vent.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "No se ha podido realizar el inicio de sesion");
-            }
-        }
+	 public static void botonInicioSesion(VentanaAdminLogIn vent, String password) {
+         if (Remote.getInstance().adminLogin(Remote.constructorRequest(password))) {
+             VentanaAdminPrincipal.main(null);
+             vent.dispose();
+         } else {
+             JOptionPane.showMessageDialog(null, "No se ha podido realizar el inicio de sesion");
+         }
+     }
     
     
 }

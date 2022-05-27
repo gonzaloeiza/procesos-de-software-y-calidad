@@ -71,6 +71,7 @@ public class MainServerTest {
 		mainServer.setUsuarioDAO(usuariosDAO);
 		mainServer.setAlquilerDAO(alqDAO);
 		mainServer.setPlazaDAO(plazasDAO);
+		mainServer.setAdminLoggedIn(false);
 		mainServer.setMap(t);
 		
 		u1 = new Usuario("gonzalo", "gonzaloeizaguirre@opendeusto.es", "1234", "ss");
@@ -300,4 +301,14 @@ public class MainServerTest {
 
         assertEquals(401, mainServer.adminLogin(requestBody2).getStatus());
     }
+	
+	@Test
+    public void testAdminGetAllUsers() {
+		 mainServer.setAdminLoggedIn(false);
+        assertEquals(401, mainServer.adminGetAllUsers().getStatus());
+        mainServer.setAdminLoggedIn(true);
+        assertEquals(200, mainServer.adminGetAllUsers().getStatus());
+	}
+	
+	
 }

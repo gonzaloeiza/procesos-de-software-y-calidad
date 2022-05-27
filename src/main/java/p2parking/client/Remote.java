@@ -302,6 +302,19 @@ public class Remote {
         return true;
     }
 	
+	public List<Usuario> adminGetAllUsers() {
+		donationsWebTarget = webTarget.path(path + "/adminGetAllUser");
+		invocationBuilder = donationsWebTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.get();
+        if(response.getStatus() != Status.OK.getStatusCode()) {
+    		return new ArrayList<Usuario>();
+        }
+        Gson gson = new Gson();
+        String r = response.readEntity(String.class);
+        ArrayList<Usuario> ret = gson.fromJson(r, new TypeToken<List<Usuario>>(){}.getType());
+        return ret;
+	}
+	 
 	public static ArrayList<String> constructorRequest(Object... args){
 		ArrayList<String> ret = new ArrayList<>();
 		Gson gson = new Gson();

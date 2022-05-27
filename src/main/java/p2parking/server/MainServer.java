@@ -27,8 +27,9 @@ import p2parking.jdo.Usuario;
 public class MainServer {
 	
 	private static HashMap<Long, Usuario> tokenUsuarios = new HashMap<>(); //mapa de usuarios logeados
-	private static boolean isAdminLoggedIn = false;
+	
 	private static String adminPassword = "12345";
+	private static boolean adminLoggedIn = false;
 
 	
 	UsuariosDAO usuarioDAO = UsuariosDAO.getInstance();
@@ -67,6 +68,15 @@ public class MainServer {
 		this.plazaDAO = plazasDAO;
 	}
 	
+	
+	public boolean isAdminLoggedIn() {
+		return adminLoggedIn;
+	}
+	
+	public void setAdminLoggedIn(boolean temp) {
+		adminLoggedIn = temp;
+	}
+	
 	/*Metodos gestion cuenta*/
 	
 	  /**
@@ -78,14 +88,12 @@ public class MainServer {
 	@POST
 	@Path("/registro")
 	public Response registro(Usuario usr) {
-		System.out.println("entra");
 		if(usuarioDAO.find(usr.getCorreo()) == null){
 			//long token = (new Date()).getTime();
 			//tokenUsuarios.put(token, usr);
 			usuarioDAO.save(usr);
 			return Response.ok(true).build();
 		}
-		System.out.println("llega");
 		return Response.notModified().build();
 	}
 	
@@ -199,7 +207,6 @@ public class MainServer {
 	@Path("/createIncidencia")
 	public Response createIncidencia(ArrayList<String> requestBody) {
 		Gson gson = new Gson();
-		System.out.println(requestBody.get(0));
 		long token = gson.fromJson(requestBody.get(0), Long.class);
 		Incidencia incidencia = gson.fromJson(requestBody.get(1), Incidencia.class);
 		if(tokenUsuarios.containsKey(token)) {
@@ -279,7 +286,6 @@ public class MainServer {
 			String email = gson.fromJson(requestBody.get(2), Usuario.class).getCorreo();
 			Usuario usr = usuarioDAO.find(email);
 			usr.newPuntuacion(puntuacion);
-			System.out.println(usr.getPuntuacion());
 			usuarioDAO.save(usr);
 			return Response.ok().build();
 		}
@@ -295,10 +301,7 @@ public class MainServer {
 	@POST
 	@Path("/getAllPlazas")
 	public Response getAllPlazas(long token) {
-		System.out.println("en server: "+ token);
-		System.out.println(tokenUsuarios.containsKey(token));
 		if(tokenUsuarios.containsKey(token)) {
-			System.out.println("entra");
 			ArrayList<Plaza> ret = plazaDAO.getAll();
 			for (int i = 0; i < ret.size(); i++) {
 				ret.get(i).getPropietario();
@@ -340,11 +343,25 @@ public class MainServer {
     public Response adminLogin(ArrayList<String> requestBody) {
         Gson gson = new Gson();
         String contrasena = gson.fromJson(requestBody.get(0), String.class);
-        System.out.println(contrasena);
         if (contrasena.equals(adminPassword)) {
-            isAdminLoggedIn = true;
+        	setAdminLoggedIn(true);
             return Response.status(200, "Login administrador correcto").build();
         }
         return Response.status(401, "Contraseña incorrectos").build();
     }
+	
+	
+	@GET
+	@Path("/adminGetAllUser")
+	public Response adminGetAllUsers() {
+		if (isAdminLoggedIn()) {
+			List<Usuario> usuarios = usuarioDAO.getAll();
+			Gson gson = new Gson();
+			return Response.ok(gson.toJson(usuarios)).build();
+		}
+		System.out.println("error");
+		return Response.status(401, "No estás autorizado.").build();
+		
+	}
+	
 }
