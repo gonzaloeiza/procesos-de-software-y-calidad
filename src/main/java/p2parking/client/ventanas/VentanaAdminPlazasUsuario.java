@@ -28,7 +28,6 @@ public class VentanaAdminPlazasUsuario extends JFrame {
 	private static VentanaAdminPlazasUsuario frame;
 	/**
 	 *Constructor de la ventana
-
 	 * @param correoUsuario el correo del usuario
 	 */
 	public static void main(String correoUsuario) {
@@ -69,7 +68,6 @@ public class VentanaAdminPlazasUsuario extends JFrame {
 		}
 		
 		JList<String> list = new JList<String>(myList.toArray(new String[myList.size()]));
-//		 JList<String> list = new JList<String>();
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(list);
 		list.setLayoutOrientation(JList.VERTICAL);

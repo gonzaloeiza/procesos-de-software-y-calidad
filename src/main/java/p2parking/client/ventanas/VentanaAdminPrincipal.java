@@ -68,7 +68,6 @@ public class VentanaAdminPrincipal extends JFrame {
 		}
 
 		JList<String> list = new JList<String>(myList.toArray(new String[myList.size()]));
-//		 JList<String> list = new JList<String>();
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(list);
 		list.setLayoutOrientation(JList.VERTICAL);

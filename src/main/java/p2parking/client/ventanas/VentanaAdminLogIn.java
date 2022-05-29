@@ -59,14 +59,14 @@ public class VentanaAdminLogIn extends JFrame {
 		getContentPane().setLayout(null);
 		setTitle("P2Parking");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 666, 481);
+		setBounds(100, 100, 359, 238);
 
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setBounds(78, 69, 85, 16);
 		getContentPane().add(lblPassword);
 
 		JLabel lblBienvenidoAlModo = new JLabel("Bienvenido al modo Administrador");
-		lblBienvenidoAlModo.setBounds(113, 13, 206, 16);
+		lblBienvenidoAlModo.setBounds(78, 13, 206, 16);
 		getContentPane().add(lblBienvenidoAlModo);
 
 		passwordField = new JPasswordField();
@@ -79,7 +79,7 @@ public class VentanaAdminLogIn extends JFrame {
 				VentanaAdminLogInFuncionalidad.botonInicioSesion(frame, passwordField.getText());
 			}
 		});
-		btnInicioSesion.setBounds(203, 248, 116, 23);
+		btnInicioSesion.setBounds(203, 126, 116, 23);
 		getContentPane().add(btnInicioSesion);
 
 	}
