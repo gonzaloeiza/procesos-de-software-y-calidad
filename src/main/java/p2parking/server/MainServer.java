@@ -351,6 +351,11 @@ public class MainServer {
     }
 	
 	
+	/**
+	   * Ruta GET para mostrar todos los usuarios
+	   * 
+	   * @return devuelve todos los usuarios registrados 
+	   */
 	@GET
 	@Path("/adminGetAllUser")
 	public Response adminGetAllUsers() {
@@ -362,7 +367,12 @@ public class MainServer {
 		return Response.status(401, "No estás autorizado.").build();	
 	}
 	
-	
+	/**
+	   * Ruta POST para conseguir las plazas por usuario
+	   * 
+	   * @param requestBody una lista con objetos deserializados necesarios para tramitar la peticion
+	   * @return devuelve todas las plazas por usurio
+	   */
 	@POST
     @Path("/adminGetPlazasUsuario")
     public Response adminGetPlazasUsuario(ArrayList<String> requestBody) {

@@ -22,6 +22,13 @@ public class VentanaAdminLogIn extends JFrame {
 	private static VentanaAdminLogIn frame;
 	private JPasswordField passwordField;
 
+	
+	
+	/**
+	 *Constructor de la ventana
+	 * @param args No usado
+	 */
+	
 	public static void main(String[] args) {
 		try {
 // Set cross-platform Java L&F (also called "Metal")

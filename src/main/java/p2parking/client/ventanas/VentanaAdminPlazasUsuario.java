@@ -29,7 +29,7 @@ public class VentanaAdminPlazasUsuario extends JFrame {
 	/**
 	 *Constructor de la ventana
 
-	 * @param args No usado
+	 * @param correoUsuario el correo del usuario
 	 */
 	public static void main(String correoUsuario) {
 		// TODO Auto-generated method stub
