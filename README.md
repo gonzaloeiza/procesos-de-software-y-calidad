@@ -60,3 +60,19 @@ Para borrar las tablas de la base de datos:
 ```
 mvn datanucleus:schema-delete
 ```
+
+Para iniciar sesion de prueba el usuario es:
+```
+a
+```
+
+Y la constraseña es:
+```
+1
+```
+
+La constraseña para el administrador es :
+```
+12345
+```
+
